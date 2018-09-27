@@ -24,7 +24,7 @@
         </div>
 
       </div>
-      <div class="my-gg">
+      <div class="my-gg" @click="productIntro(0)">
         <p>医疗急救卡</p>
       </div>
     </div>
@@ -218,8 +218,16 @@
       }
     },
     methods: {
-      changePwd: function () {
-        this.showChangePwdPanel = true
+      productIntro(v) {
+        if( v === 0 ){
+          this.$router.push({path: '/aidcard'})
+        }
+        if( v === 1 ){
+          this.$router.push({path: '/product'})
+        }
+        if( v === 2 ){
+          this.$router.push({path: '/mypolicy'})
+        }
       }
     },
     mounted: function () {},

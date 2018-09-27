@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Logon from '@/features/logon/logon'
+import Login from '@/features/login/login'
 import Index from '@/features/index/index'
 import Service from '@/features/index/service'
 import Active from '@/features/index/active'
@@ -15,12 +15,12 @@ const router = new Router({
     {
       path: '/',
       name: '',
-      component: Logon
+      component: Login
     },
     {
-      path: '/logon',
-      name: 'logon',
-      component: Logon
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/index',

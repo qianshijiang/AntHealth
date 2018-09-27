@@ -1,7 +1,7 @@
 <template>
   <div class="home-box">
     <TopBar title="活动"/>
-    <div class="box-top">
+    <div class="box-top" @click="goDetail">
       <div class="box-imgb">
         <img class="box-img1" src="http://static.ydcss.com/uploads/ydui/2.jpg">
       </div>
@@ -64,8 +64,6 @@
         </div>
       </div>
     </div>
-
-
     <FooterBar pageTag="2"/>
   </div>
 </template>
@@ -73,15 +71,15 @@
   import FooterBar from '../components/FooterBar.vue'
   import TopBar from '../components/TopBar.vue'
   export default {
-    name: 'Active',
+    name: 'Activedetail',
     data () {
       return {
         logonData: {}
       }
     },
     methods: {
-      changePwd: function () {
-        this.showChangePwdPanel = true
+      goDetail() {
+        this.$router.push({path: '/activedetail'})
       }
     },
     mounted: function () {},

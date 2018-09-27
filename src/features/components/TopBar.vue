@@ -1,15 +1,9 @@
 <template>
-  <yd-navbar style="height: 45px;">
+  <yd-navbar style="height: 45px;background: rgb(242,242,242);border-bottom: 1px solid #e0e0e0;">
     <div @click="prev" slot="left" >
       <img style="height: 18px;width: 12px;" src="../../assets/image/left.png"/>
 
     </div>
-    <!--<router-link  to="#" slot="left" >-->
-      <!--<img slot="left" src="../../assets/image/left.png"/>-->
-      <!--<yd-navbar-back-icon></yd-navbar-back-icon>-->
-    <!--</router-link>-->
-
-
     <P style="color: #333;margin-top: 27px;"  slot="center">{{title}}</P>
   </yd-navbar>
 </template>
