@@ -1,17 +1,16 @@
 <template>
     <yd-tabbar fixed active-color="#333" style="border-top:1px solid #ccc;">
-        <yd-tabbar-item title="首页" link="/" :active="this.pageTag==0" style="font-size: 12px;line-height: 16px;">
-            <yd-icon name="home" slot="icon" size="1.8rem"></yd-icon>
+        <yd-tabbar-item title="首页" link="/index" :active="this.pageTag==0" style="font-size: 12px;line-height: 16px;">
+            <yd-icon name="home-outline" slot="icon" size="1.8rem"></yd-icon>
         </yd-tabbar-item>
         <yd-tabbar-item title="服务" link="/service" :active="this.pageTag==1" style="font-size: 12px;line-height: 16px;">
           <yd-icon name="good" slot="icon" size="1.8rem"></yd-icon>
         </yd-tabbar-item>
       <yd-tabbar-item title="活动" link="/active" :active="this.pageTag==2" style="font-size: 12px;line-height: 16px;">
-        <yd-icon name="like
-" slot="icon" size="1.8rem"></yd-icon>
+        <yd-icon name="like-outline" slot="icon" size="1.8rem"></yd-icon>
       </yd-tabbar-item>
-      <yd-tabbar-item title="我的" link="/about" :active="this.pageTag==3" style="font-size: 12px;line-height: 16px;">
-          <yd-icon name="ucenter-outline" slot="icon" size="1.8rem"></yd-icon>
+      <yd-tabbar-item title="我的" link="/my" :active="this.pageTag==3" style="font-size: 12px;line-height: 16px;">
+          <yd-icon name="ucenter" slot="icon" size="1.8rem"></yd-icon>
       </yd-tabbar-item>
     </yd-tabbar>
 </template>
