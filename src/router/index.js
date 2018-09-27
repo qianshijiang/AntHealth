@@ -7,6 +7,11 @@ import Active from '@/features/index/active'
 import My from '@/features/index/my'
 import Product from '@/features/index/product'
 import Headinfo from '@/features/index/headinfo'
+import Mypolicy from '@/features/index/mypolicy'
+import Activedetail from '@/features/index/activedetail'
+import Servicedetail from '@/features/index/servicedetail'
+import Aidcard from '@/features/index/aidcard'
+
 
 Vue.use(Router)
 
@@ -51,6 +56,26 @@ const router = new Router({
       path: '/headinfo',
       name: 'headinfo',
       component: Headinfo
+    },
+    {
+      path: '/mypolicy',
+      name: 'mypolicy',
+      component: Mypolicy
+    },
+    {
+      path: '/activedetail',
+      name: 'activedetail',
+      component: Activedetail
+    },
+    {
+      path: '/servicedetail',
+      name: 'servicedetail',
+      component: Servicedetail
+    },
+    {
+      path: '/aidcard',
+      name: 'aidcard',
+      component: Aidcard
     }
   ]
 })

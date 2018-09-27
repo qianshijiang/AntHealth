@@ -16,15 +16,15 @@
       </div>
     </div>
     <div class="box-content">
-      <div class="box-imgb">
-        <img class="box-img1" src="http://static.ydcss.com/uploads/ydui/2.jpg">
-      </div>
+      <!--<div class="box-imgb">-->
+        <img class="box-imgb" src="http://static.ydcss.com/uploads/ydui/2.jpg">
+      <!--</div>-->
       <div class="box-content1">
 
         <p style="font-size: 14px;color: #333;margin-top: 5px;">
           34岁 甘肃  中级按摩师
         </p>
-        <p style="font-size: 14px;color: #999;margin-top: 5px;line-height:18px;height: 36px;overflow: hidden;display:-webkit-box; text-overflow:ellipsis; -webkit-line-clamp:2;  -webkit-box-orient:vertical;white-space:normal; ">
+        <p class="box-text">
           从业5年，曾在上海多家大型养生会所任理疗师，得到广大用户的高度评价，擅长精油SPA、淋巴排毒
         </p>
         <div>
@@ -67,6 +67,19 @@
     min-height: 100%;
     width: 100%;
     background: #fff;
+  }
+  .box-text{
+    font-size: 14px;
+    color: #999;
+    margin-top: 5px;
+    line-height:18px;
+    height: 36px;
+    overflow: hidden;
+    display:-webkit-box;
+    text-overflow:ellipsis;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    white-space:normal;
   }
   .box-content{
     height: auto;
@@ -113,11 +126,11 @@
     border-bottom: 1px solid #333;
   }
   .box-imgb{
-    width:260px;
+    width:120px;
     height:90px;
     border: 1px solid #999;
     margin-right: 15px;
-    border-radius: 20px;
+    border-radius: 10px;
   }
   .box-img1{
     width:100%;

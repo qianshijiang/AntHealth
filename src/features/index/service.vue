@@ -22,10 +22,8 @@
         <p class="se-title3">艾灸</p>
       </div>
     </div>
-    <div class="box-content">
-      <div class="box-imgb">
-        <img class="box-img1" src="http://static.ydcss.com/uploads/ydui/2.jpg">
-      </div>
+    <div class="box-content" @click="goDetail">
+      <img class="box-imgb" src="http://static.ydcss.com/uploads/ydui/2.jpg">
       <div class="box-content1">
         <div>
           <p style="font-size: 16px;color: #333;font-weight: bold">矛尖吻</p>
@@ -36,55 +34,13 @@
         <p style="font-size: 14px;color: #333;margin-top: 5px;">
           34岁 甘肃  中级按摩师
         </p>
-        <p style="font-size: 14px;color: #999;margin-top: 5px;">
-          从业5年，曾在上海多家大型养生会所任理疗师，得到广大用户的高度评价，擅长精油SPA、淋巴排毒...
-        </p>
-      </div>
-    </div>
-
-    <div class="box-content">
-      <div class="box-imgb">
-        <img class="box-img1" src="http://static.ydcss.com/uploads/ydui/2.jpg">
-      </div>
-      <div class="box-content1">
-        <div>
-          <p style="font-size: 16px;color: #333;font-weight: bold">矛尖吻</p>
-          <p style="font-size: 14px;color: #333;">
-            0.3km
-          </p>
-        </div>
-        <p style="font-size: 14px;color: #333;margin-top: 5px;">
-          34岁 甘肃  中级按摩师
-        </p>
-        <p style="font-size: 14px;color: #999;margin-top: 5px;">
-          从业5年，曾在上海多家大型养生会所任理疗师，得到广大用户的高度评价，擅长精油SPA、淋巴排毒...
-        </p>
-      </div>
-    </div>
-
-    <div class="box-content">
-      <div class="box-imgb">
-        <img class="box-img1" src="http://static.ydcss.com/uploads/ydui/2.jpg">
-      </div>
-      <div class="box-content1">
-        <div>
-          <p style="font-size: 16px;color: #333;font-weight: bold">矛尖吻</p>
-          <p style="font-size: 14px;color: #333;">
-            0.3km
-          </p>
-        </div>
-        <p style="font-size: 14px;color: #333;margin-top: 5px;">
-          34岁 甘肃  中级按摩师
-        </p>
-        <p style="font-size: 14px;color: #999;margin-top: 5px;">
+        <p class="box-text">
           从业5年，曾在上海多家大型养生会所任理疗师，得到广大用户的高度评价，擅长精油SPA、淋巴排毒...
         </p>
       </div>
     </div>
     <div class="box-content" style="margin-bottom: 60px">
-      <div class="box-imgb">
-        <img class="box-img1" src="http://static.ydcss.com/uploads/ydui/2.jpg">
-      </div>
+      <img class="box-imgb" src="http://static.ydcss.com/uploads/ydui/2.jpg">
       <div class="box-content1">
         <div>
           <p style="font-size: 16px;color: #333;font-weight: bold">矛尖吻</p>
@@ -95,7 +51,7 @@
         <p style="font-size: 14px;color: #333;margin-top: 5px;">
           34岁 甘肃  中级按摩师
         </p>
-        <p style="font-size: 14px;color: #999;margin-top: 5px;">
+        <p class="box-text">
           从业5年，曾在上海多家大型养生会所任理疗师，得到广大用户的高度评价，擅长精油SPA、淋巴排毒...
         </p>
       </div>
@@ -114,8 +70,8 @@
       }
     },
     methods: {
-      changePwd: function () {
-        this.showChangePwdPanel = true
+      goDetail() {
+        this.$router.push({path: '/servicedetail'})
       }
     },
     mounted: function () {},
@@ -135,7 +91,7 @@
   }
   .box-content{
     height: auto;
-    width: 100%;
+    flex: 1;
     border-bottom:1px solid #e0e0e0;
     border-top:1px solid #e0e0e0;
     display: flex;
@@ -143,10 +99,23 @@
     padding: 10px;
     margin-top: 10px;
   }
+  .box-text{
+    font-size: 14px;
+    color: #999;
+    margin-top: 5px;
+    overflow: hidden;
+    display:-webkit-box;
+    text-overflow:ellipsis;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    white-space:normal;
+    line-height: 18px;
+  }
   .box-content1{
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    overflow-wrap: normal;
   }
   .box-content1 div{
     display: flex;
@@ -176,11 +145,11 @@
     border-bottom: 1px solid #333;
   }
   .box-imgb{
-    width:60px;
-    height: 60px;
+    width:40px;
+    height: 50px;
     border: 1px solid #999;
     margin-right: 15px;
-    margin-top: 30px;
+    margin-top: 25px;
   }
   .box-img1{
     width:100%;

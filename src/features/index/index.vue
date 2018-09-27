@@ -20,7 +20,7 @@
 
     <!-- Unnamed (矩形) -->
     <div class="home-box1">
-      <div class="home-box2">
+      <div class="home-box2" @click="productIntro(2)">
         <div class="u186_div">
           <p class="home-title1">ICON</p>
         </div>
@@ -132,7 +132,9 @@
         if( v === 1 ){
           this.$router.push({path: '/product'})
         }
-
+        if( v === 2 ){
+          this.$router.push({path: '/mypolicy'})
+        }
       }
     },
     mounted: function () {},
