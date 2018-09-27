@@ -1,0 +1,18 @@
+{
+  "errors": null,
+  "code": "0000",
+  "data": {
+    "id": 10,
+    "staffId": "admin",
+    "name": "teat",
+    "role": "admin",
+    "gender": "FEMALE",
+    "email": "asdf@we.cn",
+    "phone": "166",
+    "birthday": "2018-01-01",
+    "registerDate": "2018-03-15 15:32:57",
+    "address": "asdf",
+    "status": "NORMAL"
+  },
+  "ok": true
+}

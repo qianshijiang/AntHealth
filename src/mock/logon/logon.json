@@ -1,0 +1,463 @@
+{
+  "errors": null,
+  "code": "0000",
+  "data": {
+    "id": 11,
+    "staffId": "admin001",
+    "name": "梁江南",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZiI6WyJhZG1pbjAwMSIsIjE4OTA5ODc2NDM4IiwiMjAxOC0wMy0xNSAwODowMDowMC4wIl0sImlhdCI6MTUyNzI0NjUwM30.qDMDDNZGVXfKK_ix0Zf2boEcpH_hITnvBjCpm7i0Uoc",
+    "gender": "MALE",
+    "email": "78184889@qq.com",
+    "phone": "18909876438",
+    "birthday": "2018-03-15 08:00:00",
+    "registerDate": "2018-03-15 17:10:48",
+    "address": "永中路1695555549999",
+    "status": null,
+    "pwdStatus": "NORMAL",
+    "roles": [
+      "超级管理员"
+    ],
+    "menuTree": [
+      {
+        "name": "用户管理",
+        "code": "01",
+        "route": null,
+        "path": null,
+        "iconUrl": "static/icon/user.png",
+        "orderNum": 1,
+        "resourceType": "CAGALOGUE",
+        "resourceStatus": "ENABLE",
+        "children": [
+          {
+            "name": "系统用户管理",
+            "code": "0101",
+            "route": "/index/staff/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 1,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "APP用户管理",
+            "code": "0102",
+            "route": "/index/user/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 2,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "司机管理",
+            "code": "0103",
+            "route": "/index/driver/driverList",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 3,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "骑士认证管理",
+            "code": "0104",
+            "route": "/index/authentication/rider",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 4,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "车主认证管理",
+            "code": "0105",
+            "route": "/index/authentication/vehicleAuthList",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 5,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          }
+        ]
+      },
+      {
+        "name": "运营管理",
+        "code": "02",
+        "route": "",
+        "path": "",
+        "iconUrl": "static/icon/operations.png",
+        "orderNum": 2,
+        "resourceType": "CAGALOGUE",
+        "resourceStatus": "ENABLE",
+        "children": [
+          {
+            "name": "车辆管理",
+            "code": "0201",
+            "route": "/index/carinfo/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 1,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "调度中心",
+            "code": "0202",
+            "route": "/index/dispatch/dispatch",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 2,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "意见反馈",
+            "code": "0203",
+            "route": "/index/feedback/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 3,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "投诉",
+            "code": "0204",
+            "route": "/index/complaints/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 4,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "公告管理",
+            "code": "0205",
+            "route": "/index/announcement/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 5,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "优惠券管理",
+            "code": "0206",
+            "route": "/index/coupon/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 6,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "收揽网点管理",
+            "code": "0207",
+            "route": "/index/factorOutlet/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 7,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "物流信息管理",
+            "code": "0208",
+            "route": "/index/logistics/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 8,
+            "resourceType": "MENU",
+            "resourceStatus": null,
+            "children": [
+
+            ]
+          },
+          {
+            "name": "物流公司基本信息",
+            "code": "0209",
+            "route": "/index/logisticsinfo/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 9,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          }
+        ]
+      },
+      {
+        "name": "统计查询",
+        "code": "03",
+        "route": null,
+        "path": null,
+        "iconUrl": "static/icon/data.png",
+        "orderNum": 3,
+        "resourceType": "CAGALOGUE",
+        "resourceStatus": "ENABLE",
+        "children": [
+          {
+            "name": "专车运单查询",
+            "code": "0301",
+            "route": "/index/order/vehicleOrderList",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 1,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "物流运单查询",
+            "code": "0302",
+            "route": "/index/logisticsOrder/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 2,
+            "resourceType": "MENU",
+            "resourceStatus": null,
+            "children": [
+
+            ]
+          },
+          {
+            "name": "实时位置查询",
+            "code": "0303",
+            "route": "/index/location/realTimeLocation",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 3,
+            "resourceType": "MENU",
+            "resourceStatus": null,
+            "children": [
+
+            ]
+          },
+          {
+            "name": "用户推广查询",
+            "code": "0304",
+            "route": "/index/promoteData/promoteDataList",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 4,
+            "resourceType": "MENU",
+            "resourceStatus": null,
+            "children": [
+
+            ]
+          },
+          {
+            "name": "司机推广查询",
+            "code": "0305",
+            "route": "/index/driverData/driverDataList",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 5,
+            "resourceType": "MENU",
+            "resourceStatus": null,
+            "children": [
+
+            ]
+          },
+          {
+            "name": "司机绩效查询",
+            "code": "0306",
+            "route": "/index/driverPerform/selfDriverPerformanceList",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 6,
+            "resourceType": "MENU",
+            "resourceStatus": null,
+            "children": [
+
+            ]
+          }
+        ]
+      },
+      {
+        "name": "财务管理",
+        "code": "04",
+        "route": null,
+        "path": null,
+        "iconUrl": "static/icon/order.png",
+        "orderNum": 4,
+        "resourceType": "CAGALOGUE",
+        "resourceStatus": "ENABLE",
+        "children": [
+          {
+            "name": "用户资金管理",
+            "code": "0401",
+            "route": "/index/funds/userFunds",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 1,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "提现申请管理",
+            "code": "0402",
+            "route": "/index/funds/withdraw",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 2,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "货滴收支查询",
+            "code": "0403",
+            "route": "/index/funds/incomeExpend",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 3,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          }
+        ]
+      },
+      {
+        "name": "系统管理",
+        "code": "05",
+        "route": "",
+        "path": "",
+        "iconUrl": "static/icon/sys.png",
+        "orderNum": 5,
+        "resourceType": "CAGALOGUE",
+        "resourceStatus": "ENABLE",
+        "children": [
+          {
+            "name": "菜单管理",
+            "code": "0501",
+            "route": "/index/menu/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 1,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "角色管理",
+            "code": "0502",
+            "route": "/index/role/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 2,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "配置管理",
+            "code": "0503",
+            "route": "/index/configData/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 3,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "日志管理",
+            "code": "0504",
+            "route": "/index/tbc",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 4,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "运费设置",
+            "code": "0505",
+            "route": "/index/feeSetting/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 5,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          },
+          {
+            "name": "保证金设置",
+            "code": "0506",
+            "route": "/index/marginSetting/list",
+            "path": "",
+            "iconUrl": "",
+            "orderNum": 6,
+            "resourceType": "MENU",
+            "resourceStatus": "ENABLE",
+            "children": [
+
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "desc": null,
+  "daytime": "2018-05-25 19:08:23",
+  "ok": true
+}

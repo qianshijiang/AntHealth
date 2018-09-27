@@ -1,0 +1,24 @@
+
+.el-header, .el-footer {
+  background-color: #B3C0D1;
+}
+.el-aside {
+  background-color: #D3DCE6;
+  width: 200px;
+}
+.el-main {
+  background-color: #E9EEF3;
+}
+
+.el-pagination{
+  text-align: right;
+  margin-top: 10px;
+}
+.el-footer {
+  min-height: 60px;
+  height: auto;
+  text-align: center;
+  color: #838383;
+  font-size: 12px;
+  padding: 15px;
+}
