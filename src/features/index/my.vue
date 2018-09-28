@@ -34,29 +34,29 @@
       <div class="u197_text ">
         <p class="text1">我的资料</p>
         <div style="display: flex;flex-direction: row;">
-          <p class="text2" style="margin-right: 5px;">更多</p>
+          <p class="text2" style="margin-right: 5px;color:#333;">更多</p>
           <img style="height: 14px;width: 12px;margin-right: 20px;" src="../../assets/image/right.png">
         </div>
 
       </div>
       <div class="home-box1">
-        <div class="home-box2">
+        <div class="home-box2" @click="productIntro(1)">
+          <div class="u186_div">
+            <p class="home-title1">ICON</p>
+          </div>
+          <p class="home-title2">我的资料</p>
+        </div>
+        <div class="home-box2" @click="productIntro(2)">
           <div class="u186_div">
             <p class="home-title1">ICON</p>
           </div>
           <p class="home-title2">我的保单</p>
         </div>
-        <div class="home-box2">
+        <div class="home-box2" @click="productIntro(3)">
           <div class="u186_div">
             <p class="home-title1">ICON</p>
           </div>
-          <p class="home-title2">福利商城</p>
-        </div>
-        <div class="home-box2">
-          <div class="u186_div">
-            <p class="home-title1">ICON</p>
-          </div>
-          <p class="home-title2">平价药房</p>
+          <p class="home-title2">地址管理</p>
         </div>
         <div class="home-box2">
           <div class="u186_div">
@@ -107,11 +107,11 @@
         <p class="text1">上门订单</p>
       </div>
       <div class="home-box1">
-        <div class="home-box2">
+        <div class="home-box2" @click="productIntro(4)">
           <div class="u186_div">
             <p class="home-title1">ICON</p>
           </div>
-          <p class="home-title2">我的保单</p>
+          <p class="home-title2">进行中</p>
         </div>
         <div class="home-box2">
           <div class="u186_div">
@@ -147,7 +147,7 @@
           <div class="u186_div">
             <p class="home-title1">ICON</p>
           </div>
-          <p class="home-title2">我的保单</p>
+          <p class="home-title2">我的资料</p>
         </div>
         <div class="home-box2">
           <div class="u186_div">
@@ -223,10 +223,16 @@
           this.$router.push({path: '/aidcard'})
         }
         if( v === 1 ){
-          this.$router.push({path: '/product'})
+          this.$router.push({path: '/myinfo'})
         }
         if( v === 2 ){
           this.$router.push({path: '/mypolicy'})
+        }
+        if( v === 3 ){
+          this.$router.push({path: '/addressmanage'})
+        }
+        if( v === 4 ){
+          this.$router.push({path: '/serviceorder'})
         }
       }
     },
@@ -257,7 +263,7 @@
   }
   .my-gg{
     position: absolute;
-    height: 60px;
+    height: 50px;
     width: 140px;
     border-top:1px solid rgb(121,121,121);
     border-right:1px solid rgb(121,121,121);
@@ -268,7 +274,7 @@
     border-bottom-radius:0;
     background: #fff;
     right: 25px;
-    bottom:-15px;
+    bottom:-10px;
     text-align: center;
     line-height: 60px;
   }
@@ -292,19 +298,6 @@
     flex-direction: row;
     padding: 20px 10px;
   }
-  .box-top1{
-    padding: 0 10px;
-    justify-content: space-around;
-    margin-bottom: 5px;
-  }
-  .box-top2{
-    padding: 15px 0;
-    flex: 1;
-    text-align: center;
-  }
-  .box-top2j{
-    border-bottom: 1px solid #333;
-  }
   .box-imgb{
     width:60px;
     height: 60px;
@@ -317,55 +310,8 @@
     width:100%;
     height: 100%;
   }
-  .se-title1{
-    font-size: 16px;
-    color: #333;
-  }
   .se-title1 span{
     font-weight: bold;
-  }
-  .se-title2{
-  }
-  .se-title3{
-    font-size: 14px;
-    color: #999;
-  }
-  .home-box-tow{
-    display: flex;
-    flex-direction: row;
-    margin-top: 10px;
-    justify-content: space-around;
-  }
-  .box-tow1{
-    height: 113px;
-    width: 168px;
-    background: rgb(204,204,204);
-    border-radius: 8px;
-    position: relative;
-    top: 0;
-  }
-  .box-img1{
-    width:100%;
-    height: 100%;
-    border-radius: 8px;
-  }
-  .box-tow2{
-    height: 32px;
-    width: 168px;
-    position: absolute;
-    bottom: 0;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    background: #e0e0e0
-  }
-  .box-tow3{
-    height: 113px;
-    width: 168px;
-    background: rgb(242,242,242);
-    border-radius: 8px;
-    padding: 15px 10px;
-    display: flex;
-    flex-direction: column
   }
   .text1{
     font-size: 16px;
@@ -376,31 +322,6 @@
     color: #999;
     font-size: 12px;
     margin-right: 20px;
-  }
-  .text3{
-    font-size: 14px;
-    color: #999;
-    text-align: center;
-    line-height: 32px;
-  }
-  .text4{
-    font-size: 14px;
-    color: #333;
-    font-weight: bold;
-    line-height: 20px;
-  }
-  .text5{
-    font-size: 12px;
-    color: #999;
-    line-height: 15px;
-    margin-top: 7px;
-  }
-  .text6{
-    font-size: 12px;
-    color: #333;
-    font-weight: bold;
-    line-height: 20px;
-    margin-top: 10px;
   }
   .home-box1 {
     height: auto;
@@ -429,35 +350,11 @@
     text-align: center;
     margin-top: 10px;
   }
-  .home-title3{
-    font-family:'FontAwesome';
-    font-weight:400;
-    font-size:16px;
-    color:#999;
-  }
-  .home-title4{
-    font-family:'Arial Normal', 'Arial';
-    font-weight:400;font-size:12px;
-    color:#999;
-  }
-  .home-title5{
-    font-size:12px;
-    margin-top: 10px;
-  }
   home-title6{
     font-family:'微软雅黑';
     font-weight:400;
     font-style:normal;
     color:#CCC;
-  }
-  .home-box3{
-    display: flex;
-    height: auto;
-    width: 100%;
-    padding:20px;
-    flex-direction: column;
-    background: #fff;
-    margin-top: 15px;
   }
   .u186_div {
     width:59px;
