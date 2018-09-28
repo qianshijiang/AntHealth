@@ -15,7 +15,7 @@
         <p class="se-title3">建康专栏</p>
       </div>
     </div>
-    <div class="box-content">
+    <div class="box-content" @click="goDetail">
       <!--<div class="box-imgb">-->
         <img class="box-imgb" src="http://static.ydcss.com/uploads/ydui/2.jpg">
       <!--</div>-->
@@ -48,8 +48,8 @@
       }
     },
     methods: {
-      changePwd: function () {
-        this.showChangePwdPanel = true
+      goDetail() {
+        this.$router.push({path: '/headinfodetail'})
       }
     },
     mounted: function () {},

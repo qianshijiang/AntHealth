@@ -38,7 +38,7 @@
         </div>
         <p class="home-title2">平价药房</p>
       </div>
-      <div class="home-box2">
+      <div class="home-box2"  @click="productIntro(3)">
         <div class="u186_div">
           <p class="home-title1">ICON</p>
         </div>
@@ -134,6 +134,9 @@
         }
         if( v === 2 ){
           this.$router.push({path: '/mypolicy'})
+        }
+        if( v === 3 ){
+          this.$router.push({path: '/aidcardt'})
         }
       }
     },

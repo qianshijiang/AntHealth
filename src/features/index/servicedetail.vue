@@ -86,7 +86,7 @@
         </p>
       </div>
     </div>
-    <div class="pro-bottom">
+    <div class="pro-bottom" @click="goAppoin">
       <p>
         立即预约
       </p>
@@ -104,9 +104,9 @@
       }
     },
     methods: {
-      changePwd: function () {
-        this.showChangePwdPanel = true
-      }
+      goAppoin() {
+        this.$router.push({path: '/appointment'})
+      },
     },
     mounted: function () {},
     components: {

@@ -1,38 +1,29 @@
 <template>
   <div class="home-box">
-    <TopBar title="我的资料"/>
-
-    <div class="box-top">
-      <p class="se-title1">头像</p>
-      <img class="box-imgb" src="http://static.ydcss.com/uploads/ydui/2.jpg">
+    <TopBar title="确认支付"/>
+    <div class="act-box1" style="background: #e0e0e0;justify-content: center;padding: 10px;border:0;">
+      <p class="act-text">支付剩余时间</p>
+    </div>
+    <div class="act-box1" style="width: 96%;margin: auto;">
+      <p class="act-text">全身丽娜</p>
+      <p class="act-text2">
+        158元/60分钟
+      </p>
+    </div>
+    <div class="act-box1">
+      <p class="act-text">微信支付</p>
+      <yd-checkbox val="允许" shape="circle"></yd-checkbox>
+    </div>
+    <div class="act-box1" style="margin-top: 0;border-top: 0;">
+      <p class="act-text" >银联支付</p>
+      <yd-checkbox val="允许" shape="circle"></yd-checkbox>
     </div>
 
-    <div class="pol-content">
-      <yd-cell-group >
-        <yd-cell-item style="border-bottom: 1px solid #e0e0e0;">
-          <span slot="left">修改昵称：</span>
-          <yd-input slot="right" v-model="input6" placeholder="美女"></yd-input>
-        </yd-cell-item>
-        <yd-cell-item style="border-bottom: 1px solid #e0e0e0;">
-          <span slot="left">手机号：</span>
-          <yd-input slot="right" v-model="input6" placeholder="15025154119"></yd-input>
-          <div slot="right" style="display: flex;justify-content: space-between;flex-direction: row">
-            <span style="width: 80px;margin-right: 2px;font-size: 14px;color: #999">更换绑定</span>
-            <img style="height: 14px;width: 12px;" src="../../assets/image/right.png">
-          </div>
-        </yd-cell-item>
-        <yd-cell-item arrow>
-          <span slot="left">出生日期：</span>
-          <yd-datetime v-model="datetime6" :yearFormat="yearFormat" :month-format="monthFormat" :day-format="dayFormat" type="date" slot="right"></yd-datetime>
-        </yd-cell-item>
-        <yd-cell-item arrow>
-          <span slot="left">选择所在地区：</span>
-          <input slot="right" type="text" @click.stop="show1 = true" v-model="model1" readonly placeholder="请选择收货地址">
-        </yd-cell-item>
-      </yd-cell-group>
-      <yd-cityselect v-model="show1" :callback="result1" :items="district"></yd-cityselect>
+    <div class="pro-bottom" @click="paySu">
+      <p>
+        确认支付
+      </p>
     </div>
-    <yd-button style="width:90%;margin: auto;margin-top: 20px;"  size="large" type="disabled" disabled>确认修改</yd-button>
   </div>
 </template>
 <script>
@@ -46,6 +37,7 @@
         logonData: {},
         show1: false,
         input6:'',
+        input4:'',
          model1: '',
         district: District,
         datetime6: '2017-05-11',
@@ -57,7 +49,10 @@
     methods: {
       result1(ret) {
         this.model1 = ret.itemName1 + ' ' + ret.itemName2 + ' ' + ret.itemName3;
-      }
+      },
+      paySu() {
+        this.$router.push({path: '/paysuccess'})
+      },
     },
     mounted: function () {},
     components: {
@@ -73,6 +68,32 @@
     height: auto;
     min-height: 100%;
     width: 100%;
+    background: #fff;
+  }
+  .act-box1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 15px;
+    border-top:1px solid #e0e0e0;
+    border-bottom:1px solid #e0e0e0;
+    margin-top:10px;
+
+  }
+  .act-text{
+    font-size: 16px;color: #333;font-weight: bold;
+  }
+  .act-text2{
+    font-size: 14px;color: #333;font-weight: bold;
+  }
+  .act-text1{
+    border:1px solid #e0e0e0;
+    padding: 5px 15px;
+    margin: 0;
+    font-size: 16px;
+    border-radius: 6px;
+    margin-right: 5px;
+    background: rgb(242,242,242);
   }
   .pol-content{
     height: auto;
@@ -87,6 +108,37 @@
     color: #333;
     font-size: 16px;
 
+  }
+  .appoin-box{
+    height: auto;
+    padding: 15px 65px;
+    background: rgb(242,242,242);
+    border:1px solid #e0e0e0;
+    border-radius: 25px;
+    margin-bottom: 5px;
+  }
+  .appoin-box p {
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+  }
+  .pro-bottom{
+    height: auto;
+    line-height: 35px;
+    width: 65%;
+    margin: auto;
+    border-radius: 35px;
+    padding: 10px;
+    position: fixed;
+    bottom: 10px;
+    background: #6f7180;
+    left: 17.5%;
+    z-index: 100;
+  }
+  .pro-bottom p{
+    text-align: center;
+    color: #ffffff;
+    font-size: 16px;
   }
   .pol-content1{
     height: auto;
