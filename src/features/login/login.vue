@@ -181,6 +181,7 @@
           font-size: 42px;
           color: #999999;
           text-align:center;
+          width:90%;
         }
         .code{
           display: flex;
