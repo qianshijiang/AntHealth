@@ -14,34 +14,35 @@
             <div class="paswicon">
               <img src="../../assets/image/u18.svg"/>
               <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="登录密码" maxlength="20"></el-input>
-              <div class="seepaswicon">
-                <div class="seepaswicondv">
-                  <div class="text seepaswicondv_text">
-                    <div>
-                      <img  src="../../assets/image/circular_u26.png">
-                      <span>123</span>
-                    </div>
-                  </div>
-                </div>
+              <div>
+                <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)" class="seepaswicon"></yd-switch>
               </div>
             </div>
           </el-form-item>
-          <el-form-item>
+          <div class="forgetpasw">
+            <a href="###" >忘记密码</a>
+          </div>
+          <el-form-item class="logintop">
             <el-button type="primary" @click="login">登录</el-button>
+          </el-form-item>
+          <el-form-item>
+            <div class="footer">
+              <P><a href="###">注册账号</a></P>
+            </div>
           </el-form-item>
         </el-form>
       </div>
     </el-main>
-    <el-footer>
-      注册账号
-    </el-footer>
   </el-container>
 </template>
 <script>
   import validationRules from '../../common/validationRules'
-
+  import Vue from 'vue';
+  import {Switch} from 'vue-ydui/dist/lib.rem/switch';
+  import ElFormItem from "../../../node_modules/element-ui/packages/form/src/form-item";
+  Vue.component(Switch.name, Switch)
   export default {
-    name: 'Logon',
+    components: {ElFormItem}, name: 'Login',
     data () {
       return {
         logonForm: {
@@ -56,7 +57,8 @@
           pwd: [
             { validator: validationRules.validatePassword, trigger: 'blur,change' }
           ]
-        }
+        },
+        switchModel: false
       }
     },
     methods: {
@@ -135,6 +137,17 @@
     box-shadow: none;
     color: rgb(204, 204, 204);
   }
+  a{
+    text-decoration:none;
+    border-width: 0px;
+    font-family: '微软雅黑';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12px;
+    color: #999;
+    text-align: right;
+    cursor: pointer;
+  }
 </style>
 <style lang="scss" scoped>
   .logo {
@@ -188,6 +201,17 @@
       }
       .el-button {
         width: 350px;
+        border-radius: 25px;
+        border-width: 0px;
+        height: 45px;
+        font-family: '微软雅黑';
+        font-weight: 400;
+        font-style: normal;
+        font-size: 16px;
+        color: #FFF;
+      }
+      .el-form-item{
+        margin-bottom: 15px;
       }
       .usernametop,.paswtop{
         box-sizing: border-box;
@@ -206,51 +230,27 @@
             margin-top:10px;
           }
         }
-        .seepaswicon{
-          height: 25px;
-          border-width: 0px;
-          margin-top:2px;
-          font-size: 12px;
-          color: #FFFFFF;
-          text-align: left;
-          display: flex;
-          .seepaswicondv{
-            width: 65px;
-            height: 30px;
-            background-color: rgb(204, 204, 204);
-            box-sizing: border-box;
-            border-width: 1px;
-            border-style: solid;
-            border-radius: 20px;
-            -moz-box-shadow: none;
-            -webkit-box-shadow: none;
-            box-shadow: none;
-            font-size: 12px;
-            color: #FFFFFF;
-            text-align: left;
-            .seepaswicondv_text{
-              div{
-                position: relative;
-                margin: 0px;
-                right: 0;
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-end;
-                span{
-                  font-size: 12px;
-                  line-height: 30px;
-                  margin-right: 8px;
-                }
-                img{
-                  position: absolute;
-                  left: 4px;
-                  top: -7px;
-                  width: 22px;
-                  height: 22px;
-                }
-              }
-            }
-          }
+        .yd-switch{
+          margin-top: 4px;
+        }
+      }
+      .forgetpasw{
+        width: 90%;
+        text-align: right;
+        margin-bottom: 22px;
+      }
+      .logintop{
+        width:350px;
+        .el-button{
+          width:90%;
+          background-color: rgb(158, 158, 158);
+        }
+      }
+      .footer{
+        width:90%;
+        text-align: center;
+        a{
+          font-size: 16px;
         }
       }
     }
