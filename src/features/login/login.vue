@@ -4,18 +4,18 @@
       <div class="logon-panel">
         <el-form :model="logonForm" :rules="rules" ref="logonForm" :label-position="'left'" label-width="0" class="logon-form">
           <div class="title">蚂蚁健康</div>
-          <el-form-item label="" prop="staffId" class="usernametop">
+          <el-form-item label="" prop="name" class="usernametop">
             <div class="usernameicon">
               <img src="../../assets/image/u19.svg" />
-              <el-input type="text" class="usernameinput" v-model="logonForm.name" placeholder="手机号码" maxlength="18"></el-input>
+              <el-input type="text" class="usernameinput" v-model="logonForm.name" placeholder="手机号码" maxlength="18" auto-complete="true"></el-input>
             </div>
           </el-form-item>
-          <el-form-item label="" prop="password" class="paswtop">
+          <el-form-item label="" prop="pwd" class="paswtop">
             <div class="paswicon">
               <img src="../../assets/image/u18.svg"/>
-              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="登录密码" maxlength="20"></el-input>
+              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="登录密码" maxlength="20" auto-complete="true"></el-input>
               <div>
-                <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)" class="seepaswicon"></yd-switch>
+                <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)"></yd-switch>
               </div>
             </div>
           </el-form-item>
@@ -27,7 +27,7 @@
           </el-form-item>
           <el-form-item>
             <div class="footer">
-              <P><a href="###">注册账号</a></P>
+              <P><a href="#/register">注册账号</a></P>
             </div>
           </el-form-item>
         </el-form>
@@ -40,22 +40,22 @@
   import Vue from 'vue';
   import {Switch} from 'vue-ydui/dist/lib.rem/switch';
   import ElFormItem from "../../../node_modules/element-ui/packages/form/src/form-item";
-  Vue.component(Switch.name, Switch)
+  Vue.component(Switch.name, Switch);
   export default {
-    components: {ElFormItem}, name: 'Login',
+    components: {ElFormItem},
+    name: 'Login',
     data () {
       return {
         logonForm: {
           name: '',
           pwd: ''
         },
-        codeImg: '',
         rules: {
           name: [
-            { validator: validationRules.validateStaffId, trigger: 'blur,change' }
+            {required: true, validator: validationRules.validateStaffId, trigger: 'blur,change',message:'填写有误' }
           ],
           pwd: [
-            { validator: validationRules.validatePassword, trigger: 'blur,change' }
+            {required: true, validator: validationRules.validatePassword, trigger: 'blur,change',message:'填写有误'}
           ]
         },
         switchModel: false
@@ -179,7 +179,7 @@
           font-weight: 400;
           font-style: normal;
           font-size: 42px;
-          color: #999999;
+          color: #999;
           text-align:center;
           width:90%;
         }

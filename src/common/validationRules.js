@@ -577,4 +577,13 @@ validationRules.validateContactPhone = (rule, value, callback) => {
     callback()
   }
 }
+validationRules.VerificationCode = (rule, value, callback) => {
+  if (value === '') {
+    callback(new Error('验证码不能为空'))
+  } else if(!/^\d{6}$/.test(value)){
+    callback(new Error('请输入6位验证码'))
+  } else {
+    callback()
+  }
+}
 export default validationRules

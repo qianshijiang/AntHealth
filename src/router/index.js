@@ -11,9 +11,10 @@ import Mypolicy from '@/features/index/mypolicy'
 import Activedetail from '@/features/index/activedetail'
 import Servicedetail from '@/features/index/servicedetail'
 import Aidcard from '@/features/index/aidcard'
+import Register from '@/features/register/register'
 
 
-Vue.use(Router)
+Vue.use(Router);
 
 const router = new Router({
   routes: [
@@ -76,6 +77,11 @@ const router = new Router({
       path: '/aidcard',
       name: 'aidcard',
       component: Aidcard
+    },
+    {
+      path:"/register",
+      name:"register",
+      component:Register
     }
   ]
 })

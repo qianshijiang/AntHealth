@@ -1,6 +1,6 @@
-# yj-admin-web
+# AntHealth-admin-web
 
-> 云聚物流管理系统前端，与后端数据接口分离，采用Vue 2.0实现。
+> 蚂蚁健康系统前端，与后端数据接口分离，采用Vue 2.0实现。
 
 
 ## Build Setup
