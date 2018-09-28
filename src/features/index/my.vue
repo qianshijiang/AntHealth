@@ -62,7 +62,7 @@
           <div class="u186_div">
             <p class="home-title1">ICON</p>
           </div>
-          <p class="home-title2">一键急救</p>
+          <p class="home-title2">积分明细</p>
         </div>
        </div>
     </div>
@@ -143,11 +143,11 @@
 
       </div>
       <div class="home-box1">
-        <div class="home-box2">
+        <div class="home-box2" @click="productIntro(5)">
           <div class="u186_div">
             <p class="home-title1">ICON</p>
           </div>
-          <p class="home-title2">我的资料</p>
+          <p class="home-title2">待参加</p>
         </div>
         <div class="home-box2">
           <div class="u186_div">
@@ -233,6 +233,9 @@
         }
         if( v === 4 ){
           this.$router.push({path: '/serviceorder'})
+        }
+        if( v === 5 ){
+          this.$router.push({path: '/activeorder'})
         }
       }
     },

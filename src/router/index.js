@@ -11,9 +11,19 @@ import Mypolicy from '@/features/index/mypolicy'
 import Activedetail from '@/features/index/activedetail'
 import Servicedetail from '@/features/index/servicedetail'
 import Aidcard from '@/features/index/aidcard'
+import Aidcardt from '@/features/index/aidcardt'
 import Myinfo from '@/features/index/myinfo'
 import Addressmanage from '@/features/index/addressmanage'
 import Serviceorder from '@/features/index/serviceorder'
+import Serviceorderdetail from '@/features/index/serviceorderdetail'
+import Refund from '@/features/index/refund'
+import Activeorder from '@/features/index/activeorder'
+import Pay from '@/features/index/pay'
+import Storeaddress from '@/features/index/storeaddress'
+import Appointment from '@/features/index/appointment'
+import Payshure from '@/features/index/payshure'
+import Paysuccess from '@/features/index/paysuccess'
+import Headinfodetail from '@/features/index/headinfodetail'
 
 
 Vue.use(Router)
@@ -81,6 +91,11 @@ const router = new Router({
       component: Aidcard
     },
     {
+      path: '/aidcardt',
+      name: 'aidcardt',
+      component: Aidcardt
+    },
+    {
       path: '/myinfo',
       name: 'myinfo',
       component: Myinfo
@@ -94,6 +109,51 @@ const router = new Router({
       path: '/serviceorder',
       name: 'serviceorder',
       component: Serviceorder
+    },
+    {
+      path: '/serviceorderdetail',
+      name: 'serviceorderdetail',
+      component: Serviceorderdetail
+    },
+    {
+      path: '/refund',
+      name: 'refund',
+      component: Refund
+    },
+    {
+      path: '/activeorder',
+      name: 'activeorder',
+      component: Activeorder
+    },
+    {
+      path: '/pay',
+      name: 'pay',
+      component: Pay
+    },
+    {
+      path: '/storeaddress',
+      name: 'storeaddress',
+      component: Storeaddress
+    },
+    {
+      path: '/appointment',
+      name: 'appointment',
+      component: Appointment
+    },
+    {
+      path: '/payshure',
+      name: 'payshure',
+      component: Payshure
+    },
+    {
+      path: '/paysuccess',
+      name: 'paysuccess',
+      component: Paysuccess
+    },
+    {
+      path: '/headinfodetail',
+      name: 'headinfodetail',
+      component: Headinfodetail
     }
   ]
 })
