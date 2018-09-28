@@ -6,29 +6,36 @@
           <div class="title">蚂蚁健康</div>
           <el-form-item label="" prop="name" class="usernametop">
             <div class="usernameicon">
-              <img src="../../assets/image/u19.svg" />
-              <el-input type="text" class="usernameinput" v-model="logonForm.name" placeholder="手机号码" maxlength="18" auto-complete="true"></el-input>
+              <img src="../../assets/image/u64.svg" />
+              <el-input type="text" class="usernameinput" v-model="logonForm.name" placeholder="输入手机号码" maxlength="18" auto-complete="true"></el-input>
+            </div>
+          </el-form-item>
+          <el-form-item label="" prop="codeVal" class="codeinputtop">
+            <div class="codeinputicon">
+              <img src="../../assets/image/u65.svg" />
+              <el-input type="text" class="codeinput" v-model="logonForm.codeVal" placeholder="短信验证码" maxlength="6" auto-complete="true"></el-input>
+              <div>
+                <yd-button type="primary" color="#999">发送验证码</yd-button>
+              </div>
             </div>
           </el-form-item>
           <el-form-item label="" prop="pwd" class="paswtop">
             <div class="paswicon">
               <img src="../../assets/image/u18.svg"/>
-              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="登录密码" maxlength="20" auto-complete="true"></el-input>
+              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="设置登录密码" maxlength="20" auto-complete="true"></el-input>
               <div>
                 <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)"></yd-switch>
               </div>
             </div>
           </el-form-item>
-          <div class="forgetpasw">
-            <a href="###" >忘记密码</a>
+          <div class="agreement">
+            <yd-checkbox-group v-model="radioAgreement" color="rgb(158, 158, 158)">
+              <yd-checkbox val="1" shape="circle">已阅读并同意</yd-checkbox>
+              <a href="###" >《用户服务协议》</a>
+            </yd-checkbox-group>
           </div>
           <el-form-item class="logintop">
-            <el-button type="primary" @click="login">登录</el-button>
-          </el-form-item>
-          <el-form-item>
-            <div class="footer">
-              <P><a href="#/register">注册账号</a></P>
-            </div>
+            <el-button type="primary" @click="register">确认</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -38,31 +45,42 @@
 <script>
   import validationRules from '../../common/validationRules'
   import Vue from 'vue';
-  import {Switch} from 'vue-ydui/dist/lib.rem/switch';
+  import {Button, ButtonGroup} from 'vue-ydui/dist/lib.rem/button';
   import ElFormItem from "../../../node_modules/element-ui/packages/form/src/form-item";
+  import {Switch} from 'vue-ydui/dist/lib.rem/switch';
+  import {CheckBox, CheckBoxGroup} from 'vue-ydui/dist/lib.rem/checkbox';
+
+  Vue.component(Button.name, Button);
   Vue.component(Switch.name, Switch);
+  Vue.component(CheckBox.name, CheckBox);
+  Vue.component(CheckBoxGroup.name, CheckBoxGroup);
   export default {
     components: {ElFormItem},
-    name: 'Login',
+    name: 'Register',
     data () {
       return {
         logonForm: {
           name: '',
-          pwd: ''
+          pwd: '',
+          codeVal: '',
         },
         rules: {
           name: [
-            {required: true, validator: validationRules.validateStaffId, trigger: 'blur,change',message:'填写有误' }
+            {required: true, validator: validationRules.validateStaffId, trigger: 'blur,change',message:'填写有误'}
           ],
           pwd: [
             {required: true, validator: validationRules.validatePassword, trigger: 'blur,change',message:'填写有误'}
+          ],
+          codeVal:[
+            {required: true, validator: validationRules.VerificationCode, trigger: 'blur,change',message:'填写有误'}
           ]
         },
-        switchModel: false
+        switchModel: false,
+        radioAgreement:['1'],
       }
     },
     methods: {
-      login: function () {
+      register: function () {
         this.$refs['logonForm'].validate((valid) => {
           if (valid) {
             let self = this
@@ -79,10 +97,10 @@
                   self.$router.replace({path: '/index/staff/list'})
                 }
               })
-              // .catch(function (error) {
-              //   alert(2)
-              //   console.log(error)
-              // })
+            // .catch(function (error) {
+            //   alert(2)
+            //   console.log(error)
+            // })
           }
         })
       },
@@ -137,6 +155,19 @@
     box-shadow: none;
     color: rgb(204, 204, 204);
   }
+  .codeinputicon input{
+    outline-color: invert;
+    outline-style: none;
+    outline-width: 0px;
+    border: none;
+    border-style: none;
+    text-shadow: none;
+    -webkit-appearance: none;
+    -webkit-user-select: text;
+    outline-color: transparent;
+    box-shadow: none;
+    color: rgb(204, 204, 204);
+  }
   a{
     text-decoration:none;
     border-width: 0px;
@@ -147,6 +178,10 @@
     color: #999;
     text-align: right;
     cursor: pointer;
+  }
+  .yd-checkbox-text{
+    font-size: 14px;
+    color: #999;
   }
 </style>
 <style lang="scss" scoped>
@@ -214,14 +249,14 @@
       .el-form-item{
         margin-bottom: 15px;
       }
-      .usernametop,.paswtop{
+      .usernametop,.paswtop,.codeinputtop{
         box-sizing: border-box;
         border-width: 0px;
         border-bottom-width: 1px;
         border-style: solid;
         width: 90%;
         border-color: rgba(228, 228, 228, 1);
-        .usernameicon,.paswicon{
+        .usernameicon,.paswicon,.codeinputicon{
           display: flex;
           outline-style: none;
           img{
@@ -230,14 +265,18 @@
             height: 20px;
             margin-top:10px;
           }
-        }
-        .yd-switch{
-          margin-top: 4px;
+          .yd-btn{
+            background-color: #FFFFFF;
+            cursor: pointer;
+          }
+          .yd-switch{
+            margin-top: 4px;
+          }
         }
       }
-      .forgetpasw{
+      .agreement{
         width: 90%;
-        text-align: right;
+        text-align: left;
         margin-bottom: 22px;
       }
       .logintop{
@@ -252,6 +291,17 @@
         text-align: center;
         a{
           font-size: 16px;
+        }
+      }
+      .agreement{
+        margen:30px 0px;
+        a{
+          font-size: 15px;
+          color: #333;
+          cursor: pointer;
+        }
+        .yd-checkbox{
+          padding-right: 0px;
         }
       }
     }

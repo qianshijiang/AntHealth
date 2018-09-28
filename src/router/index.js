@@ -11,6 +11,7 @@ import Mypolicy from '@/features/index/mypolicy'
 import Activedetail from '@/features/index/activedetail'
 import Servicedetail from '@/features/index/servicedetail'
 import Aidcard from '@/features/index/aidcard'
+import Register from '@/features/register/register'
 import Aidcardt from '@/features/index/aidcardt'
 import Myinfo from '@/features/index/myinfo'
 import Addressmanage from '@/features/index/addressmanage'
@@ -26,7 +27,7 @@ import Paysuccess from '@/features/index/paysuccess'
 import Headinfodetail from '@/features/index/headinfodetail'
 
 
-Vue.use(Router)
+Vue.use(Router);
 
 const router = new Router({
   routes: [
@@ -109,6 +110,11 @@ const router = new Router({
       path: '/serviceorder',
       name: 'serviceorder',
       component: Serviceorder
+    },
+    {
+      path:"/register",
+      name:"register",
+      component:Register
     },
     {
       path: '/serviceorderdetail',

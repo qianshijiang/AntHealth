@@ -1,5 +1,6 @@
-# ant-health
+# AntHealth-admin-web
 
+> 蚂蚁健康系统前端，与后端数据接口分离，采用Vue 2.0实现。
 
 
 ## Build Setup
