@@ -12,6 +12,9 @@ import Activedetail from '@/features/index/activedetail'
 import Servicedetail from '@/features/index/servicedetail'
 import Aidcard from '@/features/index/aidcard'
 import Register from '@/features/register/register'
+import Myinfo from '@/features/index/myinfo'
+import Addressmanage from '@/features/index/addressmanage'
+import Serviceorder from '@/features/index/serviceorder'
 
 
 Vue.use(Router);
@@ -77,6 +80,21 @@ const router = new Router({
       path: '/aidcard',
       name: 'aidcard',
       component: Aidcard
+    },
+    {
+      path: '/myinfo',
+      name: 'myinfo',
+      component: Myinfo
+    },
+    {
+      path: '/addressmanage',
+      name: 'addressmanage',
+      component: Addressmanage
+    },
+    {
+      path: '/serviceorder',
+      name: 'serviceorder',
+      component: Serviceorder
     },
     {
       path:"/register",
