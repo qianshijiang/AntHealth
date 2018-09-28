@@ -26,7 +26,8 @@
     "vue-ydui": "^1.2.6",
     "vuescroll": "^3.7.9",
     "vuex": "^3.0.1",
-    "xlsx": "^0.12.6"
+    "xlsx": "^0.12.6",
+    "ydui-district": "^1.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

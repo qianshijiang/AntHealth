@@ -15,7 +15,7 @@ import Register from '@/features/register/register'
 import Myinfo from '@/features/index/myinfo'
 import Addressmanage from '@/features/index/addressmanage'
 import Serviceorder from '@/features/index/serviceorder'
-
+import ChangePwd from '@/features/index/changePwd'
 
 Vue.use(Router);
 
@@ -97,9 +97,14 @@ const router = new Router({
       component: Serviceorder
     },
     {
-      path:"/register",
-      name:"register",
+      path:'/register',
+      name:'register',
       component:Register
+    },
+    {
+      path:'/changepwd',
+      name:'changepwd',
+      component:ChangePwd
     }
   ]
 })

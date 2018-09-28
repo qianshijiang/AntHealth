@@ -7,13 +7,13 @@
           <el-form-item label="" prop="name" class="usernametop">
             <div class="usernameicon">
               <img src="../../assets/image/u19.svg" />
-              <el-input type="text" class="usernameinput" v-model="logonForm.name" placeholder="手机号码" maxlength="18" auto-complete="true"></el-input>
+              <el-input type="number" class="usernameinput" v-model.number="logonForm.name" placeholder="手机号码" maxlength="11" auto-complete="true"></el-input>
             </div>
           </el-form-item>
           <el-form-item label="" prop="pwd" class="paswtop">
             <div class="paswicon">
               <img src="../../assets/image/u18.svg"/>
-              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="登录密码" maxlength="20" auto-complete="true"></el-input>
+              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="登录密码" maxlength="16" auto-complete="true"></el-input>
               <div>
                 <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)"></yd-switch>
               </div>
@@ -52,10 +52,14 @@
         },
         rules: {
           name: [
-            {required: true, validator: validationRules.validateStaffId, trigger: 'blur,change',message:'填写有误' }
+            {required: true,trigger: 'blur',message:'用户名不能为空'},
+            {max:11,trigger: 'blur',message:'长度为11位'},
+            {validator: validationRules.validatePhone, trigger: 'blur',message:'填写有误' }
           ],
           pwd: [
-            {required: true, validator: validationRules.validatePassword, trigger: 'blur,change',message:'填写有误'}
+            {required: true,trigger: 'blur',message:'密码不能为空'},
+            {max:16,trigger: 'blur',message:'长度为16位'},
+            {validator: validationRules.validatePassword, trigger: 'blur,change',message:'填写有误'}
           ]
         },
         switchModel: false
@@ -161,6 +165,7 @@
   }
   .el-main {
     background-color: #FFFFFF;
+    padding: 0px;
     .logon-panel {
       margin: 80px 200px;
       display: flex;

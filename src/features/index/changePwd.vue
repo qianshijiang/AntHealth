@@ -1,120 +1,312 @@
 <template>
-  <div class="change-pwd">
-    <el-dialog title="修改密码" width="350px" :visible.sync="isShow" @close="cancel" :close-on-click-modal="false">
-      <el-form :model="changeForm" size="mini" :rules="rules" ref="changeForm" :label-position="'left'">
-        <el-form-item label="原密码" :label-width="formLabelWidth" prop="oldPwd">
-          <el-input type="password" v-model="changeForm.oldPwd"></el-input>
-        </el-form-item>
-        <el-form-item label="新密码" :label-width="formLabelWidth" prop="newPwd">
-          <el-input type="password" v-model="changeForm.newPwd"></el-input>
-        </el-form-item>
-        <el-form-item label="确认新密码" :label-width="formLabelWidth" prop="confirmPwd">
-          <el-input type="password" v-model="changeForm.confirmPwd"></el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button size="mini" @click="cancel">取 消</el-button>
-        <el-button type="primary" size="mini" @click="changePwd">确 定</el-button>
+  <el-container>
+    <el-main>
+      <div class="logon-panel">
+        <el-form :model="logonForm" :rules="rules" ref="logonForm" :label-position="'left'" label-width="0" class="logon-form">
+          <div class="changepwdtop">
+            <yd-navbar title="重置密码" bgcolor="rgb(242, 242, 242)" height="60px" fontsize="20px">
+              <router-link to="#" slot="left">
+                <yd-navbar-back-icon></yd-navbar-back-icon>
+              </router-link>
+            </yd-navbar>
+          </div>
+          <el-form-item label="" prop="name" class="usernametop">
+            <div class="usernameicon">
+              <img src="../../assets/image/u64.svg" />
+              <el-input type="number" class="usernameinput" v-model.number="logonForm.name" placeholder="输入手机号码" maxlength="11" auto-complete="true"></el-input>
+            </div>
+          </el-form-item>
+          <el-form-item label="" prop="codeVal" class="codeinputtop">
+            <div class="codeinputicon">
+              <img src="../../assets/image/u65.svg" />
+              <el-input type="text" class="codeinput" v-model="logonForm.codeVal" placeholder="短信验证码" maxlength="6" auto-complete="true"></el-input>
+              <div>
+                <yd-button type="primary" color="#999">发送验证码</yd-button>
+              </div>
+            </div>
+          </el-form-item>
+          <el-form-item label="" prop="pwd" class="paswtop">
+            <div class="paswicon">
+              <img src="../../assets/image/u18.svg"/>
+              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="设置新的登录密码" maxlength="16" auto-complete="true"></el-input>
+              <div>
+                <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)"></yd-switch>
+              </div>
+            </div>
+          </el-form-item>
+          <el-form-item class="logintop">
+            <el-button type="primary" @click="register">确认</el-button>
+          </el-form-item>
+        </el-form>
       </div>
-    </el-dialog>
-  </div>
+    </el-main>
+  </el-container>
 </template>
-
-
 <script>
+  import validationRules from '../../common/validationRules'
+  import Vue from 'vue';
+  import {Button, ButtonGroup} from 'vue-ydui/dist/lib.rem/button';
+  import ElFormItem from "../../../node_modules/element-ui/packages/form/src/form-item";
+  import {Switch} from 'vue-ydui/dist/lib.rem/switch';
+  import {NavBar, NavBarBackIcon, NavBarNextIcon} from 'vue-ydui/dist/lib.rem/navbar';
+
+  Vue.component(NavBar.name, NavBar);
+  Vue.component(NavBarBackIcon.name, NavBarBackIcon);
+  Vue.component(Button.name, Button);
+  Vue.component(Switch.name, Switch);
   export default {
-    name: 'ChangePwd',
-    props: ['showChangePwdPanel'],
+    components: {ElFormItem},
+    name: 'Register',
     data () {
-      let validateOldPwd = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入原始密码'))
-        } else if (!/[0-9]+/.test(value) || !/[a-zA-Z]+/.test(value) || !/^[0-9a-zA-Z]{6,}$/.test(value)) {
-          callback(new Error('密码由字母和数字组成，至少6位'))
-        } else {
-          callback()
-        }
-      }
-      let validateNewPwd = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入新密码'))
-        } else if (!/[0-9]+/.test(value) || !/[a-zA-Z]+/.test(value) || !/^[0-9a-zA-Z]{6,}$/.test(value)) {
-          callback(new Error('密码由字母和数字组成，至少6位'))
-        } else {
-          if (this.changeForm.confirmPwd !== '') {
-            this.$refs.changeForm.validateField('confirmPwd')
-          }
-          callback()
-        }
-      }
-      let validateConfirmPwd = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入新密码'))
-        } else if (value !== this.changeForm.newPwd) {
-          callback(new Error('两次新密码输入不一致!'))
-        } else {
-          callback()
-        }
-      }
       return {
-        changeForm: {
-          oldPwd: '',
-          newPwd: '',
-          confirmPwd: ''
+        logonForm: {
+          name: '',
+          pwd: '',
+          codeVal: '',
         },
-        formLabelWidth: '85px',
-        isShow: this.showChangePwdPanel,
         rules: {
-          oldPwd: [
-            { validator: validateOldPwd, trigger: 'change' }
+          name: [
+            {required: true,trigger:'blur',message:'用户名不能为空'},
+            {max:11,trigger:'blur',message:'长度为11位'},
+            {validator: validationRules.validatePhone, trigger: 'blur',message:'填写有误'}
           ],
-          newPwd: [
-            { validator: validateNewPwd, trigger: 'change' }
+          pwd: [
+            {required: true,trigger:'blur',message:'验证码不能为空'},
+            {max:6,trigger:'blur',message:'长度为6位'},
+            {validator: validationRules.VerificationCode, trigger: 'blur',message:'填写有误'}
           ],
-          confirmPwd: [
-            { validator: validateConfirmPwd, trigger: 'change' }
+          codeVal:[
+            {required: true,trigger: 'blur',message:'密码不能为空'},
+            {max:16,trigger: 'blur',message:'长度为16位'},
+            {validator: validationRules.validatePassword, trigger: 'blur',message:'填写有误'}
           ]
-        }
+        },
+        switchModel: false,
+        radioAgreement:['1'],
       }
     },
     methods: {
-      changePwd () {
-        let self = this
-        this.$refs['changeForm'].validate((valid) => {
+      register: function () {
+        this.$refs['logonForm'].validate((valid) => {
           if (valid) {
+            let self = this
             let params = {
-              oldPassword: self.changeForm.oldPwd,
-              password: self.changeForm.newPwd,
-              token: {
-                value: sessionStorage.getItem('token')
-              }
+              'name': this.logonForm.name,
+              'pwd': this.logonForm.pwd,
+              'codeVal':this.logonForm.codeVal
             }
-            this.$http.post('/index/updatemypw', params)
-              .then(function (res) {
-                self.cancel()
-                self.$message({
-                  type: 'success',
-                  message: '密码修改成功,请重新登录!'
-                })
-                sessionStorage.clear()
-                self.$router.replace({path: '/logon'})
+            self.$http.post('/api/mobileLogin/login', params)
+              .then(function (response) {
+                console.log(JSON.stringify(response))
+                if (response.data.result) {
+                  sessionStorage.setItem('token', response.data.result.mobileToken)
+                  sessionStorage.setItem('setLogonData', JSON.stringify(response.data.result))
+                  self.$router.replace({path: '/index/staff/list'})
+                }
               })
-              .catch(function (error) {
-                console.log(error)
-              })
+            // .catch(function (error) {
+            //   alert(2)
+            //   console.log(error)
+            // })
           }
         })
       },
-      cancel () {
-        this.$refs['changeForm'].resetFields()
-        this.isShow = false
-        this.$emit('update:showChangePwdPanel', this.isShow)
+      getCodeImg () {
+        let self = this
+        let params = {
+          'height': 30,
+          'lineSize': 60,
+          'stringNum': 4,
+          'width': 80
+        }
+        self.$http.post('/staff/idyCodeImg', params)
+          .then(function (res) {
+            self.codeImg = res.data.data.image
+            self.logonForm.idyKey = res.data.data.idyKey
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
       }
+    },
+    mounted: function () {
+      alert(1)
+      // this.getCodeImg()
     }
   }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style>
+  .usernameicon input{
+    outline-color: invert;
+    outline-style: none;
+    outline-width: 0px;
+    border: none;
+    border-style: none;
+    text-shadow: none;
+    -webkit-appearance: none;
+    -webkit-user-select: text;
+    outline-color: transparent;
+    box-shadow: none;
+    color: rgb(204, 204, 204);
+  }
+  .paswicon input{
+    outline-color: invert;
+    outline-style: none;
+    outline-width: 0px;
+    border: none;
+    border-style: none;
+    text-shadow: none;
+    -webkit-appearance: none;
+    -webkit-user-select: text;
+    outline-color: transparent;
+    box-shadow: none;
+    color: rgb(204, 204, 204);
+  }
+  .codeinputicon input{
+    outline-color: invert;
+    outline-style: none;
+    outline-width: 0px;
+    border: none;
+    border-style: none;
+    text-shadow: none;
+    -webkit-appearance: none;
+    -webkit-user-select: text;
+    outline-color: transparent;
+    box-shadow: none;
+    color: rgb(204, 204, 204);
+  }
+  a{
+    text-decoration:none;
+    border-width: 0px;
+    font-family: '微软雅黑';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12px;
+    color: #999;
+    text-align: right;
+    cursor: pointer;
+  }
+</style>
 <style lang="scss" scoped>
-
+  .logo {
+    width: 132px;
+  }
+  .el-header, .el-footer {
+    background-color: #EFF4FA;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .el-main {
+    background-color: #FFFFFF;
+    padding: 0px;
+    .logon-panel {
+      margin: 20px 200px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      .logo-img {
+        width: 460px;
+        height: 460px;
+      }
+      .logon-form {
+        width: 350px !important;
+        .changepwdtop {
+          letter-spacing: 2.4px;
+          height:60px;
+          text-align:center;
+          width:90%;
+          margin-top: 0px;
+          margin-bottom: 30px;
+        }
+        .code{
+          display: flex;
+          flex-direction: row;
+          img{
+            height: 30px;
+            width: 80px;
+            margin-left: 15px;
+            margin-top: 5px;
+          }
+          span{
+            color: #0000ff;
+            margin-left: 15px;
+            text-decoration:underline;
+            cursor:pointer;
+          }
+        }
+      }
+      .el-button {
+        width: 350px;
+        border-radius: 25px;
+        border-width: 0px;
+        height: 45px;
+        font-family: '微软雅黑';
+        font-weight: 400;
+        font-style: normal;
+        font-size: 16px;
+        color: #FFF;
+      }
+      .el-form-item{
+        margin-bottom: 15px;
+      }
+      .usernametop,.paswtop,.codeinputtop{
+        box-sizing: border-box;
+        border-width: 0px;
+        border-bottom-width: 1px;
+        border-style: solid;
+        width: 90%;
+        border-color: rgba(228, 228, 228, 1);
+        .usernameicon,.paswicon,.codeinputicon{
+          display: flex;
+          outline-style: none;
+          img{
+            border-width:0px;
+            width: 20px;
+            height: 20px;
+            margin-top:10px;
+          }
+          .yd-btn{
+            background-color: #FFFFFF;
+            cursor: pointer;
+          }
+          .yd-switch{
+            margin-top: 4px;
+          }
+        }
+      }
+      .agreement{
+        width: 90%;
+        text-align: left;
+        margin-bottom: 22px;
+      }
+      .logintop{
+        width:350px;
+        .el-button{
+          width:90%;
+          background-color: rgb(158, 158, 158);
+          margin-top: 20px;
+        }
+      }
+      .footer{
+        width:90%;
+        text-align: center;
+        a{
+          font-size: 16px;
+        }
+      }
+      .agreement{
+        margen:30px 0px;
+        a{
+          font-size: 15px;
+          color: #333;
+          cursor: pointer;
+        }
+        .yd-checkbox{
+          padding-right: 0px;
+        }
+      }
+    }
+  }
 </style>
