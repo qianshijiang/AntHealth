@@ -56,7 +56,7 @@
   Vue.component(CheckBoxGroup.name, CheckBoxGroup);
   export default {
     components: {ElFormItem},
-    name: 'Register',
+    name: 'Findpwd',
     data () {
       return {
         logonForm: {

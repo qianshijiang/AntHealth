@@ -19,7 +19,7 @@
               </div>
             </div>
           </el-form-item>
-          <div class="forgetpasw">
+          <div class="forgetpasw" @click="goReg(2)">
             <a href="###" >忘记密码</a>
           </div>
           <el-form-item class="logintop">
@@ -27,7 +27,7 @@
           </el-form-item>
           <el-form-item>
             <div class="footer">
-              <P><a href="#/register">注册账号</a></P>
+              <p style="color: #999;" @click="goReg(1)">注册账号</p>
             </div>
           </el-form-item>
         </el-form>
@@ -64,7 +64,7 @@
       }
     },
     methods: {
-      login: function () {
+      login() {
         this.$refs['logonForm'].validate((valid) => {
           if (valid) {
             let self = this
@@ -72,21 +72,29 @@
               'name': this.logonForm.name,
               'pwd': this.logonForm.pwd
             }
-            self.$http.post('/api/mobileLogin/login', params)
+            localStorage.setItem("token", 'hhhhh')
+            self.$router.replace({path: '/my'})
+            self.$http.post('/index/logon', params)
               .then(function (response) {
                 console.log(JSON.stringify(response))
                 if (response.data.result) {
-                  sessionStorage.setItem('token', response.data.result.mobileToken)
-                  sessionStorage.setItem('setLogonData', JSON.stringify(response.data.result))
-                  self.$router.replace({path: '/index/staff/list'})
+                  localStorage.setItem("token", res.body.data.token)
+                  self.$router.replace({path: '/index'})
                 }
               })
-              // .catch(function (error) {
-              //   alert(2)
-              //   console.log(error)
-              // })
+              .catch(function (error) {
+                console.log(error)
+              })
           }
         })
+      },
+      goReg(v){
+        if(v === 1){
+          this.$router.push({path: '/register'})
+        }
+        if(v === 2){
+          this.$router.push({path: '/findpwd'})
+        }
       },
       getCodeImg () {
         let self = this
@@ -107,7 +115,6 @@
       }
     },
     mounted: function () {
-      alert(1)
       // this.getCodeImg()
     }
   }
@@ -124,7 +131,7 @@
     -webkit-user-select: text;
     outline-color: transparent;
     box-shadow: none;
-    color: rgb(204, 204, 204);
+    color: #333 !important;
   }
   .paswicon input{
     outline-color: invert;
@@ -149,6 +156,11 @@
     color: #999;
     text-align: right;
     cursor: pointer;
+  }
+  input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: rgb(255, 255, 255) !important;
+    background-image: none !important;
+    color: rgb(0, 0, 0) !important;
   }
 </style>
 <style lang="scss" scoped>
@@ -175,7 +187,7 @@
         height: 460px;
       }
       .logon-form {
-        width: 346px !important;
+        width: 350px !important;
         .title {
           letter-spacing: 2.4px;
           margin-bottom: 20px;
@@ -204,7 +216,7 @@
         }
       }
       .el-button {
-        width: 346px;
+        width: 350px;
         border-radius: 25px;
         border-width: 0px;
         height: 45px;
@@ -244,7 +256,7 @@
         margin-bottom: 22px;
       }
       .logintop{
-        width:346px;
+        width:350px;
         .el-button{
           width:90%;
           background-color: rgb(158, 158, 158);

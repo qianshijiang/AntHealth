@@ -6,9 +6,9 @@
         <img class="box-img2" src="http://static.ydcss.com/uploads/ydui/2.jpg">
       </div>
       <div class="box-content1">
-        <div>
+        <div @click="clearLogin">
           <p style="font-size: 14px;color: #fff;">
-            设置
+            退出
           </p>
         </div>
         <div style="display: flex;flex-direction: row;justify-content: space-between">
@@ -225,9 +225,29 @@
         if( v === 5 ){
           this.$router.push({path: '/activeorder'})
         }
+      },
+      clearLogin(){
+        localStorage.clear()
+        this.$dialog.toast({
+          mes: "已退出登录！",
+          timeout: 1500
+        })
+        this.getLogon()
+      },
+      getLogon(){
+        if(!localStorage.getItem("token")){
+          this.$router.replace({path: '/login'})
+        }
+        else{
+
+        }
       }
     },
-    mounted: function () {},
+    mounted: function () {
+      if(!localStorage.getItem("token")){
+        this.$router.replace({path: '/login'})
+      }
+    },
     components: {
       FooterBar,
       TopBar
