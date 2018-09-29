@@ -67,18 +67,15 @@
         rules: {
           name: [
             {required: true,trigger:'blur',message:'用户名不能为空'},
-            {max:11,trigger:'blur',message:'长度为11位'},
-            {validator: validationRules.validatePhone, trigger: 'blur',message:'填写有误'}
+            {validator: validationRules.validatePhone, trigger: 'blur'}
           ],
-          pwd: [
+          codeVal: [
             {required: true,trigger:'blur',message:'验证码不能为空'},
-            {max:6,trigger:'blur',message:'长度为6位'},
-            {validator: validationRules.VerificationCode, trigger: 'blur',message:'填写有误'}
+            {validator: validationRules.VerificationCode, trigger: 'blur'}
           ],
-          codeVal:[
+          pwd:[
             {required: true,trigger: 'blur',message:'密码不能为空'},
-            {max:16,trigger: 'blur',message:'长度为16位'},
-            {validator: validationRules.validatePassword, trigger: 'blur',message:'填写有误'}
+            {validator: validationRules.validatePassword, trigger: 'blur'}
           ]
         },
         switchModel: false,
