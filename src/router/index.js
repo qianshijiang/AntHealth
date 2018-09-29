@@ -28,7 +28,7 @@ import Paysuccess from '@/features/index/paysuccess'
 import Headinfodetail from '@/features/index/headinfodetail'
 import EnjoyAge from '@/features/enjoyage/enjoyage'
 
-Vue.use(Router);
+Vue.use(Router)
 
 const router = new Router({
   routes: [

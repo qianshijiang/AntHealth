@@ -66,7 +66,7 @@
       }
     },
     methods: {
-      login: function () {
+      login() {
         this.$refs['logonForm'].validate((valid) => {
           if (valid) {
             let self = this
@@ -74,13 +74,14 @@
               'name': this.logonForm.name,
               'pwd': this.logonForm.pwd
             }
-            self.$http.post('/api/mobileLogin/login', params)
+            self.$router.replace({path: '/index'})
+            self.$http.post('/logon/logon', params)
               .then(function (response) {
                 console.log(JSON.stringify(response))
                 if (response.data.result) {
                   sessionStorage.setItem('token', response.data.result.mobileToken)
                   sessionStorage.setItem('setLogonData', JSON.stringify(response.data.result))
-                  self.$router.replace({path: '/index/staff/list'})
+                  self.$router.replace({path: '/index'})
                 }
               })
               // .catch(function (error) {
@@ -109,7 +110,6 @@
       }
     },
     mounted: function () {
-      alert(1)
       // this.getCodeImg()
     }
   }
@@ -144,7 +144,7 @@
     box-shadow: none;
     color: rgb(204, 204, 204);
   }
-  a{
+  .hh{
     text-decoration:none;
     border-width: 0px;
     font-family: '微软雅黑';

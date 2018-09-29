@@ -20,7 +20,7 @@ import 'vue-ydui/dist/ydui.base.css'
 
 const env = process.env
 if (env.DUMMY) {
-  // Mock.mockData()
+  Mock.mockData()
 }
 
 Vue.use(YDUI)

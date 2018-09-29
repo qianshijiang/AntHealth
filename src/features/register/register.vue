@@ -130,7 +130,6 @@
       }
     },
     mounted: function () {
-      alert(1)
       // this.getCodeImg()
     }
   }

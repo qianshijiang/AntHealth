@@ -39,7 +39,7 @@
         <yd-preview-item class="add-box1">
           <div slot="left" class="add-box2">
             <div class="add-box3 add-box3j">
-              <yd-icon name="checkoff" size="1rem" color="#fff;display:none" class="add-box4"></yd-icon></div>
+              <yd-icon name="checkoff" size="1rem" style="color:#fff;display:none" class="add-box4"></yd-icon></div>
             <span class="add-text1">设置默认</span>
           </div>
           <div slot="left"></div>
