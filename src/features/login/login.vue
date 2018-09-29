@@ -10,12 +10,21 @@
               <el-input type="number" class="usernameinput" v-model.number="logonForm.name" placeholder="手机号码" maxlength="11" auto-complete="true"></el-input>
             </div>
           </el-form-item>
-          <el-form-item label="" prop="pwd" class="paswtop">
+          <el-form-item label="" prop="pwd" class="paswtop" v-if="seePwdModel">
+            <div class="paswicon">
+              <img src="../../assets/image/u18.svg"/>
+              <el-input type="text" class="passwordinput" v-model="logonForm.pwd" placeholder="登录密码" maxlength="16" auto-complete="true"></el-input>
+              <div>
+                <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)" :callback="displayorHidePwd"></yd-switch>
+              </div>
+            </div>
+          </el-form-item>
+          <el-form-item label="" prop="pwd" class="paswtop" v-else>
             <div class="paswicon">
               <img src="../../assets/image/u18.svg"/>
               <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="登录密码" maxlength="16" auto-complete="true"></el-input>
               <div>
-                <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)"></yd-switch>
+                <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)" :callback="displayorHidePwd"></yd-switch>
               </div>
             </div>
           </el-form-item>
@@ -60,25 +69,26 @@
             {validator: validationRules.validatePassword, trigger: 'blur'}
           ]
         },
-        switchModel: false
+        switchModel: false, //按钮开关控制
+        seePwdModel:false, //密码显示隐藏控制
       }
     },
     methods: {
       login() {
         this.$refs['logonForm'].validate((valid) => {
           if (valid) {
-            let self = this
+            let self = this;
             let params = {
               'name': this.logonForm.name,
               'pwd': this.logonForm.pwd
-            }
-            localStorage.setItem("token", 'hhhhh')
-            self.$router.replace({path: '/my'})
+            };
+            localStorage.setItem("token", 'hhhhh');
+            self.$router.replace({path: '/my'});
             self.$http.post('/index/logon', params)
               .then(function (response) {
-                console.log(JSON.stringify(response))
+                console.log(JSON.stringify(response));
                 if (response.data.result) {
-                  localStorage.setItem("token", res.body.data.token)
+                  localStorage.setItem("token", res.body.data.token);
                   self.$router.replace({path: '/index'})
                 }
               })
@@ -112,6 +122,15 @@
           .catch(function (error) {
             console.log(error)
           })
+      },
+      //显示或隐藏密码
+      displayorHidePwd(){
+          let _this = this;
+          if(_this.switchModel){
+              _this.seePwdModel = true;
+          }else{
+            _this.seePwdModel = false;
+          }
       }
     },
     mounted: function () {

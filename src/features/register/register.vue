@@ -14,17 +14,38 @@
             <div class="codeinputicon">
               <img src="../../assets/image/u65.svg" />
               <el-input type="text" class="codeinput" v-model="logonForm.codeVal" placeholder="短信验证码" maxlength="6" auto-complete="true"></el-input>
+              <yd-sendcode class="sendcode" slot="right"
+                           v-model="codeStart"
+                           init-str="点击获取"
+                           @click.native="getVerificationCode"
+                           run-str="{%s}秒"
+                           reset-str="重新获取"
+              ></yd-sendcode>
+              <!--<div class="codetips">
+                <yd-countdown :time="codeTime" timetype="second" done-text="验证码已失效" :callback="countDownEnd">
+                  <span style="color:orange;">{%s}<i>秒</i></span>
+                </yd-countdown>
+              </div>
               <div>
-                <yd-button type="primary" color="#999">发送验证码</yd-button>
+                <yd-button type="primary" color="#999" @click.native="getVerificationCode">发送验证码</yd-button>
+              </div>-->
+            </div>
+          </el-form-item>
+          <el-form-item label="" prop="pwd" class="paswtop" v-if="seePwdModel">
+            <div class="paswicon">
+              <img src="../../assets/image/u18.svg"/>
+              <el-input type="text" class="passwordinput" v-model="logonForm.pwd" placeholder="设置登录密码" maxlength="16" auto-complete="true"></el-input>
+              <div>
+                <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)" :callback="displayorHidePwd"></yd-switch>
               </div>
             </div>
           </el-form-item>
-          <el-form-item label="" prop="pwd" class="paswtop">
+          <el-form-item label="" prop="pwd" class="paswtop" v-else>
             <div class="paswicon">
               <img src="../../assets/image/u18.svg"/>
               <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="设置登录密码" maxlength="16" auto-complete="true"></el-input>
               <div>
-                <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)"></yd-switch>
+                <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)" :callback="displayorHidePwd"></yd-switch>
               </div>
             </div>
           </el-form-item>
@@ -78,7 +99,9 @@
             {validator: validationRules.validatePassword, trigger: 'blur'}
           ]
         },
-        switchModel: false,
+        switchModel: false, //按钮开关控制
+        codeStart:false,//控制发送验证码
+        seePwdModel:false, //密码显示隐藏控制
         radioAgreement:['1'],
       }
     },
@@ -109,13 +132,13 @@
         })
       },
       getCodeImg () {
-        let self = this
+        let self = this;
         let params = {
           'height': 30,
           'lineSize': 60,
           'stringNum': 4,
           'width': 80
-        }
+        };
         self.$http.post('/staff/idyCodeImg', params)
           .then(function (res) {
             self.codeImg = res.data.data.image
@@ -124,6 +147,40 @@
           .catch(function (error) {
             console.log(error)
           })
+      },
+      //显示或隐藏密码
+      displayorHidePwd(){
+        let _this = this;
+        if(_this.switchModel){
+          _this.seePwdModel = true;
+        }else{
+          _this.seePwdModel = false;
+        }
+      },
+      //获取验证码
+      getVerificationCode() {
+        if(!this.logonForm.name){
+          this.$dialog.toast({
+            mes: "手机号不能为空",
+            timeout: 1500
+          });
+          return
+        }
+        this.$dialog.loading.open("发送中...");
+        setTimeout(() => {
+          this.codeStart = true;
+          this.$dialog.loading.close();
+          //this.getcode()
+          this.$dialog.toast({
+            mes: "已发送",
+            icon: "success",
+            timeout: 1500
+          });
+        }, 1000)
+      },
+      //倒计时结束后的回调函数
+      countDownEnd(){
+
       }
     },
     mounted: function () {
@@ -273,6 +330,13 @@
           }
           .yd-switch{
             margin-top: 4px;
+          }
+          .sendcode {
+            width: 88px;
+            height: 28px;
+            background: rgb(158, 158, 158);
+            border-radius: 14px;
+            font-size: 12px;
           }
         }
       }
