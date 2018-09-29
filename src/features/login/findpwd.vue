@@ -3,7 +3,13 @@
     <el-main>
       <div class="logon-panel">
         <el-form :model="logonForm" :rules="rules" ref="logonForm" :label-position="'left'" label-width="0" class="logon-form">
-          <div class="title">蚂蚁健康</div>
+          <div class="changepwdtop">
+            <yd-navbar title="重置密码" bgcolor="rgb(242, 242, 242)" height="60px" fontsize="20px">
+              <router-link to="#" slot="left">
+                <yd-navbar-back-icon></yd-navbar-back-icon>
+              </router-link>
+            </yd-navbar>
+          </div>
           <el-form-item label="" prop="name" class="usernametop">
             <div class="usernameicon">
               <img src="../../assets/image/u64.svg" />
@@ -22,18 +28,12 @@
           <el-form-item label="" prop="pwd" class="paswtop">
             <div class="paswicon">
               <img src="../../assets/image/u18.svg"/>
-              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="设置登录密码" maxlength="16" auto-complete="true"></el-input>
+              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="设置新的登录密码" maxlength="16" auto-complete="true"></el-input>
               <div>
                 <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)"></yd-switch>
               </div>
             </div>
           </el-form-item>
-          <div class="agreement">
-            <yd-checkbox-group v-model="radioAgreement" color="rgb(158, 158, 158)">
-              <yd-checkbox val="1" shape="circle">已阅读并同意</yd-checkbox>
-              <a href="###" >《用户服务协议》</a>
-            </yd-checkbox-group>
-          </div>
           <el-form-item class="logintop">
             <el-button type="primary" @click="register">确认</el-button>
           </el-form-item>
@@ -48,12 +48,12 @@
   import {Button, ButtonGroup} from 'vue-ydui/dist/lib.rem/button';
   import ElFormItem from "../../../node_modules/element-ui/packages/form/src/form-item";
   import {Switch} from 'vue-ydui/dist/lib.rem/switch';
-  import {CheckBox, CheckBoxGroup} from 'vue-ydui/dist/lib.rem/checkbox';
+  import {NavBar, NavBarBackIcon, NavBarNextIcon} from 'vue-ydui/dist/lib.rem/navbar';
 
+  Vue.component(NavBar.name, NavBar);
+  Vue.component(NavBarBackIcon.name, NavBarBackIcon);
   Vue.component(Button.name, Button);
   Vue.component(Switch.name, Switch);
-  Vue.component(CheckBox.name, CheckBox);
-  Vue.component(CheckBoxGroup.name, CheckBoxGroup);
   export default {
     components: {ElFormItem},
     name: 'Findpwd',
@@ -182,10 +182,6 @@
     text-align: right;
     cursor: pointer;
   }
-  .yd-checkbox-text{
-    font-size: 14px;
-    color: #999;
-  }
 </style>
 <style lang="scss" scoped>
   .logo {
@@ -201,7 +197,7 @@
     background-color: #FFFFFF;
     padding: 0px;
     .logon-panel {
-      margin: 80px 200px;
+      margin: 20px 188px;
       display: flex;
       flex-direction: row;
       justify-content: space-around;
@@ -211,16 +207,13 @@
         height: 460px;
       }
       .logon-form {
-        width: 350px !important;
-        .title {
+        width: 300px !important;
+        .changepwdtop {
           letter-spacing: 2.4px;
-          margin-bottom: 20px;
-          font-weight: 400;
-          font-style: normal;
-          font-size: 42px;
-          color: #999;
+          height:60px;
           text-align:center;
-          width:90%;
+          margin-top: 0px;
+          margin-bottom: 30px;
         }
         .code{
           display: flex;
@@ -240,7 +233,7 @@
         }
       }
       .el-button {
-        width: 350px;
+        width: 300px;
         border-radius: 25px;
         border-width: 0px;
         height: 45px;
@@ -258,7 +251,6 @@
         border-width: 0px;
         border-bottom-width: 1px;
         border-style: solid;
-        width: 90%;
         border-color: rgba(228, 228, 228, 1);
         .usernameicon,.paswicon,.codeinputicon{
           display: flex;
@@ -279,19 +271,17 @@
         }
       }
       .agreement{
-        width: 90%;
         text-align: left;
-        margin: 22px 0px;
+        margin-bottom: 22px;
       }
       .logintop{
-        width:350px;
+        width:300px;
         .el-button{
-          width:90%;
           background-color: rgb(158, 158, 158);
+          margin-top: 20px;
         }
       }
       .footer{
-        width:90%;
         text-align: center;
         a{
           font-size: 16px;

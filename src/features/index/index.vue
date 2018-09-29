@@ -136,7 +136,7 @@
           this.$router.push({path: '/product'})
         }
         if( v === 2 ){
-          this.$router.push({path: '/login'}) //mypolicy
+          this.$router.push({path: '/register'}) //mypolicy
         }
         if( v === 3 ){
           this.$router.push({path: '/aidcardt'})

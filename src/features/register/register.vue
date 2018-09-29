@@ -201,7 +201,7 @@
     background-color: #FFFFFF;
     padding: 0px;
     .logon-panel {
-      margin: 80px 200px;
+      margin: 80px 188px;
       display: flex;
       flex-direction: row;
       justify-content: space-around;
@@ -211,7 +211,7 @@
         height: 460px;
       }
       .logon-form {
-        width: 350px !important;
+        width: 300px !important;
         .title {
           letter-spacing: 2.4px;
           margin-bottom: 20px;
@@ -220,7 +220,6 @@
           font-size: 42px;
           color: #999;
           text-align:center;
-          width:90%;
         }
         .code{
           display: flex;
@@ -240,7 +239,7 @@
         }
       }
       .el-button {
-        width: 350px;
+        width: 300px;
         border-radius: 25px;
         border-width: 0px;
         height: 45px;
@@ -258,7 +257,6 @@
         border-width: 0px;
         border-bottom-width: 1px;
         border-style: solid;
-        width: 90%;
         border-color: rgba(228, 228, 228, 1);
         .usernameicon,.paswicon,.codeinputicon{
           display: flex;
@@ -279,19 +277,16 @@
         }
       }
       .agreement{
-        width: 90%;
         text-align: left;
         margin: 22px 0px;
       }
       .logintop{
-        width:350px;
+        width:300px;
         .el-button{
-          width:90%;
           background-color: rgb(158, 158, 158);
         }
       }
       .footer{
-        width:90%;
         text-align: center;
         a{
           font-size: 16px;

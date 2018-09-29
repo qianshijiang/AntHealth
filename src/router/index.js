@@ -17,7 +17,6 @@ import Aidcardt from '@/features/index/aidcardt'
 import Myinfo from '@/features/index/myinfo'
 import Addressmanage from '@/features/index/addressmanage'
 import Serviceorder from '@/features/index/serviceorder'
-import ChangePwd from '@/features/index/changePwd'
 import Serviceorderdetail from '@/features/index/serviceorderdetail'
 import Refund from '@/features/index/refund'
 import Activeorder from '@/features/index/activeorder'
@@ -122,11 +121,6 @@ const router = new Router({
       path:'/register',
       name:'register',
       component:Register
-    },
-    {
-      path:'/changepwd',
-      name:'changepwd',
-      component:ChangePwd
     },
     {
       path: '/serviceorderdetail',
