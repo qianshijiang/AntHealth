@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/features/login/login'
+import Findpwd from '@/features/login/findpwd'
 import Index from '@/features/index/index'
 import Service from '@/features/index/service'
 import Active from '@/features/index/active'
@@ -41,6 +42,11 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/findpwd',
+      name: 'findpwd',
+      component: Findpwd
     },
     {
       path: '/index',
