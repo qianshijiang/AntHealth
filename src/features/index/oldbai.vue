@@ -1,24 +1,15 @@
 <template>
   <div class="home-box">
-    <TopBar title="退票"/>
-    <div class="product-box">
-      <div class="for-box" >
-        <yd-icon size="35px" name="checkoff"></yd-icon>
-        <p class="or-text" style="font-size: 16px;font-weight: bold;color:#999">退票成功</p>
-        <p class="or-text">退款金额</p>
-        <p class="or-text" style="font-size: 16px;font-weight: bold;color:#666">￥0.00</p>
-      </div>
-      <div class="for-box" style="border: 0;">
-        <p class="or-text">退款金额将在三个工作日内园路退还</p>
-      </div>
-    </div>
+    <TopBar title="老白药"/>
+    <iframe style="height: 100%;width: 100%;" src="https://m.laobai.com/react/home/" scrolling="auto" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
   </div>
 </template>
 <script>
   import FooterBar from '../components/FooterBar.vue'
   import TopBar from '../components/TopBar.vue'
   export default {
-    name: 'Refund',
+    name: 'Pay',
     data () {
       return {
         logonData: {},
@@ -26,8 +17,8 @@
       }
     },
     methods: {
-      changePwd: function () {
-        this.showChangePwdPanel = true
+      goActiveOrder() {
+        this.$router.push({path: '/activeorder'})
       }
     },
     mounted: function () {},
@@ -40,7 +31,7 @@
 <style lang="scss" scoped>
   .home-box {
     /*margin-top:45px;*/
-    height: auto;
+    height: 100%;
     /*min-height: 100%;*/
     width: 100%;
   }
@@ -56,14 +47,51 @@
     display: flex;
     flex-direction: column;
   }
+  .pay-box1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: space-between;
+    width: 100%;
+    padding: 15px 0;
+
+  }
+  .pay-text{
+    height: 25px;
+    width: 100px;
+    background: #ffffff;
+    position: absolute;
+    top: -10px;
+    color: #999;
+    font-size: 16px;
+    text-align: center;
+  }
+  .pay-text1{
+    font-size: 14px;
+    color: #999;
+  }
   .for-box{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 10px;
-    border-bottom: 1px solid #e0e0e0;
+    border-top: 1px solid #e0e0e0;
     align-items: center;
+    position: relative;
+    top: 0;
 
+  }
+  .pay-box2{
+    height: auto;
+    padding: 15px 0;
+    background: rgb(242,242,242);
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+  }
+  .pay-box2 p{
+    font-size: 14px;
+    color: #333;
+    text-align: center;
   }
   .or-box{
     height: 250px;

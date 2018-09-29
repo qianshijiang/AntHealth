@@ -87,7 +87,8 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
-    margin-top:45px;
+    /*margin-top:45px;*/
+    margin-top:10px;
     background-image:none;
     height: auto;
     min-height: 100%;

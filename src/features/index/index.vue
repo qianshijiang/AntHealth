@@ -28,14 +28,16 @@
         </div>
         <p class="home-title2">我的保单</p>
       </div>
-      <div class="home-box2">
+      <div class="home-box2" @click="productIntro(6)">
+        <!--<a  target="_parent" href="https://m.laobai.com/react/home/" >-->
         <div class="u186_div">
           <!--<p class="home-title1">ICON</p>-->
           <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
         </div>
         <p class="home-title2">福利商城</p>
+        <!--</a>-->
       </div>
-      <div class="home-box2">
+      <div class="home-box2" @click="productIntro(6)">
         <div class="u186_div">
           <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
         </div>
@@ -146,6 +148,9 @@
         }
         if( v === 5 ){
           this.$router.push({path: '/activedetail'})
+        }
+        if( v === 6 ){
+          this.$router.push({path: '/oldbai'})
         }
       }
     },

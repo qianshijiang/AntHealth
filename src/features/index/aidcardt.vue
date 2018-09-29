@@ -103,7 +103,7 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
-    margin-top:45px;
+    /*margin-top:45px;*/
     height: auto;
     /*min-height: 100%;*/
     width: 100%;
@@ -174,7 +174,7 @@
     margin: auto;
     border-radius: 35px;
     padding: 10px;
-    background: #6f7180;
+    background: rgb(153,153,153);
     margin-top:15px;
     margin-bottom: 15px;
     margin-left: 15%;

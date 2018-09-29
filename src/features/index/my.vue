@@ -73,13 +73,15 @@
           <p class="text2" style="margin-right: 5px;">进入商城</p>
           <img style="height: 14px;width: 12px;margin-right: 20px;" src="../../assets/image/right.png">
         </div>
-
       </div>
       <div class="home-box1">
         <div class="home-box2">
           <div class="u186_div">
+            <yd-badge color="#666" style="position: absolute;top:-3px;right: 0;background: #fff;border:1px solid #999;">1</yd-badge>
             <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
+
           </div>
+
           <p class="home-title2">待付款</p>
         </div>
         <div class="home-box2">
@@ -109,6 +111,7 @@
       <div class="home-box1">
         <div class="home-box2" @click="productIntro(4)">
           <div class="u186_div">
+            <yd-badge color="#666" style="position: absolute;top:-3px;right: 0;background: #fff;border:1px solid #999;">2</yd-badge>
             <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
           </div>
           <p class="home-title2">进行中</p>
@@ -256,7 +259,7 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
-    margin-top:45px;
+    /*margin-top:45px;*/
     background-image:none;
     height: auto;
     min-height: 100%;
@@ -380,6 +383,8 @@
     font-style:normal;
     font-size:12px;
     color:#999999;
+    position: relative;
+    top: 0;
   }
 
   .u197 {

@@ -60,7 +60,7 @@
         </p>
       </div>
     </div>
-    <div style="height: auto;background: #fff;padding:5px;padding-top: 15px;">
+    <div style="height: auto;background: #fff;padding:5px;padding-top: 15px;margin-bottom: 60px;">
       <div class="product-box2">
         <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2084177578,2732537718&fm=26&gp=0.jpg">
       </div>
@@ -91,6 +91,8 @@
              <span class="act-text1" style="border-right:0">1 </span>
              <span class="act-text1">+</span>
            </p>
+           <!--<yd-spinner style="height: 40px;width: 90px;" v-model="spinner3"></yd-spinner>-->
+           <!--<span>[model: spinner3 = {{spinner3}}]</span>-->
          </div>
        </div>
         <div @click="goPay"><yd-button style="width:96%;margin: 25px auto;" size="large" type="disabled" >下一步</yd-button></div>
@@ -108,7 +110,8 @@
       return {
         logonData: {},
         show2: false,
-        radio2: 2
+        radio2: 2,
+        spinner3:1,
       }
     },
     methods: {
@@ -128,7 +131,7 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
-    margin-top:45px;
+    /*margin-top:45px;*/
     background-image:none;
     height: auto;
     min-height: 100%;
@@ -339,7 +342,7 @@
     padding: 10px;
     position: fixed;
     bottom: 10px;
-    background: #6f7180;
+    background: rgb(153,153,153);
     left: 17.5%;
   }
   .pro-bottom p{

@@ -26,6 +26,7 @@ import Appointment from '@/features/index/appointment'
 import Payshure from '@/features/index/payshure'
 import Paysuccess from '@/features/index/paysuccess'
 import Headinfodetail from '@/features/index/headinfodetail'
+import Oldbai from '@/features/index/oldbai'
 import EnjoyAge from '@/features/enjoyage/enjoyage'
 
 Vue.use(Router)
@@ -171,6 +172,11 @@ const router = new Router({
       path: '/enjoyage',
       name: 'enjoyage',
       component: EnjoyAge
+    },
+    {
+      path: '/oldbai',
+      name: 'oldbai',
+      component: Oldbai
     }
   ]
 });

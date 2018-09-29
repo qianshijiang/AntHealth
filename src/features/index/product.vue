@@ -135,7 +135,7 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
-    margin-top:45px;
+    /*margin-top:45px;*/
     background-image:none;
     height: auto;
     min-height: 100%;
@@ -289,7 +289,7 @@
     padding: 10px;
     position: fixed;
     bottom: 10px;
-    background: #6f7180;
+    background: rgb(153,153,153);
     left: 17.5%;
   }
   .pro-bottom p{
