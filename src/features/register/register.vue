@@ -7,7 +7,7 @@
           <el-form-item label="" prop="name" class="usernametop">
             <div class="usernameicon">
               <img src="../../assets/image/u64.svg" />
-              <el-input type="text" class="usernameinput" v-model="logonForm.name" placeholder="输入手机号码" maxlength="18" auto-complete="true"></el-input>
+              <el-input type="number" class="usernameinput" v-model.number="logonForm.name" placeholder="输入手机号码" maxlength="11" auto-complete="true"></el-input>
             </div>
           </el-form-item>
           <el-form-item label="" prop="codeVal" class="codeinputtop">
@@ -22,7 +22,7 @@
           <el-form-item label="" prop="pwd" class="paswtop">
             <div class="paswicon">
               <img src="../../assets/image/u18.svg"/>
-              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="设置登录密码" maxlength="20" auto-complete="true"></el-input>
+              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="设置登录密码" maxlength="16" auto-complete="true"></el-input>
               <div>
                 <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)"></yd-switch>
               </div>
@@ -66,13 +66,19 @@
         },
         rules: {
           name: [
-            {required: true, validator: validationRules.validateStaffId, trigger: 'blur,change',message:'填写有误'}
+            {required: true,trigger:'blur',message:'用户名不能为空'},
+            {max:11,trigger:'blur',message:'长度为11位'},
+            {validator: validationRules.validatePhone, trigger: 'blur',message:'填写有误'}
           ],
           pwd: [
-            {required: true, validator: validationRules.validatePassword, trigger: 'blur,change',message:'填写有误'}
+            {required: true,trigger:'blur',message:'验证码不能为空'},
+            {max:6,trigger:'blur',message:'长度为6位'},
+            {validator: validationRules.VerificationCode, trigger: 'blur',message:'填写有误'}
           ],
           codeVal:[
-            {required: true, validator: validationRules.VerificationCode, trigger: 'blur,change',message:'填写有误'}
+            {required: true,trigger: 'blur',message:'密码不能为空'},
+            {max:16,trigger: 'blur',message:'长度为16位'},
+            {validator: validationRules.validatePassword, trigger: 'blur',message:'填写有误'}
           ]
         },
         switchModel: false,
@@ -86,7 +92,8 @@
             let self = this
             let params = {
               'name': this.logonForm.name,
-              'pwd': this.logonForm.pwd
+              'pwd': this.logonForm.pwd,
+              'codeVal':this.logonForm.codeVal
             }
             self.$http.post('/api/mobileLogin/login', params)
               .then(function (response) {
@@ -197,6 +204,7 @@
   }
   .el-main {
     background-color: #FFFFFF;
+    padding: 0px;
     .logon-panel {
       margin: 80px 200px;
       display: flex;
@@ -278,7 +286,7 @@
       .agreement{
         width: 90%;
         text-align: left;
-        margin-bottom: 22px;
+        margin: 22px 0px;
       }
       .logintop{
         width:350px;
