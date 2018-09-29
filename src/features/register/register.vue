@@ -178,10 +178,6 @@
           });
         }, 1000)
       },
-      //倒计时结束后的回调函数
-      countDownEnd(){
-
-      }
     },
     mounted: function () {
       // this.getCodeImg()

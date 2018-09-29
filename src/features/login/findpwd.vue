@@ -151,10 +151,6 @@
           _this.seePwdModel = false;
         }
       },
-      //倒计时结束后的回调函数
-      countDownEnd(){
-
-      },
       //获取验证码
       getVerificationCode() {
         if(!this.logonForm.name){
