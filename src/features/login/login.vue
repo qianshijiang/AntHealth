@@ -65,7 +65,6 @@
     },
     methods: {
       login: function () {
-          alert(1);
         this.$refs['logonForm'].validate((valid) => {
           if (valid) {
             let self = this
@@ -176,7 +175,7 @@
         height: 460px;
       }
       .logon-form {
-        width: 350px !important;
+        width: 346px !important;
         .title {
           letter-spacing: 2.4px;
           margin-bottom: 20px;
@@ -205,7 +204,7 @@
         }
       }
       .el-button {
-        width: 350px;
+        width: 346px;
         border-radius: 25px;
         border-width: 0px;
         height: 45px;
@@ -245,7 +244,7 @@
         margin-bottom: 22px;
       }
       .logintop{
-        width:350px;
+        width:346px;
         .el-button{
           width:90%;
           background-color: rgb(158, 158, 158);
