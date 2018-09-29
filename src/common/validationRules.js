@@ -14,8 +14,8 @@ validationRules.validateStaffId = (rule, value, callback) => {
 validationRules.validatePassword = (rule, value, callback) => {
   if (value === '') {
     callback(new Error('请输入密码'))
-  } else if(!/^[0-9a-zA-Z]{6,16}$/.test(value)){
-    callback(new Error('密码为6-16位的字母或数字'))
+  } else if(!/^[0-9a-zA-Z]{6,20}$/.test(value)){
+    callback(new Error('密码为6-20位的字母或数字'))
   } else {
     callback()
   }

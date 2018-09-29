@@ -21,20 +21,12 @@
                            run-str="{%s}秒"
                            reset-str="重新获取"
               ></yd-sendcode>
-              <!--<div class="codetips">
-                <yd-countdown :time="codeTime" timetype="second" done-text="验证码已失效" :callback="countDownEnd">
-                  <span style="color:orange;">{%s}<i>秒</i></span>
-                </yd-countdown>
-              </div>
-              <div>
-                <yd-button type="primary" color="#999" @click.native="getVerificationCode">发送验证码</yd-button>
-              </div>-->
             </div>
           </el-form-item>
           <el-form-item label="" prop="pwd" class="paswtop" v-if="seePwdModel">
             <div class="paswicon">
               <img src="../../assets/image/u18.svg"/>
-              <el-input type="text" class="passwordinput" v-model="logonForm.pwd" placeholder="设置登录密码" maxlength="16" auto-complete="true"></el-input>
+              <el-input type="text" class="passwordinput" v-model="logonForm.pwd" placeholder="设置登录密码" maxlength="20" auto-complete="true"></el-input>
               <div>
                 <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)" :callback="displayorHidePwd"></yd-switch>
               </div>
@@ -43,7 +35,7 @@
           <el-form-item label="" prop="pwd" class="paswtop" v-else>
             <div class="paswicon">
               <img src="../../assets/image/u18.svg"/>
-              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="设置登录密码" maxlength="16" auto-complete="true"></el-input>
+              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="设置登录密码" maxlength="20" auto-complete="true"></el-input>
               <div>
                 <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)" :callback="displayorHidePwd"></yd-switch>
               </div>

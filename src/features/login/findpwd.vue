@@ -32,7 +32,7 @@
           <el-form-item label="" prop="pwd" class="paswtop" v-if="seePwdModel">
             <div class="paswicon">
               <img src="../../assets/image/u18.svg"/>
-              <el-input type="text" class="passwordinput" v-model="logonForm.pwd" placeholder="设置新的登录密码" maxlength="16" auto-complete="true"></el-input>
+              <el-input type="text" class="passwordinput" v-model="logonForm.pwd" placeholder="设置新的登录密码" maxlength="20" auto-complete="true"></el-input>
               <div>
                 <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)" :callback="displayorHidePwd"></yd-switch>
               </div>
@@ -41,7 +41,7 @@
           <el-form-item label="" prop="pwd" class="paswtop" v-else>
             <div class="paswicon">
               <img src="../../assets/image/u18.svg"/>
-              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="设置新的登录密码" maxlength="16" auto-complete="true"></el-input>
+              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="设置新的登录密码" maxlength="20" auto-complete="true"></el-input>
               <div>
                 <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)" :callback="displayorHidePwd"></yd-switch>
               </div>
