@@ -26,7 +26,7 @@ import Appointment from '@/features/index/appointment'
 import Payshure from '@/features/index/payshure'
 import Paysuccess from '@/features/index/paysuccess'
 import Headinfodetail from '@/features/index/headinfodetail'
-
+import EnjoyAge from '@/features/enjoyage/enjoyage'
 
 Vue.use(Router);
 
@@ -166,9 +166,14 @@ const router = new Router({
       path: '/headinfodetail',
       name: 'headinfodetail',
       component: Headinfodetail
+    },
+    {
+      path: '/enjoyage',
+      name: 'enjoyage',
+      component: EnjoyAge
     }
   ]
-})
+});
 
 // router.beforeEach((to, from, next) => {
 //   if (to.meta.requireAuth) {
