@@ -11,7 +11,7 @@
     </div>
     <div style="height: auto;background: #fff;padding:5px;padding-top: 10px;margin-top: -5px;">
       <div class="product-box2">
-
+        <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2084177578,2732537718&fm=26&gp=0.jpg">
       </div>
       <p style="font-size: 12px;color: #666;line-height: 20px;margin: 10px 5px;">
         现在9月份入秋的季节，也是吃螃蟹最好的季节，螃蟹不只是美味，还是很营养的一道海鲜，螃蟹不仅含有丰富的蛋白质，氨基酸，还含有丰富的钙，铁，锌，硒，钾，维生素A，维生素B等，其蛋白质的含量是猪肉和鱼肉的几倍，螃蟹体内的维生素A和核黄素的含量，在人们的食谱中是也首屈一指的。但是并不是所有螃蟹都能那么营养，而且也不是什么人都可以吃螃蟹，除了海鲜过敏的人，还有一些胆固醇过高的人群，也要尽量少吃螃蟹，当然这些都是已知的禁忌，今天主要来说说一些鲜为人知的吃螃蟹禁忌，这可是讨海人的经验之谈，大家好好收藏。首先螃蟹一定要挑新鲜的，很多人因为没有办法看到螃蟹咋煮之前，到底是不是活蹦乱跳的，所以很是吃亏，虽然沿海地方基本上都是一些新鲜的螃蟹在市场是哪个，难免也会混入一些不良的商家，将死了很久的螃蟹夹杂在其中，这就让大家很是头痛。为什么别吃死蟹？因为死蟹体内的寄生细菌，会繁殖并扩散到蟹肉中，使得蛋白质分解产生组织胺。蟹死的时间越长，体内积累的组织胺越多，毒性越大。即使把死蟹煮熟煮透，毒素仍然不易被破坏，食用后会引起恶心呕吐，面颊潮红，心跳加速等。不要吃隔夜蟹，螃蟹为含组胺酸较多的食物，隔夜的剩蟹种组氨酸在某些维生素的作用下，会分解为组胺，回锅加热随可杀灭病源微生物，却不能破坏毒素，从而导致组氨酸中毒。因此，蟹最好现蒸现吃，一般不要超过4小时。还有不能吃生蟹和醉蟹。醉蟹是生的螃蟹下去浸泡白酒，而螃蟹体内含有各种病源微生物。尤其是其体内的肺吸虫幼虫卵感染度很高，抵抗力很强，单用黄酒，白酒浸泡并不能杀死。吃生蟹，醉蟹，极易诱发肺吸虫病，引起咳嗽咯血，如果病毒进入脑部，还会引起瘫痪。还有螃蟹的四个部件也不要吃，那就是蟹腮，蟹肠，蟹心和蟹胃。
@@ -48,12 +48,16 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
-    margin:0px;
+    margin-top:45px;
     background-image:none;
     height: auto;
     min-height: 100%;
     width: 100%;
     background: #ffffff;
+  }
+  .home-img1{
+    height: 100%;
+    width: 100%;
   }
   .product-box{
     height: 150px;
@@ -72,6 +76,9 @@
     flex-direction: column;
     background: #fff;
     padding: 10px 15px;
+  }
+  .product-boxj2{
+    padding: 0;
   }
  .product-box1{
     height: auto;

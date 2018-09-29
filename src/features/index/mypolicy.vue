@@ -2,13 +2,13 @@
   <div class="home-box">
     <TopBar title="我的保单"/>
     <div class="box-top box-top1">
-      <div class="box-top2 box-top2j">
+      <div class="box-top2 " :class="{'box-top2j': navflag === 1}" @click="searchList(0)">
         <p class="se-title3">全部</p>
       </div>
-      <div class="box-top2">
+      <div class="box-top2" :class="{'box-top2j': navflag === 2}" @click="searchList(1)">
         <p class="se-title3">保障中</p>
       </div>
-      <div class="box-top2">
+      <div class="box-top2" :class="{'box-top2j': navflag === 3}" @click="searchList(2)">
         <p class="se-title3">已过期</p>
       </div>
     </div>
@@ -44,12 +44,13 @@
     name: 'Service',
     data () {
       return {
-        logonData: {}
+        logonData: {},
+        navflag: 1
       }
     },
     methods: {
-      changePwd: function () {
-        this.showChangePwdPanel = true
+      searchList(v){
+        this.navflag = v + 1
       }
     },
     mounted: function () {},
@@ -61,7 +62,7 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
-    margin:0px;
+    margin-top:45px;
     background-image:none;
     height: auto;
     min-height: 100%;

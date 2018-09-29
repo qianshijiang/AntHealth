@@ -44,7 +44,7 @@
         </div>
       </div>
     </div>
-    <div class="box-content" style="margin: 5px;">
+    <div class="box-content" style="margin: 5px 0;">
       <!--<div class="box-imgb">-->
       <img class="box-imgb" src="http://static.ydcss.com/uploads/ydui/2.jpg">
       <!--</div>-->
@@ -89,7 +89,7 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
-    margin:0px;
+    margin-top:45px;
     background-image:none;
     height: auto;
     min-height: 100%;
@@ -157,19 +157,7 @@
     flex-direction: row;
     padding: 20px 10px;
   }
-  .box-top1{
-    padding: 0 10px;
-    justify-content: space-around;
-    margin-bottom: 5px;
-  }
-  .box-top2{
-    padding: 15px 0;
-    flex: 1;
-    text-align: center;
-  }
-  .box-top2j{
-    border-bottom: 1px solid #333;
-  }
+
   .box-imgb{
     width:140px;
     height:100px;

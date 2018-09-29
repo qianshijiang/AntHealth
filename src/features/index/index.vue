@@ -22,25 +22,28 @@
     <div class="home-box1">
       <div class="home-box2" @click="productIntro(2)">
         <div class="u186_div">
-          <p class="home-title1">ICON</p>
+          <!--<div class="home-title1">-->
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
+          <!--</div>-->
         </div>
         <p class="home-title2">我的保单</p>
       </div>
       <div class="home-box2">
         <div class="u186_div">
-          <p class="home-title1">ICON</p>
+          <!--<p class="home-title1">ICON</p>-->
+          <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
         </div>
         <p class="home-title2">福利商城</p>
       </div>
       <div class="home-box2">
         <div class="u186_div">
-          <p class="home-title1">ICON</p>
+          <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
         </div>
         <p class="home-title2">平价药房</p>
       </div>
       <div class="home-box2"  @click="productIntro(3)">
         <div class="u186_div">
-          <p class="home-title1">ICON</p>
+          <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
         </div>
         <p class="home-title2">一键急救</p>
       </div>
@@ -62,10 +65,10 @@
     <div class="u197">
       <div class="u197_text ">
         <p class="text1">最新活动</p>
-        <p class="text2">更多</p>
+        <p class="text2" @click="productIntro(4)">更多</p>
       </div>
       <div class="home-box-tow">
-        <div class="box-tow1">
+        <div class="box-tow1" @click="productIntro(5)">
           <img class="box-img1" src="http://static.ydcss.com/uploads/ydui/2.jpg">
           <div class="box-tow2">
             <p class="text3">
@@ -73,7 +76,7 @@
             </p>
           </div>
         </div>
-        <div class="box-tow1">
+        <div class="box-tow1" @click="productIntro(5)">
           <img class="box-img1" src="http://static.ydcss.com/uploads/ydui/3.jpg">
           <div class="box-tow2">
             <p class="text3">
@@ -138,6 +141,12 @@
         if( v === 3 ){
           this.$router.push({path: '/aidcardt'})
         }
+        if( v === 4 ){
+          this.$router.push({path: '/active'})
+        }
+        if( v === 5 ){
+          this.$router.push({path: '/activedetail'})
+        }
       }
     },
     mounted: function () {},
@@ -148,11 +157,11 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
-    margin:0px;
+    /*margin-top:30px;*/
     background-image:none;
     height: auto;
-    min-height: 100%;
     width: 100%;
+    /*overflow: hidden;*/
   }
   .home-box-tow{
     display: flex;
@@ -245,6 +254,12 @@
     text-align: center;
     line-height: 59px
   }
+  .home-img1{
+    height: 100%;
+    width: 100%;
+    /*max-width: 59px;*/
+    border-radius: 30px;
+  }
   .home-title2{
     font-size: 12px;
     color: #333;
@@ -294,6 +309,7 @@
     font-style:normal;
     font-size:12px;
     color:#999999;
+    text-align: center;display:table-cell;vertical-align: middle;
   }
 
   .u197 {

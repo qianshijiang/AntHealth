@@ -129,6 +129,9 @@
   }
 </script>
 <style>
+
+</style>
+<style lang="scss" scoped>
   .usernameicon input{
     outline-color: invert;
     outline-style: none;
@@ -183,8 +186,6 @@
     font-size: 14px;
     color: #999;
   }
-</style>
-<style lang="scss" scoped>
   .logo {
     width: 132px;
   }

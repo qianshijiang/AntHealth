@@ -1,7 +1,8 @@
 <template>
   <div class="home-box">
     <TopBar title="保健养生"/>
-    <div class="product-box">
+    <div class="product-box product-boxj2">
+      <img class="home-img1" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1528954988,3244525745&fm=26&gp=0.jpg">
     </div>
     <div class="product-box1">
       <div class="product-box-son product-box-sonj">
@@ -117,7 +118,7 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
-    margin:0px;
+    margin:45px;
     background-image:none;
     height: auto;
     min-height: 100%;
@@ -158,8 +159,15 @@
    /*border-top:1px solid #e0e0e0;*/
     display: flex;
    background: #fff;
-   margin-top: 10px;
+   margin-top:30px;
    flex-direction: column;
+  }
+  .product-boxj2{
+    padding: 0;
+  }
+  .home-img1{
+    height: 100%;
+    width: 100%;
   }
  .product-box-son{
    width: 100%;

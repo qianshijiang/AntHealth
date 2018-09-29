@@ -2,13 +2,13 @@
   <div class="home-box">
     <TopBar title="服务订单"/>
     <div class="box-top box-top1">
-      <div class="box-top2 box-top2j">
+      <div class="box-top2" :class="{'box-top2j': navflag === 1}" @click="searchList(0)">
         <p class="se-title3">进行中</p>
       </div>
-      <div class="box-top2">
+      <div class="box-top2" :class="{'box-top2j': navflag === 2}" @click="searchList(1)">
         <p class="se-title3">已完成</p>
       </div>
-      <div class="box-top2">
+      <div class="box-top2" :class="{'box-top2j': navflag === 3}" @click="searchList(2)">
         <p class="se-title3">已取消</p>
       </div>
     </div>
@@ -59,8 +59,9 @@
       return {
         logonData: {},
         show2: false,
-        radio2: 2
-      }
+        radio2: 2,
+        navflag: 1
+    }
     },
     methods: {
       goDetail() {
@@ -68,6 +69,9 @@
       },
       goRefund() {
         this.$router.push({path: '/refund'})
+      },
+      searchList(v){
+        this.navflag = v + 1
       }
     },
     mounted: function () {},
@@ -79,7 +83,7 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
-    margin:0px;
+    margin-top:45px;
     background-image:none;
     height: auto;
     width: 100%;

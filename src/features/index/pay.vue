@@ -65,6 +65,7 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
+    margin-top:45px;
     height: auto;
     /*min-height: 100%;*/
     width: 100%;

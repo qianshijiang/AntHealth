@@ -31,11 +31,11 @@ Vue.use(Router);
 
 const router = new Router({
   routes: [
-    {
-      path: '/',
-      name: '',
-      component: Login
-    },
+    // {
+    //   path: '/',
+    //   name: '',
+    //   component: Login
+    // },
     {
       path: '/login',
       name: 'login',

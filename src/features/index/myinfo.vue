@@ -18,7 +18,7 @@
           <yd-input slot="right" v-model="input6" placeholder="15025154119"></yd-input>
           <div slot="right" style="display: flex;justify-content: space-between;flex-direction: row">
             <span style="width: 80px;margin-right: 2px;font-size: 14px;color: #999">更换绑定</span>
-            <img style="height: 14px;width: 12px;" src="../../assets/image/right.png">
+            <img style="height: 11px;width: 9px;margin-top: 2px;" src="../../assets/image/right.png">
           </div>
         </yd-cell-item>
         <yd-cell-item arrow>
@@ -68,7 +68,7 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
-    margin:0px;
+    margin-top:45px;
     background-image:none;
     height: auto;
     min-height: 100%;

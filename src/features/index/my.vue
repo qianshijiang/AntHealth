@@ -22,10 +22,9 @@
           </div>
           <img style="height: 14px;width: 12px;margin-right: 20px;margin-top: 22px;" src="../../assets/image/right1.png">
         </div>
-
       </div>
-      <div class="my-gg" @click="productIntro(0)">
-        <p>医疗急救卡</p>
+      <div class="my-gg">
+        <p @click="productIntro(0)" style="margin-top: 20px;">医疗急救卡</p>
       </div>
     </div>
 
@@ -42,25 +41,26 @@
       <div class="home-box1">
         <div class="home-box2" @click="productIntro(1)">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <!--<p class="home-title1">ICON</p>-->
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
           </div>
           <p class="home-title2">我的资料</p>
         </div>
         <div class="home-box2" @click="productIntro(2)">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
           </div>
           <p class="home-title2">我的保单</p>
         </div>
         <div class="home-box2" @click="productIntro(3)">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
           </div>
           <p class="home-title2">地址管理</p>
         </div>
         <div class="home-box2">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
           </div>
           <p class="home-title2">积分明细</p>
         </div>
@@ -78,27 +78,27 @@
       <div class="home-box1">
         <div class="home-box2">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
           </div>
-          <p class="home-title2">我的保单</p>
+          <p class="home-title2">待付款</p>
         </div>
         <div class="home-box2">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
           </div>
-          <p class="home-title2">福利商城</p>
+          <p class="home-title2">待发货</p>
         </div>
         <div class="home-box2">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
           </div>
-          <p class="home-title2">平价药房</p>
+          <p class="home-title2">待收货</p>
         </div>
         <div class="home-box2">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
           </div>
-          <p class="home-title2">一键急救</p>
+          <p class="home-title2">售后/退款</p>
         </div>
       </div>
     </div>
@@ -109,27 +109,21 @@
       <div class="home-box1">
         <div class="home-box2" @click="productIntro(4)">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
           </div>
           <p class="home-title2">进行中</p>
         </div>
-        <div class="home-box2">
+        <div class="home-box2" @click="productIntro(4)">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
           </div>
-          <p class="home-title2">福利商城</p>
+          <p class="home-title2">已完成</p>
         </div>
-        <div class="home-box2">
+        <div class="home-box2" @click="productIntro(4)">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
           </div>
-          <p class="home-title2">平价药房</p>
-        </div>
-        <div class="home-box2">
-          <div class="u186_div">
-            <p class="home-title1">ICON</p>
-          </div>
-          <p class="home-title2">一键急救</p>
+          <p class="home-title2">已取消</p>
         </div>
       </div>
     </div>
@@ -145,27 +139,27 @@
       <div class="home-box1">
         <div class="home-box2" @click="productIntro(5)">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
           </div>
           <p class="home-title2">待参加</p>
         </div>
-        <div class="home-box2">
+        <div class="home-box2" @click="productIntro(5)">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
           </div>
-          <p class="home-title2">福利商城</p>
+          <p class="home-title2">待审核</p>
         </div>
-        <div class="home-box2">
+        <div class="home-box2" @click="productIntro(5)">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
           </div>
-          <p class="home-title2">平价药房</p>
+          <p class="home-title2">已验票</p>
         </div>
-        <div class="home-box2">
+        <div class="home-box2" @click="productIntro(5)">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
           </div>
-          <p class="home-title2">一键急救</p>
+          <p class="home-title2">退票</p>
         </div>
       </div>
     </div>
@@ -176,27 +170,21 @@
       <div class="home-box1">
         <div class="home-box2">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
           </div>
-          <p class="home-title2">我的保单</p>
+          <p class="home-title2">商城优惠卷</p>
         </div>
         <div class="home-box2">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
           </div>
-          <p class="home-title2">福利商城</p>
+          <p class="home-title2">服务优惠卷</p>
         </div>
         <div class="home-box2">
           <div class="u186_div">
-            <p class="home-title1">ICON</p>
+            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
           </div>
-          <p class="home-title2">平价药房</p>
-        </div>
-        <div class="home-box2">
-          <div class="u186_div">
-            <p class="home-title1">ICON</p>
-          </div>
-          <p class="home-title2">一键急救</p>
+          <p class="home-title2">分享赚积分</p>
         </div>
       </div>
     </div>
@@ -248,7 +236,7 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
-    margin:0px;
+    margin-top:45px;
     background-image:none;
     height: auto;
     min-height: 100%;
@@ -279,7 +267,7 @@
     right: 25px;
     bottom:-10px;
     text-align: center;
-    line-height: 60px;
+    /*line-height: 60px;*/
   }
   .box-content1{
     display: flex;
@@ -392,6 +380,12 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+  .home-img1{
+    height: 100%;
+    width: 100%;
+    /*max-width: 59px;*/
+    border-radius: 30px;
   }
 </style>
 

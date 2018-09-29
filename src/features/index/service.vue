@@ -6,19 +6,19 @@
       <p class="se-title2">个更换地址</p>
     </div>
     <div class="box-top box-top1">
-      <div class="box-top2 box-top2j">
+      <div class="box-top2" :class="{'box-top2j': navflag === 1}" @click="searchList(0)">
         <p class="se-title3">按摩推拿</p>
       </div>
-      <div class="box-top2">
+      <div class="box-top2" :class="{'box-top2j': navflag === 2}" @click="searchList(1)">
         <p class="se-title3">小儿推拿</p>
       </div>
-      <div class="box-top2">
+      <div class="box-top2" :class="{'box-top2j': navflag === 3}" @click="searchList(2)">
         <p class="se-title3">SPA</p>
       </div>
-      <div class="box-top2">
+      <div class="box-top2" :class="{'box-top2j': navflag === 4}" @click="searchList(3)">
         <p class="se-title3">足疗</p>
       </div>
-      <div class="box-top2">
+      <div class="box-top2" :class="{'box-top2j': navflag === 5}" @click="searchList(4)">
         <p class="se-title3">艾灸</p>
       </div>
     </div>
@@ -66,10 +66,14 @@
     name: 'Service',
     data () {
       return {
-        logonData: {}
+        logonData: {},
+        navflag: 1
       }
     },
     methods: {
+      searchList(v){
+        this.navflag = v + 1
+      },
       goDetail() {
         this.$router.push({path: '/servicedetail'})
       }
@@ -83,7 +87,7 @@
 </script>
 <style lang="scss" scoped>
   .home-box {
-    margin:0px;
+    margin-top:45px;
     background-image:none;
     height: auto;
     min-height: 100%;
