@@ -53,13 +53,11 @@
         rules: {
           name: [
             {required: true,trigger: 'blur',message:'用户名不能为空'},
-            {max:11,trigger: 'blur',message:'长度为11位'},
-            {validator: validationRules.validatePhone, trigger: 'blur',message:'填写有误' }
+            {validator: validationRules.validatePhone, trigger: 'blur'}
           ],
           pwd: [
             {required: true,trigger: 'blur',message:'密码不能为空'},
-            {max:16,trigger: 'blur',message:'长度为16位'},
-            {validator: validationRules.validatePassword, trigger: 'blur,change',message:'填写有误'}
+            {validator: validationRules.validatePassword, trigger: 'blur'}
           ]
         },
         switchModel: false
@@ -115,9 +113,6 @@
   }
 </script>
 <style>
-
-</style>
-<style lang="scss" scoped>
   .usernameicon input{
     outline-color: invert;
     outline-style: none;
@@ -144,7 +139,7 @@
     box-shadow: none;
     color: rgb(204, 204, 204);
   }
-  .hh{
+  a{
     text-decoration:none;
     border-width: 0px;
     font-family: '微软雅黑';
@@ -155,6 +150,8 @@
     text-align: right;
     cursor: pointer;
   }
+</style>
+<style lang="scss" scoped>
   .logo {
     width: 132px;
   }
