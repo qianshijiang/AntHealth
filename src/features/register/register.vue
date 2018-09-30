@@ -42,13 +42,11 @@
             </div>
           </el-form-item>
           <div class="agreement">
-            <yd-checkbox-group v-model="radioAgreement" color="rgb(158, 158, 158)">
-              <yd-checkbox val="1" shape="circle">已阅读并同意</yd-checkbox>
-              <a href="###" >《用户服务协议》</a>
-            </yd-checkbox-group>
+            <yd-checkbox v-model="radioAgreement" color="rgb(158, 158, 158)" :change="isAgreement" shape="circle">已阅读并同意</yd-checkbox>
+            <a href="###" >《用户服务协议》</a>
           </div>
           <el-form-item class="logintop">
-            <el-button type="primary" @click="register">确认</el-button>
+            <el-button type="primary" @click="register" :disabled=isSubmit>确认</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -94,25 +92,26 @@
         switchModel: false, //按钮开关控制
         codeStart:false,//控制发送验证码
         seePwdModel:false, //密码显示隐藏控制
-        radioAgreement:['1'],
+        radioAgreement:true, //是否同意协议
+        isSubmit:false,//控制提交按钮
       }
     },
     methods: {
       register: function () {
         this.$refs['logonForm'].validate((valid) => {
           if (valid) {
-            let self = this
+            let self = this;
             let params = {
               'name': this.logonForm.name,
               'pwd': this.logonForm.pwd,
               'codeVal':this.logonForm.codeVal
-            }
+            };
             self.$http.post('/api/mobileLogin/login', params)
               .then(function (response) {
-                console.log(JSON.stringify(response))
+                console.log(JSON.stringify(response));
                 if (response.data.result) {
-                  sessionStorage.setItem('token', response.data.result.mobileToken)
-                  sessionStorage.setItem('setLogonData', JSON.stringify(response.data.result))
+                  sessionStorage.setItem('token', response.data.result.mobileToken);
+                  sessionStorage.setItem('setLogonData', JSON.stringify(response.data.result));
                   self.$router.replace({path: '/index/staff/list'})
                 }
               })
@@ -121,7 +120,7 @@
             //   console.log(error)
             // })
           }
-        })
+         })
       },
       getCodeImg () {
         let self = this;
@@ -133,7 +132,7 @@
         };
         self.$http.post('/staff/idyCodeImg', params)
           .then(function (res) {
-            self.codeImg = res.data.data.image
+            self.codeImg = res.data.data.image;
             self.logonForm.idyKey = res.data.data.idyKey
           })
           .catch(function (error) {
@@ -170,6 +169,14 @@
           });
         }, 1000)
       },
+      //是否同意协议
+      isAgreement(){
+          if(this.radioAgreement){
+            this.isSubmit=true;
+          }else{
+            this.isSubmit=false;
+          }
+      },
     },
     mounted: function () {
       // this.getCodeImg()
@@ -188,7 +195,7 @@
     -webkit-user-select: text;
     outline-color: transparent;
     box-shadow: none;
-    color: rgb(204, 204, 204);
+    color: #333;
   }
   .paswicon input{
     outline-color: invert;
@@ -201,7 +208,7 @@
     -webkit-user-select: text;
     outline-color: transparent;
     box-shadow: none;
-    color: rgb(204, 204, 204);
+    color: #333;
   }
   .codeinputicon input{
     outline-color: invert;
@@ -214,7 +221,7 @@
     -webkit-user-select: text;
     outline-color: transparent;
     box-shadow: none;
-    color: rgb(204, 204, 204);
+    color: #333;
   }
   a{
     text-decoration:none;

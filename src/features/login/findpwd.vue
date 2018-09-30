@@ -191,7 +191,7 @@
     -webkit-user-select: text;
     outline-color: transparent;
     box-shadow: none;
-    color: rgb(204, 204, 204);
+    color: #333;
   }
   .paswicon input{
     outline-color: invert;
@@ -204,7 +204,7 @@
     -webkit-user-select: text;
     outline-color: transparent;
     box-shadow: none;
-    color: rgb(204, 204, 204);
+    color: #333;
   }
   .codeinputicon input{
     outline-color: invert;
@@ -217,7 +217,7 @@
     -webkit-user-select: text;
     outline-color: transparent;
     box-shadow: none;
-    color: rgb(204, 204, 204);
+    color: #333;
   }
   a{
     text-decoration:none;
