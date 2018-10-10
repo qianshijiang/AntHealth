@@ -93,7 +93,7 @@
     name: 'Login',
     data () {
       return {
-        logonForm: {
+        /*logonForm: {
           name: '',
           pwd: ''
         },
@@ -108,11 +108,11 @@
           ]
         },
         switchModel: false, //按钮开关控制
-        seePwdModel:false, //密码显示隐藏控制
+        seePwdModel:false, //密码显示隐藏控制*/
       }
     },
     methods: {
-      login() {
+      /*login() {
         this.$refs['logonForm'].validate((valid) => {
           if (valid) {
             let self = this;
@@ -169,7 +169,7 @@
           }else{
             _this.seePwdModel = false;
           }
-      }
+      }*/
     },
     mounted: function () {
       // this.getCodeImg()
