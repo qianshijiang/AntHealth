@@ -11,21 +11,24 @@
                 <label>
                   <img src="../../../static/imgs/img13.png"/>
                 </label>
-                <input type="text" class="txt" name=""  value="" placeholder="请输入手机号"/>
+                <input type="number" class="txt" v-model.number="logonForm.name" placeholder="请输入手机号" @change="checkName"/>
               </li>
+              <p class="messagesty">{{messagename}}</p>
               <li>
                 <label>
                   <img src="../../../static/imgs/img36.png"/>
                 </label>
-                <input type="password" class="txt" name="" id="pass-id" value="" placeholder="请输入密码"/>
-                <button type="button" class="eye " id="eye"></button>
+                <input type="text" v-model="logonForm.pwd" class="txt" placeholder="请输入密码" v-if="seePwdModel" @change="checkPwd"/>
+                <input type="password" v-model="logonForm.pwd" class="txt" placeholder="请输入密码" v-else @change="checkPwd"/>
+                <button type="button" class="eye" :class="{'eye-on':!seePwdModel}" @click="displayorHidePwd"></button>
               </li>
+              <p class="messagesty">{{messagepwd}}</p>
             </ul>
             <div class="fgtpwd">
               <a href="#">忘记密码</a>
             </div>
             <div class="submit">
-              <input type="submit" name="" value="登  录" />
+              <input type="submit" @click="login" value="登  录" />
             </div>
             <div class="regbtn">
               <a href="#">注册账号</a>
@@ -37,82 +40,25 @@
         </div>
       </div>
     </div>
- <!-- <el-container>
-    <el-main>
-      <div class="logon-panel">
-        <el-form :model="logonForm" :rules="rules" ref="logonForm" :label-position="'left'" label-width="0" class="logon-form">
-          <div class="title">蚂蚁健康</div>
-          <el-form-item label="" prop="name" class="usernametop">
-            <div class="usernameicon">
-              <img src="../../assets/image/u19.svg" />
-              <el-input type="number" class="usernameinput" v-model.number="logonForm.name" placeholder="手机号码" maxlength="11" auto-complete="true"></el-input>
-            </div>
-          </el-form-item>
-          <el-form-item label="" prop="pwd" class="paswtop" v-if="seePwdModel">
-            <div class="paswicon">
-              <img src="../../assets/image/u18.svg"/>
-              <el-input type="text" class="passwordinput" v-model="logonForm.pwd" placeholder="登录密码" maxlength="20" auto-complete="true"></el-input>
-              <div>
-                <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)" :callback="displayorHidePwd"></yd-switch>
-              </div>
-            </div>
-          </el-form-item>
-          <el-form-item label="" prop="pwd" class="paswtop" v-else>
-            <div class="paswicon">
-              <img src="../../assets/image/u18.svg"/>
-              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="登录密码" maxlength="16" auto-complete="true"></el-input>
-              <div>
-                <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)" :callback="displayorHidePwd"></yd-switch>
-              </div>
-            </div>
-          </el-form-item>
-          <div class="forgetpasw" @click="goReg(2)">
-            <p style="font-size: 14px;color: #999;">忘记密码</p>
-          </div>
-          <el-form-item class="logintop">
-            <el-button type="primary" @click="login">登录</el-button>
-          </el-form-item>
-          <el-form-item>
-            <div class="footer">
-              <p style="color: #999;" @click="goReg(1)">注册账号</p>
-            </div>
-          </el-form-item>
-        </el-form>
-      </div>
-    </el-main>
-  </el-container>-->
 </template>
 <script>
   import validationRules from '../../common/validationRules'
   import Vue from 'vue';
-  import {Switch} from 'vue-ydui/dist/lib.rem/switch';
-  import ElFormItem from "../../../node_modules/element-ui/packages/form/src/form-item";
-  Vue.component(Switch.name, Switch);
   export default {
-    components: {ElFormItem},
     name: 'Login',
     data () {
       return {
-        /*logonForm: {
+        logonForm: {
           name: '',
           pwd: ''
         },
-        rules: {
-          name: [
-            {required: true,trigger: 'blur',message:'用户名不能为空'},
-            {validator: validationRules.validatePhone, trigger: 'blur'}
-          ],
-          pwd: [
-            {required: true,trigger: 'blur',message:'密码不能为空'},
-            {validator: validationRules.validatePassword, trigger: 'blur'}
-          ]
-        },
-        switchModel: false, //按钮开关控制
-        seePwdModel:false, //密码显示隐藏控制*/
+        messagename: '', //用户名校验
+        messagepwd:'',//密码校验
+        seePwdModel:true, //密码显示隐藏控制
       }
     },
     methods: {
-      /*login() {
+      login() {
         this.$refs['logonForm'].validate((valid) => {
           if (valid) {
             let self = this;
@@ -136,46 +82,49 @@
           }
         })
       },
-      goReg(v){
-        if(v === 1){
-          this.$router.replace({path: '/register'})
-        }
-        if(v === 2){
-          this.$router.push({path: '/findpwd'})
-        }
-      },
-      getCodeImg () {
-        let self = this
-        let params = {
-          'height': 30,
-          'lineSize': 60,
-          'stringNum': 4,
-          'width': 80
-        }
-        self.$http.post('/staff/idyCodeImg', params)
-          .then(function (res) {
-            self.codeImg = res.data.data.image
-            self.logonForm.idyKey = res.data.data.idyKey
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
-      },
-      //显示或隐藏密码
-      displayorHidePwd(){
-          let _this = this;
-          if(_this.switchModel){
-              _this.seePwdModel = true;
-          }else{
+    //显示或隐藏密码
+    displayorHidePwd(){
+        let _this = this;
+        if(_this.seePwdModel){
             _this.seePwdModel = false;
-          }
-      }*/
+        }else{
+          _this.seePwdModel = true;
+        }
     },
+    //名字格式校验
+    checkName(){
+      if (this.logonForm.name === '') {
+        this.messagename='请输入手机号码';
+      } else if (!/^[1][3,4,5,7,8][0-9]{9}$/.test(this.logonForm.name)) {
+        this.messagename='请输入正确的11位手机号码';
+      }else{
+        this.messagename = '';
+      }
+    },
+    //密码格式校验
+    checkPwd(){
+      if (this.logonForm.pwd === '') {
+        this.messagepwd = '请输入密码';
+      } else if(!/^[0-9a-zA-Z]{6,20}$/.test(this.logonForm.pwd)){
+        this.messagepwd = '密码为6-20位的字母或数字';
+      }else{
+        this.messagepwd = '';
+      }
+    },
+   },
     mounted: function () {
       // this.getCodeImg()
     }
   }
 </script>
 <style lang="scss" scoped>
-
+ .body{
+   li label img{
+     width:31px !important;
+   }
+   .messagesty{
+     font-size: 12px;
+     color: red;
+   }
+ }
 </style>
