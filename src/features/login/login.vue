@@ -1,5 +1,43 @@
 <template>
-  <el-container>
+    <div class="layout">
+      <div class="loginpage">
+        <div class="head">
+          <img src="../../assets/image/logo_1.png"/>
+        </div>
+        <div class="body">
+          <form action="" method="post">
+            <ul>
+              <li>
+                <label>
+                  <img src="../../assets/image/img13.png"/>
+                </label>
+                <input type="text" class="txt" name="" id="" value="" placeholder="请输入手机号"/>
+              </li>
+              <li>
+                <label>
+                  <img src="../../assets/image/img36.png"/>
+                </label>
+                <input type="password" class="txt" name="" id="pass-id" value="" placeholder="请输入密码"/>
+                <button type="button" class="eye " id="eye"></button>
+              </li>
+            </ul>
+            <div class="fgtpwd">
+              <a href="#">忘记密码</a>
+            </div>
+            <div class="submit">
+              <input type="submit" name="" id="" value="登  录" />
+            </div>
+            <div class="regbtn">
+              <a href="#">注册账号</a>
+            </div>
+          </form>
+        </div>
+        <div class="foot">
+          <p>公司版权所有2018-2019</p>
+        </div>
+      </div>
+    </div>
+ <!-- <el-container>
     <el-main>
       <div class="logon-panel">
         <el-form :model="logonForm" :rules="rules" ref="logonForm" :label-position="'left'" label-width="0" class="logon-form">
@@ -42,7 +80,7 @@
         </el-form>
       </div>
     </el-main>
-  </el-container>
+  </el-container>-->
 </template>
 <script>
   import validationRules from '../../common/validationRules'
@@ -138,151 +176,6 @@
     }
   }
 </script>
-<style>
-  .usernameicon input{
-    outline-color: invert;
-    outline-style: none;
-    outline-width: 0px;
-    border: none;
-    border-style: none;
-    text-shadow: none;
-    -webkit-appearance: none;
-    -webkit-user-select: text;
-    outline-color: transparent;
-    box-shadow: none;
-    color: #333;
-  }
-  .paswicon input{
-    outline-color: invert;
-    outline-style: none;
-    outline-width: 0px;
-    border: none;
-    border-style: none;
-    text-shadow: none;
-    -webkit-appearance: none;
-    -webkit-user-select: text;
-    outline-color: transparent;
-    box-shadow: none;
-    color: #333;
-  }
-  a{
-    text-decoration:none;
-    border-width: 0px;
-    font-family: '微软雅黑';
-    font-weight: 400;
-    font-style: normal;
-    font-size: 12px;
-    color: #999;
-    text-align: right;
-    cursor: pointer;
-  }
-  input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
-    background-color: rgb(255, 255, 255) !important;
-    background-image: none !important;
-    color: rgb(0, 0, 0) !important;
-  }
-</style>
 <style lang="scss" scoped>
-  .logo {
-    width: 132px;
-  }
-  .el-header, .el-footer {
-    background-color: #EFF4FA;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .el-main {
-    background-color: #FFFFFF;
-    padding: 0px;
-    .logon-panel {
-      margin: 80px 188px;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-      .logo-img {
-        width: 460px;
-        height: 460px;
-      }
-      .logon-form {
-        width: 300px !important;
-        .title {
-          letter-spacing: 2.4px;
-          margin-bottom: 20px;
-          font-weight: 400;
-          font-style: normal;
-          font-size: 42px;
-          color: #999;
-          text-align:center;
-        }
-        .code{
-          display: flex;
-          flex-direction: row;
-          img{
-            height: 30px;
-            width: 80px;
-            margin-left: 15px;
-            margin-top: 5px;
-          }
-          span{
-            color: #0000ff;
-            margin-left: 15px;
-            text-decoration:underline;
-            cursor:pointer;
-          }
-        }
-      }
-      .el-button {
-        width: 300px;
-        border-radius: 25px;
-        border-width: 0px;
-        height: 45px;
-        font-family: '微软雅黑';
-        font-weight: 400;
-        font-style: normal;
-        font-size: 16px;
-        color: #FFF;
-      }
-      .el-form-item{
-        margin-bottom: 15px;
-      }
-      .usernametop,.paswtop{
-        box-sizing: border-box;
-        border-width: 0px;
-        border-bottom-width: 1px;
-        border-style: solid;
-        border-color: rgba(228, 228, 228, 1);
-        .usernameicon,.paswicon{
-          display: flex;
-          outline-style: none;
-          img{
-            border-width:0px;
-            width: 20px;
-            height: 20px;
-            margin-top:10px;
-          }
-        }
-        .yd-switch{
-          margin-top: 4px;
-        }
-      }
-      .forgetpasw{
-        text-align: right;
-        margin-bottom: 22px;
-      }
-      .logintop{
-        width:300px;
-        .el-button{
-          background-color: rgb(158, 158, 158);
-        }
-      }
-      .footer{
-        text-align: center;
-        a{
-          font-size: 16px;
-        }
-      }
-    }
-  }
+
 </style>
