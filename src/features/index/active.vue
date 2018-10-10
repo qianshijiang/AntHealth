@@ -1,68 +1,52 @@
 <template>
-  <div class="home-box">
-    <TopBar title="活动"/>
-    <div class="box-top" @click="goDetail">
-      <div class="box-imgb">
-        <img class="box-img1" src="http://static.ydcss.com/uploads/ydui/2.jpg">
-      </div>
-      <div class="box-tb">
-        <p style="font-size: 16px;color: #333;">
-          活动介绍活动简介
-        </p>
-        <div style="display:flex;flex-direction: row;margin-top: 15px;">
-          <div class="box-tb2">
-            <p class="box-title1">
-              标签
-            </p>
-          </div>
-          <div class="box-tb2">
-            <p class="box-title1">
-              标签文字
-            </p>
-          </div>
-        </div>
-        <P class="box-title2">9月18日 10:10 至10月10日 17:00</P>
-        <div style="display:flex;flex-direction: row;justify-content: space-between;margin-top: 15px;">
-          <p class="box-title3">
-            上海市丹巴路55号
-          </p>
-          <P class="box-title4">
-            ¥ 199
-          </P>
-        </div>
+  <div class="layout pb120">
+    <div class="header header-bg">
+
+      <div class="center">
+        <p>活动</p>
       </div>
     </div>
-
-    <div class="box-top" style="margin-bottom: 60px;">
-      <div class="box-imgb">
-        <img class="box-img1" src="http://static.ydcss.com/uploads/ydui/3.jpg">
-      </div>
-      <div class="box-tb">
-        <p style="font-size: 16px;color: #333;">
-          活动介绍活动简介
-        </p>
-        <div style="display:flex;flex-direction: row;margin-top: 15px;">
-          <div class="box-tb2">
-            <p class="box-title1">
-              标签
-            </p>
-          </div>
-          <div class="box-tb2">
-            <p class="box-title1">
-              标签文字
-            </p>
-          </div>
-        </div>
-        <P class="box-title2">9月18日 10:10 至10月10日 17:00</P>
-        <div style="display:flex;flex-direction: row;justify-content: space-between;margin-top: 15px;">
-          <p class="box-title3">
-            上海市丹巴路55号
-          </p>
-          <P class="box-title4">
-            ¥ 199
-          </P>
-        </div>
-      </div>
+    <div class="actlist">
+      <ul>
+        <li>
+          <a href="#">
+            <div class="head">
+              <img src="../../../static/imgs/img79.jpg"/>
+            </div>
+            <div class="body">
+              <h4>上海中青年市民健康跑活动系列</h4>
+              <div class="labels">
+                <span>跑步</span>
+                <span>市民健康</span>
+              </div>
+              <dl>
+                <dt>2018-09-16 10:00～14:00 </dt>
+                <dd>上海市东方明珠广场</dd>
+              </dl>
+              <label class="c_green">¥158</label>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <div class="head">
+              <img src="../../../static/imgs/img73.jpg"/>
+            </div>
+            <div class="body">
+              <h4>上海中青年市民健康跑活动系列</h4>
+              <div class="labels">
+                <span>跑步</span>
+                <span>市民健康</span>
+              </div>
+              <dl>
+                <dt>2018-09-16 10:00～14:00 </dt>
+                <dd>上海市东方明珠广场</dd>
+              </dl>
+              <label class="c_green">¥158</label>
+            </div>
+          </a>
+        </li>
+      </ul>
     </div>
     <FooterBar pageTag="2"/>
   </div>

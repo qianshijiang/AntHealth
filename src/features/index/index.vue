@@ -1,119 +1,170 @@
 <template>
   <div class="home-box">
-    <yd-slider autoplay="3000">
-      <yd-slider-item>
-        <a href="http://www.ydcss.com">
-          <img src="http://static.ydcss.com/uploads/ydui/1.jpg">
-        </a>
-      </yd-slider-item>
-      <yd-slider-item>
-        <a href="http://www.ydcss.com">
-          <img src="http://static.ydcss.com/uploads/ydui/2.jpg">
-        </a>
-      </yd-slider-item>
-      <yd-slider-item>
-        <a href="http://www.ydcss.com">
-          <img src="http://static.ydcss.com/uploads/ydui/3.jpg">
-        </a>
-      </yd-slider-item>
-    </yd-slider>
+    <div class="layout pb120">
+      <div class="g-bg-wrap">
 
-    <!-- Unnamed (矩形) -->
-    <div class="home-box1">
-      <div class="home-box2" @click="productIntro(2)">
-        <div class="u186_div">
-          <!--<div class="home-title1">-->
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
-          <!--</div>-->
-        </div>
-        <p class="home-title2">我的保单</p>
-      </div>
-      <div class="home-box2" @click="productIntro(6)">
-        <!--<a  target="_parent" href="https://m.laobai.com/react/home/" >-->
-        <div class="u186_div">
-          <!--<p class="home-title1">ICON</p>-->
-          <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
-        </div>
-        <p class="home-title2">福利商城</p>
-        <!--</a>-->
-      </div>
-      <div class="home-box2" @click="productIntro(6)">
-        <div class="u186_div">
-          <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
-        </div>
-        <p class="home-title2">平价药房</p>
-      </div>
-      <div class="home-box2"  @click="productIntro(3)">
-        <div class="u186_div">
-          <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
-        </div>
-        <p class="home-title2">一键急救</p>
-      </div>
-  </div>
-
-
-    <div class="home-box3" @click="productIntro(0)">
-      <p>
-        <span class="home-title3"></span>
-        <span class="home-title4"> 蚁塔头条</span>
-      </p>
-      <p class="home-title5">
-        <span class="home-title6">页面中常用的文字、图片等基础元素</span>
-      </p>
-    </div>
-
-
-    <!-- Unnamed (矩形) -->
-    <div class="u197">
-      <div class="u197_text ">
-        <p class="text1">最新活动</p>
-        <p class="text2" @click="productIntro(4)">更多</p>
-      </div>
-      <div class="home-box-tow">
-        <div class="box-tow1" @click="productIntro(5)">
-          <img class="box-img1" src="http://static.ydcss.com/uploads/ydui/2.jpg">
-          <div class="box-tow2">
-            <p class="text3">
-              到店送免费服务一次
-            </p>
+        <div class="header header-bg1">
+          <div class="center">
+            <p><span class="header-tit">上海 新华园</span></p>
           </div>
         </div>
-        <div class="box-tow1" @click="productIntro(5)">
-          <img class="box-img1" src="http://static.ydcss.com/uploads/ydui/3.jpg">
-          <div class="box-tow2">
-            <p class="text3">
-              到店送免费服务一次
-            </p>
+
+        <div class="h-slider ">
+          <!--swiper-->
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="../../../static/imgs/banner.png"/>
+                <div class="txt">
+                  <h3>专家认为多吃水果健康</h3>
+                  <h4>你所不知道的十大误区之食物相克</h4>
+                  <a class="btn" href="#">查看详情</a>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <img src="../../../static/imgs/banner.png"/>
+                <div class="txt">
+                  <h3>专家认为</h3>
+                  <h4>你所不知道的十大误区之食物相克</h4>
+                  <a class="btn" href="#">查看详情</a>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <img src="../../../static/imgs/banner.png"/>
+                <div class="txt">
+                  <h3>专家认为多吃水</h3>
+                  <h4>你所不知道的十大误区之食物相克</h4>
+                  <a class="btn" href="#">查看详情</a>
+                </div>
+              </div>
+            </div>
+            <!-- 分页器 -->
+            <div class="swiper-pagination"></div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="u197" style="margin-bottom: 60px;">
-      <div class="u197_text ">
-        <p class="text1"><span>重磅推荐</span></p>
+
+      <div class="h-naver">
+        <ul>
+          <li>
+            <a href="#">
+              <div class="txt">
+                <h4>我的保单</h4>
+                <p>一键轻松管理保单</p>
+              </div>
+              <div class="img">
+                <img src="../../../static/imgs/img21.png"/>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="txt">
+                <h4>福利商城</h4>
+                <p>一键轻松管理保单</p>
+              </div>
+              <div class="img">
+                <img src="../../../static/imgs/img23.png"/>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a href="#">
+              <div class="txt">
+                <h4>平价药店</h4>
+                <p>让买药变轻松的事</p>
+              </div>
+              <div class="img">
+                <img src="../../../static/imgs/img24.png"/>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="txt">
+                <h4>一键急救</h4>
+                <p>遇到危险点这里</p>
+              </div>
+              <div class="img">
+                <img src="../../../static/imgs/img22.png"/>
+              </div>
+            </a>
+          </li>
+        </ul>
       </div>
-      <div class="home-box-tow">
-        <div class="box-tow3" @click="productIntro(1)">
-          <p class="text4">
-            企业员工意外险
-          </p>
-          <p class="text5">
-            3人以上即可投保,轻松转移企业风险
-          </p>
-          <p class="text6">
-            71元起
-          </p>
+      <div class="h-news">
+        <em>蚂蚁<br>头条</em>
+        <ul>
+          <li>
+            <a href="#">
+              <label>快讯</label>国庆福利大放送，为60岁以上老年人免费体检
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="h-act">
+        <div class="head">
+          <h2>最新活动</h2>
+          <a class="more" href="#">查看全部</a>
         </div>
-        <div class="box-tow3" @click="productIntro(1)">
-          <p class="text4">
-            长期护理脸
-          </p>
-          <p class="text5">
-            区居家照护、养老机构照护、住院医疗护理等
-          </p>
-          <p class="text6">
-            300元起
-          </p>
+        <div class="body h-act-list">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <a href="#">
+                  <div class="img">
+                    <img src="../../../static/imgs/img09.jpg"/>
+                  </div>
+                  <p>到店送免费体检服务一次</p>
+                </a>
+              </div>
+              <div class="swiper-slide">
+                <a href="#">
+                  <div class="img">
+                    <img src="../../../static/imgs/img09.jpg"/>
+                  </div>
+                  <p>如何合理膳食</p>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="h-related">
+        <div class="head">
+          <h2>重磅推荐</h2>
+        </div>
+        <div class="body">
+          <ul>
+            <li>
+              <a href="#">
+                <div class="img">
+                  <img src="../../../static/imgs/img11.jpg"/>
+                </div>
+                <div class="txt">
+                  <h4>企业员工意外险</h4>
+                  <p>3人以上即可投保，轻松转移企业风险</p>
+                  <label class="c_green">¥71.00起</label>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <div class="img">
+                  <img src="../../../static/imgs/img10.jpg"/>
+                </div>
+                <div class="txt">
+                  <h4>长期护理险</h4>
+                  <p>小区居家照护、养老机构照护、住院医疗护理等</p>
+                  <label class="c_green">¥300.00起</label>
+                </div>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

@@ -106,13 +106,15 @@
               'pwd': this.logonForm.pwd,
               'codeVal':this.logonForm.codeVal
             };
+            localStorage.setItem("token", 'hhhhh');
+            self.$router.replace({path: '/my'});
             self.$http.post('/api/mobileLogin/login', params)
               .then(function (response) {
                 console.log(JSON.stringify(response));
                 if (response.data.result) {
-                  sessionStorage.setItem('token', response.data.result.mobileToken);
-                  sessionStorage.setItem('setLogonData', JSON.stringify(response.data.result));
-                  self.$router.replace({path: '/index/staff/list'})
+                  localStorage.setItem('token', response.data.result.mobileToken);
+                  // sessionStorage.setItem('setLogonData', JSON.stringify(response.data.result));
+                  self.$router.replace({path: '/my'})
                 }
               })
             // .catch(function (error) {

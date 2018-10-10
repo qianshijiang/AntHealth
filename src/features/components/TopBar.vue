@@ -5,6 +5,7 @@
       <img style="height: 18px;width: 10px;margin-left: 20px;" src="../../assets/image/left.png"/>
 
     </div>
+    <!--<yd-navbar-back-icon></yd-navbar-back-icon>-->
     <P style="color: #333;margin-top: 27px;"  slot="center">{{title}}</P>
   </yd-navbar>
 </template>
