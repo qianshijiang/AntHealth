@@ -1,200 +1,246 @@
 <template>
-  <div class="home-box">
-    <TopBar title="用户中心"/>
-    <div class="my-box">
-      <div class="box-imgb">
-        <img class="box-img2" src="http://static.ydcss.com/uploads/ydui/2.jpg">
-      </div>
-      <div class="box-content1">
-        <div @click="clearLogin">
-          <p style="font-size: 14px;color: #fff;">
-            退出
-          </p>
+  <div class="layout pb120 ">
+    <div class="my-head">
+      <a href="#" class="set"></a>
+      <div class="head">
+        <div class="head-l">
+          <img src="../../../static/imgs/img39.png"/>
         </div>
-        <div style="display: flex;flex-direction: row;justify-content: space-between">
-          <div style="display: flex;flex-direction: column">
-            <p style="font-size: 16px;color: #fff;margin-top: 5px;font-weight: bold">
-              15025154119<span style="margin-left: 8px;margin-top: 5px;font-size: 14px;">500积分</span>
-            </p>
-            <p style="font-size: 16px;color: rgb(204,204,204);margin-top: 5px;">
-              高科技股份有限公司
-            </p>
-          </div>
-          <img style="height: 14px;width: 12px;margin-right: 20px;margin-top: 22px;" src="../../assets/image/right1.png">
+        <div class="head-r">
+          <h4>王力宏</h4>
+          <p>新华园 上海网络科技有限公司</p>
         </div>
       </div>
-      <div class="my-gg">
-        <p @click="productIntro(0)" style="margin-top: 20px;">医疗急救卡</p>
-      </div>
-    </div>
-
-    <!-- Unnamed (矩形) -->
-    <div class="u197">
-      <div class="u197_text ">
-        <p class="text1">我的资料</p>
-        <div style="display: flex;flex-direction: row;">
-          <p class="text2" style="margin-right: 5px;color:#333;">更多</p>
-          <img style="height: 14px;width: 12px;margin-right: 20px;" src="../../assets/image/right.png">
+      <div class="body">
+        <div class="body-l">
+          <i><img src="../../../static/imgs/img16.png"/></i>
+          <font>医疗急救卡</font>
         </div>
-
-      </div>
-      <div class="home-box1">
-        <div class="home-box2" @click="productIntro(1)">
-          <div class="u186_div">
-            <!--<p class="home-title1">ICON</p>-->
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">我的资料</p>
-        </div>
-        <div class="home-box2" @click="productIntro(2)">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">我的保单</p>
-        </div>
-        <div class="home-box2" @click="productIntro(3)">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">地址管理</p>
-        </div>
-        <div class="home-box2">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">积分明细</p>
-        </div>
-       </div>
-    </div>
-    <div class="u197">
-      <div class="u197_text ">
-        <p class="text1">商城订单</p>
-        <div style="display: flex;flex-direction: row;">
-          <p class="text2" style="margin-right: 5px;">进入商城</p>
-          <img style="height: 14px;width: 12px;margin-right: 20px;" src="../../assets/image/right.png">
-        </div>
-      </div>
-      <div class="home-box1">
-        <div class="home-box2">
-          <div class="u186_div">
-            <yd-badge color="#666" style="position: absolute;top:-3px;right: 0;background: #fff;border:1px solid #999;">1</yd-badge>
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
-
-          </div>
-
-          <p class="home-title2">待付款</p>
-        </div>
-        <div class="home-box2">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">待发货</p>
-        </div>
-        <div class="home-box2">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">待收货</p>
-        </div>
-        <div class="home-box2">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">售后/退款</p>
+        <div class="body-r">
+          <img src="../../../static/imgs/img15.png"/>
         </div>
       </div>
     </div>
-    <div class="u197">
-      <div class="u197_text ">
-        <p class="text1">上门订单</p>
-      </div>
-      <div class="home-box1">
-        <div class="home-box2" @click="productIntro(4)">
-          <div class="u186_div">
-            <yd-badge color="#666" style="position: absolute;top:-3px;right: 0;background: #fff;border:1px solid #999;">2</yd-badge>
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">进行中</p>
+    <div class="my-nav on">
+      <div class="head">
+        <div class="head-l">
+          我的资料
         </div>
-        <div class="home-box2" @click="productIntro(4)">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">已完成</p>
-        </div>
-        <div class="home-box2" @click="productIntro(4)">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">已取消</p>
+        <div class="head-r">
+          <a href="#">更多</a>
         </div>
       </div>
-    </div>
-    <div class="u197">
-      <div class="u197_text ">
-        <p class="text1">活动预约</p>
-        <div style="display: flex;flex-direction: row;">
-          <p class="text2" style="margin-right: 5px;">更多</p>
-          <img style="height: 14px;width: 12px;margin-right: 20px;" src="../../assets/image/right.png">
-        </div>
+      <div class="body">
+        <ul>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img42.png"/>
+              </div>
+              <p>我的资料</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img43.png"/>
+              </div>
+              <p>我的保单</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img44.png"/>
+              </div>
+              <p>地址管理</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img45.png"/>
+              </div>
+              <p>积分明细</p>
+            </a>
+          </li>
+        </ul>
 
       </div>
-      <div class="home-box1">
-        <div class="home-box2" @click="productIntro(5)">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">待参加</p>
-        </div>
-        <div class="home-box2" @click="productIntro(5)">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">待审核</p>
-        </div>
-        <div class="home-box2" @click="productIntro(5)">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">已验票</p>
-        </div>
-        <div class="home-box2" @click="productIntro(5)">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=469540469,3618755683&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">退票</p>
-        </div>
-      </div>
     </div>
-    <div class="u197" style="margin-bottom: 60px;">
-      <div class="u197_text ">
-        <p class="text1">福利</p>
+    <div class="my-nav">
+      <div class="head">
+        <div class="head-l">
+          商城订单
+        </div>
+        <div class="head-r">
+          <a href="#">进入商城</a>
+        </div>
       </div>
-      <div class="home-box1">
-        <div class="home-box2">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">商城优惠卷</p>
-        </div>
-        <div class="home-box2">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">服务优惠卷</p>
-        </div>
-        <div class="home-box2">
-          <div class="u186_div">
-            <img class="home-img1" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3042089157,635750329&fm=26&gp=0.jpg">
-          </div>
-          <p class="home-title2">分享赚积分</p>
-        </div>
+      <div class="body">
+        <ul>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img46.png"/>
+              </div>
+              <p>待付款</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img47.png"/>
+              </div>
+              <p>待发货</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img48.png"/>
+                <sup>1</sup>
+              </div>
+              <p>待收货</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img49.png"/>
+              </div>
+              <p>售后/退款</p>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
 
 
+    <div class="my-nav">
+      <div class="head">
+        <div class="head-l">
+          上门订单
+        </div>
+        <div class="head-r">
+          <a href="#">全部</a>
+        </div>
+      </div>
+      <div class="body">
+        <ul>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img50.png"/>
+              </div>
+              <p>进行中</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img51.png"/>
+              </div>
+              <p>已完成</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img52.png"/>
+              </div>
+              <p>已取消</p>
+            </a>
+          </li>
 
+        </ul>
+      </div>
+    </div>
 
+    <div class="my-nav">
+      <div class="head">
+        <div class="head-l">
+          活动预约
+        </div>
+        <div class="head-r">
+          <a href="#">更多</a>
+        </div>
+      </div>
+      <div class="body">
+        <ul>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img53.png"/>
+              </div>
+              <p>待参加</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img54.png"/>
+              </div>
+              <p>待审核</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img55.png"/>
+              </div>
+              <p>已验票</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img56.png"/>
+              </div>
+              <p>退票</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="my-nav">
+      <div class="head">
+        <div class="head-l">
+          福利
+        </div>
+
+      </div>
+      <div class="body">
+        <ul>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img57.png"/>
+              </div>
+              <p>商城优惠券</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img58.png"/>
+              </div>
+              <p>服务优惠券</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img59.png"/>
+              </div>
+              <p>分享赚积分</p>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
     <FooterBar pageTag="3"/>
   </div>
 </template>

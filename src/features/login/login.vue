@@ -29,7 +29,7 @@
             </div>
           </el-form-item>
           <div class="forgetpasw" @click="goReg(2)">
-            <a href="###" >忘记密码</a>
+            <p style="font-size: 14px;color: #999;">忘记密码</p>
           </div>
           <el-form-item class="logintop">
             <el-button type="primary" @click="login">登录</el-button>
@@ -100,7 +100,7 @@
       },
       goReg(v){
         if(v === 1){
-          this.$router.push({path: '/register'})
+          this.$router.replace({path: '/register'})
         }
         if(v === 2){
           this.$router.push({path: '/findpwd'})

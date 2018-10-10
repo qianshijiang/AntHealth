@@ -133,7 +133,7 @@
     border: 1px solid #e0e0e0;
     border-radius: 6px;
     margin-right: 8px;
-    background: rgb(242,242,242);
+    background-color: rgb(242,242,242);
   }
   .pol-content1 p {
     font-size: 14px;

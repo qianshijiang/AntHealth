@@ -1,25 +1,27 @@
 <template>
   <el-container>
     <el-main>
+      <TopBar title="重置密码"/>
       <div class="logon-panel">
-        <el-form :model="logonForm" :rules="rules" ref="logonForm" :label-position="'left'" label-width="0" class="logon-form">
-          <div class="changepwdtop">
-            <yd-navbar title="重置密码" bgcolor="rgb(242, 242, 242)" height="60px" fontsize="20px">
-              <router-link to="#" slot="left">
-                <yd-navbar-back-icon></yd-navbar-back-icon>
-              </router-link>
-            </yd-navbar>
-          </div>
+        <el-form :model="findForm" :rules="rules" ref="findForm" :label-position="'left'" label-width="0" class="logon-form">
+
+          <!--<div class="changepwdtop">-->
+            <!--<yd-navbar title="重置密码" bgcolor="rgb(242, 242, 242)" height="60px" fontsize="20px">-->
+              <!--<router-link to="#" slot="left">-->
+                <!--<yd-navbar-back-icon></yd-navbar-back-icon>-->
+              <!--</router-link>-->
+            <!--</yd-navbar>-->
+          <!--</div>-->
           <el-form-item label="" prop="name" class="usernametop">
             <div class="usernameicon">
               <img src="../../assets/image/u64.svg" />
-              <el-input type="number" class="usernameinput" v-model.number="logonForm.name" placeholder="输入手机号码" maxlength="11" auto-complete="true"></el-input>
+              <el-input type="number" class="usernameinput" v-model.number="findForm.name" placeholder="输入手机号码" maxlength="11" auto-complete="true"></el-input>
             </div>
           </el-form-item>
           <el-form-item label="" prop="codeVal" class="codeinputtop">
             <div class="codeinputicon">
               <img src="../../assets/image/u65.svg" />
-              <el-input type="text" class="codeinput" v-model="logonForm.codeVal" placeholder="短信验证码" maxlength="6" auto-complete="true"></el-input>
+              <el-input type="text" class="codeinput" v-model="findForm.codeVal" placeholder="短信验证码" maxlength="6" auto-complete="true"></el-input>
               <yd-sendcode class="sendcode" slot="right"
                              v-model="codeStart"
                              init-str="点击获取"
@@ -32,7 +34,7 @@
           <el-form-item label="" prop="pwd" class="paswtop" v-if="seePwdModel">
             <div class="paswicon">
               <img src="../../assets/image/u18.svg"/>
-              <el-input type="text" class="passwordinput" v-model="logonForm.pwd" placeholder="设置新的登录密码" maxlength="20" auto-complete="true"></el-input>
+              <el-input type="text" class="passwordinput" v-model="findForm.pwd" placeholder="设置新的登录密码" maxlength="20" auto-complete="true"></el-input>
               <div>
                 <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)" :callback="displayorHidePwd"></yd-switch>
               </div>
@@ -41,14 +43,14 @@
           <el-form-item label="" prop="pwd" class="paswtop" v-else>
             <div class="paswicon">
               <img src="../../assets/image/u18.svg"/>
-              <el-input type="password" class="passwordinput" v-model="logonForm.pwd" placeholder="设置新的登录密码" maxlength="20" auto-complete="true"></el-input>
+              <el-input type="password" class="passwordinput" v-model="findForm.pwd" placeholder="设置新的登录密码" maxlength="20" auto-complete="true"></el-input>
               <div>
                 <yd-switch v-model="switchModel" size="normal" color="rgb(158, 158, 158)" :callback="displayorHidePwd"></yd-switch>
               </div>
             </div>
           </el-form-item>
           <el-form-item class="logintop">
-            <el-button type="primary" @click="register">确认</el-button>
+            <el-button type="primary" @click="submit">确认</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -63,6 +65,7 @@
   import {Switch} from 'vue-ydui/dist/lib.rem/switch';
   import {NavBar, NavBarBackIcon, NavBarNextIcon} from 'vue-ydui/dist/lib.rem/navbar';
   import {SendCode} from 'vue-ydui/dist/lib.rem/sendcode';
+  import TopBar from '../components/TopBar.vue'
 
   Vue.component(SendCode.name, SendCode);
   Vue.component(NavBar.name, NavBar);
@@ -70,11 +73,11 @@
   Vue.component(Button.name, Button);
   Vue.component(Switch.name, Switch);
   export default {
-    components: {ElFormItem},
+    components: {ElFormItem,TopBar},
     name: 'Findpwd',
     data () {
       return {
-        logonForm: {
+        findForm: {
           name: '',
           pwd: '',
           codeVal: '',
@@ -100,15 +103,16 @@
       }
     },
     methods: {
-      register: function () {
-        this.$refs['logonForm'].validate((valid) => {
+      submit: function () {
+        this.$refs['findForm'].validate((valid) => {
           if (valid) {
             let self = this
             let params = {
-              'name': this.logonForm.name,
-              'pwd': this.logonForm.pwd,
-              'codeVal':this.logonForm.codeVal
+              'name': this.findForm.name,
+              'pwd': this.findForm.pwd,
+              'codeVal':this.findForm.codeVal
             }
+            self.$router.replace({path: '/login'});
             self.$http.post('/api/mobileLogin/login', params)
               .then(function (response) {
                 console.log(JSON.stringify(response))
