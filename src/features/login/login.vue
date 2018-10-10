@@ -2,20 +2,20 @@
     <div class="layout">
       <div class="loginpage">
         <div class="head">
-          <img src="../../assets/image/logo_1.png"/>
+          <img src="../../../static/imgs/logo_1.png"/>
         </div>
         <div class="body">
           <form action="" method="post">
             <ul>
               <li>
                 <label>
-                  <img src="../../assets/image/img13.png"/>
+                  <img src="../../../static/imgs/img13.png"/>
                 </label>
-                <input type="text" class="txt" name="" id="" value="" placeholder="请输入手机号"/>
+                <input type="text" class="txt" name=""  value="" placeholder="请输入手机号"/>
               </li>
               <li>
                 <label>
-                  <img src="../../assets/image/img36.png"/>
+                  <img src="../../../static/imgs/img36.png"/>
                 </label>
                 <input type="password" class="txt" name="" id="pass-id" value="" placeholder="请输入密码"/>
                 <button type="button" class="eye " id="eye"></button>
@@ -25,7 +25,7 @@
               <a href="#">忘记密码</a>
             </div>
             <div class="submit">
-              <input type="submit" name="" id="" value="登  录" />
+              <input type="submit" name="" value="登  录" />
             </div>
             <div class="regbtn">
               <a href="#">注册账号</a>
