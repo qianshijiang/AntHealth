@@ -11,17 +11,17 @@
         <yd-slider autoplay="3000" style="height: 140px;width: 92%;margin: auto;border-radius: 5px;margin-top: -45px;">
           <yd-slider-item>
             <a href="http://www.ydcss.com">
-              <img src="../../assets/imgs/banner.png">
+              <img src="../../../static/imgs/banner.png">
             </a>
           </yd-slider-item>
           <yd-slider-item>
             <a href="http://www.ydcss.com">
-              <img src="../../assets/imgs/banner.png">
+              <img src="../../../static/imgs/banner.png">
             </a>
           </yd-slider-item>
           <yd-slider-item>
             <a href="http://www.ydcss.com">
-              <img src="../../assets/imgs/banner.png">
+              <img src="../../../static/imgs/banner.png">
             </a>
           </yd-slider-item>
         </yd-slider>
@@ -31,7 +31,7 @@
             <div class="swiper-wrapper">
 
               <div class="swiper-slide">
-                <img src="../../assets/imgs/banner.png"/>
+                <img src="../../../static/imgs/banner.png"/>
                 <div class="txt">
                   <h3>专家认为多吃水果健康</h3>
                   <h4>你所不知道的十大误区之食物相克</h4>
@@ -39,7 +39,7 @@
                 </div>
               </div>
               <div class="swiper-slide">
-                <img src="../../assets/imgs/banner.png"/>
+                <img src="../../../static/imgs/banner.png"/>
                 <div class="txt">
                   <h3>专家认为</h3>
                   <h4>你所不知道的十大误区之食物相克</h4>
@@ -47,7 +47,7 @@
                 </div>
               </div>
               <div class="swiper-slide">
-                <img src="../../assets/imgs/banner.png"/>
+                <img src="../../../static/imgs/banner.png"/>
                 <div class="txt">
                   <h3>专家认为多吃水</h3>
                   <h4>你所不知道的十大误区之食物相克</h4>
@@ -70,7 +70,7 @@
                 <p>一键轻松管理保单</p>
               </div>
               <div class="img">
-                <img src="../../assets/imgs/img21.png"/>
+                <img src="../../../static/imgs/img21.png"/>
               </div>
             </a>
           </li>
@@ -81,7 +81,7 @@
                 <p>一键轻松管理保单</p>
               </div>
               <div class="img">
-                <img src="../../assets/imgs/img23.png"/>
+                <img src="../../../static/imgs/img23.png"/>
               </div>
             </a>
           </li>
@@ -94,7 +94,7 @@
                 <p>让买药变轻松的事</p>
               </div>
               <div class="img">
-                <img src="../../assets/imgs/img24.png"/>
+                <img src="../../../static/imgs/img24.png"/>
               </div>
             </a>
           </li>
@@ -105,7 +105,7 @@
                 <p>遇到危险点这里</p>
               </div>
               <div class="img">
-                <img src="../../assets/imgs/img22.png"/>
+                <img src="../../../static/imgs/img22.png"/>
               </div>
             </div>
           </li>
@@ -139,7 +139,7 @@
               <div class="swiper-slide">
                 <a href="#">
                   <div class="img">
-                    <img src="../../assets/imgs/img09.jpg"/>
+                    <img src="../../../static/imgs/img09.jpg"/>
                   </div>
                   <p>到店送免费体检服务一次</p>
                 </a>
@@ -147,7 +147,7 @@
               <div class="swiper-slide">
                 <a href="#">
                   <div class="img">
-                    <img src="../../assets/imgs/img09.jpg"/>
+                    <img src="../../../static/imgs/img09.jpg"/>
                   </div>
                   <p>如何合理膳食</p>
                 </a>
@@ -166,7 +166,7 @@
           <ul>
             <li @click="productIntro(1)">
                 <div class="img">
-                  <img src="../../assets/imgs/img11.jpg"/>
+                  <img src="../../../static/imgs/img11.jpg"/>
                 </div>
                 <div class="txt">
                   <h4>企业员工意外险</h4>
@@ -177,7 +177,7 @@
             <li>
               <a href="#">
                 <div class="img">
-                  <img src="../../assets/imgs/img10.jpg"/>
+                  <img src="../../../static/imgs/img10.jpg"/>
                 </div>
                 <div class="txt">
                   <h4>长期护理险</h4>
