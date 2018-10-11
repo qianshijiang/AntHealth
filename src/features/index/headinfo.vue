@@ -1,41 +1,141 @@
 <template>
-  <div class="home-box">
-    <TopBar title="头条信息"/>
-    <div class="box-top box-top1">
-      <div class="box-top2" :class="{'box-top2j': navflag === 1}" @click="searchList(0)">
-        <p class="se-title3">全部</p>
+    <div class="layout ">
+      <!--<TopBar title="蚂蚁头条"/>-->
+      <div class="header header-bg">
+        <div class="left">
+          <div @click="prev" class="back"></div>
+        </div>
+        <div class="center">
+          <p>蚂蚁头条</p>
+        </div>
       </div>
-      <div class="box-top2" :class="{'box-top2j': navflag === 2}" @click="searchList(1)">
-        <p class="se-title3">建康保障</p>
-      </div>
-      <div class="box-top2" :class="{'box-top2j': navflag === 3}" @click="searchList(2)">
-        <p class="se-title3">健康管理</p>
-      </div>
-      <div class="box-top2" :class="{'box-top2j': navflag === 4}" @click="searchList(3)">
-        <p class="se-title3">建康专栏</p>
-      </div>
-    </div>
-    <div class="box-content" @click="goDetail">
-      <!--<div class="box-imgb">-->
-        <img class="box-imgb" src="http://static.ydcss.com/uploads/ydui/2.jpg">
-      <!--</div>-->
-      <div class="box-content1">
-
-        <p style="font-size: 14px;color: #333;margin-top: 5px;">
-          34岁 甘肃  中级按摩师
-        </p>
-        <p class="box-text">
-          从业5年，曾在上海多家大型养生会所任理疗师，得到广大用户的高度评价，擅长精油SPA、淋巴排毒
-        </p>
-        <div>
-          <p style="font-size: 16px;color: #333;font-weight: bold">标签</p>
-          <p style="font-size: 14px;color: #333;">
-            2018年9月17日 12:57
-          </p>
+      <div class="topnews">
+        <div class="head g-tab-hd">
+          <ul>
+            <li class="on"><a href="#">全部</a></li>
+            <li><a href="#">健康保障</a></li>
+            <li><a href="#">健康管理</a></li>
+            <li><a href="#">健康专栏</a></li>
+          </ul>
+        </div>
+        <div class="body g-tab-bd">
+          <ul>
+            <li @click="goDetail">
+              <!--<a href="#">-->
+                <div class="img">
+                  <img src="../../../static/imgs/img66.png"/>
+                </div>
+                <div class="txt">
+                  <h4>2018市民健康跑步活动</h4>
+                  <p>让我们的开始锻炼吧，让身体健康起来，加油吧</p>
+                  <div class="labels">
+                    <div class="left">
+                      <label>跑步</label>
+                      <label>市民健康</label>
+                    </div>
+                    <div class="right">
+                      2018-09-16
+                    </div>
+                  </div>
+                </div>
+              <!--</a>-->
+            </li>
+            <li>
+              <div @click="goDetail">
+                <div class="img">
+                  <img src="../../../static/imgs/img66.png"/>
+                </div>
+                <div class="txt">
+                  <h4>大型全面健康体检活动</h4>
+                  <p>让我们的开始锻炼吧，让身体健康起来，加油吧</p>
+                  <div class="labels">
+                    <div class="left">
+                      <label>跑步</label>
+                      <label>市民健康</label>
+                    </div>
+                    <div class="right">
+                      2018-09-16
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="body g-tab-bd" style="display: none;">
+          <ul>
+            <li>
+              <a href="#">
+                <div class="img">
+                  <img src="../../../static/imgs/img66.png"/>
+                </div>
+                <div class="txt">
+                  <h4>2018市民健康跑步活动</h4>
+                  <p>让我们的开始锻炼吧，让身体健康起来，加油吧</p>
+                  <div class="labels">
+                    <div class="left">
+                      <label>跑步</label>
+                      <label>市民健康</label>
+                    </div>
+                    <div class="right">
+                      2018-09-16
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="body g-tab-bd" style="display: none;">
+          <ul>
+            <li>
+              <a href="#">
+                <div class="img">
+                  <img src="../../../static/imgs/img66.png"/>
+                </div>
+                <div class="txt">
+                  <h4>2018市民健康跑步活动11</h4>
+                  <p>让我们的开始锻炼吧，让身体健康起来，加油吧</p>
+                  <div class="labels">
+                    <div class="left">
+                      <label>跑步</label>
+                      <label>市民健康</label>
+                    </div>
+                    <div class="right">
+                      2018-09-16
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="body g-tab-bd" style="display: none;">
+          <ul>
+            <li>
+              <a href="#">
+                <div class="img">
+                  <img src="../../../static/imgs/img66.png"/>
+                </div>
+                <div class="txt">
+                  <h4>2018市民健康跑步活动22</h4>
+                  <p>让我们的开始锻炼吧，让身体健康起来，加油吧</p>
+                  <div class="labels">
+                    <div class="left">
+                      <label>跑步</label>
+                      <label>市民健康</label>
+                    </div>
+                    <div class="right">
+                      2018-09-16
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-  </div>
 </template>
 <script>
   import FooterBar from '../components/FooterBar.vue'
@@ -54,6 +154,9 @@
       },
       searchList(v){
         this.navflag = v + 1
+      },
+      prev(){
+        this.$router.go(-1)
       }
     },
     mounted: function () {},

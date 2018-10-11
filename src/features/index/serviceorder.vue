@@ -1,53 +1,165 @@
 <template>
-  <div class="home-box">
-    <TopBar title="服务订单"/>
-    <div class="box-top box-top1">
-      <div class="box-top2" :class="{'box-top2j': navflag === 1}" @click="searchList(0)">
-        <p class="se-title3">进行中</p>
+  <div class="layout ">
+    <div class="header header-bg">
+      <div class="left">
+        <div @click="prev" class="back"></div>
       </div>
-      <div class="box-top2" :class="{'box-top2j': navflag === 2}" @click="searchList(1)">
-        <p class="se-title3">已完成</p>
+      <div class="center">
+        <p>服务订单</p>
       </div>
-      <div class="box-top2" :class="{'box-top2j': navflag === 3}" @click="searchList(2)">
-        <p class="se-title3">已取消</p>
+      <div class="right">
+
       </div>
     </div>
-    <div style="margin-top: 15px;">
-      <div class="box-top">
-        <p class="se-title1">09年9月12日 12：69<span style="margin-left: 5px;font-weight: bold">进行中</span></p>
+    <div class="servlist">
+      <div class="head g-tab-hd">
+        <ul>
+          <li class="on"><a href="#">进行中</a></li>
+          <li><a href="#">已完成</a></li>
+          <li><a href="#">已取消</a></li>
+        </ul>
       </div>
-      <div class="pol-content" @click="goDetail">
-        <img class="box-imgb" src="http://static.ydcss.com/uploads/ydui/2.jpg">
-        <div style="display: flex;flex-direction: column">
-          <p>服务：<span>杠杠滴</span></p>
-          <p>技师：<span>赵云</span></p>
-          <p>服务时间：<span>2018-09-17 </span></p>
-        </div>
-      </div>
-      <div class="box-top box-topj">
-        <p class="se-title4">￥ 230.00</p>
-        <yd-button class="pol-content1"  @click.native="show2 = true" >
-          <p>取消</p>
-        </yd-button>
-      </div>
-      <yd-popup  v-model="show2" position="bottom" height="45%">
-        <div style="background: rgb(242,242,242);height: 100%">
-          <div class="box-bottom">
-            <p class="se-title4" style="flex: 14;text-align: center">退票</p>
-            <yd-icon size="25px" style="flex: 1;text-align: right" name="error-outline" @click.native="show2 = false"></yd-icon>
-          </div>
-          <yd-radio-group v-model="radio2" class="or-box1">
-            <p class="or-text1">请选择一个退票理由</p>
-            <yd-radio class="or-box2" val="1">啦啦啦</yd-radio>
-            <yd-radio class="or-box2" val="2">啊啊啊</yd-radio>
-            <yd-radio class="or-box2" val="3">喔喔喔</yd-radio>
-          </yd-radio-group>
-          <div @click="goRefund"><yd-button size="large" type="disabled" >确认退票</yd-button></div>
-        </div>
+      <div class="body g-tab-bd">
+        <ul>
+          <li>
+            <div class="bd" @click="goDetail">
+              <div class="bd-l">
+                <img src="../../../static/imgs/img77.png"/>
+              </div>
+              <div class="bd-r">
+                <h3>技师：李艾美</h3>
+                <h4>服务：团享办公室肩颈</h4>
+                <p>服务时间：09-16  15:30</p>
+                <label>¥158</label>
+              </div>
+            </div>
+            <div class="ft">
+              <div class="ft-l">
+                2018-09-16
+              </div>
+              <div class="ft-r">
+                <!--<input type="button" name="" id="" value="取消" />-->
+                <p style="text-align: center;color:#00CE9F;line-height: 23px;font-size: 12px;" @click="goRefund">取消</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="bd">
+              <div class="bd-l">
+                <img src="../../../static/imgs/img76.png"/>
+              </div>
+              <div class="bd-r">
+                <h3>技师：欧阳夏丹</h3>
+                <h4>服务：团享办公室肩颈</h4>
+                <p>服务时间：09-18  11:30</p>
+                <label>¥158</label>
+              </div>
+            </div>
+            <div class="ft">
+              <div class="ft-l">
+                2018-09-16
+              </div>
+              <div class="ft-r">
+                <input type="button" name="" id="" value="取消" />
+              </div>
+            </div>
+          </li>
 
-      </yd-popup>
+        </ul>
+      </div>
+      <div class="body g-tab-bd" style="display: none;">
+        <ul>
+          <li>
+            <div class="bd">
+              <div class="bd-l">
+                <img src="../../../static/imgs/img77.png"/>
+              </div>
+              <div class="bd-r">
+                <h3>技师：李艾美</h3>
+                <h4>服务：团享办公室肩颈</h4>
+                <p>服务时间：09-16  15:30</p>
+                <label>¥158</label>
+              </div>
+            </div>
+            <div class="ft">
+              <div class="ft-l">
+                2018-09-16
+              </div>
+              <div class="ft-r">
+                <input type="button" name="" id="" value="取消" />
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="bd">
+              <div class="bd-l">
+                <img src="../../../static/imgs/img76.png"/>
+              </div>
+              <div class="bd-r">
+                <h3>技师：欧阳夏丹</h3>
+                <h4>服务：团享办公室肩颈</h4>
+                <p>服务时间：09-18  11:30</p>
+                <label>¥158</label>
+              </div>
+            </div>
+            <div class="ft">
+              <div class="ft-l">
+                2018-09-16
+              </div>
+              <div class="ft-r">
+                <input type="button" name="" id="" value="取消" />
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="bd">
+              <div class="bd-l">
+                <img src="../../../static/imgs/img76.png"/>
+              </div>
+              <div class="bd-r">
+                <h3>技师：欧阳夏丹</h3>
+                <h4>服务：团享办公室肩颈</h4>
+                <p>服务时间：09-18  11:30</p>
+                <label>¥158</label>
+              </div>
+            </div>
+            <div class="ft">
+              <div class="ft-l">
+                2018-09-16
+              </div>
+              <div class="ft-r">
+                <input type="button" name="" id="" value="取消" />
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="body g-tab-bd" style="display: none;">
+        <ul>
+          <li>
+            <div class="bd">
+              <div class="bd-l">
+                <img src="../../../static/imgs/img77.png"/>
+              </div>
+              <div class="bd-r">
+                <h3>技师：李艾美</h3>
+                <h4>服务：团享办公室肩颈</h4>
+                <p>服务时间：09-16  15:30</p>
+                <label>¥158</label>
+              </div>
+            </div>
+            <div class="ft">
+              <div class="ft-l">
+                2018-09-16
+              </div>
+              <div class="ft-r" >
+                <p @click="goRefund">取消</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
-
   </div>
 </template>
 <script>
@@ -72,6 +184,9 @@
       },
       searchList(v){
         this.navflag = v + 1
+      },
+      prev(){
+        this.$router.go(-1)
       }
     },
     mounted: function () {},

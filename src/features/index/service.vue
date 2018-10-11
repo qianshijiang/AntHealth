@@ -14,17 +14,16 @@
     <div class="selectaddr">
       <div class="head">
         <ul>
-          <li class="on"><a href="#">按摩推拿</a></li>
-          <li><a href="#">小儿推拿</a></li>
-          <li class=""><a href="#">SPA</a></li>
-          <li><a href="#">足疗</a></li>
-          <li><a href="#">艾灸</a></li>
+          <li ><p class="xq" :class="{'xh' : navflag === 1}" @click="searchList(1)">按摩推拿</p></li>
+          <li><p class="xq" :class="{'xh' : navflag === 2}" @click="searchList(2)">小儿推拿</p></li>
+          <li><p class="xq" :class="{'xh' : navflag === 3}" @click="searchList(3)">SPA</p></li>
+          <li><p class="xq" :class="{'xh' : navflag === 4}" @click="searchList(4)">足疗</p></li>
+          <li><p class="xq" :class="{'xh' : navflag === 5}" @click="searchList(5)">艾灸</p></li>
         </ul>
       </div>
       <div class="body">
         <ul>
-          <li>
-            <a href="#">
+          <li @click="goDetail">
               <div class="img">
                 <img src="../../../static/imgs/img77.png"/>
               </div>
@@ -40,10 +39,8 @@
                 <p>专业按摩师上门为您进行深度的中医按摩服务，缓解疲劳、身体病痛，改善健康状况。</p>
                 <address>0.2km</address>
               </div>
-            </a>
           </li>
           <li>
-            <a href="#">
               <div class="img">
                 <img src="../../../static/imgs/img76.png"/>
               </div>
@@ -59,10 +56,8 @@
                 <p>从业5年，曾在上海多家大型养生会所任理疗师，得到广大用户的高度评价，擅长精油SPA</p>
                 <address>0.6km</address>
               </div>
-            </a>
           </li>
           <li>
-            <a href="#">
               <div class="img">
                 <img src="../../../static/imgs/img69.png"/>
               </div>
@@ -78,10 +73,8 @@
                 <p>专业按摩师上门为您进行深度的中医按摩服务，缓解疲劳、身体病痛，改善健康状况。</p>
                 <address>0.8km</address>
               </div>
-            </a>
           </li>
           <li>
-            <a href="#">
               <div class="img">
                 <img src="../../../static/imgs/img68.png"/>
               </div>
@@ -97,7 +90,6 @@
                 <p>专业按摩师上门为您进行深度的中医按摩服务，缓解疲劳、身体病痛，改善健康状况。</p>
                 <address>1.2km</address>
               </div>
-            </a>
           </li>
         </ul>
       </div>
@@ -118,13 +110,45 @@
     },
     methods: {
       searchList(v){
-        this.navflag = v + 1
+        this.navflag = v
+      },
+      getListType(){
+        let self = this
+        self.$http.get('/api/getservicetypename')
+          .then(function (response) {
+            console.log(JSON.stringify(response))
+            if (response.data.data) {
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+      getList(){
+        let self = this
+        let paramts = {
+          typeid: 1,
+          page: 1,
+          pagemax: 10
+        }
+        self.$http.post('/api/gettechnicianbytype',paramts,{ emulateJSON: true })
+          .then(function (response) {
+            console.log(JSON.stringify(response))
+            if (response.data.data) {
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
       },
       goDetail() {
         this.$router.push({path: '/servicedetail'})
       }
     },
-    mounted: function () {},
+    mounted: function () {
+      this.getListType()
+      this.getList()
+    },
     components: {
       FooterBar,
       TopBar
@@ -132,6 +156,13 @@
   }
 </script>
 <style lang="scss" scoped>
+  .xq{
+    color:#999;
+  }
+  .xh{
+    color: #333;
+    border-bottom: 1px solid #00CE9F
+  }
   .home-box {
     /*margin-top:45px;*/
     /*margin-top:10px;*/

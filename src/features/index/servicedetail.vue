@@ -1,96 +1,102 @@
 <template>
-  <div class="home-box">
-    <TopBar title="保健养生"/>
-    <div class="product-box product-boxj2">
-      <img class="home-img1" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1528954988,3244525745&fm=26&gp=0.jpg">
-    </div>
-    <div class="product-box1">
-      <div class="product-box-son product-box-sonj">
-        <p class="pro-text3 pro-text3j">
-          全身推拿理疗
-        </p>
-        <P class="pro-text4">
-          158元/60分钟
-        </P>
+  <div class="layout pb120">
+    <div class="header">
+      <div class="left">
+        <div @click="prev" class="back"></div>
       </div>
-      <div class="product-box-son" style="border: 0;">
-          <p class="pro-text5">
-            深度全身理疗是由点到专业理疗医师团队悉心打造的上门按摩服务项目，专业按摩师上门为您进行深度的中医按摩服务，缓解疲劳、身体病痛，改善健康状况。
-          </p>
+      <div class="center">
+        <p>保健养生</p>
       </div>
-    </div>
+      <div class="right">
 
-    <div class="product-box1" style="border-top:1px solid #e0e0e0;">
-      <div class="product-box-son" style="justify-content: center">
-        <p class="pro-text3" style="text-align: center;font-weight: normal">
-          技师信息
-        </p>
-      </div>
-      <div class="sed-box1">
-        <div class="sed-box2">
-          <img style="height: 100%;width: 100%;border-radius: 40px;" src="http://static.ydcss.com/uploads/ydui/3.jpg">
-        </div>
-        <p class="sed-text1">
-         大哥哥
-        </p>
-        <div style="margin-top: 5px;">
-          <yd-icon name="star" size="20px" color="#FF685D"></yd-icon>
-          <yd-icon name="star" size="20px" color="#FF685D"></yd-icon>
-          <yd-icon name="star" size="20px" color="#16AA6B"></yd-icon>
-          <yd-icon name="star" size="20px" color="#16AA6B"></yd-icon>
-        </div>
-      </div>
-      <div class="product-box-son">
-        <p class="pro-text5" style="font-size: 12px;">
-          深度全身理疗是由点到专业理疗医师团队悉心打造的上门按摩服务项目，专业按摩师上门为您进行深度的中医按摩服务，缓解疲劳、身体病痛，改善健康状况。
-        </p>
       </div>
     </div>
-    <div class="product-box1" style="margin-top: -2px;">
-      <div class="product-box-son" style="justify-content: center;padding-top: 45px;border-bottom-color:#333;">
-        <p class="pro-text3" style="text-align: center;font-weight: normal">
-          服务介绍
-        </p>
+    <div class="servpage">
+      <div class="head">
+        <div class="head-l">
+          <img src="../../../static/imgs/img77.png"/>
+        </div>
+        <div class="head-r">
+          <h2>
+            <span>李艾美 </span>
+            <i class="ico-star"></i>
+            <i class="ico-star"></i>
+            <i class="ico-star"></i>
+            <i class="ico-star"></i>
+            <i class="ico-star"></i>
+          </h2>
+          <h4>
+            <span>30岁</span>
+            <span>|</span>
+            <span>上海</span>
+            <span>|</span>
+            <span>高级按摩师</span>
+          </h4>
+          <p>专业按摩师上门为您进行深度的中医按摩服务，缓解疲劳、身体病痛，改善健康状况。</p>
+        </div>
       </div>
-      <div class="product-box-son" style="padding: 10px;flex-direction: column">
-        <p style="color: green;padding: 5px 0;">
-          针对部位:
-        </p>
-        <p class="pro-text5">
-          深度全身理疗是由点到专业理疗医师团队悉心打造的上门按摩服务项目，专业按摩师上门为您进行深度的中医按摩服务，缓解疲劳、身体病痛，改善健康状况。
-        </p>
-        <p style="color: green;padding: 5px 0;">
-          调理急症:
-        </p>
-        <p class="pro-text5">
-          深度全身理疗是由点到专业理疗医师团队悉心打造的上门按摩服务项目，专业按摩师上门为您进行深度的中医按摩服务，缓解疲劳、身体病痛，改善健康状况。
-        </p>
+      <div class="head-f">
+        <div class="bd">
+          <div class="tit">
+            <div class="left">
+              <p>全身推拿理疗</p>
+            </div>
+            <div class="right">
+              <font class="c_green">¥158</font>/60分钟
+            </div>
+          </div>
+          <div class="conter">
+            <p>深度全身理疗是由点到专业理疗医师团队悉心打造的上门按摩服务项目，专业按摩师上门为您进行的中医按摩服务，缓解疲劳、身体病痛，改善健康状况</p>
+          </div>
+        </div>
+
       </div>
-      <div class="product-box-son" style="padding: 10px;flex-direction: column;margin-top: 15px;">
-        <p style="color: green;padding: 5px 0;width: 96%;margin:auto;text-align: left;border-bottom: 1px solid #e0e0e0;">
-          服务内容:
-        </p>
-        <p class="pro-text5" style="margin-top: 8px;">
-          1、深度全身理疗是由点到专业理疗医师团队悉心打造的上门按摩服务项目，
-        </p>
-        <p class="pro-text5" style="margin-top: 8px;">
-          2、专业按摩师上门为您进行深度的中医按摩服务，
-        </p>
-        <p style="color: green;padding: 5px 0;width: 96%;margin:auto;text-align: left;border-bottom: 1px solid #e0e0e0;">
-          服务内容:
-        </p>
-        <p class="pro-text5" style="margin-top: 8px;">
-          1、深度全身理疗是由点到专业理疗医师团队悉心打造的上门按摩服务项目，
-        </p>
-        <p class="pro-text5" style="margin-top: 8px;">
-          2、专业按摩师上门为您进行深度的中医按摩服务，
-        </p>
+      <div class="body">
+        <div class="hd">
+          <p>服务介绍</p>
+        </div>
+        <div class="bd">
+          <h4 class="c_green">针对部位</h4>
+          <p>对取颊脂垫位置的判定，结合每叶有独立的血管来源，形成包膜下血管网。颊脂肪垫有填充、滑动、保护和缓冲作用。</p>
+        </div>
+        <div class="bd">
+          <h4 class="c_green">调理急症</h4>
+          <p>对取颊脂垫位置的判定，结合每叶有独立的血管来源，形成包膜下血管网。颊脂肪垫有填充、滑动、保护和缓冲作用。</p>
+        </div>
       </div>
-    </div>
-    <div class="pro-bottom" @click="goAppoin">
-      <p>
-        立即预约
-      </p>
+      <div class="body">
+        <div class="hd">
+          <p>服务内容</p>
+        </div>
+        <div class="bd">
+          <ul>
+            <li>1、便捷、省心  我们为您做了大量的前期筛选、审核工作；</li>
+            <li>2、成本低，效率高  我们拥有经验丰富的专业团队、海量的项目信息、优质的投资客户群；</li>
+            <li>3、严谨、高效的对接流程  严格的信息审核、资料递交、项目价值评估、有力的合同保障、高效的对接执行力。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="body">
+        <div class="hd">
+          <p>预约须知</p>
+        </div>
+        <div class="bd">
+          <dl>
+            <dt>尊敬的顾客，在购买前请仔细阅读以下条款</dt>
+            <dd>1、便捷、省心  我们为您做了大量的前期筛选、审核工作；</dd>
+            <dd>2、成本低，效率高  我们拥有经验丰富的专业团队、海量的项目信息、优质的投资客户群；</dd>
+            <dd>3、严谨、高效的对接流程  严格的信息审核、资料递交、项目价值评估、有力的合同保障、高效的对接执行力。</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="foot">
+        <div class="foot-l">
+          <strong class="c_green">¥158</strong>/60分钟
+        </div>
+        <div class="foot-r">
+          <div @click="goAppoin" class="foot-btn" style="margin-top: 0;margin-left: 0;text-align: center">立即预约</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -108,8 +114,28 @@
       goAppoin() {
         this.$router.push({path: '/appointment'})
       },
+      prev(){
+        this.$router.go(-1)
+      },
+      getInfo(){
+        let self = this
+        let paramts = {
+          technicianid: 1,
+        }
+        self.$http.post('/api/getServices',paramts,{ emulateJSON: true })
+          .then(function (response) {
+            console.log(JSON.stringify(response))
+            if (response.data.data) {
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
     },
-    mounted: function () {},
+    mounted: function () {
+      this.getInfo()
+    },
     components: {
       FooterBar,
       TopBar

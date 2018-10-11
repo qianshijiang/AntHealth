@@ -1,68 +1,203 @@
 <template>
-  <div class="home-box">
-    <TopBar title="我的资料"/>
-    <div class="act-box1">
-      <p class="act-text">余额充足</p>
-      <p class="act-text2">
-        158元/60分钟
-      </p>
-      <p class="act-text">
-        <span class="act-text1" style="">-</span>
-        <span class="act-text1" style="background: #fff;">1</span>
-        <span class="act-text1">+</span>
-      </p>
-    </div>
-    <div class="act-box1" style="justify-content: flex-start">
-      <p class="act-text" style="color: #999;margin-right: 40px;">按摩师</p>
-      <yd-checkbox val="刘晓国 "></yd-checkbox>
-    </div>
-    <div class="act-box1" style="margin-top: 0;border-top:0;justify-content: flex-start">
-      <p class="act-text" style="color: #999;margin-right: 20px;">当前技师无法服务时，允许更换技师</p>
-      <yd-checkbox val="允许" shape="circle"></yd-checkbox>
-    </div>
-    <div class="pol-content">
-      <yd-cell-group >
-        <yd-cell-item style="border-bottom: 1px solid #e0e0e0;">
-          <span slot="left">联系电话：</span>
-          <yd-input slot="right" v-model="input6" placeholder="15025154119"></yd-input>
-          <div slot="right" style="display: flex;justify-content: space-between;flex-direction: row">
-            <img style="height: 11px;width: 9px;" src="../../assets/image/right.png">
-          </div>
-        </yd-cell-item>
-        <yd-cell-item arrow style="border-bottom: 1px solid #e0e0e0;">
-          <span slot="left">服务地址：</span>
-          <input slot="right" type="text" @click.stop="show1 = true" v-model="model1" readonly placeholder="请选择收货地址">
-        </yd-cell-item>
-        <yd-cell-item arrow>
-          <span slot="left">上门时间：</span>
-          <yd-datetime v-model="datetime6" :yearFormat="yearFormat" :month-format="monthFormat" :day-format="dayFormat" type="date" slot="right"></yd-datetime>
-        </yd-cell-item>
-        <div class="act-box1" style="justify-content:center;border-top: 0;padding: 5px;">
-          <div class="appoin-box">备注留言</div>
+  <div>
+    <div class="layout pb120">
+      <div class="header">
+        <div class="left">
+          <div @click="prev" class="back"></div>
         </div>
+        <div class="center">
+          <p>保健养生</p>
+        </div>
+        <div class="right">
 
-      </yd-cell-group>
-      <yd-cityselect v-model="show1" :callback="result1" :items="district"></yd-cityselect>
-    </div>
-    <div class="pol-content" style="margin-bottom: 60px;z-index:1;">
-      <yd-cell-group >
-        <yd-cell-item style="border-bottom: 1px solid #e0e0e0;">
-          <span slot="left">优惠卷：</span>
-          <yd-input slot="right" v-model="input6" placeholder="15025154119"></yd-input>
-          <div slot="right" style="display: flex;justify-content: space-between;flex-direction: row">
-            <img style="height: 11px;width: 9px;" src="../../assets/image/right.png">
+        </div>
+      </div>
+      <div class="servf">
+        <form action="" method="post">
+          <div class="body">
+            <ul>
+              <li>
+                <div class="label">
+                  全身推拿理疗
+                </div>
+                <div class="input">
+                  158元/60分钟
+                  <input class="spinnerExample" type="" name=""  value="1" />
+                  <!--插件-->
+                </div>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <div class="label">
+                  按摩师
+                </div>
+                <div class="input">
+                  <img src="../../../static/imgs/img77.png"/>
+                  李艾美
+                </div>
+              </li>
+              <li>
+                <div class="label c_gray">
+                  当前技师无法服务时，允许更换技师
+                </div>
+
+                <div class="input">
+                  <input type="checkbox" name="" id="chose" checked="" value="" class="choose-btn" />
+                  <label for="chose" class="choose-label"></label>
+                </div>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <div class="label">
+                  联系电话
+                </div>
+                <div class="input input-arr">
+                  <input type="text" readonly name="" id="" value="13888860877" />
+                </div>
+              </li>
+              <li>
+                <div class="label">
+                  服务地址
+                </div>
+                <div class="input input-arr">
+                  <input type="text" readonly name="" id="" value="上海市静安区延长中路801号A12室" />
+                </div>
+              </li>
+              <li>
+                <div class="label">
+                  上门时间
+                </div>
+                <div class="input input-arr">
+                  <input type="text" readonly name="" id="sub_time" value="" placeholder="请选择上门时间"/>
+                </div>
+              </li>
+              <li>
+                <div class="label">
+                  备注留言
+                </div>
+                <div class="input memo">
+                  <input type="text" class="memo" name="" id="" value="" placeholder="请输入备注"/>
+                </div>
+              </li>
+            </ul>
+            <ul>
+              <li @click="goCoupon">
+                <div class="label">
+                  优惠券
+                </div>
+                <div class="input input-arr">
+                  <input type="text" readonly name="" id="" value="" placeholder="0张"/>
+                </div>
+              </li>
+              <li>
+                <div class="label">
+                  预计实付
+                </div>
+                <div class="input">
+                  <input type="text" class="c_green number"  name="" id="" value="158元" />
+                </div>
+              </li>
+            </ul>
           </div>
-        </yd-cell-item>
-        <yd-cell-item>
-          <span slot="left">预计实付：</span>
-          <yd-input slot="right" v-model="input4"  placeholder=""></yd-input>
-        </yd-cell-item>
-      </yd-cell-group>
+          <div class="foot foot-fixd">
+            <div class="foot-l left">
+              合计金额：<strong>¥158</strong>
+            </div>
+            <div class="foot-r right" @click="goPay">
+              <p  class="foot-btn" >立即预约</p>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="pro-bottom" @click="goPay">
-      <p>
-        确认预约
-      </p>
+    <div class="shade"></div>
+    <div class="section_time">
+      <div class="hd">
+        <div class="hd-left">
+          <a href="#" id="time-off">取消</a>
+        </div>
+        <div class="hd-mid">
+          <p>选择上门时间</p>
+        </div>
+        <div class="hd-right">
+          <a href="#" id="time-open">确认</a>
+        </div>
+      </div>
+      <div class="nav">
+        <ul>
+          <li>
+            <a href="#">
+              <p class="time-s">09-16</p>
+              <p class="time-x">星期天</p>
+            </a>
+          </li>
+          <li class="on">
+            <a href="#">
+              <p class="time-s">09-17</p>
+              <p class="time-x">星期一</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <p class="time-s">09-18</p>
+              <p class="time-x">星期二</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <p class="time-s">09-19</p>
+              <p class="time-x">星期三</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <p class="time-s">09-20</p>
+              <p class="time-x">星期四</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <p class="time-s">09-21</p>
+              <p class="time-x">星期五</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <p class="time-s">09-22</p>
+              <p class="time-x">星期六</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="bd">
+        <ul>
+          <li><a href="#">9:00</a></li>
+          <li><a href="#">9:30</a></li>
+          <li><a href="#">10:00</a></li>
+          <li><a href="#">10:30</a></li>
+          <li><a href="#">11:00</a></li>
+
+          <li><a href="#">11:30</a></li>
+          <li><a href="#">12:00</a></li>
+          <li class="no-more"><a href="#">约满</a></li>
+          <li class="no-more"><a href="#">约满</a></li>
+          <li><a href="#">13:00</a></li>
+
+          <li><a href="#">13:30</a></li>
+          <li class="no-more"><a href="#">约满</a></li>
+          <li class="on"><a href="#">14:00</a></li>
+          <li><a href="#">14:30</a></li>
+          <li><a href="#">15:00</a></li>
+
+          <li><a href="#">15:30</a></li>
+          <li><a href="#">16:00</a></li>
+          <li><a href="#">16:30</a></li>
+          <li><a href="#">17:00</a></li>
+          <li class="no-more"><a href="#">约满</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -76,6 +211,13 @@
       return {
         logonData: {},
         show1: false,
+        replacetype: 0,
+        guestphone: '15025154119',
+        address: 'fffff',
+        times: '2018-11-12',
+        remarks: 'ffff',
+        coupon: 0,
+        servicenum: 1,
         input6:'',
         input4:'',
          model1: '',
@@ -91,7 +233,38 @@
         this.model1 = ret.itemName1 + ' ' + ret.itemName2 + ' ' + ret.itemName3;
       },
       goPay() {
-        this.$router.push({path: '/payshure'})
+        this.submit()
+
+      },
+      goCoupon(){
+        this.$router.push({path: '/coupon'})
+      },
+      prev(){
+        this.$router.go(-1)
+      },
+      submit(){
+        let self = this
+        let paramts = {
+          technicianid: 1,
+          serviceid: 2,
+          replaceType: self.replacetype,
+          guestPhone: self.guestphone,
+          serviceAddress: self.address,
+          serviceTime: self.times,
+          remarks: self.remarks,
+          couponId: self.coupon,
+          serviceNum: self.servicenum
+        }
+        self.$http.post('/api/creatServiceOrder',paramts,{ emulateJSON: true })
+          .then(function (response) {
+            console.log(JSON.stringify(response))
+            this.$router.push({path: '/pay'})
+            if (response.data.data) {
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
       },
     },
     mounted: function () {},
@@ -102,6 +275,9 @@
   }
 </script>
 <style lang="scss" scoped>
+  .servf .body ul li{
+    height: auto !important;
+  }
   .home-box {
     /*margin-top:45px;*/
     background-image:none;

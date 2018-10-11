@@ -11,14 +11,15 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'https://yunjf.gov.cn/', // 接口的域名
+        target: 'http://118.190.26.38:8888/', // 接口的域名
         // secure: false,  // 如果是https接口，需要配置这个参数
         changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
         pathRewrite: {
-          '^/api': 'https://yunjf.gov.cn/'
+          '^/api': '/healthymvc'
         }
       }
     },
+
 
     // Various Dev Server settings
     host: 'localhost',//'192.168.101.82' // can be overwritten by process.env.HOST

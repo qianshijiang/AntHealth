@@ -1,5 +1,5 @@
 <template>
-  <div class="layout pb120 ">
+  <div class="layout pb120 " >
     <div class="my-head">
       <a href="#" class="set"></a>
       <div class="head">
@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="body">
-        <div class="body-l">
+        <div class="body-l" @click="productIntro(0)">
           <i><img src="../../../static/imgs/img16.png"/></i>
           <font>医疗急救卡</font>
         </div>
@@ -32,29 +32,23 @@
       </div>
       <div class="body">
         <ul>
-          <li>
-            <a href="#">
+          <li @click="productIntro(1)">
               <div class="img">
                 <img src="../../../static/imgs/img42.png"/>
               </div>
               <p>我的资料</p>
-            </a>
           </li>
-          <li>
-            <a href="#">
+          <li @click="productIntro(2)">
               <div class="img">
                 <img src="../../../static/imgs/img43.png"/>
               </div>
               <p>我的保单</p>
-            </a>
           </li>
-          <li>
-            <a href="#">
+          <li @click="productIntro(3)">
               <div class="img">
                 <img src="../../../static/imgs/img44.png"/>
               </div>
               <p>地址管理</p>
-            </a>
           </li>
           <li>
             <a href="#">
@@ -204,7 +198,7 @@
       </div>
     </div>
 
-    <div class="my-nav">
+    <div class="my-nav" style="margin-bottom: 80px;">
       <div class="head">
         <div class="head-l">
           福利
@@ -304,6 +298,9 @@
   }
 </script>
 <style lang="scss" scoped>
+  a{
+    text-align: center;
+  }
   .home-box {
     /*margin-top:45px;*/
     background-image:none;

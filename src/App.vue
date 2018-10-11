@@ -11,7 +11,6 @@ export default {
 </script>
 
 <style  lang="scss">
-$font-size: 16px;
 html, body, #app {height: 100%;}
 #app {
   font-family: Avenirltstd,Microsoft YaHei,Helvetica,sans-serif;
@@ -23,7 +22,7 @@ html, body, #app {height: 100%;}
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
-  font-size: $font-size;
+font-size:12px;
   .panel {
     background-color: #FFFFFF;
     padding: 20px 20px 0 20px;

@@ -1,91 +1,86 @@
 <template>
-  <div class="layout pb120">
-    <div class="header">
-      <div class="left">
-        <div @click="prev" class=" back"></div>
-      </div>
-      <div class="center">
-        活动详情
-      </div>
-    </div>
-    <div class="actd">
-      <div class="actd-vw">
-        <img src="../../../static/imgs/img79.jpg"/>
-      </div>
-      <div class="actd-hd">
-        <h2>上海中青年市民健康跑活动系列</h2>
-        <div class="label">
-          <span>跑步</span>
-          <span>市民健康</span>
+  <div class="layout ">
+    <div class="g-bg-wrap">
+      <div class="header header-bg1">
+        <div class="left">
+          <div @click="prev" class="back"></div>
         </div>
-        <label class="c_green">¥158</label>
+        <div class="center">
+          <p><span class="header-tit">上海 新华园</span></p>
+        </div>
       </div>
-      <div class="actd-nv">
-        <ul>
-          <li>
-            <div @click="goAddress">
-              <i><img src="../../../static/imgs/img81.png"/></i>主办门店
+      <div class="h-slider ">
+        <!--swiper-->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="../../../static/imgs/banner.png"/>
+              <div class="txt">
+                <h3>专家认为多吃水果健康</h3>
+                <h4>你所不知道的十大误区之食物相克</h4>
+                <a class="btn" href="#">查看详情</a>
+              </div>
             </div>
-            <a href="#" class="more"></a>
-          </li>
-          <li>
-            <i><img src="../../../static/imgs/img103.png"/></i>2018-09-16 10:00～14:00
-          </li>
-          <li>
-            <i><img src="../../../static/imgs/img82.png"/></i>上海市东方明珠广场
-          </li>
-        </ul>
-      </div>
-      <div class="actd-bd">
-        <div class="head">
-          详情
-        </div>
-        <div class="body">
-          <p><img src="../../../static/imgs/img73.jpg"/></p>
-          <p>现在9月份入秋的季节，也是吃螃蟹最好的季节，螃蟹不只是美味，还是很营养的一道海鲜，螃蟹不仅含有丰富的蛋白质，氨基酸，还含有丰富的钙，铁，锌，硒，钾，维生素A，维生素B等，其蛋白质的含量是猪肉和鱼肉的几倍，螃蟹体内的维生素A和核黄素的含量，在人们的食谱中是也首屈一指的。</p>
-          <p>但是并不是所有螃蟹都能那么营养，而且也不是什么人都可以吃螃蟹，除了海鲜过敏的人，还有一些胆固醇过高的人群，也要尽量少吃螃蟹，当然这些都是已知的禁忌，今天主要来说说一些鲜为人知的吃螃蟹禁忌，这可是讨海人的经验之谈，大家好好收藏。</p>
-          <p>首先螃蟹一定要挑新鲜的，很多人因为没有办法看到螃蟹咋煮之前，到底是不是活蹦乱跳的，所以很是吃亏，虽然沿海地方基本上都是一些新鲜的螃蟹在市场是哪个，难免也会混入一些不良的商家，将死了很久的螃蟹夹杂在其中，这就让大家很是头痛。</p>
-
-
-          <p>为什么别吃死蟹？因为死蟹体内的寄生细菌，会繁殖并扩散到蟹肉中，使得蛋白质分解产生组织胺。蟹死的时间越长，体内积累的组织胺越多，毒性越大。即使把死蟹煮熟煮透，毒素仍然不易被破坏，食用后会引起恶心呕吐，面颊潮红，心跳加速等。</p>
-
-          <p>不要吃隔夜蟹，螃蟹为含组胺酸较多的食物，隔夜的剩蟹种组氨酸在某些维生素的作用下，会分解为组胺，回锅加热随可杀灭病源微生物，却不能破坏毒素，从而导致组氨酸中毒。因此，蟹最好现蒸现吃，一般不要超过4小时。还有不能吃生蟹和醉蟹。</p>
-
-
+            <div class="swiper-slide">
+              <img src="../../../static/imgs/banner.png"/>
+              <div class="txt">
+                <h3>专家认为</h3>
+                <h4>你所不知道的十大误区之食物相克</h4>
+                <a class="btn" href="#">查看详情</a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <img src="../../../static/imgs/banner.png"/>
+              <div class="txt">
+                <h3>专家认为多吃水</h3>
+                <h4>你所不知道的十大误区之食物相克</h4>
+                <a class="btn" href="#">查看详情</a>
+              </div>
+            </div>
+          </div>
+          <!-- 分页器 -->
+          <div class="swiper-pagination"></div>
         </div>
       </div>
-      <div class="actd-ft">
-        <div class="body">
-          <dl>
-            <dt>选择票券</dt>
-            <dd>
-              <div class="left">
-                <h4>免费票</h4>
-                <p>库存：2348张</p>
-              </div>
-              <div class="right">
-                <input class="spinnerExample" type="" name="" id="" value="1" />
-              </div>
-            </dd>
-            <dd>
-              <div class="left">
-                <h4>成人票   ¥15</h4>
-                <p>库存：2348张</p>
-              </div>
-              <div class="right">
-                <input class="spinnerExample" type="" name="" id="" value="1" />
-
-              </div>
-            </dd>
-          </dl>
-        </div>
-        <div class="foot">
-          <p @click="goPay" style="display: block;height: .8rem;line-height: .8rem; text-align: center;color: #fff; font-size: .32rem;background: #00CE9F; -moz-border-radius: .42rem; border-radius: .42rem;">我要报名</p>
-        </div>
-      </div>
-      <div class="mask"></div>
     </div>
 
+    <div class="h-menu">
+      <ul>
+        <li>
+          <a href="#">
+            <div class="img">
+              <img src="../../../static/imgs/img21.png"/>
+            </div>
+            <div class="txt">
+              <h4>我的保单</h4>
+              <p>一键轻松管理保单</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <div class="img">
+              <img src="../../../static/imgs/img23.png"/>
+            </div>
+            <div class="txt">
+              <h4>福利商城</h4>
+              <p>更多的优惠属于你</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <div class="img">
+              <img src="../../../static/imgs/img24.png"/>
+            </div>
+            <div class="txt">
+              <h4>平价药店</h4>
+              <p>让买药变轻松的事</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>

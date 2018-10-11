@@ -5,25 +5,12 @@
         <div @click="prev" class="back"></div>
       </div>
       <div class="center">
-        <p>我的资料</p>
+        <p>地址管理</p>
       </div>
     </div>
     <div class="myinfo">
       <form action="" method="post">
         <div class="body">
-          <ul class="body-hd">
-            <li>
-              <div class="left">
-                头像
-              </div>
-              <div class="right">
-                <div class="myinfo-ava">
-                  <img src="../../../static/imgs/img39.png"/>
-                  <input class="file" type="file" name="" id="" value="" />
-                </div>
-              </div>
-            </li>
-          </ul>
           <ul class="body-bd">
             <li>
               <div class="left">
@@ -43,20 +30,20 @@
             </li>
             <li>
               <div class="left">
-                出生日期
-              </div>
-              <div class="right right-arr">
-                <input class="text text-date" type="date"   placeholder="请选择出生日期" />
-              </div>
-            </li>
-            <li>
-              <div class="left">
                 所在区域
               </div>
               <div class="right right-arr">
                 <select name="">
                   <option value="请选择所在区域">请选择所在区域</option>
                 </select>
+              </div>
+            </li>
+            <li>
+              <div class="left">
+                详细地址
+              </div>
+              <div class="right right-arr">
+                <input class="text text1" type="text" name="" id="" value="" placeholder="请输入详细地址" />
               </div>
             </li>
           </ul>
@@ -69,22 +56,22 @@
   </div>
 </template>
 <script>
-  import District from 'ydui-district/dist/jd_province_city_area_id';
-  import FooterBar from '../components/FooterBar.vue'
+  import Vue from 'vue';
+  import {Preview, PreviewHeader, PreviewItem} from 'vue-ydui/dist/lib.rem/preview';
+  /* 使用px：import {Preview, PreviewHeader, PreviewItem} from 'vue-ydui/dist/lib.px/preview'; */
+
+  Vue.component(Preview.name, Preview);
+  Vue.component(PreviewHeader.name, PreviewHeader);
+  Vue.component(PreviewItem.name, PreviewItem);
   import TopBar from '../components/TopBar.vue'
   export default {
-    name: 'Service',
+    name: 'Addressmanage',
     data () {
       return {
         logonData: {},
-        show1: false,
-        input6:'',
-         model1: '',
-        district: District,
-        datetime6: '2017-05-11',
-        yearFormat: '<span style="color:#F00;">{value}<i style="font-size: 12px;margin-left: 1px;">年</i></span>',
-        monthFormat: '<span style="color:#0BB20C;">{value}<i style="font-size: 12px;margin-left: 1px;">月</i></span>',
-        dayFormat: '<span style="color:#FFB400;">{value}<i style="font-size: 12px;margin-left: 1px;">日</i></span>'
+        btns: [
+
+        ]
       }
     },
     methods: {
@@ -97,7 +84,6 @@
     },
     mounted: function () {},
     components: {
-      FooterBar,
       TopBar
     }
   }
@@ -109,6 +95,37 @@
     height: auto;
     min-height: 100%;
     width: 100%;
+  }
+  .add-box{
+    border-bottom: 1px solid #e0e0e0;width: 95%;margin: auto;padding: 5px 0;
+  }
+  .add-text{
+    margin-bottom: 10px;
+  }
+  .add-text2{
+    color: #666;margin-right: 10px;
+  }
+  .add-box1{
+    border-bottom: 1px solid #e0e0e0;width: 95%;margin: auto;
+  }
+  .add-box2{
+    line-height: 30px;display: flex;flex-direction: row;margin-top: 10px;
+  }
+  .add-box3{
+    height: 25px;width: 25px;background: rgb(242,136,147);border-radius:12.5px;position: relative;top: 5px;right: 5px;
+  }
+  .add-box3j{
+    background: #fff;
+    border:1px solid #e0e0e0;
+  }
+  .add-box4{
+    position: absolute;top: -2px;left:3px;
+  }
+  .add-text1{
+    font-size: 14px;line-height: 35px;
+  }
+  .add-box5{
+    display: flex;flex-direction: row;justify-content: flex-end;align-items: center;margin-top: 5px;
   }
   .pol-content{
     height: auto;
@@ -140,15 +157,12 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    /*padding: 15px;*/
   }
   .box-top{
     height: auto;
     width: 100%;
-    border-bottom:1px solid #e0e0e0;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    padding: 20px 10px;
+   margin-top: 10px;
     background: #ffffff;
   }
   .box-topj{
