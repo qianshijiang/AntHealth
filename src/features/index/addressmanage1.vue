@@ -11,84 +11,82 @@
     <div class="myinfo">
       <form action="" method="post">
         <div class="body">
-          <ul class="body-bd">
-            <li>
-              <div class="left">
-                昵称
-              </div>
-              <div class="right">
-                王力宏
-              </div>
-            </li>
-            <li>
-              <div class="left">
-                修改手机号
-              </div>
-              <div class="right right-arr">
-                <input class="text" type="text" name="" id="" value="13888860877" />
-              </div>
-            </li>
-            <li>
-              <div class="left">
-                所在区域
-              </div>
-              <div class="right right-arr">
-                <select name="">
-                  <option value="请选择所在区域">请选择所在区域</option>
-                </select>
-              </div>
-            </li>
-            <li>
-              <div class="left">
-                详细地址
-              </div>
-              <div class="right right-arr">
-                <input class="text text1" type="text" name="" id="" value="" placeholder="请输入详细地址" />
-              </div>
-            </li>
-          </ul>
+            <yd-cell-item style="background-color: #fff;border-bottom: 1px solid #e0e0e0;">
+              <span slot="left">昵称：</span>
+              <yd-input slot="right" v-model="nickname" placeholder="请输入昵称"></yd-input>
+            </yd-cell-item>
+            <yd-cell-item style="background-color: #fff;border-bottom: 1px solid #e0e0e0;">
+              <span slot="left">手机号：</span>
+              <yd-input slot="right" v-model="phone" placeholder="请输入手机号码"></yd-input>
+            </yd-cell-item>
+            <yd-cell-group style="margin-bottom: 0">
+              <yd-cell-item arrow>
+                <span slot="left">所在地区：</span>
+                <input slot="right" type="text" @click.stop="show1 = true" v-model="address" readonly placeholder="请选择收货地址">
+              </yd-cell-item>
+            </yd-cell-group>
+            <yd-cityselect v-model="show1" :callback="result1" :items="district"></yd-cityselect>
+            <yd-cell-item style="background-color: #fff;border-bottom: 1px solid #e0e0e0;">
+              <span slot="left">详细地址：</span>
+              <yd-input slot="right" v-model="addressdetail" placeholder="请输入详细地址"></yd-input>
+            </yd-cell-item>
         </div>
         <div class="foot">
-          <input type="submit" name="" id="" value="确认修改" />
+          <input type="submit" name="" id="" value="确 定" />
         </div>
       </form>
     </div>
   </div>
 </template>
 <script>
-  import Vue from 'vue';
-  import {Preview, PreviewHeader, PreviewItem} from 'vue-ydui/dist/lib.rem/preview';
-  /* 使用px：import {Preview, PreviewHeader, PreviewItem} from 'vue-ydui/dist/lib.px/preview'; */
-
-  Vue.component(Preview.name, Preview);
-  Vue.component(PreviewHeader.name, PreviewHeader);
-  Vue.component(PreviewItem.name, PreviewItem);
-  import TopBar from '../components/TopBar.vue'
-  export default {
+  import District from 'ydui-district/dist/jd_province_city_area_id'
+    export default {
     name: 'Addressmanage',
     data () {
       return {
-        logonData: {},
-        btns: [
-
-        ]
+        nickname: '',
+        phone: '',
+        show1: false,
+        address: '',
+        addressdetail: '',
+        district: District
       }
     },
     methods: {
-      result1(ret) {
-        this.model1 = ret.itemName1 + ' ' + ret.itemName2 + ' ' + ret.itemName3;
+      result2(ret) {
+        this.address = ret.itemName1 + ' ' + ret.itemName2 + ' ' + ret.itemName3
       },
       prev(){
         this.$router.go(-1)
-      }
+      },
+      submit(){
+        let self = this
+        let paramts = {
+          page: 1,
+          pagemax: 20
+        }
+        self.$http.post('api/gettopnews',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+          .then(function (response) {
+            console.log(JSON.stringify(response))
+            if (response.data.data) {
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
     },
     mounted: function () {},
-    components: {
-      TopBar
-    }
+    // components: {
+    //   TopBar
+    // }
   }
 </script>
 <style lang="scss" scoped>
+  .myinfo .body-bd li{
+    height: auto;
+    padding: 0;
+  }
   .home-box {
     /*margin-top:45px;*/
     background-image:none;
