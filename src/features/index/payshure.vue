@@ -1,29 +1,56 @@
 <template>
-  <div class="home-box">
-    <TopBar title="确认支付"/>
-    <div class="act-box1" style="background: #e0e0e0;justify-content: center;padding: 10px;border:0;">
-      <p class="act-text">支付剩余时间</p>
+  <div class="layout">
+    <div class="header">
+      <div class="left">
+        <div @click="prev" class=" back"></div>
+      </div>
+      <div class="center">
+        保健养生
+      </div>
+      <div class="right">
+
+      </div>
     </div>
-    <div class="act-box1" style="width: 96%;margin: auto;">
-      <p class="act-text">全身丽娜</p>
-      <p class="act-text2">
-        158元/60分钟
-      </p>
-    </div>
-    <div class="act-box1">
-      <p class="act-text">微信支付</p>
-      <yd-checkbox val="允许" shape="circle"></yd-checkbox>
-    </div>
-    <div class="act-box1" style="margin-top: 0;border-top: 0;">
-      <p class="act-text" >银联支付</p>
-      <yd-checkbox val="允许" shape="circle"></yd-checkbox>
+    <div class="getyes">
+      <div class="head">
+        <div class="head-hd">
+          <img src="../../../static/imgs/img99.png"/>
+          <p>支付成功</p>
+        </div>
+        <div class="head-bd">
+          <h4 class="c_green">¥0.00</h4>
+          <p>支付金额</p>
+        </div>
+      </div>
+      <div class="body">
+        <div class="body-hd">
+          <h3>购票清单</h3>
+        </div>
+        <div class="body-bd">
+          <!--table-->
+          <table>
+            <tr>
+              <td class="td1">免费票</td>
+              <td class="td2">X 1</td>
+              <td class="td3">¥0.00</td>
+            </tr>
+          </table>
+        </div>
+        <div class="body-ft">
+          小计：<font class="c_green">¥0.00</font>
+        </div>
+      </div>
+      <div class="foot">
+        <div class="foot-hd">
+          <h4>出票成功</h4>
+          <p>已放入［我的预约］中</p>
+        </div>
+        <div class="foot-bd">
+          <div class="hh" @click="goActiveOrder">立即查看</div>
+        </div>
+      </div>
     </div>
 
-    <div class="pro-bottom" @click="paySu">
-      <p>
-        确认支付
-      </p>
-    </div>
   </div>
 </template>
 <script>
@@ -50,9 +77,12 @@
       result1(ret) {
         this.model1 = ret.itemName1 + ' ' + ret.itemName2 + ' ' + ret.itemName3;
       },
-      paySu() {
-        this.$router.push({path: '/paysuccess'})
+      goActiveOrder() {
+        this.$router.push({path: '/activeorder'})
       },
+      prev(){
+        this.$router.go(-1)
+      }
     },
     mounted: function () {},
     components: {
@@ -62,6 +92,17 @@
   }
 </script>
 <style lang="scss" scoped>
+  .hh{
+    display: inline-block;
+    width: 5.5rem;
+    height: .84rem;
+    line-height: .84rem;
+    -moz-border-radius: .42rem;
+    border-radius: .42rem;
+    color: #fff;
+    background: #00ce9f;
+    font-size: .3rem;
+  }
   .home-box {
     /*margin-top:45px;*/
     background-image:none;

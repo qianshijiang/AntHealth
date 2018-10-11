@@ -1,26 +1,46 @@
 <template>
-  <div class="layout ">
+  <div class="layout">
     <div class="header">
       <div class="left">
-        <div @click="prev" class="back"></div>
+        <div @click="prev" class=" back"></div>
       </div>
       <div class="center">
-        <p>保健养生</p>
+        活动订单
       </div>
-      <div class="right">
 
-      </div>
     </div>
-    <div class="cancelyes">
-      <div class="head">
-        <img src="../../../static/imgs/img99.png"/>
-        <p>取消成功</p>
+    <div class="orderd">
+
+      <div class="orderd-vw">
+        <div class="head">
+          免费票
+        </div>
+        <div class="body">
+          <img src="../../../static/imgs/qrcode.png"/>
+          <p>验票码：1823917283172</p>
+        </div>
+        <div class="foot">
+          <img src="../../../static/imgs/img95.png"/>
+          <!--待审核-->
+        </div>
       </div>
-      <div class="body">
-        <h2>¥158</h2>
-        <h4>退款金额</h4>
-        <p>退款金额将在3个工作日前原路返回</p>
+
+      <div class="orderd-hd">
+        <h4>上海中青年市民健康跑活动系列</h4>
+        <dl>
+          <dt>2018-09-16 10:00～14:00 </dt>
+          <dd>上海市东方明珠广场</dd>
+        </dl>
       </div>
+      <div class="orderd-bd">
+        <p>姓名：韩琛</p>
+        <p>手机：138887888128</p>
+      </div>
+
+    </div>
+    <div class="orderd-f">
+      购票时间：2018-09-18 13:5
+      <p style="float: right;margin-right: 25px;font-size: 14px;color: #333;font-weight: bold" @click="goRefund">取消</p>
     </div>
   </div>
 </template>
@@ -28,16 +48,20 @@
   import FooterBar from '../components/FooterBar.vue'
   import TopBar from '../components/TopBar.vue'
   export default {
-    name: 'Refund',
+    name: 'Aidcard',
     data () {
       return {
         logonData: {},
         show2: false,
+        radio2: 2
       }
     },
     methods: {
-      changePwd: function () {
-        this.showChangePwdPanel = true
+      goRefund() {
+        this.$router.push({path: '/refund'})
+      },
+      goAppoin() {
+        this.$router.push({path: '/appointment'})
       },
       prev(){
         this.$router.go(-1)
@@ -74,8 +98,7 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 10px;
-    border-bottom: 1px solid #e0e0e0;
-    align-items: center;
+    border-bottom: 1px dashed #e0e0e0;
 
   }
   .or-box{
@@ -100,38 +123,6 @@
     font-size: 16px;
     text-align: center;
   }
-  .aid-box1{
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid #e0e0e0;
-    width: 100%;
-    padding-bottom: 15px;
-  }
-  .aid-text1{
-    font-size: 24px;
-    color: #333;
-    font-weight: bold;
-    line-height: 35px;
-  }
-  .aid-text2{
-    font-size: 16px;
-    color: #999;
-    line-height: 35px;
-  }
-  .aid-text3{
-    font-size: 18px;
-    color: #999;
-    line-height: 35px;
-    font-weight: bold;
-    margin-top: 7px;
-  }
-  .aid-text4{
-    font-size: 16px;
-    color: #333;
-    line-height: 35px;
-    font-weight: bold;
-  }
   .box-content1 div{
     display: flex;
     flex-direction: row;
@@ -145,17 +136,6 @@
     font-weight:400;
     font-style:normal;
     color:#CCC;
-  }
-  .pro-bottom{
-    height: auto;
-    line-height: 35px;
-    width: 65%;
-    margin: auto;
-    border-radius: 35px;
-    padding: 10px;
-    background: #6f7180;
-    margin-top:15px;
-    margin-bottom: 15px;
   }
   .pro-bottom p{
     text-align: center;

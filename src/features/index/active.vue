@@ -5,11 +5,11 @@
       <div class="center">
         <p>活动</p>
       </div>
-    </div>
-    <div class="actlist">
+    </div>style="margin-bottom: 80px;"
+    <div class="actlist" >
       <ul>
-        <li>
-          <a href="#">
+        <li @click="goDetail">
+          <!--<a href="#">-->
             <div class="head">
               <img src="../../../static/imgs/img79.jpg"/>
             </div>
@@ -25,7 +25,7 @@
               </dl>
               <label class="c_green">¥158</label>
             </div>
-          </a>
+          <!--</a>-->
         </li>
         <li>
           <a href="#">

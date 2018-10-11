@@ -1,38 +1,164 @@
 <template>
-  <div class="home-box">
-    <TopBar title="我的保单"/>
-    <div class="box-top box-top1">
-      <div class="box-top2 " :class="{'box-top2j': navflag === 1}" @click="searchList(0)">
-        <p class="se-title3">全部</p>
+  <div class="layout ">
+    <div class="header header-bg">
+      <div class="left">
+        <div @click="prev" class="back"></div>
       </div>
-      <div class="box-top2" :class="{'box-top2j': navflag === 2}" @click="searchList(1)">
-        <p class="se-title3">保障中</p>
-      </div>
-      <div class="box-top2" :class="{'box-top2j': navflag === 3}" @click="searchList(2)">
-        <p class="se-title3">已过期</p>
+      <div class="center">
+        <p>我的保单</p>
       </div>
     </div>
-    <div class="box-top">
-      <p class="se-title1">保单号：<span>4678345734864</span></p>
-      <p class="se-title2">即将到期</p>
-    </div>
-    <div class="pol-content">
-      <p>乐享晚年-长护险（2018）</p>
-      <p>被保人：赵云</p>
-      <p>保障期限：2018-09-17 零时至 2018-10-11</p>
-    </div>
-    <div class="box-top box-topj">
-      <p class="se-title4">保费：230.00元</p>
-    </div>
-    <div class="box-top box-topj">
-      <div class="pol-content1">
-        <p>再爆一年</p>
+    <div class="myorder">
+      <div class="head g-tab-hd">
+        <ul>
+          <li class="on"><a href="#">全部</a></li>
+          <li><a href="#">保障中</a></li>
+          <li><a href="#">已过期</a></li>
+        </ul>
       </div>
-      <div class="pol-content1">
-        <p>再爆一年</p>
+      <div class="body g-tab-bd">
+        <ul>
+          <li>
+            <div class="body-hd">
+              <div class="left">
+                保单号：9200100010608429
+              </div>
+              <div class="right">
+                <font class="c_red">即将到期</font>
+              </div>
+            </div>
+            <div class="body-bd">
+              <p>乐享晚年-长护险（2018）<br/>
+                被保人：赵云<br/>
+                保障期限：2018-09-17 零时至 2018-10-11
+              </p>
+              <label>保费：<font class="c_green">¥158</font></label>
+            </div>
+            <div class="body-ft">
+              <a href="#">再保一年</a>
+              <a href="#">自助理赔</a>
+              <a href="#" class="on">保单信息</a>
+            </div>
+          </li>
+          <li>
+            <div class="body-hd">
+              <div class="left">
+                保单号：9200100010608429
+              </div>
+              <div class="right">
+                <font class="c_red">即将到期</font>
+              </div>
+            </div>
+            <div class="body-bd">
+              <p>乐享晚年-长护险（2018）<br/>
+                被保人：赵云<br/>
+                保障期限：2018-09-17 零时至 2018-10-11
+              </p>
+              <label>保费：<font class="c_green">¥158</font></label>
+            </div>
+            <div class="body-ft">
+              <a href="#">再保一年</a>
+              <a href="#">自助理赔</a>
+              <a href="#" class="on">保单信息</a>
+            </div>
+          </li>
+          <li>
+            <div class="body-hd">
+              <div class="left">
+                保单号：9200100010608429
+              </div>
+              <div class="right">
+                <font >已过期</font>
+              </div>
+            </div>
+            <div class="body-bd">
+              <p>乐享晚年-长护险（2018）<br/>
+                被保人：赵云<br/>
+                保障期限：2018-09-17 零时至 2018-10-11
+              </p>
+              <label>保费：<font class="c_green">¥158</font></label>
+            </div>
+            <div class="body-ft">
+              <a href="#">再保一年</a>
+              <a href="#">自助理赔</a>
+              <a href="#" class="on">保单信息</a>
+            </div>
+          </li>
+          <li class="on">
+            <div class="body-hd">
+              <div class="left">
+                保单号：9200100010608429
+              </div>
+
+            </div>
+            <div class="body-bd">
+              <p>乐享晚年-长护险（2018）<br/>
+                被保人：赵云<br/>
+                保障期限：2018-09-17 零时至 2018-10-11
+              </p>
+              <label>保费：<font class="c_green">¥158</font></label>
+            </div>
+            <div class="body-ft">
+              <a href="#">再保一年</a>
+              <a href="#">自助理赔</a>
+              <a href="#" class="on">保单信息</a>
+            </div>
+          </li>
+        </ul>
       </div>
-      <div class="pol-content1">
-        <p>再爆一年</p>
+
+      <div class="body g-tab-bd" style="display: none;">
+        <ul>
+
+          <li class="on">
+            <div class="body-hd">
+              <div class="left">
+                保单号：9200100010608429
+              </div>
+
+            </div>
+            <div class="body-bd">
+              <p>乐享晚年-长护险（2018）<br/>
+                被保人：赵云<br/>
+                保障期限：2018-09-17 零时至 2018-10-11
+              </p>
+              <label>保费：<font class="c_green">¥158</font></label>
+            </div>
+            <div class="body-ft">
+              <a href="#">再保一年</a>
+              <a href="#">自助理赔</a>
+              <a href="#" class="on">保单信息</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="body g-tab-bd" style="display: none;">
+        <ul>
+          <li>
+            <div class="body-hd">
+              <div class="left">
+                保单号：9200100010608429
+              </div>
+              <div class="right">
+                <font >已过期</font>
+              </div>
+            </div>
+            <div class="body-bd">
+              <p>乐享晚年-长护险（2018）<br/>
+                被保人：赵云<br/>
+                保障期限：2018-09-17 零时至 2018-10-11
+              </p>
+              <label>保费：<font class="c_green">¥158</font></label>
+            </div>
+            <div class="body-ft">
+              <a href="#">再保一年</a>
+              <a href="#">自助理赔</a>
+              <a href="#" class="on">保单信息</a>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -51,6 +177,9 @@
     methods: {
       searchList(v){
         this.navflag = v + 1
+      },
+      prev(){
+        this.$router.go(-1)
       }
     },
     mounted: function () {},

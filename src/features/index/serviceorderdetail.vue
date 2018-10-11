@@ -1,49 +1,103 @@
 <template>
-  <div class="home-box">
-    <TopBar title="订单详情"/>
-    <div class="product-box">
-      <div class="box-top">
-        <p class="se-title4">免费票</p>
-        <div class="pol-content1">
-          <p>有效</p>
-        </div>
+  <div class="layout servbg pb120">
+    <div class="header">
+      <div class="left">
+        <div @click="prev" class="back"></div>
       </div>
-      <div class="for-box">
-        <div class="or-box">
-        </div>
-        <p class="or-text">验票码：12326872346329</p>
+      <div class="center">
+        <p>保健养生</p>
       </div>
-      <div class="for-box">
-        <p class="or-text" style="font-size: 18px;font-weight: bold">活动：活动标题活动标题活动标题活动标题活动标题活动标题</p>
-        <p class="or-text">时间：9月18日 10:10 至10月10日 17:00</p>
-        <p class="or-text">地点：上海市普陀区丹巴路55号</p>
-      </div>
-      <div class="for-box">
-        <p class="or-text">姓名：韩琛</p>
-        <p class="or-text">手机：138887888128</p>
+      <div class="right">
+
       </div>
     </div>
-    <div class="box-top box-topj">
-      <p class="se-title4">购票时间：2018-09-18 13:50</p>
-      <yd-button color="#fff" @click.native="show2 = true" class="se-title4" style="color: #333;font-weight: bold;background: rgba(0,0,0,0)">退票</yd-button>
-
-    </div>
-    <yd-popup  v-model="show2" position="bottom" height="45%">
-      <div style="background: rgb(242,242,242);height: 100%">
-        <div class="box-bottom">
-          <p class="se-title4" style="flex: 14;text-align: center">退票</p>
-          <yd-icon size="25px" style="flex: 1;text-align: right" name="error-outline" @click.native="show2 = false"></yd-icon>
+    <div class="servpage">
+      <div class="head">
+        <div class="head-l">
+          <img src="../../../static/imgs/img77.png"/>
         </div>
-        <yd-radio-group v-model="radio2" class="or-box1">
-          <p class="or-text1">请选择一个退票理由</p>
-          <yd-radio class="or-box2" val="1">啦啦啦</yd-radio>
-          <yd-radio class="or-box2" val="2">啊啊啊</yd-radio>
-          <yd-radio class="or-box2" val="3">喔喔喔</yd-radio>
-        </yd-radio-group>
-        <div @click="goRefund"><yd-button size="large" type="disabled" >确认退票</yd-button></div>
+        <div class="head-r">
+          <h2>
+            <span>李艾美 </span>
+            <i class="ico-star"></i>
+            <i class="ico-star"></i>
+            <i class="ico-star"></i>
+            <i class="ico-star"></i>
+            <i class="ico-star"></i>
+          </h2>
+          <h4>
+            <span>30岁</span>
+            <span>|</span>
+            <span>上海</span>
+            <span>|</span>
+            <span>高级按摩师</span>
+          </h4>
+          <p>专业按摩师上门为您进行深度的中医按摩服务，缓解疲劳、身体病痛，改善健康状况。</p>
+        </div>
       </div>
-
-    </yd-popup>
+      <div class="head-f">
+        <div class="bd">
+          <div class="tit">
+            <div class="left">
+              <p>全身推拿理疗</p>
+            </div>
+            <div class="right">
+              <font class="c_green">¥158</font>/60分钟
+            </div>
+          </div>
+          <div class="conter">
+            <p>深度全身理疗是由点到专业理疗医师团队悉心打造的上门按摩服务项目，专业按摩师上门为您进行的中医按摩服务，缓解疲劳、身体病痛，改善健康状况</p>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="hd">
+          <p>服务介绍</p>
+        </div>
+        <div class="bd">
+          <h4 class="c_green">针对部位</h4>
+          <p>对取颊脂垫位置的判定，结合每叶有独立的血管来源，形成包膜下血管网。颊脂肪垫有填充、滑动、保护和缓冲作用。</p>
+        </div>
+        <div class="bd">
+          <h4 class="c_green">调理急症</h4>
+          <p>对取颊脂垫位置的判定，结合每叶有独立的血管来源，形成包膜下血管网。颊脂肪垫有填充、滑动、保护和缓冲作用。</p>
+        </div>
+      </div>
+      <div class="body">
+        <div class="hd">
+          <p>服务内容</p>
+        </div>
+        <div class="bd">
+          <ul>
+            <li>1、便捷、省心  我们为您做了大量的前期筛选、审核工作；</li>
+            <li>2、成本低，效率高  我们拥有经验丰富的专业团队、海量的项目信息、优质的投资客户群；</li>
+            <li>3、严谨、高效的对接流程  严格的信息审核、资料递交、项目价值评估、有力的合同保障、高效的对接执行力。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="body">
+        <div class="hd">
+          <p>预约须知</p>
+        </div>
+        <div class="bd">
+          <dl>
+            <dt>尊敬的顾客，在购买前请仔细阅读以下条款</dt>
+            <dd>1、便捷、省心  我们为您做了大量的前期筛选、审核工作；</dd>
+            <dd>2、成本低，效率高  我们拥有经验丰富的专业团队、海量的项目信息、优质的投资客户群；</dd>
+            <dd>3、严谨、高效的对接流程  严格的信息审核、资料递交、项目价值评估、有力的合同保障、高效的对接执行力。</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="foot">
+        <div class="foot-l">
+          <strong class="c_green">¥158</strong>/60分钟
+        </div>
+        <div class="foot-r">
+          <!--<a href="#" class="foot-btn">立即预约</a>-->
+          <div @click="goAppoin" class="foot-btn" style="margin-top: 0;margin-left: 0;text-align: center">立即预约</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -61,6 +115,12 @@
     methods: {
       goRefund() {
         this.$router.push({path: '/refund'})
+      },
+      goAppoin() {
+        this.$router.push({path: '/appointment'})
+      },
+      prev(){
+        this.$router.go(-1)
       }
     },
     mounted: function () {},

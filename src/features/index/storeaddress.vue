@@ -1,68 +1,53 @@
 <template>
-  <div class="home-box">
-    <TopBar title="门店地址"/>
-    <div class="product-box-son" style="border-bottom: 0;padding-bottom: 0;">
-      <div style="display: flex;flex-direction: row">
-        <img  style="height: 20px;width: 20px;margin-top: 12px;margin-left: 15px;" src="../../assets/image/icon.png">
-        <p class="pro-text3 pro-text3j">
-          上海市普陀区丹巴路55号
-        </p>
+  <div class="layout">
+    <div class="header actaddr-header">
+      <div class="left">
+        <div @click="prev" class=" back back1"></div>
+      </div>
+
+    </div>
+    <div class="actaddr">
+      <div class="actaddr-vw">
+        <img src="../../../static/imgs/img83.jpg"/>
+        <label></label>
+      </div>
+      <div class="actaddr-hd">
+        <dl>
+          <dt><i></i></dt>
+          <dd class="d1">上海市东方明珠广场</dd>
+          <dd class="d2">021-21512230</dd>
+        </dl>
+      </div>
+      <div class="actaddr-bd">
+        <ul>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img66.png"/>
+              </div>
+              <div class="txt">
+                <h4>2018市民健康跑步活动</h4>
+                <p>2018-09-16 10:00～14:00 </p>
+                <label class="c_green">免费</label>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <div class="img">
+                <img src="../../../static/imgs/img66.png"/>
+              </div>
+              <div class="txt">
+                <h4>2018市民健康跑步活动</h4>
+                <p>2018-09-16 10:00～14:00 </p>
+                <label class="c_green">免费</label>
+              </div>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="product-box-son" style="padding-top: 0;">
-      <div style="display: flex;flex-direction: row">
-        <img  style="height: 20px;width: 20px;margin-top: 12px;margin-left: 15px;" src="../../assets/image/time.png">
-        <p class="pro-text3 pro-text3j">
-          021-21512230
-        </p>
-      </div>
-    </div>
-    <div class="product-box-son">
-      <div style="display: flex;flex-direction: row">
-        <div style="height: 35px;width: 5px;background: #e0e0e0;margin-left: 20px;"></div>
-        <p class="pro-text3 pro-text3j">
-          活动列表
-        </p>
-      </div>
-    </div>
-    <div class="box-content" style="margin: 0;">
-      <!--<div class="box-imgb">-->
-        <img class="box-imgb" src="http://static.ydcss.com/uploads/ydui/2.jpg">
-      <!--</div>-->
-      <div class="box-content1">
-        <p style="font-size: 16px;color: #999;margin-top: 5px;font-weight: bold">
-          活动标题 活动标题 活动标题 活动标题 活动标题
-        </p>
-        <p class="box-text">
-          上海市普陀区丹巴路55号
-        </p>
-        <div>
-          <p style="font-size: 14px;color: #999;">9月18日 开始</p>
-          <p style="font-size: 14px;color: #999;">
-            免费
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="box-content" style="margin: 5px 0;">
-      <!--<div class="box-imgb">-->
-      <img class="box-imgb" src="http://static.ydcss.com/uploads/ydui/2.jpg">
-      <!--</div>-->
-      <div class="box-content1">
-        <p style="font-size: 16px;color: #999;margin-top: 5px;font-weight: bold">
-          活动标题 活动标题 活动标题 活动标题 活动标题
-        </p>
-        <p class="box-text">
-          上海市普陀区丹巴路55号
-        </p>
-        <div>
-          <p style="font-size: 14px;color: #999;">9月18日 开始</p>
-          <p style="font-size: 14px;color: #999;">
-            免费
-          </p>
-        </div>
-      </div>
-    </div>
+
   </div>
 </template>
 <script>
@@ -78,6 +63,9 @@
     methods: {
       changePwd: function () {
         this.showChangePwdPanel = true
+      },
+      prev(){
+        this.$router.go(-1)
       }
     },
     mounted: function () {},

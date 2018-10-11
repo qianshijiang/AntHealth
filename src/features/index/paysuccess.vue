@@ -1,10 +1,20 @@
 <template>
-  <div class="home-box">
-    <TopBar title="支付"/>
-    <p style="font-size: 32px;font-weight: bold;color: #666;text-align: center;line-height: 250px;">
-      恭喜你，支付成功！
-    </p>
+  <div class="layout ">
+    <div class="header">
+      <div class="left">
+        <div @click="prev"class="back"></div>
+      </div>
+      <div class="center">
+        <p>保健养生</p>
+      </div>
+      <div class="right">
 
+      </div>
+    </div>
+    <div class="payyes" @click="linshi">
+      <img src="../../../static/imgs/img99.png"/>
+      <p>恭喜，支付成功</p>
+    </div>
   </div>
 </template>
 <script>
@@ -21,6 +31,12 @@
     methods: {
       goActiveOrder() {
         this.$router.push({path: '/activeorder'})
+      },
+      linshi() {
+        this.$router.push({path: '/serviceorder'})
+      },
+      prev(){
+        this.$router.go(-1)
       }
     },
     mounted: function () {},

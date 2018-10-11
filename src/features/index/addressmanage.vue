@@ -1,61 +1,58 @@
 <template>
-  <div class="home-box">
-    <TopBar title="地址管理"/>
-
-    <div class="box-top">
-      <yd-preview :buttons="btns" style="padding-top:10px; ">
-        <yd-preview-item>
-          <div slot="left" style="color: #333">杨大哥   <span style="margin-left: 15px;">15025154119</span></div>
-          <div slot="left"></div>
-        </yd-preview-item>
-        <yd-preview-item class="add-box">
-          <div slot="left" class="add-text">云南省昆明市。。。。。</div>
-          <div slot="left"></div>
-        </yd-preview-item>
-        <yd-preview-item class="add-box1">
-          <div slot="left" class="add-box2">
-            <div class="add-box3">
-              <yd-icon name="checkoff" size="1rem" color="#fff" class="add-box4"></yd-icon></div>
-            <span class="add-text1">设置默认</span>
+  <div class="layout ">
+    <div class="header">
+      <div class="left">
+        <div @click="prev" class="back"></div>
+      </div>
+      <div class="center">
+        <p>地址管理</p>
+      </div>
+      <div class="right">
+        <p @click="newAdderess" style="display: block; color: #fff; font-size: 0.28rem;">新建地址</p>
+      </div>
+    </div>
+    <div class="myaddr">
+      <ul>
+        <li>
+          <div class="body">
+            <h4>王力宏<small>13888860877</small></h4>
+            <p>上海市静安区延长中路801号A12室</p>
+          </div>
+          <div class="foot">
+            <div class="foot-l">
+              <label class="radio_box">
+                <input type="radio" id="radio_1" name="radio" checked="">
+                <label for="radio_1"></label>
+                <em>设置默认</em>
+              </label>
             </div>
-          <div slot="left"></div>
-          <div slot="right" class="add-box5">
-            <div class="add-text2"><yd-icon style="margin-right: 5px;" size="1.5rem" name="compose"></yd-icon><span  style="font-size: 14px;">编辑</span></div>
-            <div style="color: #666"><yd-icon  size="1.5rem"  name="delete"></yd-icon><span style="font-size: 14px;">删除</span></div>
+            <div class="foot-r">
+              <a href="#" class="edit">编辑</a>
+              <a href="#" class="del">删除</a>
+            </div>
           </div>
-        </yd-preview-item>
-      </yd-preview>
-    </div>
-    <div class="box-top">
-      <yd-preview :buttons="btns" style="padding-top:10px; ">
-        <yd-preview-item>
-          <div slot="left" style="color: #333">杨大哥   <span style="margin-left: 15px;">15025154119</span></div>
-          <div slot="left"></div>
-        </yd-preview-item>
-        <yd-preview-item class="add-box">
-          <div slot="left" class="add-text">云南省昆明市。。。。。</div>
-          <div slot="left"></div>
-        </yd-preview-item>
-        <yd-preview-item class="add-box1">
-          <div slot="left" class="add-box2">
-            <div class="add-box3 add-box3j">
-              <yd-icon name="checkoff" size="1rem" style="color:#fff;display:none" class="add-box4"></yd-icon></div>
-            <span class="add-text1">设置默认</span>
+        </li>
+        <li>
+          <div class="body">
+            <h4>王力宏<small>13888860877</small></h4>
+            <p>上海市静安区延长中路801号A12室</p>
           </div>
-          <div slot="left"></div>
-          <div slot="right" class="add-box5">
-            <div class="add-text2"><yd-icon style="margin-right: 5px;" size="1.5rem" name="compose"></yd-icon><span  style="font-size: 14px;">编辑</span></div>
-            <div style="color: #666"><yd-icon  size="1.5rem"  name="delete"></yd-icon><span style="font-size: 14px;">删除</span></div>
+          <div class="foot">
+            <div class="foot-l">
+              <label class="radio_box">
+                <input type="radio" id="radio_2" name="radio">
+                <label for="radio_2"></label>
+                <em>设置默认</em>
+              </label>
+            </div>
+            <div class="foot-r">
+              <a href="#" class="edit">编辑</a>
+              <a href="#" class="del">删除</a>
+            </div>
           </div>
-        </yd-preview-item>
-      </yd-preview>
+        </li>
+      </ul>
     </div>
-
-
-    <div class="pol-content">
-
-    </div>
-    <yd-button size="large" type="danger" style="position: absolute;bottom:0;">+ 新建地址</yd-button>
   </div>
 </template>
 <script>
@@ -80,6 +77,12 @@
     methods: {
       result1(ret) {
         this.model1 = ret.itemName1 + ' ' + ret.itemName2 + ' ' + ret.itemName3;
+      },
+      prev(){
+        this.$router.go(-1)
+      },
+      newAdderess(){
+        this.$router.push({path: '/addressmanage1'})
       }
     },
     mounted: function () {},

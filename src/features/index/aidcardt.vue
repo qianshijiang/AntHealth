@@ -1,81 +1,87 @@
 <template>
-  <div class="home-box" style="background: #fff;">
-    <TopBar title="医疗急救卡"/>
-    <div class="product-box">
-      <div class="aid-box1">
-        <p class="aid-text1">
-          酱爆茄子
-          <span style="font-size: 16px;margin-left: 15px;">男</span>
-        </p>
-        <p class="aid-text2">
-          血型： <span style="font-size: 16px;font-weight: bold;color:#333">男</span>
-        </p>
-        <p class="aid-text2">
-          身高： <span style="font-size: 16px;font-weight: bold;color:#333">169cm</span>
-        </p>
-        <p class="aid-text2">
-          体重： <span style="font-size: 16px;font-weight: bold;color:#333">80kg</span>
-        </p>
-        <p class="aid-text2">
-         紧急联系人电话： <span style="font-size: 16px;font-weight: bold;color:#333">1602716475</span>
-        </p>
+  <div class="layout h-bg ">
+
+    <div class="header onetouch-head">
+      <div class="left">
+        <div @click="prev" class="back back2"></div>
       </div>
-      <div class="aid-box1">
-        <p class="aid-text3">
-          医疗状况备注
-        </p>
-        <p class="aid-text4">
-        未列名
-      </p>
-      </div>
-      <div class="aid-box1">
-        <p class="aid-text3">
-          过敏反应备注
-        </p>
-        <p class="aid-text4">
-          青霉素过敏
-        </p>
-      </div>
-      <div class="aid-box1">
-        <p class="aid-text3">
-          在使用的药物
-        </p>
-        <p class="aid-text4">
-          未列名
-        </p>
-      </div>
-      <div class="aid-box1">
-        <p class="aid-text3" style="font-size: 16px;">
-          急救地址
-        </p>
-        <p class="aid-text4" style="font-weight: normal">
-          上海市静安区延长中路801号A12室
-        </p>
+      <div class="center">
+        <p>一键急救</p>
       </div>
     </div>
-    <div style="padding: 10px;justify-content: center;width: 100%;text-align: center">
-      <yd-checkbox val="1" shape="circle">已阅读并且同意《用户服务协议》</yd-checkbox>
+
+    <div class="onetouch">
+      <div class="head">
+        <div class="head-hd">
+          <div class="img">
+            <img src="../../../static/imgs/img38.png"/>
+            <sub>女</sub>
+          </div>
+          <div class="txt">
+            <h4>王力宏</h4>
+            <p class="tel">13868937846</p>
+          </div>
+        </div>
+        <div class="head-bd">
+          <ul>
+            <li>
+              <h4>168</h4>
+              <p>身高(cm)</p>
+            </li>
+            <li>
+              <h4>B</h4>
+              <p>血型</p>
+            </li>
+            <li>
+              <h4>49</h4>
+              <p>体重(kg)</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="body">
+        <ul>
+          <li>
+            <div class="body-hd">
+              医疗状况备注
+            </div>
+            <div class="body-bd">
+              <p>该患者淋巴结肿大，有明显肿块，建议多锻炼</p>
+            </div>
+          </li>
+          <li>
+            <div class="body-hd">
+              过敏反应备注
+            </div>
+            <div class="body-bd">
+              <p class="c_red">青霉素过敏</p>
+            </div>
+          </li>
+          <li>
+            <div class="body-hd">
+              在使用的药物
+            </div>
+            <div class="body-bd">
+              <p>为列明</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="body-f">
+        <span>上海市静安区延长中路801号A12室</span>
+      </div>
+      <div class="foot">
+        <a href="#" style="text-align: center">立即急救</a>
+      </div>
     </div>
-    <yd-button @click.native="show1 = true" class="pro-bottom">
-      <p>
-        立即急救
-      </p>
-    </yd-button>
-    <yd-popup v-model="show1" position="center" width="96%" style="margin:auto;border:1px solid #303133;border-radius: 8px;">
-      <div style="background-color:#fff;border:1px solid #303133;border-radius: 8px;padding: 25px;">
-        <p style="font-weight: bold;font-size: 36px;color: #666;line-height: 35px;text-align: center">
-         接入成功
-        </p>
-      <div style="display: flex;padding: 15px 40px;background: rgb(242,242,242);border:1px solid #e0e0e0;border-radius: 25px;margin: 25px auto;">
-        <p style="text-align: center;font-size: 14px;color: #333;">
-          救护员电话：13867543211
-        </p>
-      </div>
-        <p style="text-align: center;color: #999;" >
-          救护员 <span style="color: #333">白求恩</span>飞速赶往<span style="color: #333">新华园A栋101室中</span>
-        </p>
-      </div>
-    </yd-popup>
+    <div class="onetouch-f">
+      <label class="check_box">
+        <input type="checkbox" id="check_1" checked="">
+        <label for="check_1"></label>
+        <em>已阅读并同意</em>
+        <a href="#">《用户服务协议》</a>
+      </label>
+    </div>
   </div>
 </template>
 <script>
@@ -92,6 +98,9 @@
     methods: {
       changePwd: function () {
         this.showChangePwdPanel = true
+      },
+      prev(){
+        this.$router.go(-1)
       }
     },
     mounted: function () {},

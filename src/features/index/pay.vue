@@ -1,42 +1,58 @@
 <template>
-  <div class="home-box">
-    <TopBar title="支付"/>
-    <div class="product-box">
-      <div class="for-box" style="border: 0;">
-        <yd-icon size="35px" name="checkoff"></yd-icon>
-        <p class="or-text" style="font-size: 16px;font-weight: bold;color:#999">支付成功</p>
-        <p class="or-text">本次支付总额</p>
-        <p class="or-text" style="font-size: 18px;font-weight: bold;color:#666">￥0.00</p>
+  <div class="layout ">
+    <div class="header">
+      <div class="left">
+        <div @click="prev" class="back"></div>
       </div>
-      <div class="for-box" >
-        <p class="pay-text">
-          购票清单
-        </p>
-        <div class="pay-box1" style="border-bottom: 1px solid #e0e0e0;">
-          <p class="or-text">免费票</p>
-          <p class="or-text pay-text1">
-            <span>x1</span>
-            <span style="margin-left: 10px;">0</span>
-          </p>
-        </div>
-        <div class="pay-box1" style="justify-content: flex-end;padding-bottom: 0">
-          <p class="or-text pay-text1">
-            <span style="color: #333 ">小计：</span>
-            <span style="margin-left: 10px;">0</span>
-          </p>
-        </div>
+      <div class="center">
+        <p>保健养生</p>
+      </div>
+      <div class="right">
+
       </div>
     </div>
-    <div class="product-box">
-      <div class="for-box" style="border: 0;">
-        <p class="or-text">出票成功</p>
-        <p class="or-text" style="font-size: 16px;color:#999">已放入[我的预约]中</p>
-      </div>
-      <div class="pay-box2" @click="goActiveOrder">
-        <p>
-         立即查看
-        </p>
-      </div>
+    <div class="paytype">
+      <form action="" method="post">
+        <div class="head">
+          支付剩余时间：<label>12</label><span>:</span><label>00</label>
+        </div>
+        <div class="body">
+          <ul>
+            <li>
+              <label class="radio_box">
+                <div class="img">
+                  <img src="../../../static/imgs/img104.png"/>
+                </div>
+                <div class="txt">
+                  微信支付
+                </div>
+                <div class="chk ">
+                  <input type="radio" id="radio_1" name="radio" checked="">
+                  <label for="radio_1"></label>
+                </div>
+              </label>
+
+            </li>
+            <li>
+              <label class="radio_box">
+                <div class="img">
+                  <img src="../../../static/imgs/img105.png"/>
+                </div>
+                <div class="txt">
+                  银行卡支付
+                </div>
+                <div class="chk ">
+                  <input type="radio" id="radio_2" name="radio">
+                  <label for="radio_2"></label>
+                </div>
+              </label>
+            </li>
+          </ul>
+        </div>
+        <div class="foot foot-fixd" @click="goPayshure">
+          <p class="foot-btn" style="margin-top: 7px;margin-left: 27%;">确认支付</p>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -54,6 +70,12 @@
     methods: {
       goActiveOrder() {
         this.$router.push({path: '/activeorder'})
+      },
+      goPayshure() {
+        this.$router.push({path: '/paysuccess'})
+      },
+      prev(){
+        this.$router.go(-1)
       }
     },
     mounted: function () {},

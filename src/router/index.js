@@ -16,6 +16,7 @@ import Register from '@/features/register/register'
 import Aidcardt from '@/features/index/aidcardt'
 import Myinfo from '@/features/index/myinfo'
 import Addressmanage from '@/features/index/addressmanage'
+import Addressmanage1 from '@/features/index/addressmanage1'
 import Serviceorder from '@/features/index/serviceorder'
 import Serviceorderdetail from '@/features/index/serviceorderdetail'
 import Refund from '@/features/index/refund'
@@ -26,8 +27,11 @@ import Appointment from '@/features/index/appointment'
 import Payshure from '@/features/index/payshure'
 import Paysuccess from '@/features/index/paysuccess'
 import Headinfodetail from '@/features/index/headinfodetail'
+import Activeorderdetail from '@/features/index/activeorderdetail'
 import Oldbai from '@/features/index/oldbai'
+import Lookall from '@/features/index/lookall'
 import EnjoyAge from '@/features/enjoyage/enjoyage'
+import Coupon from '@/features/index/coupon'
 
 Vue.use(Router)
 
@@ -114,6 +118,11 @@ const router = new Router({
       component: Addressmanage
     },
     {
+      path: '/addressmanage1',
+      name: 'addressmanage1',
+      component: Addressmanage1
+    },
+    {
       path: '/serviceorder',
       name: 'serviceorder',
       component: Serviceorder
@@ -177,6 +186,21 @@ const router = new Router({
       path: '/oldbai',
       name: 'oldbai',
       component: Oldbai
+    },
+    {
+      path: '/activeorderdetail',
+      name: 'activeorderdetail',
+      component: Activeorderdetail
+    },
+    {
+      path: '/lookall',
+      name: 'lookall',
+      component: Lookall
+    },
+    {
+      path: '/coupon',
+      name: 'coupon',
+      component: Coupon
     }
   ]
 });
