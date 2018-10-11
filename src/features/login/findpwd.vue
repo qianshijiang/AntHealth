@@ -15,12 +15,12 @@
         <ul>
           <li>
             <label><img src="../../../static/imgs/img13.png"/></label>
-            <input type="number" class="txt" v-model="findForm.name" placeholder="请输入手机号" @change="checkName"/>
+            <input type="number" style="width:120px;" class="txt" v-model="findForm.name" placeholder="请输入手机号" @blur="checkName"/>
+            <p class="messagesty">{{messagename}}</p>
           </li>
-          <p class="messagesty">{{messagename}}</p>
           <li>
             <label><img src="../../../static/imgs/img35.png"/></label>
-            <input type="text" style="width: 160px;" class="txt" v-model="findForm.codeVal" placeholder="短信验证码" @change="checkCode"/>
+            <input type="text" style="width: 100px;" class="txt" v-model="findForm.codeVal" placeholder="短信验证码" @blur="checkCode"/>
             <yd-sendcode class="sendcode" slot="right"
                          v-model="codeStart"
                          init-str="点击获取"
@@ -28,18 +28,20 @@
                          run-str="{%s}秒"
                          reset-str="重新获取"
             ></yd-sendcode>
+            <p class="messagesty">{{messagecode}}</p>
           </li>
-          <p class="messagesty">{{messagecode}}</p>
+
           <li>
             <label><img src="../../../static/imgs/img36.png"/></label>
-            <input type="type" v-model="findForm.pwd" class="txt" placeholder="请输入密码" v-if="seePwdModel" @change="checkPwd"/>
-            <input type="password" v-model="findForm.pwd" class="txt" placeholder="请输入密码" v-else @change="checkPwd"/>
+            <input type="type" v-model="findForm.pwd" style="width: 120px;" class="txt" placeholder="请输入密码" v-if="seePwdModel" @blur="checkPwd"/>
+            <input type="password" v-model="findForm.pwd" style="width: 120px;" class="txt" placeholder="请输入密码" v-else @blur="checkPwd"/>
             <button type="button" class="eye" :class="{'eye-on':!seePwdModel}" @click="displayorHidePwd"></button>
+            <p class="messagesty">{{messagepwd}}</p>
           </li>
-          <p class="messagesty">{{messagepwd}}</p>
+
         </ul>
-        <div class="foot">
-          <input type="submit" value="确 认" />
+        <div class="foot" @click="submit">
+          <div class="find">确 认</div>
         </div>
       </form>
     </div>
@@ -70,69 +72,80 @@
       }
     },
     methods: {
-      submit: function () {
-        this.$refs['findForm'].validate((valid) => {
-          if (valid) {
-            let self = this
-            let params = {
-              'name': this.findForm.name,
-              'pwd': this.findForm.pwd,
-              'codeVal':this.findForm.codeVal
-            }
-            self.$router.replace({path: '/login'});
-            self.$http.post('/api/mobileLogin/login', params)
-              .then(function (response) {
-                console.log(JSON.stringify(response))
-                if (response.data.result) {
-                  sessionStorage.setItem('token', response.data.result.mobileToken)
-                  sessionStorage.setItem('setLogonData', JSON.stringify(response.data.result))
-                  self.$router.replace({path: '/index/staff/list'})
-                }
+      submit () {
+        let self = this
+        if(!this.checkName() || !this.checkPwd || !this.checkCode){
+          return
+        }
+        let params = {
+          'phone': this.findForm.name,
+          'password': this.findForm.pwd,
+          'code':this.findForm.codeVal
+        }
+        self.$http.post('/api/retrieve', params,{ emulateJSON: true })
+          .then(function (response) {
+            console.log(JSON.stringify(response))
+            if (response.data.status === true) {
+              // sessionStorage.setItem('token', response.data.result.mobileToken)
+              // sessionStorage.setItem('setLogonData', JSON.stringify(response.data.result))
+              self.$router.replace({path: '/login'})
+            }else{
+              this.$dialog.toast({
+                mes: response.body.msg,
+                timeout: 1500
               })
-            // .catch(function (error) {
-            //   alert(2)
-            //   console.log(error)
-            // })
-          }
+            }
+          })
+        .catch(function (error) {
+          console.log(error)
         })
       },
       //显示或隐藏密码
       displayorHidePwd(){
         let _this = this;
         if(_this.seePwdModel){
-          _this.seePwdModel = false;
+          _this.seePwdModel = false
         }else{
-          _this.seePwdModel = true;
+          _this.seePwdModel = true
         }
       },
       //名字格式校验
       checkName(){
         if (this.findForm.name === '') {
-          this.messagename='请输入手机号码';
+          this.messagename='请输入手机号码'
+          return false
         } else if (!/^[1][3,4,5,7,8][0-9]{9}$/.test(this.findForm.name)) {
-          this.messagename='请输入正确的11位手机号码';
+          this.messagename='请输入正确的11位手机号码'
+          return false
         }else{
-          this.messagename = '';
+          this.messagename = ''
+          return true
         }
       },
       //密码格式校验
       checkPwd(){
         if (this.findForm.pwd === '') {
-          this.messagepwd = '请输入密码';
+          this.messagepwd = '请输入密码'
+          return false
         } else if(!/^[0-9a-zA-Z]{6,20}$/.test(this.findForm.pwd)){
-          this.messagepwd = '密码为6-20位的字母或数字';
+          this.messagepwd = '密码为6-20位的字母或数字'
+          return false
         }else{
-          this.messagepwd = '';
+          this.messagename = ''
+          return true
         }
       },
       //检验验证码
       checkCode(){
         if (this.findForm.codeVal === '') {
-          this.messagecode = '验证码不能为空';
+          this.messagecode = '验证码不能为空'
+          return false
         } else if(!/^\d{6}$/.test(this.findForm.codeVal)){
-          this.messagecode = '请输入6位验证码';
+          this.messagecode = '请输入6位验证码'
+          return false
         } else {
-          this.messagecode = '';
+          this.messagename = ''
+          return true
         }
       },
       //获取验证码
@@ -148,7 +161,7 @@
         setTimeout(() => {
           this.codeStart = true;
           this.$dialog.loading.close();
-          //this.getcode()
+          this.getcode()
           this.$dialog.toast({
             mes: "已发送",
             icon: "success",
@@ -156,6 +169,31 @@
           });
         }, 1000)
 
+      },
+      getcode(){
+        this.$http
+          .post(
+            "/api/setsms",
+            { phone: this.logonForm.name },
+            { emulateJSON: true }
+          )
+          .then(
+            function(res) {
+              console.log(res)
+              if(res.body.status==true){
+
+              }else{
+                this.$dialog.toast({
+                  mes: res.body.msg,
+                  timeout: 1500
+                })
+              }
+            },
+            function(res) {
+              console.log(res);
+              // 处理失败的结果
+            }
+          )
       },
     },
     mounted: function () {
@@ -171,13 +209,40 @@
     .messagesty{
       font-size: 12px;
       color: red;
+      /*padding-top: 7px;padding-bottom: 15px;*/
+      margin-left: 20px;
+      line-height: 48px;
+      width:100px;
+      float: right;
     }
     .sendcode {
-      width: 48px;
-      height: 48px;
+      width: 40px;
+      height: 30px;
       background: rgb(158, 158, 158);
-      border-radius: 14px;
+      border-radius: 20px;
       font-size: 12px;
+      margin-right: 5px;
+      margin-top: 10px;
+      line-height: 20px;
     }
+    .find{
+      margin: 0.15rem 0;
+      display: inline-block;
+      width: 6.9rem;
+      line-height: 0.8rem;
+      text-align: center;
+      color: #fff;
+      font-size: 0.32rem;
+      background: #00CE9F;
+      border-radius: 0.42rem;
+      -webkit-border-radius: 0.42rem;
+      -moz-border-radius: 0.42rem;
+      border: none;
+      font-family: PingFangSC-Regular;
+    }
+  /*.loginpage .body li{*/
+    /*margin-bottom: 0;*/
+    /*height: auto;*/
+  /*}*/
   }
 </style>

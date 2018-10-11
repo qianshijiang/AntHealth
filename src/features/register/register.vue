@@ -35,8 +35,8 @@
             </li>
             <p class="messagesty">{{messagepwd}}</p>
           </ul>
-          <div class="submit reg-subm">
-            <input type="submit" value="立即注册"/>
+          <div class="submit reg-subm" @click="register">
+            <div class="zc">立即注册</div>
           </div>
           <div class="rule">
             <label class="check_box check_box1">
@@ -82,70 +82,80 @@
       }
     },
     methods: {
-      register: function () {
-        this.$refs['logonForm'].validate((valid) => {
-          if (valid) {
-            let self = this;
-            let params = {
-              'name': this.logonForm.name,
-              'pwd': this.logonForm.pwd,
-              'codeVal':this.logonForm.codeVal
-            };
-            localStorage.setItem("token", 'hhhhh');
-            self.$router.replace({path: '/my'});
-            self.$http.post('/api/mobileLogin/login', params)
-              .then(function (response) {
-                console.log(JSON.stringify(response));
-                if (response.data.result) {
-                  localStorage.setItem('token', response.data.result.mobileToken);
-                  // sessionStorage.setItem('setLogonData', JSON.stringify(response.data.result));
-                  self.$router.replace({path: '/my'})
-                }
+      register() {
+        if(!this.checkName() || !this.checkPwd || !this.checkCode){
+          return
+        }
+        let self = this
+        let params = {
+          'phone': this.logonForm.name,
+          'password': this.logonForm.pwd,
+          'code':this.logonForm.codeVal
+        }
+        self.$http.post('/api/register', params,{ emulateJSON: true })
+          .then(function (response) {
+            console.log(JSON.stringify(response))
+            if (response.data.status === true) {
+              localStorage.setItem('token', response.data.data.token)
+              localStorage.setItem('setLogonData', JSON.stringify(response.data.data))
+              self.$router.replace({path: '/my'})
+            }else{
+              this.$dialog.toast({
+                mes: response.data.msg,
+                timeout: 1500
               })
-            // .catch(function (error) {
-            //   alert(2)
-            //   console.log(error)
-            // })
-          }
-         })
+            }
+          })
+        .catch(function (error) {
+          console.log(error)
+        })
       },
       //显示或隐藏密码
       displayorHidePwd(){
         let _this = this;
         if(_this.seePwdModel){
-          _this.seePwdModel = false;
+          _this.seePwdModel = false
         }else{
-          _this.seePwdModel = true;
+          _this.seePwdModel = true
         }
       },
       //名字格式校验
       checkName(){
         if (this.logonForm.name === '') {
-          this.messagename='请输入手机号码';
+          this.messagename='请输入手机号码'
+          return false
         } else if (!/^[1][3,4,5,7,8][0-9]{9}$/.test(this.logonForm.name)) {
-          this.messagename='请输入正确的11位手机号码';
+          this.messagename='请输入正确的11位手机号码'
+          return false
         }else{
-          this.messagename = '';
+          this.messagename = ''
+          return true
         }
       },
       //密码格式校验
       checkPwd(){
         if (this.logonForm.pwd === '') {
-          this.messagepwd = '请输入密码';
+          this.messagepwd = '请输入密码'
+          return false
         } else if(!/^[0-9a-zA-Z]{6,20}$/.test(this.logonForm.pwd)){
-          this.messagepwd = '密码为6-20位的字母或数字';
+          this.messagepwd = '密码为6-20位的字母或数字'
+          return false
         }else{
-          this.messagepwd = '';
+          this.messagename = ''
+          return true
         }
       },
       //检验验证码
       checkCode(){
         if (this.logonForm.codeVal === '') {
-          this.messagecode = '验证码不能为空';
+          this.messagecode = '验证码不能为空'
+          return false
         } else if(!/^\d{6}$/.test(this.logonForm.codeVal)){
-          this.messagecode = '请输入6位验证码';
+          this.messagecode = '请输入6位验证码'
+          return false
         } else {
-          this.messagecode = '';
+          this.messagename = ''
+          return true
         }
       },
       //获取验证码
@@ -161,13 +171,38 @@
         setTimeout(() => {
           this.codeStart = true;
           this.$dialog.loading.close();
-          //this.getcode()
+          this.getcode()
           this.$dialog.toast({
             mes: "已发送",
             icon: "success",
             timeout: 1500
           });
         }, 1000)
+      },
+      getcode(){
+        this.$http
+          .post(
+            "/api/setsms",
+            { phone: this.logonForm.name },
+            { emulateJSON: true }
+          )
+          .then(
+            function(res) {
+              console.log(res)
+              if(res.body.status==true){
+
+              }else{
+                this.$dialog.toast({
+                  mes: res.body.msg,
+                  timeout: 1500
+                })
+              }
+            },
+            function(res) {
+              console.log(res);
+              // 处理失败的结果
+            }
+          )
       },
       //是否同意协议
       isAgreement(){
@@ -186,20 +221,43 @@
   }
 </script>
 <style lang="scss" scoped>
-  .body{
-    li label img{
-      width:31px !important;
-    }
-    .messagesty{
-      font-size: 12px;
-      color: red;
-    }
-    .sendcode {
-      width: 48px;
-      height: 43px;
-      background: rgb(158, 158, 158);
-      border-radius: 14px;
-      font-size: 12px;
-    }
+  li label img{
+    width:31px !important;
+  }
+  .messagesty{
+    font-size: 12px;
+    color: red;
+    margin-top: 7px;margin-bottom: 15px;
+    margin-left: 25px;
+  }
+
+  .zc{
+    display: block;
+    background: #00CE9F;
+    border-radius: 0.42rem;
+    -webkit-border-radius: 0.42rem;
+    -moz-border-radius: 0.42rem;
+    color: #fff;
+    font-size: 0.36rem;
+    line-height: 0.88rem;
+    text-align: center;
+    width: 100%;
+    border: none;
+  }
+  .loginpage .body li{
+    margin-bottom: 0;
+    height: auto;
+  }
+  .loginpage .body li button{
+    height: 30px;
+  }
+  .sendcode {
+    width: 40px;
+    height: 30px;
+    background: rgb(158, 158, 158);
+    border-radius: 20px;
+    font-size: 12px;
+    margin-right: 5px;
+    margin-top: 7px;
   }
 </style>
