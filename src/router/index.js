@@ -17,6 +17,7 @@ import Aidcardt from '@/features/index/aidcardt'
 import Myinfo from '@/features/index/myinfo'
 import Addressmanage from '@/features/index/addressmanage'
 import Addressmanage1 from '@/features/index/addressmanage1'
+import Addressmanage2 from '@/features/index/addressmanage2'
 import Serviceorder from '@/features/index/serviceorder'
 import Serviceorderdetail from '@/features/index/serviceorderdetail'
 import Refund from '@/features/index/refund'
@@ -32,6 +33,8 @@ import Oldbai from '@/features/index/oldbai'
 import Lookall from '@/features/index/lookall'
 import EnjoyAge from '@/features/enjoyage/enjoyage'
 import Coupon from '@/features/index/coupon'
+import Updatephone from '@/features/index/updatephone'
+import Insurance from '@/features/index/insurance'
 
 Vue.use(Router)
 
@@ -123,6 +126,11 @@ const router = new Router({
       component: Addressmanage1
     },
     {
+      path: '/addressmanage2',
+      name: 'addressmanage2',
+      component: Addressmanage2
+    },
+    {
       path: '/serviceorder',
       name: 'serviceorder',
       component: Serviceorder
@@ -173,7 +181,7 @@ const router = new Router({
       component: Paysuccess
     },
     {
-      path: '/headinfodetail',
+      path: '/Headinfodetail',
       name: 'headinfodetail',
       component: Headinfodetail
     },
@@ -201,6 +209,16 @@ const router = new Router({
       path: '/coupon',
       name: 'coupon',
       component: Coupon
+    },
+    {
+      path: '/updatephone',
+      name: 'updatephone',
+      component: Updatephone
+    },
+    {
+      path: '/insurance',
+      name: 'insurance',
+      component: Insurance
     }
   ]
 });

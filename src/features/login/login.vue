@@ -11,7 +11,7 @@
                 <label>
                   <img src="../../../static/imgs/img13.png"/>
                 </label>
-                <input type="number" class="txt" v-model.number="logonForm.name" placeholder="请输入手机号" @change="checkName"/>
+                <input type="text" class="txt" v-model="logonForm.name" placeholder="请输入手机号" @change="checkName"/>
               </li>
               <p class="messagesty">{{messagename}}</p>
               <li>
@@ -78,15 +78,17 @@
               console.log(JSON.stringify(response))
               if (response.data.status === true) {
                 localStorage.setItem('token', response.data.data.token)
-                localStorage.setItem('setLogonData', JSON.stringify(response.data.data))
+                localStorage.setItem('avatar_url', response.data.data.avatar_url)
+                localStorage.setItem('display_name', response.data.data.display_name)
+                localStorage.setItem('address', response.data.data.address)
+                localStorage.setItem('phone', response.data.data.phone)
+                localStorage.setItem('data', JSON.stringify(response.data.data))
                 self.$router.replace({path: '/my'})
               }else{
                 this.$dialog.toast({
                   mes: response.data.msg,
                   timeout: 1500
                 })
-                localStorage.setItem('token', 'hhhhh')
-                self.$router.replace({path: '/my'})
               }
             })
             .catch(function (error) {

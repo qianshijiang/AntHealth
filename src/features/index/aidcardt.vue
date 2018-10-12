@@ -85,8 +85,6 @@
   </div>
 </template>
 <script>
-  import FooterBar from '../components/FooterBar.vue'
-  import TopBar from '../components/TopBar.vue'
   export default {
     name: 'Aidcard',
     data () {
@@ -96,18 +94,24 @@
       }
     },
     methods: {
-      changePwd: function () {
-        this.showChangePwdPanel = true
+      getInfo(){
+        let self = this
+        self.$http.get('api/getmyFirstAid')
+          .then(function (response) {
+            if (response.data.status == true) {
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
       },
       prev(){
         this.$router.go(-1)
       }
     },
-    mounted: function () {},
-    components: {
-      FooterBar,
-      TopBar
-    }
+    mounted: function () {
+      this.getInfo()
+    },
   }
 </script>
 <style lang="scss" scoped>

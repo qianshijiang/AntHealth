@@ -12,125 +12,29 @@
       <div class="topnews">
         <div class="head g-tab-hd">
           <ul>
-            <li class="on"><a href="#">全部</a></li>
-            <li><a href="#">健康保障</a></li>
-            <li><a href="#">健康管理</a></li>
-            <li><a href="#">健康专栏</a></li>
+            <li  v-for="item in typeData" :key="item.id">
+              <p class="xq" :class="{'xh' : item.check === true}" @click="searchList(item.id)">{{item.newtypename}}</p>
+            </li>
           </ul>
         </div>
         <div class="body g-tab-bd">
           <ul>
-            <li @click="goDetail">
-              <!--<a href="#">-->
+            <li @click="goDetail(item.id)" v-for="item in listData" :key="item.id">
                 <div class="img">
-                  <img src="../../../static/imgs/img66.png"/>
+                  <img :src="item.newImg"/>
                 </div>
                 <div class="txt">
-                  <h4>2018市民健康跑步活动</h4>
-                  <p>让我们的开始锻炼吧，让身体健康起来，加油吧</p>
+                  <h4>{{item.newTitle}}</h4>
+                  <p>{{item.newIntroduction}}</p>
                   <div class="labels">
                     <div class="left">
-                      <label>跑步</label>
-                      <label>市民健康</label>
+                      <label>{{item.newLable}}</label>
                     </div>
                     <div class="right">
                       2018-09-16
                     </div>
                   </div>
                 </div>
-              <!--</a>-->
-            </li>
-            <li>
-              <div @click="goDetail">
-                <div class="img">
-                  <img src="../../../static/imgs/img66.png"/>
-                </div>
-                <div class="txt">
-                  <h4>大型全面健康体检活动</h4>
-                  <p>让我们的开始锻炼吧，让身体健康起来，加油吧</p>
-                  <div class="labels">
-                    <div class="left">
-                      <label>跑步</label>
-                      <label>市民健康</label>
-                    </div>
-                    <div class="right">
-                      2018-09-16
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="body g-tab-bd" style="display: none;">
-          <ul>
-            <li>
-              <a href="#">
-                <div class="img">
-                  <img src="../../../static/imgs/img66.png"/>
-                </div>
-                <div class="txt">
-                  <h4>2018市民健康跑步活动</h4>
-                  <p>让我们的开始锻炼吧，让身体健康起来，加油吧</p>
-                  <div class="labels">
-                    <div class="left">
-                      <label>跑步</label>
-                      <label>市民健康</label>
-                    </div>
-                    <div class="right">
-                      2018-09-16
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="body g-tab-bd" style="display: none;">
-          <ul>
-            <li>
-              <a href="#">
-                <div class="img">
-                  <img src="../../../static/imgs/img66.png"/>
-                </div>
-                <div class="txt">
-                  <h4>2018市民健康跑步活动11</h4>
-                  <p>让我们的开始锻炼吧，让身体健康起来，加油吧</p>
-                  <div class="labels">
-                    <div class="left">
-                      <label>跑步</label>
-                      <label>市民健康</label>
-                    </div>
-                    <div class="right">
-                      2018-09-16
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="body g-tab-bd" style="display: none;">
-          <ul>
-            <li>
-              <a href="#">
-                <div class="img">
-                  <img src="../../../static/imgs/img66.png"/>
-                </div>
-                <div class="txt">
-                  <h4>2018市民健康跑步活动22</h4>
-                  <p>让我们的开始锻炼吧，让身体健康起来，加油吧</p>
-                  <div class="labels">
-                    <div class="left">
-                      <label>跑步</label>
-                      <label>市民健康</label>
-                    </div>
-                    <div class="right">
-                      2018-09-16
-                    </div>
-                  </div>
-                </div>
-              </a>
             </li>
           </ul>
         </div>
@@ -144,22 +48,79 @@
     name: 'Headinfo',
     data () {
       return {
-        logonData: {},
-        navflag: 1
+        typeData: [],
+        listData:[],
+        typeid: 1
       }
     },
     methods: {
-      goDetail() {
-        this.$router.push({path: '/headinfodetail'})
+      goDetail(id) {
+        this.$router.push({path: '/Headinfodetail',  query: {
+            id: id
+          }})
       },
-      searchList(v){
-        this.navflag = v + 1
+      searchList(id){
+        this.typeData.forEach(item => {
+          if(item.id === id){
+            item.check = true
+          }else {
+            item.check = false
+          }
+        })
+        this.typeid = id
+        this.getList()
       },
       prev(){
         this.$router.go(-1)
-      }
+      },
+      getListType(){
+        let self = this
+        self.$http.get('/api/getnewstypenew')
+          .then(function (response) {
+            if (response.data.status == true) {
+              let datas = response.data.data
+              datas.forEach((item,index) => {
+                if(index === 0){
+                  this.typeData.push({check: true,id: item.id,newtypename: item.newtypename})
+                }
+                else {
+                  this.typeData.push({check: false,id: item.id,newtypename: item.newtypename})
+                }
+              })
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+      getList(){
+        let self = this
+        self.listData = []
+        let paramts = {
+          typeid: this.typeid,
+          page: 1,
+          pagemax: 10
+        }
+        self.$http.post('/api/getnewslist',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+          .then(function (response) {
+            if (response.data.status == true) {
+              this.listData = response.data.data
+            }else {
+              this.$dialog.toast({
+              mes:  response.data.msg,
+              timeout: 1500
+              })
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
     },
-    mounted: function () {},
+    mounted: function () {
+      this.getListType()
+      this.getList()
+    },
     components: {
       FooterBar,
       TopBar
@@ -167,6 +128,13 @@
   }
 </script>
 <style lang="scss" scoped>
+  .xq{
+    color:#999;
+  }
+  .xh{
+    color: #333;
+    border-bottom: 1px solid #00CE9F
+  }
   .home-box {
     /*margin-top:45px;*/
     background-image:none;

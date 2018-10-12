@@ -12,60 +12,47 @@
       <form action="" method="post">
         <div class="body">
           <ul class="body-hd">
-            <li>
+            <li style="overflow: hidden">
               <div class="left">
                 头像
               </div>
               <div class="right">
                 <div class="myinfo-ava">
-                  <img src="../../../static/imgs/img39.png"/>
-                  <input class="file" type="file" name="" id="" value="" />
+                  <img v-if="face"  @click="uploadImg" :src="face" style="height: .8rem;width: .8rem;border-radius: .4rem"/>
+                  <img v-else @click="uploadImg" src="../../../static/imgs/img39.png"/>
+                  <!--<input class="file" type="file" name="" id="" value="" />-->
                 </div>
               </div>
             </li>
           </ul>
-          <ul class="body-bd">
-            <li>
-              <div class="left">
-                昵称
-              </div>
-              <div class="right">
-                王力宏
-              </div>
-            </li>
-            <li>
-              <div class="left">
-                修改手机号
-              </div>
-              <div class="right right-arr">
-                <input class="text" type="text" name="" id="" value="13888860877" />
-              </div>
-            </li>
-            <li>
-              <div class="left">
-                出生日期
-              </div>
-              <div class="right right-arr">
-                <input class="text text-date" type="date"   placeholder="请选择出生日期" />
-              </div>
-            </li>
-            <li>
-              <div class="left">
-                所在区域
-              </div>
-              <div class="right right-arr">
-                <select name="">
-                  <option value="请选择所在区域">请选择所在区域</option>
-                </select>
-              </div>
-            </li>
-          </ul>
+          <yd-cell-item style="background-color: #fff;border-bottom: 1px solid #e0e0e0;">
+            <span slot="left">昵称：</span>
+            <yd-input slot="right" v-model="nickname" :show-clear-icon="false" required placeholder="请输入昵称"></yd-input>
+          </yd-cell-item>
+          <yd-cell-item :show-clear-icon="false" style="background-color: #fff;border-bottom: 1px solid #e0e0e0;position:relative;top:0;">
+            <span slot="left">手机号：</span>
+            <yd-input slot="right" v-model="phone" readonly :show-clear-icon="false"  placeholder="请输入手机号码"></yd-input>
+            <img @click="updPhone" slot="right" style="position: absolute;top:18px;right: 12px;color: #c9c9c9;height: 12px;width: 8px;" src="../../../static/imgs/img12.png"/>
+          </yd-cell-item>
+
+          <yd-cell-item arrow style="background: #fff;">
+            <span slot="left">出生日期：</span>
+            <yd-datetime type="date" start-date="1948-01-01" v-model="datetime" slot="right"></yd-datetime>
+          </yd-cell-item>
+          <yd-cell-group style="margin-bottom: 0">
+            <yd-cell-item arrow>
+              <span slot="left">所在地区：</span>
+              <input slot="right" type="text" @click.stop="show1 = true" v-model="address" readonly placeholder="请选择地区">
+            </yd-cell-item>
+          </yd-cell-group>
+          <yd-cityselect style="overflow: scroll" v-model="show1" :callback="result1" :items="district"></yd-cityselect>
         </div>
-        <div class="foot">
-          <input type="submit" name="" id="" value="确认修改" />
+        <div class="foot" @click="submit">
+          <div class="hh">确认修改</div>
         </div>
       </form>
     </div>
+    <input id="upfile" name="file" type="file" style="display:none;margin-bottom: 45px" accept="image/png,image/gif,image/jpeg" @change="update"/>
   </div>
 </template>
 <script>
@@ -78,24 +65,89 @@
       return {
         logonData: {},
         show1: false,
-        input6:'',
-         model1: '',
+        nickname:'',
+        phone: '',
+        address: '',
+        face: '',
         district: District,
-        datetime6: '2017-05-11',
-        yearFormat: '<span style="color:#F00;">{value}<i style="font-size: 12px;margin-left: 1px;">年</i></span>',
-        monthFormat: '<span style="color:#0BB20C;">{value}<i style="font-size: 12px;margin-left: 1px;">月</i></span>',
-        dayFormat: '<span style="color:#FFB400;">{value}<i style="font-size: 12px;margin-left: 1px;">日</i></span>'
+        datetime: '',
       }
     },
     methods: {
       result1(ret) {
-        this.model1 = ret.itemName1 + ' ' + ret.itemName2 + ' ' + ret.itemName3;
+        this.address = ret.itemName1 + ' ' + ret.itemName2 + ' ' + ret.itemName3;
       },
       prev(){
         this.$router.go(-1)
-      }
+      },
+      updPhone(){
+        this.$router.push({path: '/updatePhone'})
+      },
+      uploadImg: function() {
+        document.getElementById("upfile").click();
+      },
+      update(e) {
+        this.$dialog.loading.open('上传中...')
+        let file = e.target.files[0];
+        let param = new FormData(); //创建form对象
+        param.append("photo", file, file.name); //通过append向form对象添加数据
+        param.append("orderno", "10001"); //添加form表单中其他数据
+        // console.log(param.get("photo")); //FormData私有类对象，访问不到，可以通过get判断值是否传进去
+
+        this.$http
+          .post("/api/avatar_url", param, { emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token") }})
+          .then(function(res) {
+            this.$dialog.loading.close()
+            console.log(res.body)
+            if(res.body.status==true){
+              this.face =  res.body.data.avatar_url
+              localStorage.setItem("avatar_url", res.body.data.avatar_url)
+            }else{
+              this.$dialog.toast({
+                mes: res.body.msg,
+                timeout: 1500
+              })
+            }
+          },
+          function(res) {
+            this.$dialog.loading.close()
+            console.log(res)
+            // 处理失败的结果
+          }
+          );
+      },
+      getInfo(){
+        let datas = {}
+        datas = JSON.parse(localStorage.getItem("data"))
+        this.face = localStorage.getItem("avatar_url")
+        this.nickname = localStorage.getItem("display_name")
+        this.address = localStorage.getItem("address")
+        this.phone = localStorage.getItem("phone")
+        this.datetime = datas.birthday
+      },
+      submit(){
+        let self = this
+        let paramts = {
+          display_name: this.nickname,
+          birthday: this.datetime,
+          address: this.address,
+        }
+        self.$http.post('api//updateHealthyUser',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+          .then(function (response) {
+            console.log(JSON.stringify(response))
+            if (response.data.status == true) {
+              localStorage.setItem("display_name", res.body.data.display_name)
+              localStorage.setItem("address", res.body.data.address)
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
     },
-    mounted: function () {},
+    mounted: function () {
+      this.getInfo()
+    },
     components: {
       FooterBar,
       TopBar
@@ -103,92 +155,16 @@
   }
 </script>
 <style lang="scss" scoped>
-  .home-box {
-    /*margin-top:45px;*/
-    background-image:none;
-    height: auto;
-    min-height: 100%;
-    width: 100%;
-  }
-  .pol-content{
-    height: auto;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background: rgb(246,246,246);
-    margin-top: 15px;
-  }
-  .pol-content p{
-    line-height: 30px;
-    color: #333;
-    font-size: 16px;
-
-  }
-  .pol-content1{
-    height: auto;
-    padding: 10px 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
-    margin-right: 8px;
-  }
-  .pol-content1 p {
-    font-size: 14px;
+  .hh{
+    height: .84rem;
+    line-height: .84rem;
     text-align: center;
-    color: #666;
-  }
-  .box-content1 div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  .box-top{
-    height: auto;
+    border: 0;
+    background: #00CE9F;
+    border-radius: .42rem;
     width: 100%;
-    border-bottom:1px solid #e0e0e0;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    padding: 20px 10px;
-    background: #ffffff;
-  }
-  .box-topj{
-    justify-content: flex-end;
-  }
-  .box-imgb{
-    width:50px;
-    height: 60px;
-    border: 1px solid #999;
-    margin-right: 15px;
-  }
-  .box-top1{
-    padding: 0 10px;
-    justify-content: space-around;
-    margin-bottom: 5px;
-  }
-  .box-top2{
-    padding: 15px 0;
-    flex: 1;
-    text-align: center;
-  }
-  .box-top2j{
-    border-bottom: 1px solid #333;
-  }
-  .se-title1{
-    font-size: 16px;
-    color: #333;
-    line-height: 60px;
-  }
-  .se-title2{
-    color: #999;
-  }
-  .se-title3{
-    font-size: 14px;
-    color: #999;
-  }
-  .se-title4{
-    font-size: 14px;
-    color: #666;
-    font-weight: bold;
+    font-size: .3rem;
+    color: #fff;
   }
 </style>
 

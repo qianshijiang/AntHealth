@@ -41,7 +41,7 @@
 <script>
   import District from 'ydui-district/dist/jd_province_city_area_id'
     export default {
-    name: 'Addressmanage',
+    name: 'Addressmanage2',
     data () {
       return {
         nickname: '',
@@ -58,6 +58,13 @@
       },
       prev(){
         this.$router.go(-1)
+      },
+      getinfo(){
+        this.nickname = addressinfo.name
+        this.phone = addressinfo.phone
+        this.state = addressinfo.state
+        this.address = addressinfo.address
+        this.addressdetail = addressinfo.detailed_address
       },
       submit(){
         let self = this
@@ -82,7 +89,7 @@
           address: this.address,
           detailed_address: this.addressdetail,
         }
-        self.$http.post('api/inmyaddress',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+        self.$http.post('api/upmyaddress',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
             console.log(JSON.stringify(response))
             if (response.data.data) {

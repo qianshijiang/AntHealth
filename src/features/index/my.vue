@@ -4,11 +4,12 @@
       <div @click="clearLogin" class="set"></div>
       <div class="head">
         <div class="head-l">
-          <img src="../../../static/imgs/img39.png"/>
+          <img style="height: 60px;width: 60px;border-radius: 30px;" v-if="face" :src="face"/>
+          <img v-else src="../../../static/imgs/img39.png"/>
         </div>
         <div class="head-r">
-          <h4>王力宏</h4>
-          <p>新华园 上海网络科技有限公司</p>
+          <h4>{{name}}</h4>
+          <p>{{address}}</p>
         </div>
       </div>
       <div class="body">
@@ -109,8 +110,6 @@
         </ul>
       </div>
     </div>
-
-
     <div class="my-nav">
       <div class="head">
         <div class="head-l">
@@ -245,6 +244,9 @@
     name: 'My',
     data () {
       return {
+        face: '',
+        name: '',
+        address: '',
         logonData: {}
       }
     },
@@ -289,6 +291,12 @@
     mounted: function () {
       if(!localStorage.getItem("token")){
         this.$router.replace({path: '/login'})
+      }
+      else{
+        this.logonData = JSON.parse(localStorage.getItem("data"))
+        this.face = localStorage.getItem("avatar_url")
+        this.name = localStorage.getItem("display_name")
+        this.address = localStorage.getItem("address")
       }
     },
     components: {

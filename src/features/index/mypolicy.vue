@@ -11,9 +11,9 @@
     <div class="myorder">
       <div class="head g-tab-hd">
         <ul>
-          <li class="on"><a href="#">全部</a></li>
-          <li><a href="#">保障中</a></li>
-          <li><a href="#">已过期</a></li>
+          <li v-for="item in typeData" :key="item.id">
+            <p class="xq" :class="{'xh' : item.check === true}" @click="searchList(item)">{{item.typename}}</p>
+          </li>
         </ul>
       </div>
       <div class="body g-tab-bd">
@@ -170,19 +170,62 @@
     name: 'Service',
     data () {
       return {
-        logonData: {},
-        navflag: 1
+        typeData: [],
+        navflag: true
       }
     },
     methods: {
       searchList(v){
-        this.navflag = v + 1
+        this.navflag = v
       },
       prev(){
         this.$router.go(-1)
-      }
+      },
+      getListType(){
+        let self = this
+        self.$http.get('/api/getinseranceType')
+          .then(function (response) {
+            console.log(JSON.stringify(response))
+            if (response.data.status == true) {
+             let datas = response.data.data
+              datas.forEach((item,index) => {
+                if(index === 0){
+                  this.typeData.push({check: true,id: item.id,typename: item.typename})
+                }
+                else {
+                  this.typeData.push({check: false,id: item.id,typename: item.typename})
+                }
+              })
+              console.log(this.typeData)
+              // this.typeData = response.data.data
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+      getList(){
+        let self = this
+        let paramts = {
+          typeid: 1,
+          page: 1,
+          pagemax: 10
+        }
+        self.$http.post('/api/getinseranceTypeList',paramts,{ emulateJSON: true })
+          .then(function (response) {
+            console.log(JSON.stringify(response))
+            if (response.data.data) {
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
     },
-    mounted: function () {},
+    mounted: function () {
+      this.getListType()
+      this.getList()
+    },
     components: {
       FooterBar,
       TopBar
@@ -190,85 +233,12 @@
   }
 </script>
 <style lang="scss" scoped>
-  .home-box {
-    /*margin-top:45px;*/
-    background-image:none;
-    height: auto;
-    min-height: 100%;
-    width: 100%;
+  .xq{
+    color:#999;
   }
-  .pol-content{
-    height: auto;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background: rgb(246,246,246);
-  }
-  .pol-content p{
-    line-height: 30px;
+  .xh{
     color: #333;
-    font-size: 16px;
-
-  }
-  .pol-content1{
-    height: auto;
-    padding: 10px 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
-    margin-right: 8px;
-  }
-  .pol-content1 p {
-    font-size: 14px;
-    text-align: center;
-    color: #666;
-  }
-  .box-content1 div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  .box-top{
-    height: auto;
-    width: 100%;
-    border-bottom:1px solid #e0e0e0;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    padding: 20px 10px;
-    background: #ffffff;
-  }
-  .box-topj{
-    justify-content: flex-end;
-  }
-  .box-top1{
-    padding: 0 10px;
-    justify-content: space-around;
-    margin-bottom: 5px;
-  }
-  .box-top2{
-    padding: 15px 0;
-    flex: 1;
-    text-align: center;
-  }
-  .box-top2j{
-    border-bottom: 1px solid #333;
-  }
-  .se-title1{
-    font-size: 16px;
-    color: #333;
-  }
-  .se-title2{
-    color: #999;
-  }
-  .se-title3{
-    font-size: 14px;
-    color: #999;
-  }
-  .se-title4{
-    font-size: 14px;
-    color: #666;
-    font-weight: bold;
+    border-bottom: 1px solid #00CE9F
   }
 </style>
 

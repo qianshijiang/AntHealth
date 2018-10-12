@@ -20,13 +20,13 @@
           </div>
           <div class="foot">
             <div class="foot-l">
-              <label class="radio_box">
+              <label class="radio_box" @click="setAddress">
                 <img class="himg" src="../../../static/imgs/img29.png">
                 <em>设置默认</em>
               </label>
             </div>
             <div class="foot-r">
-              <a href="#" class="edit">编辑</a>
+              <a @click="updateAddress" class="edit">编辑</a>
               <a @click="delAddress" class="del">删除</a>
             </div>
           </div>
@@ -83,10 +83,29 @@
       newAdderess(){
         this.$router.push({path: '/addressmanage1'})
       },
+      updateAddress(){
+        this.$router.push({path: '/addressmanage2'})
+      },
       getList(){
         let self = this
         this.listData.push({id : '1', checkflag : false})
         self.$http.get('api/getmyaddresslist',{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+          .then(function (response) {
+            console.log(JSON.stringify(response))
+            if (response.data.data) {
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+      setAddress(){
+        let self = this
+        let paramts = {
+          myaddressid: '1',
+          state: '2'
+        }
+        self.$http.post('api/upmyaddressState',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
             console.log(JSON.stringify(response))
             if (response.data.data) {

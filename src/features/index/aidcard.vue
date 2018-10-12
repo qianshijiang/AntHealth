@@ -1,5 +1,5 @@
 <template>
-  <div class="layout  h-bg pb30">
+  <div class="layout  h-bg pb30" style="min-height: auto;">
     <div class="header onetouch-head">
       <div class="left">
         <div @click="prev" class="back"></div>
@@ -8,35 +8,38 @@
         <p>一键急救</p>
       </div>
     </div>
-    <div class="onetouch">
-      <div class="head">
-        <div class="head-hd">
-          <div class="img">
-            <img src="../../../static/imgs/img38.png"/>
-            <sub>女</sub>
-          </div>
-          <div class="txt">
-            <h4>王力宏</h4>
-            <p class="tel">13868937846</p>
-          </div>
-        </div>
-        <div class="head-bd">
-          <ul>
-            <li>
-              <h4>168</h4>
-              <p>身高(cm)</p>
-            </li>
-            <li>
-              <h4>B</h4>
-              <p>血型</p>
-            </li>
-            <li>
-              <h4>49</h4>
-              <p>体重(kg)</p>
-            </li>
-          </ul>
-        </div>
+    <div class="onetouch" style="margin-top: .5rem">
+      <div class="head" style="border-radius: 6px;">
+        <yd-cell-item style="background-color: #fff;border-bottom: 1px solid #e0e0e0;">
+          <span slot="left">姓名：</span>
+          <yd-input slot="right" v-model="name" required placeholder="请输入姓名"></yd-input>
+        </yd-cell-item>
+        <yd-cell-item arrow type="label">
+          <span slot="left">性别：</span>
+          <select slot="right" v-model="gender" required >
+            <option value="">请选择性别</option>
+            <option value="男">男</option>
+            <option value="女">女</option>
+          </select>
+        </yd-cell-item>
+        <yd-cell-item style="background-color: #fff;border-bottom: 1px solid #e0e0e0;">
+          <span slot="left">血型：</span>
+          <yd-input slot="right" v-model="blood" required placeholder="请输入血型"></yd-input>
+        </yd-cell-item>
+        <yd-cell-item style="background-color: #fff;border-bottom: 1px solid #e0e0e0;">
+          <span slot="left">身高：</span>
+          <yd-input slot="right" v-model="height" required placeholder="请输入身高"></yd-input>
+        </yd-cell-item>
+        <yd-cell-item style="background-color: #fff;border-bottom: 1px solid #e0e0e0;">
+          <span slot="left">体重：</span>
+          <yd-input slot="right" v-model="weight" required placeholder="请输入体重"></yd-input>
+        </yd-cell-item>
+        <yd-cell-item style="background-color: #fff;border-bottom: 1px solid #e0e0e0;">
+          <span slot="left">紧急联系人：</span>
+          <yd-input slot="right" v-model="phone" required regex="mobile" placeholder="请输入紧急联系人号码"></yd-input>
+        </yd-cell-item>
       </div>
+
       <div class="body">
         <ul>
           <li>
@@ -44,7 +47,7 @@
               医疗状况备注
             </div>
             <div class="body-bd">
-              <p>该患者淋巴结肿大，有明显肿块，建议多锻炼</p>
+              <textarea v-model="medical" style="border:0;width: 100%;color: #666;" placeholder="请输入医疗状况备注"></textarea>
             </div>
           </li>
           <li>
@@ -52,7 +55,7 @@
               过敏反应备注
             </div>
             <div class="body-bd">
-              <p class="c_red">青霉素过敏</p>
+              <textarea  v-model="allergy" class="c_red" style="border:0;width: 100%;color: #666;" placeholder="请输入过敏反应备注"></textarea>
             </div>
           </li>
           <li>
@@ -60,50 +63,100 @@
               在使用的药物
             </div>
             <div class="body-bd">
-              <p>为列明</p>
+              <textarea v-model="usedrag" style="border:0;width: 100%;color: #666;" placeholder="请输入在使用的药物"></textarea>
             </div>
           </li>
           <li>
             <div class="body-hd">
               急救地址
             </div>
+
             <div class="body-bd">
-              <p>上海市静安区延长中路801号A12室</p>
+              <textarea v-model="address" style="border:0;width: 100%;color: #666;" placeholder="请输入急救地址"></textarea>
             </div>
           </li>
         </ul>
       </div>
-
-      <div class="foot">
-        <a href="#">立即急救</a>
+      <div class="foot" @click="submit">
+        <a >保 存</a>
       </div>
     </div>
-
   </div>
 </template>
 <script>
-  import FooterBar from '../components/FooterBar.vue'
-  import TopBar from '../components/TopBar.vue'
   export default {
     name: 'Aidcard',
     data () {
       return {
+        name: '',
+        gender: '',
+        blood: '',
+        height: '',
+        weight: '',
+        phone: '',
+        medical: '',
+        allergy: '',
+        usedrag: '',
+        address: '',
         logonData: {}
       }
     },
     methods: {
-      changePwd: function () {
-        this.showChangePwdPanel = true
+      getInfo(){
+        let self = this
+        self.$http.get('api/getmyFirstAid')
+          .then(function (response) {
+            if (response.data.status == true) {
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+      submit(){
+        let self = this
+        if(!this.name || !this.gender || !this.blood || !this.height || !this.weight || !this.phone || !this.medical || !this.allergy
+        || !this.usedrag || !this.address){
+          this.$dialog.toast({
+            mes: '信息未填写完！',
+            timeout: 1500
+          })
+          return
+        }
+        let paramts = {
+          name: this.name,
+          sex: this.gender,
+          blood : this.blood,
+          height : this.height,
+          weight : this.weight,
+          sosphone : this.phone,
+          medicalRemarks : this.medical,
+          allergyRemarks : this.allergy,
+          medicine : this.usedrag,
+          sosaddress : this.address,
+        }
+        self.$http.post('api/insertFirstAid',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+          .then(function (response) {
+            // if (response.data.status == true) {
+              this.$dialog.toast({
+                mes: response.data.msg,
+                timeout: 1500
+              })
+            // }else{
+            //
+            // }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
       },
       prev(){
         this.$router.go(-1)
       }
     },
-    mounted: function () {},
-    components: {
-      FooterBar,
-      TopBar
-    }
+    mounted: function () {
+      this.getInfo()
+    },
   }
 </script>
 <style lang="scss" scoped>
