@@ -5,10 +5,10 @@
       <div class="center">
         <p>活动</p>
       </div>
-    </div>style="margin-bottom: 80px;"
+    </div>
     <div class="actlist" >
       <ul>
-        <li @click="goDetail">
+        <li @click="goDetail('activityid')">
           <!--<a href="#">-->
             <div class="head">
               <img src="../../../static/imgs/img79.jpg"/>
@@ -58,15 +58,37 @@
     name: 'Activedetail',
     data () {
       return {
-        logonData: {}
+        logonData: {},
       }
     },
     methods: {
-      goDetail() {
-        this.$router.push({path: '/activedetail'})
+      //获取活动列表下拉分页
+      getActiveInfo(){
+          let telf_ = this;
+          let params = {
+            page:1, //分页初始值
+            pageMax:10 //每页最大值
+          };
+        telf_.$http.post('api/getactivitytop',params, {emulateJSON: true,
+          headers: {'Content-Type': 'application/json'}
+        }).then(
+            function (response) {
+              console.log(JSON.stringify(response))
+            }
+        ).catch(function (error) {
+          console.log(error);
+        });
+      },
+      //进入活动详情页面
+      goDetail(activityid) {
+        this.$router.push({path: '/activedetail',query:{activityid:activityid}})
       }
     },
-    mounted: function () {},
+    mounted: function () {
+      //页面加载就执行
+      this.getActiveInfo();
+
+    },
     components: {
       FooterBar,
       TopBar

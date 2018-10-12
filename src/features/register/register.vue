@@ -31,7 +31,7 @@
               <label><img src="../../../static/imgs/img36.png"/></label>
               <input type="type" v-model="logonForm.pwd" class="txt" placeholder="请输入密码" v-if="seePwdModel" @change="checkPwd"/>
               <input type="password" v-model="logonForm.pwd" class="txt" placeholder="请输入密码" v-else @change="checkPwd"/>
-              <button type="button" class="eye" :class="{'eye-on':!seePwdModel}" @click="displayorHidePwd"></button>
+              <button type="button" style="margin-top: 8px" class="eye" :class="{'eye-on':!seePwdModel}" @click="displayorHidePwd"></button>
             </li>
             <p class="messagesty">{{messagepwd}}</p>
           </ul>
@@ -145,7 +145,7 @@
           this.messagepwd = '密码为6-20位的字母或数字'
           return false
         }else{
-          this.messagename = ''
+          this.messagepwd = ''
           return true
         }
       },
@@ -158,7 +158,7 @@
           this.messagecode = '请输入6位验证码'
           return false
         } else {
-          this.messagename = ''
+          this.messagecode = ''
           return true
         }
       },
