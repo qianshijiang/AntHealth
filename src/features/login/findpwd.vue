@@ -131,7 +131,7 @@
           this.messagepwd = '密码为6-20位的字母或数字'
           return false
         }else{
-          this.messagename = ''
+          this.messagepwd = ''
           return true
         }
       },
@@ -144,7 +144,7 @@
           this.messagecode = '请输入6位验证码'
           return false
         } else {
-          this.messagename = ''
+          this.messagecode = ''
           return true
         }
       },
