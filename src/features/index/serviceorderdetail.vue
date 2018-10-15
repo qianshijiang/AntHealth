@@ -14,7 +14,7 @@
     <div class="servpage">
       <div class="head">
         <div class="head-l">
-          <img src="../../../static/imgs/img77.png"/>
+          <img src="../../assets/imgs/img77.png"/>
         </div>
         <div class="head-r">
           <h2>

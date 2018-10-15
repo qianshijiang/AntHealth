@@ -8,93 +8,63 @@
         <p>保健养生</p>
       </div>
       <div class="right">
-
       </div>
     </div>
     <div class="servpage">
       <div class="head">
         <div class="head-l">
-          <img src="../../../static/imgs/img77.png"/>
+          <img :src="technicians.technicianAvatar_url"/>
         </div>
         <div class="head-r">
           <h2>
-            <span>李艾美 </span>
-            <i class="ico-star"></i>
-            <i class="ico-star"></i>
-            <i class="ico-star"></i>
-            <i class="ico-star"></i>
-            <i class="ico-star"></i>
+            <span>{{technicians.technicianName}} </span>
+            <i class="ico-star" v-if="technicians.starGrade>0"></i>
+            <i class="ico-star" v-if="technicians.starGrade>1"></i>
+            <i class="ico-star" v-if="technicians.starGrade>2"></i>
+            <i class="ico-star" v-if="technicians.starGrade>3"></i>
+            <i class="ico-star" v-if="technicians.starGrade>4"></i>
           </h2>
           <h4>
-            <span>30岁</span>
+            <span>{{technicians.technicianAge}}</span>
             <span>|</span>
-            <span>上海</span>
+            <span>{{technicians.nativePlace}}</span>
             <span>|</span>
-            <span>高级按摩师</span>
+            <span>{{technicians.occupationTitle}}</span>
           </h4>
-          <p>专业按摩师上门为您进行深度的中医按摩服务，缓解疲劳、身体病痛，改善健康状况。</p>
+          <p>{{technicians.introduction}}</p>
         </div>
       </div>
       <div class="head-f">
         <div class="bd">
           <div class="tit">
             <div class="left">
-              <p>全身推拿理疗</p>
+              <p>{{services.serviceName}}</p>
             </div>
             <div class="right">
-              <font class="c_green">¥158</font>/60分钟
+              <font class="c_green">{{technicians.price}}</font>/60分钟
             </div>
           </div>
           <div class="conter">
-            <p>深度全身理疗是由点到专业理疗医师团队悉心打造的上门按摩服务项目，专业按摩师上门为您进行的中医按摩服务，缓解疲劳、身体病痛，改善健康状况</p>
+            <p>{{services.serviceIntroduction}}</p>
           </div>
         </div>
 
       </div>
-      <div class="body">
+      <div class="body" style="margin-bottom: 60px;">
         <div class="hd">
           <p>服务介绍</p>
         </div>
-        <div class="bd">
-          <h4 class="c_green">针对部位</h4>
-          <p>对取颊脂垫位置的判定，结合每叶有独立的血管来源，形成包膜下血管网。颊脂肪垫有填充、滑动、保护和缓冲作用。</p>
-        </div>
-        <div class="bd">
-          <h4 class="c_green">调理急症</h4>
-          <p>对取颊脂垫位置的判定，结合每叶有独立的血管来源，形成包膜下血管网。颊脂肪垫有填充、滑动、保护和缓冲作用。</p>
-        </div>
-      </div>
-      <div class="body">
-        <div class="hd">
-          <p>服务内容</p>
-        </div>
-        <div class="bd">
-          <ul>
-            <li>1、便捷、省心  我们为您做了大量的前期筛选、审核工作；</li>
-            <li>2、成本低，效率高  我们拥有经验丰富的专业团队、海量的项目信息、优质的投资客户群；</li>
-            <li>3、严谨、高效的对接流程  严格的信息审核、资料递交、项目价值评估、有力的合同保障、高效的对接执行力。</li>
-          </ul>
-        </div>
-      </div>
-      <div class="body">
-        <div class="hd">
-          <p>预约须知</p>
-        </div>
-        <div class="bd">
-          <dl>
-            <dt>尊敬的顾客，在购买前请仔细阅读以下条款</dt>
-            <dd>1、便捷、省心  我们为您做了大量的前期筛选、审核工作；</dd>
-            <dd>2、成本低，效率高  我们拥有经验丰富的专业团队、海量的项目信息、优质的投资客户群；</dd>
-            <dd>3、严谨、高效的对接流程  严格的信息审核、资料递交、项目价值评估、有力的合同保障、高效的对接执行力。</dd>
-          </dl>
+        <div class="bd" v-for="(item ,index) in detailData.introductions" :key="index">
+          <h4 class="c_green">{{item.name}}</h4>
+          <p>{{item.contents}}</p>
         </div>
       </div>
       <div class="foot">
         <div class="foot-l">
-          <strong class="c_green">¥158</strong>/60分钟
+          <strong class="c_green">¥{{technicians.price}}</strong>/60分钟
         </div>
         <div class="foot-r">
-          <div @click="goAppoin" class="foot-btn" style="margin-top: 0;margin-left: 0;text-align: center">立即预约</div>
+          <div @click="goAppoin(detailData.technicians.serviceId,detailData.technicians.technicianid)" class="foot-btn" style="margin-top: 0;margin-left: 0;text-align: center">立即预约</div>
         </div>
       </div>
     </div>
@@ -107,12 +77,17 @@
     name: 'Servicedetail',
     data () {
       return {
-        logonData: {}
+        detailData: {},
+        timeData: {},
+        technicians:{},
+        services: {},
       }
     },
     methods: {
-      goAppoin() {
-        this.$router.push({path: '/appointment'})
+      goAppoin(id,tid) {
+        this.$router.push({path: '/appointment',query: {
+          id:id, tid: tid
+          }})
       },
       prev(){
         this.$router.go(-1)
@@ -120,18 +95,30 @@
       getInfo(){
         let self = this
         let paramts = {
-          technicianid: 1,
+          technicianid: this.$route.query.tid,
+          serviceid: this.$route.query.id
         }
-        self.$http.post('/api/getServices',paramts,{ emulateJSON: true })
+        this.$dialog.loading.open('获取中...')
+        self.$http.post('/healthymvc/getServices',paramts,{ emulateJSON: true,headers: { "Content-Type": "multipart/form-data"} })
           .then(function (response) {
-            console.log(JSON.stringify(response))
-            if (response.data.data) {
+            this.$dialog.loading.close()
+            if (response.data.status == true) {
+              this.detailData = response.data.data
+              this.technicians = response.data.data.technicians
+              this.services = response.data.data.services
+            }else{
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
             }
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
       },
+
     },
     mounted: function () {
       this.getInfo()

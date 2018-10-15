@@ -13,7 +13,7 @@
     </div>
     <div class="paytype">
       <form action="" method="post">
-        <div class="head">
+        <div class="head" style="display: none">
           支付剩余时间：<label>12</label><span>:</span><label>00</label>
         </div>
         <div class="body">
@@ -21,14 +21,14 @@
             <li>
               <label class="radio_box">
                 <div class="img">
-                  <img src="../../../static/imgs/img104.png"/>
+                  <img src="../../assets/imgs/img104.png"/>
                 </div>
                 <div class="txt">
                   微信支付
                 </div>
                 <div class="chk ">
-                  <input type="radio" id="radio_1" name="radio" checked="">
-                  <label for="radio_1"></label>
+                  <img @click="payType(2)"  v-if="ptype == 1" src="../../assets/imgs/img30.png"/>
+                  <img @click="payType(2)"  v-if="ptype == 2" src="../../assets/imgs/img29.png"/>
                 </div>
               </label>
 
@@ -36,20 +36,20 @@
             <li>
               <label class="radio_box">
                 <div class="img">
-                  <img src="../../../static/imgs/img105.png"/>
+                  <img src="../../assets/imgs/img105.png"/>
                 </div>
                 <div class="txt">
-                  银行卡支付
+                  支付宝支付
                 </div>
                 <div class="chk ">
-                  <input type="radio" id="radio_2" name="radio">
-                  <label for="radio_2"></label>
+                  <img @click="payType(1)"  v-if="ptype == 2" src="../../assets/imgs/img30.png"/>
+                  <img @click="payType(1)" v-if="ptype == 1" src="../../assets/imgs/img29.png"/>
                 </div>
               </label>
             </li>
           </ul>
         </div>
-        <div class="foot foot-fixd" @click="goPayshure">
+        <div class="foot foot-fixd" @click="submit">
           <p class="foot-btn" style="margin-top: 7px;margin-left: 27%;">确认支付</p>
         </div>
       </form>
@@ -63,20 +63,121 @@
     name: 'Pay',
     data () {
       return {
-        logonData: {},
+        payData: {},
         show2: false,
+        ptype: 2,
       }
     },
     methods: {
       goActiveOrder() {
         this.$router.push({path: '/activeorder'})
       },
+      payType(v){
+        this.ptype = v
+      },
       goPayshure() {
-        this.$router.push({path: '/paysuccess'})
+        this.$router.push({path: '/paysuccess',query:{type:this.$route.query.type}})
       },
       prev(){
         this.$router.go(-1)
-      }
+      },
+      submit(){
+        let self = this
+        let paramts = {
+          objOrderno : this.$route.query.orderid,
+          paytype : this.ptype,
+          objType  : this.$route.query.type
+        }
+        this.$dialog.loading.open('提交中...')
+        self.$http.post('/healthymvc/payorder',paramts,{ emulateJSON: true,headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+          .then(function (response) {
+            this.$dialog.loading.close()
+            if (response.data.status == true) {
+              this.payData = response.data.data
+              window.location.href="https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id="+response.data.data.weixingpay.prepayid+"&package="+response.data.data.weixingpay.partnerid
+              // this. weixinPay(response.data.data)
+            }else{
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
+            }
+          })
+          .catch(function (error) {
+            this.$dialog.loading.close()
+            console.log(error)
+          })
+      },
+      weixinPay:function(data){
+        var vm= this;
+        if (typeof WeixinJSBridge == "undefined"){//微信浏览器内置对象。参考微信官方文档
+          if( document.addEventListener ){
+            document.addEventListener('WeixinJSBridgeReady', vm.onBridgeReady(data), false);
+
+          }else if (document.attachEvent){
+            document.attachEvent('WeixinJSBridgeReady', vm.onBridgeReady(data));
+            document.attachEvent('onWeixinJSBridgeReady',vm.onBridgeReady(data));
+          }
+        }else{
+          vm.onBridgeReady(data)
+        }
+      },
+      onBridgeReady:function(data){
+        var  vm = this;
+        WeixinJSBridge.invoke(
+          'getBrandWCPayRequest',{
+            debug:true,
+            "appId":data.appid,     //公众号名称，由商户传入
+            "timeStamp":data.partnerid, //时间戳，自1970年以来的秒数
+            "nonceStr":data.noncestr, //随机串
+            "package":data.package_ss,
+            "signType":"MD5", //微信签名方式：
+            "paySign":data.sign, //微信签名
+            //这里的信息从后台返回的接口获得。
+            jsApiList: [
+              'chooseWXPay'
+            ]
+          },
+          function(res){
+            // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+            if(res.err_msg == "get_brand_wcpay_request:ok" ){
+              if(vm.fromRoute == 'personal'){
+                window.location.href = vm.BASE_URL + 'index.html#/depositResult'
+              }else {
+                vm.confirmTry()
+              }
+            }else{
+              alert("取消支付！")
+            }
+          }
+        )
+      },
+      submits(){
+        let self = this
+        let paramts = {
+          objOrderno : this.$route.query.orderid,
+          paytype : this.ptype,
+          objType  : this.$route.query.type
+        }
+        this.$dialog.loading.open('支付中...')
+        self.$http.post('/healthymvc/payover',paramts,{ emulateJSON: true,headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+          .then(function (response) {
+            this.$dialog.loading.close()
+            if (response.data.status == true) {
+              this.payData = response.data.data
+              // this.goPayshure()
+            }else{
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
+            }
+          })
+          .catch(function (error) {
+            this.$dialog.loading.close()
+            console.log(error)
+          })
+      },
     },
     mounted: function () {},
     components: {

@@ -14,17 +14,17 @@
       <form action="" method="post">
         <ul>
           <li>
-            <label><img src="../../../static/imgs/img13.png"/></label>
+            <label><img src="../../assets/imgs/img13.png"/></label>
             <input type="number" style="width:120px;" class="txt" v-model="findForm.oldphone" placeholder="请输入旧手机号" @blur="checkOldphone"/>
             <p class="messagesty">{{messageoldphone}}</p>
           </li>
           <li>
-            <label><img src="../../../static/imgs/img13.png"/></label>
+            <label><img src="../../assets/imgs/img13.png"/></label>
             <input type="number" style="width:120px;" class="txt" v-model="findForm.phone" placeholder="请输入新手机号" @blur="checkPhone"/>
             <p class="messagesty">{{messagephone}}</p>
           </li>
           <li>
-            <label><img src="../../../static/imgs/img35.png"/></label>
+            <label><img src="../../assets/imgs/img35.png"/></label>
             <input type="text" style="width: 100px;" class="txt" v-model="findForm.codeVal" placeholder="短信验证码" @blur="checkCode"/>
             <yd-sendcode class="sendcode" slot="right"
                          v-model="codeStart"
@@ -78,9 +78,10 @@
           'newphone': this.findForm.phone,
           'code':this.findForm.codeVal
         }
-        self.$http.post('/api/upphone', params,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+        this.$dialog.loading.open('提交中...')
+        self.$http.post('/healthymvc/upphone', params,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
-            console.log(JSON.stringify(response))
+            this.$dialog.loading.close()
             if (response.data.status === true) {
               localStorage.setItem('phone', response.data.data.phone)
               // sessionStorage.setItem('setLogonData', JSON.stringify(response.data.result))
@@ -93,6 +94,7 @@
             }
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
       },
@@ -169,7 +171,7 @@
       getcode(){
         this.$http
           .post(
-            "/api/setsms",
+            "/healthymvc/setsms",
             { phone: this.logonForm.name },
             { emulateJSON: true }
           )

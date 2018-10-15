@@ -2,21 +2,21 @@
     <div class="layout">
       <div class="loginpage">
         <div class="head">
-          <img src="../../../static/imgs/logo_1.png"/>
+          <img src="../../assets/imgs/logo_1.png"/>
         </div>
         <div class="body">
           <form action="" method="post">
             <ul>
               <li>
                 <label>
-                  <img src="../../../static/imgs/img13.png"/>
+                  <img src="../../assets/imgs/img13.png"/>
                 </label>
                 <input type="text" class="txt" v-model="logonForm.name" placeholder="请输入手机号" @change="checkName"/>
               </li>
               <p class="messagesty">{{messagename}}</p>
               <li>
                 <label>
-                  <img src="../../../static/imgs/img36.png"/>
+                  <img src="../../assets/imgs/img36.png"/>
                 </label>
                 <input type="text" v-model="logonForm.pwd" class="txt" placeholder="请输入密码" v-if="seePwdModel" @change="checkPwd"/>
                 <input type="password" v-model="logonForm.pwd" class="txt" placeholder="请输入密码" v-else @change="checkPwd"/>
@@ -73,9 +73,10 @@
             'phone': this.logonForm.name,
             'password': this.logonForm.pwd
           }
-          self.$http.post('/api/login', params,{ emulateJSON: true })
+        this.$dialog.loading.open('登录中...')
+          self.$http.post('/healthymvc/login', params,{ emulateJSON: true })
             .then(function (response) {
-              console.log(JSON.stringify(response))
+              this.$dialog.loading.close()
               if (response.data.status === true) {
                 localStorage.setItem('token', response.data.data.token)
                 localStorage.setItem('avatar_url', response.data.data.avatar_url)
@@ -83,7 +84,21 @@
                 localStorage.setItem('address', response.data.data.address)
                 localStorage.setItem('phone', response.data.data.phone)
                 localStorage.setItem('data', JSON.stringify(response.data.data))
-                self.$router.replace({path: '/my'})
+                if(this.$route.query.url == 'aidcardt'){
+                  setTimeout(self.$router.replace({path: '/aidcardt'}),3000)
+                }
+                else if(this.$route.query.url == 'service'){
+                  setTimeout(self.$router.replace({path: '/service'}),3000)
+                }
+                else if(this.$route.query.url == 'activdetail'){
+                  setTimeout(self.$router.replace({path: '/activ'}),3000)
+                }
+                else if(this.$route.query.url == 'appointment'){
+                  setTimeout(self.$router.replace({path: '/service'}),3000)
+                }
+                else {
+                  self.$router.replace({path: '/my'})
+                }
               }else{
                 this.$dialog.toast({
                   mes: response.data.msg,
@@ -92,6 +107,7 @@
               }
             })
             .catch(function (error) {
+              this.$dialog.loading.close()
               console.log(error)
             })
       },

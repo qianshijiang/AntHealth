@@ -13,40 +13,22 @@
     </div>
     <div class="myaddr">
       <ul>
-        <li>
+        <li v-for="item in listData" :key="item.id">
           <div class="body">
-            <h4>王力宏<small>13888860877</small></h4>
-            <p>上海市静安区延长中路801号A12室</p>
-          </div>
-          <div class="foot">
-            <div class="foot-l">
-              <label class="radio_box" @click="setAddress">
-                <img class="himg" src="../../../static/imgs/img29.png">
-                <em>设置默认</em>
-              </label>
-            </div>
-            <div class="foot-r">
-              <a @click="updateAddress" class="edit">编辑</a>
-              <a @click="delAddress" class="del">删除</a>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="body">
-            <h4>王力宏<small>13888860877</small></h4>
-            <p>上海市静安区延长中路801号A12室</p>
+            <h4>{{item.name}}<small>{{item.phone}}</small></h4>
+            <p>{{item.address}}</p>
           </div>
           <div class="foot">
             <div class="foot-l">
               <label class="radio_box">
-                <input type="radio"  name="radio" checked="true">
-                <label ></label>
+                <img v-if="item.status == 3" @click="setAddress(0,item.id)" class="himg" src="../../assets/imgs/img29.png">
+                <img v-if="item.status == 0" @click="setAddress(3,item.id)" class="himg" src="../../assets/imgs/img30.png">
                 <em>设置默认</em>
               </label>
             </div>
             <div class="foot-r">
-              <a href="#" class="edit">编辑</a>
-              <a href="#" class="del">删除</a>
+              <a @click="updateAddress(item)" class="edit">编辑</a>
+              <a @click="delAddress(item.id)" class="del">删除</a>
             </div>
           </div>
         </li>
@@ -55,22 +37,13 @@
   </div>
 </template>
 <script>
-  // import Vue from 'vue';
-  // import {Preview, PreviewHeader, PreviewItem} from 'vue-ydui/dist/lib.rem/preview';
-  /* 使用px：import {Preview, PreviewHeader, PreviewItem} from 'vue-ydui/dist/lib.px/preview'; */
-
-  // Vue.component(Preview.name, Preview);
-  // Vue.component(PreviewHeader.name, PreviewHeader);
-  // Vue.component(PreviewItem.name, PreviewItem);
   import TopBar from '../components/TopBar.vue'
   export default {
     name: 'Addressmanage',
     data () {
       return {
         listData:{},
-        btns: [
-
-        ]
+        imgs: '../../assets/imgs/img29.png',
       }
     },
     methods: {
@@ -83,50 +56,87 @@
       newAdderess(){
         this.$router.push({path: '/addressmanage1'})
       },
-      updateAddress(){
-        this.$router.push({path: '/addressmanage2'})
+      updateAddress(item){
+        this.$router.push({path: '/addressmanage2',query: {
+            item:item
+          }})
       },
       getList(){
         let self = this
-        this.listData.push({id : '1', checkflag : false})
-        self.$http.get('api/getmyaddresslist',{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+        // this.listData.push({id : '1', checkflag : false})
+        this.$dialog.loading.open('获取中...')
+        self.$http.get('/healthymvc/getmyaddresslist',{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
-            console.log(JSON.stringify(response))
-            if (response.data.data) {
+            this.$dialog.loading.close()
+            if (response.data.status == true) {
+              this.listData = response.data.data
+              this.listData.forEach(item => {
+                if(item.status == 3){
+                  localStorage.setItem('address', item.address)
+                }
+              })
             }
+            if(response.data.msg == 'token错误'){
+              this.$router.push({path: '/login'})
+            }
+            this.$dialog.toast({
+              mes: response.data.msg,
+              timeout: 1500
+            })
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
       },
-      setAddress(){
+      setAddress(status,id){
         let self = this
         let paramts = {
-          myaddressid: '1',
-          state: '2'
+          myaddressid: id,
+          status: status
         }
-        self.$http.post('api/upmyaddressState',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+        this.$dialog.loading.open('设置中...')
+        self.$http.post('/healthymvc/upmyaddressState',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
-            console.log(JSON.stringify(response))
-            if (response.data.data) {
+            this.$dialog.loading.close()
+            if (response.data.status == true) {
+              this.getList()
+            }
+            this.$dialog.toast({
+              mes: response.data.msg,
+              timeout: 1500
+            })
+            if(response.data.msg == 'token错误'){
+              this.$router.push({path: '/login'})
             }
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
       },
-      delAddress(){
+      delAddress(id){
         let self = this
         let paramts = {
-          myaddressid: '1'
+          myaddressid: id
         }
-        self.$http.post('api/demyaddress',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+        this.$dialog.loading.open('删除中...')
+        self.$http.post('/healthymvc/demyaddress',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
-            console.log(JSON.stringify(response))
-            if (response.data.data) {
+            this.$dialog.loading.close()
+            if (response.data.status == true) {
+              this.getList()
+            }
+            this.$dialog.toast({
+              mes: response.data.msg,
+              timeout: 1500
+            })
+            if(response.data.msg == 'token错误'){
+              this.$router.push({path: '/login'})
             }
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
       },

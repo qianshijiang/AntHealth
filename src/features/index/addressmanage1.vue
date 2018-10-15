@@ -75,20 +75,29 @@
           })
           return
         }
+        this.$dialog.loading.open('提交中...')
+        let adds = this.address
+        adds = adds.replace(/\s+/g,"")
         let paramts = {
           name: this.nickname,
           phone: this.phone,
-          state: 0,
-          address: this.address,
+          status : 0,
+          address: adds,
           detailed_address: this.addressdetail,
         }
-        self.$http.post('api/inmyaddress',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+        self.$http.post('/healthymvc/inmyaddress',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
-            console.log(JSON.stringify(response))
-            if (response.data.data) {
+            this.$dialog.loading.close()
+            if (response.data.status == true) {
+              this.$router.replace({path: '/addressmanage'})
             }
+            this.$dialog.toast({
+              mes: response.data,
+              timeout: 1500
+            })
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
       },

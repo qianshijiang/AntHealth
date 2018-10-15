@@ -14,7 +14,7 @@
     <div class="getyes">
       <div class="head">
         <div class="head-hd">
-          <img src="../../../static/imgs/img99.png"/>
+          <img src="../../assets/imgs/img99.png"/>
           <p>支付成功</p>
         </div>
         <div class="head-bd">

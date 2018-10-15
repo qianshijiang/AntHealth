@@ -13,7 +13,7 @@
     </div>
     <div class="cancelyes">
       <div class="head">
-        <img src="../../../static/imgs/img99.png"/>
+        <img src="../../assets/imgs/img99.png"/>
         <p>取消成功</p>
       </div>
       <div class="body">

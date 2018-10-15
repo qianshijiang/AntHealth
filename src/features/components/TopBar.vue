@@ -1,11 +1,8 @@
 <template>
   <yd-navbar style="height: 45px;background: rgb(242,242,242);border-bottom: 1px solid #e0e0e0;">
-    <!--<yd-navbar style="width:100%;height: 45px;background: rgb(242,242,242);border-bottom: 1px solid #e0e0e0;position: fixed;top:0;">-->
     <div @click="prev" slot="left" >
       <img style="height: 18px;width: 10px;margin-left: 20px;" src="../../assets/image/left.png"/>
-
     </div>
-    <!--<yd-navbar-back-icon></yd-navbar-back-icon>-->
     <P style="color: #333;margin-top: 27px;"  slot="center">{{title}}</P>
   </yd-navbar>
 </template>

@@ -1,50 +1,28 @@
 <template>
   <div class="layout pb120">
     <div class="header header-bg">
-
       <div class="center">
         <p>活动</p>
       </div>
     </div>
-    <div class="actlist" >
+    <div class="actlist" style="margin-bottom: 60px;">
       <ul>
-        <li @click="goDetail('activityid')">
-          <!--<a href="#">-->
+        <li v-for="item in listData" :key="item.activateid" @click="goDetail(item.activateid)">
             <div class="head">
-              <img src="../../../static/imgs/img79.jpg"/>
+              <!--<img src="../../../static/imgs/img79.jpg"/>-->
+              <img style="width: 100%;height: 220px;border-radius: 6px;" :src="item.activity_img"/>
             </div>
             <div class="body">
-              <h4>上海中青年市民健康跑活动系列</h4>
+              <h4>{{item.activity_name}}</h4>
               <div class="labels">
-                <span>跑步</span>
-                <span>市民健康</span>
+                <span v-for="(label,index) in item.activity_titles" :key="index">{{label.title}}</span>
               </div>
               <dl>
-                <dt>2018-09-16 10:00～14:00 </dt>
-                <dd>上海市东方明珠广场</dd>
+                <dt>{{item.activity_time}} </dt>
+                <dd>{{item.activity_address}}</dd>
               </dl>
-              <label class="c_green">¥158</label>
+              <label class="c_green">¥{{item.activity_price}}</label>
             </div>
-          <!--</a>-->
-        </li>
-        <li>
-          <a href="#">
-            <div class="head">
-              <img src="../../../static/imgs/img73.jpg"/>
-            </div>
-            <div class="body">
-              <h4>上海中青年市民健康跑活动系列</h4>
-              <div class="labels">
-                <span>跑步</span>
-                <span>市民健康</span>
-              </div>
-              <dl>
-                <dt>2018-09-16 10:00～14:00 </dt>
-                <dd>上海市东方明珠广场</dd>
-              </dl>
-              <label class="c_green">¥158</label>
-            </div>
-          </a>
         </li>
       </ul>
     </div>
@@ -53,35 +31,43 @@
 </template>
 <script>
   import FooterBar from '../components/FooterBar.vue'
-  import TopBar from '../components/TopBar.vue'
   export default {
     name: 'Activedetail',
     data () {
       return {
-        logonData: {},
+        listData: [],
       }
     },
     methods: {
       //获取活动列表下拉分页
       getActiveInfo(){
-          let telf_ = this;
+        this.$dialog.loading.open('获取中...')
+          let self = this
           let params = {
-            page:1, //分页初始值
-            pageMax:10 //每页最大值
-          };
-        telf_.$http.post('api/getactivitytop',params, {emulateJSON: true,
-          headers: {'Content-Type': 'application/json'}
-        }).then(
-            function (response) {
-              console.log(JSON.stringify(response))
+            page:1,
+            pagemax:10
+          }
+        self.$http.post('/healthymvc/getactivitytop',params, {emulateJSON: true})
+          .then(function (response) {
+            this.$dialog.loading.close()
+            if(response.body.status == true){
+              this.listData = response.data.data.activitys
             }
+            else{
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
+            }
+          }
         ).catch(function (error) {
-          console.log(error);
-        });
+          this.$dialog.loading.close()
+          console.log(error)
+        })
       },
       //进入活动详情页面
-      goDetail(activityid) {
-        this.$router.push({path: '/activedetail',query:{activityid:activityid}})
+      goDetail(id) {
+        this.$router.push({path: '/activedetail',query: {id: id}})
       }
     },
     mounted: function () {
@@ -90,8 +76,7 @@
 
     },
     components: {
-      FooterBar,
-      TopBar
+      FooterBar
     }
   }
 </script>

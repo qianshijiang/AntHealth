@@ -19,7 +19,7 @@
               <div class="right">
                 <div class="myinfo-ava">
                   <img v-if="face"  @click="uploadImg" :src="face" style="height: .8rem;width: .8rem;border-radius: .4rem"/>
-                  <img v-else @click="uploadImg" src="../../../static/imgs/img39.png"/>
+                  <img v-else @click="uploadImg" src="../../assets/imgs/img39.png"/>
                   <!--<input class="file" type="file" name="" id="" value="" />-->
                 </div>
               </div>
@@ -32,7 +32,7 @@
           <yd-cell-item :show-clear-icon="false" style="background-color: #fff;border-bottom: 1px solid #e0e0e0;position:relative;top:0;">
             <span slot="left">手机号：</span>
             <yd-input slot="right" v-model="phone" readonly :show-clear-icon="false"  placeholder="请输入手机号码"></yd-input>
-            <img @click="updPhone" slot="right" style="position: absolute;top:18px;right: 12px;color: #c9c9c9;height: 12px;width: 8px;" src="../../../static/imgs/img12.png"/>
+            <img @click="updPhone" slot="right" style="position: absolute;top:18px;right: 12px;color: #c9c9c9;height: 12px;width: 8px;" src="../../assets/imgs/img12.png"/>
           </yd-cell-item>
 
           <yd-cell-item arrow style="background: #fff;">
@@ -94,11 +94,9 @@
         param.append("orderno", "10001"); //添加form表单中其他数据
         // console.log(param.get("photo")); //FormData私有类对象，访问不到，可以通过get判断值是否传进去
 
-        this.$http
-          .post("/api/avatar_url", param, { emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token") }})
+        this.$http.post("/healthymvc/avatar_url", param, { emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token") }})
           .then(function(res) {
             this.$dialog.loading.close()
-            console.log(res.body)
             if(res.body.status==true){
               this.face =  res.body.data.avatar_url
               localStorage.setItem("avatar_url", res.body.data.avatar_url)
@@ -132,15 +130,17 @@
           birthday: this.datetime,
           address: this.address,
         }
-        self.$http.post('api//updateHealthyUser',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+        this.$dialog.loading.open('提交中...')
+        self.$http.post('/healthymvc/updateHealthyUser',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
-            console.log(JSON.stringify(response))
+            this.$dialog.loading.close()
             if (response.data.status == true) {
-              localStorage.setItem("display_name", res.body.data.display_name)
-              localStorage.setItem("address", res.body.data.address)
+              localStorage.setItem("display_name", response.body.data.display_name)
+              localStorage.setItem("address", response.body.data.address)
             }
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
       },
@@ -165,6 +165,9 @@
     width: 100%;
     font-size: .3rem;
     color: #fff;
+  }
+  .myinfo .body li{
+    overflow: scroll;
   }
 </style>
 

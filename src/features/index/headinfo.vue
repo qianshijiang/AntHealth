@@ -12,7 +12,7 @@
       <div class="topnews">
         <div class="head g-tab-hd">
           <ul>
-            <li  v-for="item in typeData" :key="item.id">
+            <li  v-for="(item,index) in typeData" :key="item.id" v-if="index<5">
               <p class="xq" :class="{'xh' : item.check === true}" @click="searchList(item.id)">{{item.newtypename}}</p>
             </li>
           </ul>
@@ -50,7 +50,7 @@
       return {
         typeData: [],
         listData:[],
-        typeid: 1
+        typeid: ''
       }
     },
     methods: {
@@ -75,21 +75,32 @@
       },
       getListType(){
         let self = this
-        self.$http.get('/api/getnewstypenew')
+        this.$dialog.loading.open('获取中...')
+        self.$http.get('/healthymvc/getnewstypenew')
           .then(function (response) {
+            this.$dialog.loading.close()
             if (response.data.status == true) {
               let datas = response.data.data
               datas.forEach((item,index) => {
                 if(index === 0){
+                  this.typeid = item.id
                   this.typeData.push({check: true,id: item.id,newtypename: item.newtypename})
                 }
                 else {
                   this.typeData.push({check: false,id: item.id,newtypename: item.newtypename})
                 }
               })
+              this.getList()
+            }
+            else {
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
             }
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
       },
@@ -101,8 +112,10 @@
           page: 1,
           pagemax: 10
         }
-        self.$http.post('/api/getnewslist',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+        this.$dialog.loading.open('获取中...')
+        self.$http.post('/healthymvc/getnewslist',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
+            this.$dialog.loading.close()
             if (response.data.status == true) {
               this.listData = response.data.data
             }else {
@@ -113,13 +126,13 @@
             }
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
       },
     },
     mounted: function () {
       this.getListType()
-      this.getList()
     },
     components: {
       FooterBar,

@@ -5,18 +5,18 @@
         <div class="l_back">
           <a href="#/login" class="back"></a>
         </div>
-        <img src="../../../static/imgs/logo_1.png"/>
+        <img src="../../assets/imgs/logo_1.png"/>
       </div>
       <div class="body">
         <form action="" method="post">
           <ul>
             <li>
-              <label><img src="../../../static/imgs/img13.png"/></label>
+              <label><img src="../../assets/imgs/img13.png"/></label>
               <input type="number" class="txt" v-model="logonForm.name" placeholder="请输入手机号" @change="checkName"/>
             </li>
             <p class="messagesty">{{messagename}}</p>
             <li>
-              <label><img src="../../../static/imgs/img35.png"/></label>
+              <label><img src="../../assets/imgs/img35.png"/></label>
               <input type="text" style="width: 160px;" class="txt" v-model="logonForm.codeVal" placeholder="短信验证码" @change="checkCode"/>
               <yd-sendcode class="sendcode" slot="right"
                            v-model="codeStart"
@@ -28,7 +28,7 @@
             </li>
             <p class="messagesty">{{messagecode}}</p>
             <li>
-              <label><img src="../../../static/imgs/img36.png"/></label>
+              <label><img src="../../assets/imgs/img36.png"/></label>
               <input type="type" v-model="logonForm.pwd" class="txt" placeholder="请输入密码" v-if="seePwdModel" @change="checkPwd"/>
               <input type="password" v-model="logonForm.pwd" class="txt" placeholder="请输入密码" v-else @change="checkPwd"/>
               <button type="button" style="margin-top: 8px" class="eye" :class="{'eye-on':!seePwdModel}" @click="displayorHidePwd"></button>
@@ -55,7 +55,6 @@
   </div>
 </template>
 <script>
-  import validationRules from '../../common/validationRules'
   import Vue from 'vue';
   import {SendCode} from 'vue-ydui/dist/lib.rem/sendcode';
   import {CheckBox, CheckBoxGroup} from 'vue-ydui/dist/lib.rem/checkbox';
@@ -92,9 +91,10 @@
           'password': this.logonForm.pwd,
           'code':this.logonForm.codeVal
         }
-        self.$http.post('/api/register', params,{ emulateJSON: true })
+        this.$dialog.loading.open('提交中...')
+        self.$http.post('/healthymvc/register', params,{ emulateJSON: true })
           .then(function (response) {
-            console.log(JSON.stringify(response))
+            this.$dialog.loading.close()
             if (response.data.status === true) {
               localStorage.setItem('token', response.data.data.token)
               localStorage.setItem('avatar_url', response.data.data.avatar_url)
@@ -111,6 +111,7 @@
             }
           })
         .catch(function (error) {
+          this.$dialog.loading.close()
           console.log(error)
         })
       },
@@ -186,7 +187,7 @@
       getcode(){
         this.$http
           .post(
-            "/api/setsms",
+            "/healthymvc/setsms",
             { phone: this.logonForm.name },
             { emulateJSON: true }
           )

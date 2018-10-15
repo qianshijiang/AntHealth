@@ -78,7 +78,7 @@
         </ul>
       </div>
       <div class="foot" @click="submit">
-        <a >保 存</a>
+        <a >{{title}}</a>
       </div>
     </div>
   </div>
@@ -98,18 +98,45 @@
         allergy: '',
         usedrag: '',
         address: '',
-        logonData: {}
+        logonData: {},
+        title: '保 存',
+        aidData:{}
       }
     },
     methods: {
       getInfo(){
         let self = this
-        self.$http.get('api/getmyFirstAid')
+        this.$dialog.loading.open('获取中...')
+        self.$http.get('/healthymvc/getmyFirstAid',{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token") }})
           .then(function (response) {
+            this.$dialog.loading.close()
             if (response.data.status == true) {
+              this.aidData = response.data.data
+              if(response.data.data == null){
+                this.title = '保 存'
+              }else {
+                this.name = this.aidData
+                this.gender = this.aidData.sex
+                this.blood = this.aidData.blood
+                this.height = this.aidData.height
+                this.weight = this.aidData.weight
+                this.phone = this.aidData.sosPhone
+                this.medical = this.aidData.medicalRemarks
+                this.allergy = this.aidData.allergyRemarks
+                this.usedrag = this.aidData.medicine
+                this.address = this.aidData.sosAddress
+                this.title = '修 改'
+              }
+            }
+            else{
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
             }
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
       },
@@ -123,6 +150,7 @@
           })
           return
         }
+        this.$dialog.loading.open('提交中...')
         let paramts = {
           name: this.name,
           sex: this.gender,
@@ -135,8 +163,16 @@
           medicine : this.usedrag,
           sosaddress : this.address,
         }
-        self.$http.post('api/insertFirstAid',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+        let url = '/healthymvc/insertFirstAid'
+        if(this.title == '保 存'){
+          url = '/healthymvc/insertFirstAid'
+        }
+        else if(this.title == '修 改'){
+          url = '/healthymvc/upFirstAid'
+        }
+        self.$http.post(url,paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
+            this.$dialog.loading.close()
             // if (response.data.status == true) {
               this.$dialog.toast({
                 mes: response.data.msg,
@@ -147,6 +183,7 @@
             // }
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
       },

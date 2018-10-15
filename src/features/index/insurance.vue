@@ -11,21 +11,22 @@
     <div class="h-related">
       <div class="head g-tab-hd" style="padding-top: 0;">
         <ul style="display: flex;flex-direction: row;line-height: 35px;">
-          <li v-for="item in typeData" :key="item.id" >
+          <li style="flex: 1" v-for="(item,index) in typeData" :key="item.id" v-if="index<5">
             <p class="xq" :class="{'xh' : item.check === true}" @click="searchList(item.id)">{{item.typename}}</p>
           </li>
         </ul>
       </div>
       <div class="body">
         <ul>
-          <li>
+          <li v-for="item in listData" :key="item.id" @click="goDetail(item.id)">
             <div class="img">
-              <img src="../../../static/imgs/img11.jpg"/>
+              <!--<img src="../../assets/imgs/img11.jpg"/>-->
+              <img style="height: 110px;width: 110px;" :src="item.insruanceimg"/>
             </div>
             <div class="txt">
-              <h4>企业员工意外险</h4>
-              <p>3人以上即可投保，轻松转移企业风险</p>
-              <label class="c_green">¥71.00起</label>
+              <h4>{{item.insuranceName}}</h4>
+              <p>{{item.insuranceIntroduction}}</p>
+              <label class="c_green">¥{{item.insruanceprice}}起</label>
             </div>
           </li>
         </ul>
@@ -60,23 +61,27 @@
       },
       getListType(){
         let self = this
-        self.$http.get('/api/getinseranceType')
+        this.$dialog.loading.open('获取中...')
+        self.$http.get('/healthymvc/getinseranceType')
           .then(function (response) {
+            this.$dialog.loading.close()
             if (response.data.status == true) {
               let datas = response.data.data
               datas.forEach((item,index) => {
                 if(index === 0){
+                  this.typeid = item.id
+                  this.getList()
                   this.typeData.push({check: true,id: item.id,typename: item.typename})
                 }
                 else {
                   this.typeData.push({check: false,id: item.id,typename: item.typename})
                 }
               })
-              console.log(this.typeData)
-              // this.typeData = response.data.data
+
             }
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
       },
@@ -87,19 +92,33 @@
           page: 1,
           pagemax: 10
         }
-        self.$http.post('/api/getinseranceTypeList',paramts,{ emulateJSON: true })
+        this.$dialog.loading.open('获取中...')
+        self.$http.post('/healthymvc/getinseranceTypeList',paramts,{ emulateJSON: true })
           .then(function (response) {
-            if (response.data.data) {
+            this.$dialog.loading.close()
+            if (response.data.status == true) {
+              this.listData = response.data.data
+            }
+            else{
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
             }
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
+      },
+      goDetail(id) {
+        this.$router.push({path: '/product',  query: {
+            id: id
+          }})
       },
     },
     mounted: function () {
       this.getListType()
-      this.getList()
     },
   }
 </script>
@@ -110,6 +129,7 @@
      .xq{
        color:#999;
        padding: 0 10px;
+       text-align: center;
      }
   .xh{
     color: #333;

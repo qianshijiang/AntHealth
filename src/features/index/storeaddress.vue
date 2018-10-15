@@ -1,63 +1,54 @@
 <template>
   <div class="layout">
-    <div class="header actaddr-header">
+    <div class="header actaddr-header" style="z-index: 999999">
       <div class="left">
         <div @click="prev" class=" back back1"></div>
       </div>
-
     </div>
+
     <div class="actaddr">
-      <div class="actaddr-vw">
-        <img src="../../../static/imgs/img83.jpg"/>
-        <label></label>
-      </div>
+      <div id="allmap" class="bm-view"></div>
+      <!--<div class="actaddr-vw">-->
+        <!--<img src="../../assets/imgs/img83.jpg"/>-->
+        <!--<label></label>-->
+      <!--</div>-->
       <div class="actaddr-hd">
         <dl>
           <dt><i></i></dt>
-          <dd class="d1">上海市东方明珠广场</dd>
-          <dd class="d2">021-21512230</dd>
+          <dd class="d1">{{detailData.storeaddress}}</dd>
+          <dd class="d2">{{detailData.storephone}}</dd>
         </dl>
       </div>
       <div class="actaddr-bd">
         <ul>
-          <li>
-            <a href="#">
-              <div class="img">
-                <img src="../../../static/imgs/img66.png"/>
-              </div>
-              <div class="txt">
-                <h4>2018市民健康跑步活动</h4>
-                <p>2018-09-16 10:00～14:00 </p>
-                <label class="c_green">免费</label>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <div class="img">
-                <img src="../../../static/imgs/img66.png"/>
-              </div>
-              <div class="txt">
-                <h4>2018市民健康跑步活动</h4>
-                <p>2018-09-16 10:00～14:00 </p>
-                <label class="c_green">免费</label>
-              </div>
+          <li v-for="item in listData" :key="item.activateid" @click="goDetail(item.activateid)">
+            <a>
+            <div class="img">
+              <!--<img src="../../assets/imgs/img66.png"/>-->
+              <img style="height: 90px;width: 90px;" :src="item.activity_img"/>
+            </div>
+            <div class="txt" style="width: 75%;">
+              <h4>{{item.activity_name}}</h4>
+              <p>{{item.activity_time}} </p>
+              <label class="c_green">{{item.activity_address}}</label>
+            </div>
             </a>
           </li>
         </ul>
       </div>
     </div>
-
   </div>
 </template>
 <script>
+  import BMap from 'BMap'
   import FooterBar from '../components/FooterBar.vue'
   import TopBar from '../components/TopBar.vue'
   export default {
     name: 'Storeaddress',
     data () {
       return {
-        logonData: {}
+        listData: [],
+        detailData: {},
       }
     },
     methods: {
@@ -66,9 +57,60 @@
       },
       prev(){
         this.$router.go(-1)
+      },
+      getInfo(){
+        let self = this
+        let params = {
+          storeid : this.$route.query.storeid,
+          page:1,
+          pagemax:10
+        }
+        this.$dialog.loading.open('获取中...')
+        self.$http.post('/healthymvc/storeactivity',params, {emulateJSON: true})
+          .then(function (response) {
+            this.$dialog.loading.close()
+              if(response.body.status == true){
+                this.listData = response.data.data.activitys
+                this.detailData = response.data.data
+                this.getMap()
+              }
+              else{
+                this.$dialog.toast({
+                  mes:  response.data.msg,
+                  timeout: 1500
+                })
+                this.getMap()
+              }
+            }
+          ).catch(function (error) {
+          this.$dialog.loading.close()
+          console.log(error)
+        })
+      },
+      getMap(){
+        let lng = this.detailData.storeLongitude //经度 长的
+        let lat = this.detailData.storeLatitude
+        let map = new BMap.Map("allmap")
+        let point = new BMap.Point(lng, lat)
+        map.centerAndZoom(point, 15)
+
+        //创建小狐狸
+        let pt = new BMap.Point(lng, lat)
+        // let marker = new BMap.Marker(point)  // 创建标注
+        // map.addOverlay(marker)           // 将标注添加到地图中
+        // map.centerAndZoom(point, 15)
+        let myIcon = new BMap.Icon("../static/imgs/img44.png", new BMap.Size(30,150))
+        let marker2 = new BMap.Marker(pt,{icon:myIcon})  // 创建标注
+        map.addOverlay(marker2)
+      },
+      goDetail(id) {
+        this.$router.push({path: '/activedetail',query: {id: id}})
       }
     },
-    mounted: function () {},
+    mounted: function () {
+      this.getInfo()
+
+    },
     components: {
       FooterBar,
       TopBar
@@ -76,91 +118,10 @@
   }
 </script>
 <style lang="scss" scoped>
-  .home-box {
-    /*margin-top:45px;*/
-    background-image:none;
-    height: auto;
-    min-height: 100%;
+  .bm-view {
     width: 100%;
-    background: #fff;
-  }
-  .box-text{
-    font-size: 14px;
-    color: #999;
-    margin-top: 5px;
-    line-height:25px;
-    overflow: hidden;
-    display:-webkit-box;
-    text-overflow:ellipsis;
-    -webkit-line-clamp:2;
-    -webkit-box-orient:vertical;
-    white-space:normal;
-  }
-  .box-content{
-    height: auto;
-    max-height: 120px;
-    width: 100%;
-    /*border-bottom:1px solid #e0e0e0;*/
-    /*border-top:1px solid #e0e0e0;*/
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-    margin-top: 10px;
-    background: rgb(242,242,242);
-  }
-  .box-content1{
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-  .box-content1 div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 8px;
-  }
-  .product-box-son{
-    width: 100%;
-    border-bottom: 1px solid #e0e0e0;
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 0;
-  }
-  .pro-text3{
-    color: #333;
-    line-height: 45px;
-    margin-left: 15px;
-    font-weight: bold;
-  }
-  .pro-text3j{
-    color: #333;
-    font-weight: normal;
-  }
-  .box-top{
-    height: auto;
-    width: 100%;
-    border-bottom:1px solid #e0e0e0;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    padding: 20px 10px;
-  }
-
-  .box-imgb{
-    width:140px;
-    height:100px;
-    border: 1px solid #999;
-    margin-right: 15px;
-    border-radius: 10px;
-  }
-  .box-img1{
-    width:100%;
-    height: 100%;
-    border-radius: 15px;
-  }
-  .se-title3{
-    font-size: 14px;
-    color: #999;
+    height: 400px;
+    /*margin-top: -1.1rem;*/
   }
 </style>
 

@@ -1736,9 +1736,9 @@ input[type="date"].full:before {
 }
 .servf .body ul li{
 	padding: 0.3rem;
-	height: 0.4rem;
+	height: auto;
 	line-height: 0.4rem;
-	overflow: hidden;
+	overflow: scroll;
 	border-bottom: 1px solid #ddd;
 }
 .servf .body ul li .label{
@@ -3067,7 +3067,7 @@ display: none;
    -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
            box-sizing: border-box;
-   background: url(../imgs/bg5.png) repeat-x top #fff;
+   background: url(../imgs/bg4.png) repeat-x top #fff;
    position: relative;
 }
 /*.orderd-hd:before{

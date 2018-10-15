@@ -11,11 +11,11 @@
     <div class="prod">
       <div class="prod-vw">
         <div class="img">
-          <img src="../../../static/imgs/img75.jpg"/>
+          <img src="../../assets/imgs/img75.jpg"/>
         </div>
         <div class="txt">
-          <h4>长期护理险</h4>
-          <p>老年人长期护理包括家中、敬老院及其他地方的照顾</p>
+          <h4>{{detailData.insurance_title}}</h4>
+          <p>{{detailData.introduction}}</p>
         </div>
       </div>
       <div class="prod-txt">
@@ -26,15 +26,15 @@
           <ul>
             <li>
               <div class="left">保障计划</div>
-              <div class="right">长护险</div>
+              <div class="right">{{detailData.insurance_label}}</div>
             </li>
             <li>
               <div class="left">被保人年龄</div>
-              <div class="right">45-70周岁</div>
+              <div class="right">{{detailData.insured_age}}周岁</div>
             </li>
             <li>
               <div class="left">保障期间</div>
-              <div class="right">1年</div>
+              <div class="right">{{detailData.guarantee_period}}年</div>
             </li>
           </ul>
         </div>
@@ -46,17 +46,9 @@
         </div>
         <div class="body">
           <ul>
-            <li>
-              <div class="left">恶性肿瘤及原位癌医疗保险金</div>
-              <div class="right">200万元</div>
-            </li>
-            <li>
-              <div class="left">意外医疗保险金</div>
-              <div class="right">20万元</div>
-            </li>
-            <li>
-              <div class="left">年免赔额</div>
-              <div class="right">无免赔额</div>
+            <li v-for="(item,index) in detailData.guarantees" :key="index">
+              <div class="left">{{item.insuranceTitle}}</div>
+              <div class="right">{{item.insuranceContent}}</div>
             </li>
             <li>
               <div class="left">医院范围</div>
@@ -69,35 +61,25 @@
       <div class="prod-tabs">
         <div class="head g-tab-hd">
           <ul>
-            <li class="on"><a>产品介绍</a></li>
-            <li><a >保险案例</a></li>
-            <li><a >理赔须知</a></li>
+            <li :class="{'on' : flag === 1}" @click="getclass(1)"><a>产品介绍</a></li>
+            <li :class="{'on' : flag === 2}" @click="getclass(2)"><a >保险案例</a></li>
+            <li :class="{'on' : flag === 3}" @click="getclass(3)"><a >理赔须知</a></li>
           </ul>
         </div>
-        <div class="body g-tab-bd">
-          <p><img src="../../../static/imgs/img73.jpg"/></p>
-          <p>现在9月份入秋的季节，也是吃螃蟹最好的季节，螃蟹不只是美味，还是很营养的一道海鲜，螃蟹不仅含有丰富的蛋白质，氨基酸，还含有丰富的钙，铁，锌，硒，钾，维生素A，维生素B等，其蛋白质的含量是猪肉和鱼肉的几倍，螃蟹体内的维生素A和核黄素的含量，在人们的食谱中是也首屈一指的。</p>
-
-          <p>但是并不是所有螃蟹都能那么营养，而且也不是什么人都可以吃螃蟹，除了海鲜过敏的人，还有一些胆固醇过高的人群，也要尽量少吃螃蟹，当然这些都是已知的禁忌，今天主要来说说一些鲜为人知的吃螃蟹禁忌，这可是讨海人的经验之谈，大家好好收藏。</p>
-
-          <p>首先螃蟹一定要挑新鲜的，很多人因为没有办法看到螃蟹咋煮之前，到底是不是活蹦乱跳的，所以很是吃亏，虽然沿海地方基本上都是一些新鲜的螃蟹在市场是哪个，难免也会混入一些不良的商家，将死了很久的螃蟹夹杂在其中，这就让大家很是头痛。</p>
-
-          <p>为什么别吃死蟹？因为死蟹体内的寄生细菌，会繁殖并扩散到蟹肉中，使得蛋白质分解产生组织胺。蟹死的时间越长，体内积累的组织胺越多，毒性越大。即使把死蟹煮熟煮透，毒素仍然不易被破坏，食用后会引起恶心呕吐，面颊潮红，心跳加速等。</p>
-
-          <p>不要吃隔夜蟹，螃蟹为含组胺酸较多的食物，隔夜的剩蟹种组氨酸在某些维生素的作用下，会分解为组胺，回锅加热随可杀灭病源微生物，却不能破坏毒素，从而导致组氨酸中毒。因此，蟹最好现蒸现吃，一般不要超过4小时。还有不能吃生蟹和醉蟹。</p>
+        <div class="body g-tab-bd" style="margin-bottom: 60px;">
+          <!--<p><img src="../../assets/imgs/img73.jpg"/></p>-->
+          <p><img style="height: 220px;width: 100%;" :src="detailData.htmlurls"/></p>
+          <p style="overflow: hidden" v-if="flag == 1">{{detailData.insured_introduction}}</p>
+          <p style="overflow: hidden" v-if="flag == 2">{{detailData.insured_case}}</p>
+          <p style="overflow: hidden" v-if="flag == 3">{{detailData.insured_notes}}</p>
         </div>
 
-        <div class="body g-tab-bd" style="display: none;">
-          <p>现在9月份入秋的季节，也是吃螃蟹最好的季节，螃蟹不只是美味，还是很营养的一道海鲜，螃蟹不仅含有丰富的蛋白质，氨基酸，还含有丰富的钙，铁，锌，硒，钾，维生素A，维生素B等，其蛋白质的含量是猪肉和鱼肉的几倍，螃蟹体内的维生素A和核黄素的含量，在人们的食谱中是也首屈一指的。</p>
-        </div>
 
-        <div class="body g-tab-bd" style="display: none;">
-          <p>现在9月份入秋的季节，也是吃螃蟹最好的季节，螃蟹不只是美味，还是很营养的一道海鲜，螃蟹不仅含有丰富的蛋白质，氨基酸，还含有丰富的钙，铁，锌，硒，钾，维生素A，维生素B等，其蛋白质的含量是猪肉和鱼肉的几倍，螃蟹体内的维生素A和核黄素的含量，在人们的食谱中是也首屈一指的。</p>
-          <p>现在9月份入秋的季节，也是吃螃蟹最好的季节，螃蟹不只是美味，还是很营养的一道海鲜，螃蟹不仅含有丰富的蛋白质，氨基酸，还含有丰富的钙，铁，锌，硒，钾，维生素A，维生素B等，其蛋白质的含量是猪肉和鱼肉的几倍，螃蟹体内的维生素A和核黄素的含量，在人们的食谱中是也首屈一指的。</p>
-        </div>
+
+
       </div>
       <div class="prod-ft">
-        <a href="#">立即投保</a>
+        <a>立即投保</a>
       </div>
     </div>
   </div>
@@ -109,19 +91,44 @@
     name: 'My',
     data () {
       return {
-        logonData: {},
-        navflag: 1,
+        detailData: {},
+        flag: 1,
       }
     },
     methods: {
-      searchList(v){
-        this.navflag = v + 1
+      getclass(v){
+        this.flag = v
       },
       prev(){
         this.$router.go(-1)
-      }
+      },
+      getDetail(){
+        let self = this
+        let paramts = {
+          inseranceid : this.$route.query.id,
+        }
+        this.$dialog.loading.open('获取中...')
+        self.$http.post('/healthymvc/getinseranceDetails',paramts,{ emulateJSON: true })
+          .then(function (response) {
+            this.$dialog.loading.close()
+            if (response.data.status == true) {
+              this.detailData = response.data.data
+            }else {
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
+            }
+          })
+          .catch(function (error) {
+            this.$dialog.loading.close()
+            console.log(error)
+          })
+      },
     },
-    mounted: function () {},
+    mounted: function () {
+      this.getDetail()
+    },
     components: {
       FooterBar,
       TopBar

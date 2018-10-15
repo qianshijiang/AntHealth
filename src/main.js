@@ -5,21 +5,21 @@ import Element from 'element-ui'
 import VueResource from 'vue-resource'
 
 Vue.use(VueResource)
-import http from 'axios'
-import qs from 'qs'
+// import http from 'axios'
+// import qs from 'qs'
 import Mock from './mock/mock'
 import store from './vuex/store'
 import vuescroll from 'vuescroll'
 import errorMapping from './common/errorMapping'
 import * as customFilters from './common/customFilters'
 /* import common style files */
-// import 'element-ui/lib/theme-chalk/index.css'
-// import '@/assets/style/normalize.css'
-// import '@/assets/style/layout.css'
+import 'element-ui/lib/theme-chalk/index.css'
+import '@/assets/style/normalize.css'
+import '@/assets/style/layout.css'
 import Swiper from 'swiper'
 import '@/assets/style/swiper.min.css'
 import '@/assets/style/qietu.css'
-// import '@/assets/style/bc.css'
+// import '@/assets/style/style.css'
 import '@/assets/js/flexible.min.js'
 
 import YDUI from 'vue-ydui' /* �൱��import YDUI from 'vue-ydui/ydui.rem.js' */
@@ -35,7 +35,8 @@ Vue.use(YDUI)
 Vue.use(Element)
 Vue.use(vuescroll)
 Vue.config.productionTip = false
-// http.defaults.baseURL = env.HOST
+// VueResource.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
+// VueResource.defaults.baseURL = env.HOST
 // http.defaults.timeout = 5000
 // http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 // let loadinginstace

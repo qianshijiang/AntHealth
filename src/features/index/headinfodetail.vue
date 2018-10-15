@@ -15,9 +15,9 @@
         <p>2018 09/17  08:02</p>
       </div>
       <div class="body">
-        <!--<p><img src="../../../static/imgs/img67.jpg"/></p>-->
+        <!--<p><img src="../../assets/imgs/img67.jpg"/></p>-->
         <p><img style="width: 100%;height: 210px;border-radius: 6px;" :src="detailData.newImg"/></p>
-        <p>{{detailData.newcontent}}</p>
+        <p style="overflow: hidden">{{detailData.newcontent}}</p>
 
 
       </div>
@@ -41,8 +41,10 @@
         let paramts = {
           newid: this.$route.query.id,
         }
-        self.$http.post('/api/getnewsdetails',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+        this.$dialog.loading.open('获取中...')
+        self.$http.post('/healthymvc/getnewsdetails',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
+            this.$dialog.loading.close()
             if (response.data.status == true) {
               this.detailData = response.data.data
             }else {
@@ -53,6 +55,7 @@
             }
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
       },

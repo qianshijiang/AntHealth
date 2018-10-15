@@ -2,7 +2,7 @@
   <div class="layout ">
     <div class="header">
       <div class="left">
-        <div @click="prev"class="back"></div>
+        <div @click="prev"></div>
       </div>
       <div class="center">
         <p>保健养生</p>
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="payyes" @click="linshi">
-      <img src="../../../static/imgs/img99.png"/>
+      <img src="../../assets/imgs/img99.png"/>
       <p>恭喜，支付成功</p>
     </div>
   </div>
@@ -39,7 +39,14 @@
         this.$router.go(-1)
       }
     },
-    mounted: function () {},
+    mounted: function () {
+      if(this.$route.query.type == 1){
+        setTimeout(this.$router.replace({path: '/serviceorder'}),6000)
+      }
+      else if(this.$route.query.type == 2){
+        setTimeout(this.$router.replace({path: '/activeorder'}),6000)
+      }
+    },
     components: {
       FooterBar,
       TopBar

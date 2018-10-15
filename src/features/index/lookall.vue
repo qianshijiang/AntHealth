@@ -14,7 +14,7 @@
         <div class="swiper-container">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <img src="../../../static/imgs/banner.png"/>
+              <img src="../../assets/imgs/banner.png"/>
               <div class="txt">
                 <h3>专家认为多吃水果健康</h3>
                 <h4>你所不知道的十大误区之食物相克</h4>
@@ -22,7 +22,7 @@
               </div>
             </div>
             <div class="swiper-slide">
-              <img src="../../../static/imgs/banner.png"/>
+              <img src="../../assets/imgs/banner.png"/>
               <div class="txt">
                 <h3>专家认为</h3>
                 <h4>你所不知道的十大误区之食物相克</h4>
@@ -30,7 +30,7 @@
               </div>
             </div>
             <div class="swiper-slide">
-              <img src="../../../static/imgs/banner.png"/>
+              <img src="../../assets/imgs/banner.png"/>
               <div class="txt">
                 <h3>专家认为多吃水</h3>
                 <h4>你所不知道的十大误区之食物相克</h4>
@@ -49,7 +49,7 @@
         <li>
           <a href="#">
             <div class="img">
-              <img src="../../../static/imgs/img21.png"/>
+              <img src="../../assets/imgs/img21.png"/>
             </div>
             <div class="txt">
               <h4>我的保单</h4>
@@ -60,7 +60,7 @@
         <li>
           <a href="#">
             <div class="img">
-              <img src="../../../static/imgs/img23.png"/>
+              <img src="../../assets/imgs/img23.png"/>
             </div>
             <div class="txt">
               <h4>福利商城</h4>
@@ -71,7 +71,7 @@
         <li>
           <a href="#">
             <div class="img">
-              <img src="../../../static/imgs/img24.png"/>
+              <img src="../../assets/imgs/img24.png"/>
             </div>
             <div class="txt">
               <h4>平价药店</h4>

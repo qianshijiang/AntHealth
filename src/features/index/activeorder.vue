@@ -12,149 +12,34 @@
     <div class="actorder">
       <div class="head g-tab-hd">
         <ul>
-          <li class="on"><a href="#">全部</a></li>
-          <li><a href="#">待审核</a></li>
-          <li><a href="#">审核中</a></li>
-          <li><a href="#">已验票</a></li>
-          <li><a href="#">退票</a></li>
+          <li :class="{'xh' : statusflag === 99}" @click="searchList(99)"><p>全部</p></li>
+          <li :class="{'xh' : statusflag === 0}" @click="searchList(0)"><p>待审核</p></li>
+          <li :class="{'xh' : statusflag === 4}" @click="searchList(4)"><p>审核中</p></li>
+          <li :class="{'xh' : statusflag === 7}" @click="searchList(7)"><p>已验票</p></li>
+          <li :class="{'xh' : statusflag === 9}"  @click="searchList(9)"><p>退票</p></li>
         </ul>
       </div>
       <div class="body g-tab-bd">
         <ul>
-          <li @click="goDetail">
+          <li v-for="(item,index) in listData" :key="index" @click="goDetail(item)">
             <div class="left">
-              <h4>上海市东方明珠广场</h4>
+              <h4>{{item.activitename}}</h4>
               <dl>
-                <dt>2018-09-16 10:00～14:00 </dt>
-                <dd>上海市东方明珠广场</dd>
+                <dt>{{item.activitetime}} </dt>
+                <dd>{{item.activiteaddress}}</dd>
               </dl>
             </div>
             <div class="right">
-              <h4>免费票</h4>
-              <p class="c_green">¥0.00</p>
+              <h4>{{item.ticketname}}</h4>
+              <p class="c_green">¥{{item.unitprice}}</p>
             </div>
-            <div class="img img-wait"></div>
-          </li>
-          <li>
-            <div class="left">
-              <h4>上海市东方明珠广场</h4>
-              <dl>
-                <dt>2018-09-16 10:00～14:00 </dt>
-                <dd>上海市东方明珠广场</dd>
-              </dl>
-            </div>
-            <div class="right">
-              <h4>免费票</h4>
-              <p class="c_green">¥0.00</p>
-            </div>
-            <div class="img img-doing"></div>
-          </li>
-          <li>
-            <div class="left">
-              <h4>上海市东方明珠广场</h4>
-              <dl>
-                <dt>2018-09-16 10:00～14:00 </dt>
-                <dd>上海市东方明珠广场</dd>
-              </dl>
-            </div>
-            <div class="right">
-              <h4>免费票</h4>
-              <p class="c_green">¥0.00</p>
-            </div>
-            <div class="img img-done"></div>
-          </li>
-          <li>
-            <div class="left">
-              <h4>上海市东方明珠广场</h4>
-              <dl>
-                <dt>2018-09-16 10:00～14:00 </dt>
-                <dd>上海市东方明珠广场</dd>
-              </dl>
-            </div>
-            <div class="right">
-              <h4>免费票</h4>
-              <p class="c_green">¥0.00</p>
-            </div>
-            <div class="img img-return"></div>
+            <div class="img img-wait" v-if="statusflag == 0"></div>
+            <div class="img img-doing" v-if="statusflag == 4"></div>
+            <div class="img img-done" v-if="statusflag == 7"></div>
+            <div class="img img-return" v-if="statusflag == 9"></div>
           </li>
         </ul>
       </div>
-      <div class="body g-tab-bd" style="display: none;">
-        <ul>
-          <li>
-            <div class="left">
-              <h4>上海市东方明珠广场</h4>
-              <dl>
-                <dt>2018-09-16 10:00～14:00 </dt>
-                <dd>上海市东方明珠广场</dd>
-              </dl>
-            </div>
-            <div class="right">
-              <h4>免费票</h4>
-              <p class="c_green">¥0.00</p>
-            </div>
-            <div class="img img-wait"></div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="body g-tab-bd" style="display: none;">
-        <ul>
-
-          <li>
-            <div class="left">
-              <h4>上海市东方明珠广场</h4>
-              <dl>
-                <dt>2018-09-16 10:00～14:00 </dt>
-                <dd>上海市东方明珠广场</dd>
-              </dl>
-            </div>
-            <div class="right">
-              <h4>免费票</h4>
-              <p class="c_green">¥0.00</p>
-            </div>
-            <div class="img img-doing"></div>
-          </li>
-        </ul>
-      </div>
-      <div class="body g-tab-bd" style="display: none;">
-        <ul>
-          <li>
-            <div class="left">
-              <h4>上海市东方明珠广场</h4>
-              <dl>
-                <dt>2018-09-16 10:00～14:00 </dt>
-                <dd>上海市东方明珠广场</dd>
-              </dl>
-            </div>
-            <div class="right">
-              <h4>免费票</h4>
-              <p class="c_green">¥0.00</p>
-            </div>
-            <div class="img img-done"></div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="body g-tab-bd" style="display: none;">
-        <ul>
-          <li>
-            <div class="left">
-              <h4>上海市东方明珠广场</h4>
-              <dl>
-                <dt>2018-09-16 10:00～14:00 </dt>
-                <dd>上海市东方明珠广场</dd>
-              </dl>
-            </div>
-            <div class="right">
-              <h4>免费票</h4>
-              <p class="c_green">¥0.00</p>
-            </div>
-            <div class="img img-return"></div>
-          </li>
-        </ul>
-      </div>
-
     </div>
 
   </div>
@@ -166,25 +51,64 @@
     name: 'Activeorder',
     data () {
       return {
-        logonData: {},
-        navflag: 1
+        status: 0,
+        listData: [],
+        statusflag: 99
       }
     },
     methods: {
-      goDetail() {
-        this.$router.push({path: '/activeorderdetail'})
+      goDetail(item) {
+        this.$router.push({path: '/activeorderdetail',query: {
+            item: item
+          }})
       },
       prev(){
         this.$router.go(-1)
+      },
+      getActiveOrder(){
+        this.$dialog.loading.open('获取中...')
+        this.listData = []
+        let self = this
+        let params = {
+          status: this.statusflag,
+          page:1,
+          pagemax:10
+        }
+        self.$http.post('/healthymvc/getmyticket',params, {emulateJSON: true,headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+          .then(function (response) {
+            this.$dialog.loading.close()
+              if(response.body.status == true){
+                this.listData = response.data.data.tickets
+              }
+              else{
+                if(response.data.msg == 'token错误'){
+                  this.$router.push({path: '/login'})
+                }
+                this.$dialog.toast({
+                  mes:  response.data.msg,
+                  timeout: 1500
+                })
+              }
+            }
+          ).catch(function (error) {
+          this.$dialog.loading.close()
+          console.log(error)
+        })
       },
       goRefund() {
         this.$router.push({path: '/refund'})
       },
       searchList(v){
-        this.navflag = v + 1
+        this.statusflag = v
+        this.getActiveOrder()
       }
     },
-    mounted: function () {},
+    mounted: function () {
+      if(this.$route.query.flag){
+        this.statusflag = this.$route.query.flag
+      }
+      this.getActiveOrder()
+    },
     components: {
       FooterBar,
       TopBar
@@ -192,101 +116,12 @@
   }
 </script>
 <style lang="scss" scoped>
-  .home-box {
-    /*margin-top:45px;*/
-    background-image:none;
-    height: auto;
-    width: 100%;
-
+  .xq{
+    color:#999;
   }
-  .aor-box1{
-    display: flex;flex-direction: column;border-right:1px dashed #e0e0e0;
-    padding: 0 15px;
-    flex: 2;
-  }
-  .aor-box1j{
-    border: 0;
-    flex: 1;
-    align-items: center;
-  }
-  .aor-text{
-    font-size: 16px;
+  .xh{
     color: #333;
-    font-weight: bold;
-  }
-  .aor-text1{
-    font-size: 14px;
-    color: #999;
-  }
-  .aor-text2{
-    font-size: 12px;
-    color: #666;
-  }
-  .pol-content{
-    height: auto;
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    padding: 20px 0px;
-    background: rgb(255,255,255);
-    overflow: hidden;
-    width: 95%;margin: auto;
-    margin-top: 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-  }
-  .pol-content p{
-    line-height: 30px;
-    color: #333;
-    font-size: 16px;
-
-  }
-  .pol-content1{
-    height: auto;
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
-    margin-right: 8px;
-    background: rgb(242,242,242);
-    height: 25px;
-    width: 40px;
-
-  }
-  .pol-content1 p {
-    font-size: 12px;
-    text-align: center;
-    color: #333;
-    line-height: 25px;
-  }
-  .box-content1 div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  .box-top{
-    height: auto;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    padding: 10px;
-    background: #ffffff;
-  }
-  .box-top1{
-    padding: 0 10px;
-    justify-content: space-around;
-    margin-bottom: 5px;
-  }
-  .box-top2{
-    padding: 15px 0;
-    flex: 1;
-    text-align: center;
-  }
-  .box-top2j{
-    border-bottom: 1px solid #333;
-  }
-  .se-title3{
-    font-size: 14px;
-    color: #999;
+    border-bottom: 1px solid #00CE9F
   }
 </style>
 

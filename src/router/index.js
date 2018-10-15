@@ -35,6 +35,9 @@ import EnjoyAge from '@/features/enjoyage/enjoyage'
 import Coupon from '@/features/index/coupon'
 import Updatephone from '@/features/index/updatephone'
 import Insurance from '@/features/index/insurance'
+import Integral from '@/features/index/integral'
+import Integraldetail from '@/features/index/integraldetail'
+import Aidorder from '@/features/index/aidorder'
 
 Vue.use(Router)
 
@@ -43,7 +46,7 @@ const router = new Router({
     {
       path: '/',
       name: '',
-      component: Login
+      component: Index
     },
     {
       path: '/login',
@@ -219,6 +222,21 @@ const router = new Router({
       path: '/insurance',
       name: 'insurance',
       component: Insurance
+    },
+    {
+      path: '/integral',
+      name: 'integral',
+      component: Integral
+    },
+    {
+      path: '/integraldetail',
+      name: 'integraldetail',
+      component: Integraldetail
+    },
+    {
+      path: '/aidorder',
+      name: 'aidorder',
+      component: Aidorder
     }
   ]
 });

@@ -1,7 +1,7 @@
 'use strict'
 module.exports = {
   NODE_ENV: '"production"',
-  env_config: '"prod"',
+  // env_config: '"prod"',
   // DUMMY: false,
   // HOST: '"https://yunjf.gov.cn/"',
   // resourceDomain: '"http://public.yunjuwuliu.com/admin"',

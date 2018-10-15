@@ -14,12 +14,12 @@
       <form action="" method="post">
         <ul>
           <li>
-            <label><img src="../../../static/imgs/img13.png"/></label>
+            <label><img src="../../assets/imgs/img13.png"/></label>
             <input type="number" style="width:120px;" class="txt" v-model="findForm.name" placeholder="请输入手机号" @blur="checkName"/>
             <p class="messagesty">{{messagename}}</p>
           </li>
           <li>
-            <label><img src="../../../static/imgs/img35.png"/></label>
+            <label><img src="../../assets/imgs/img35.png"/></label>
             <input type="text" style="width: 100px;" class="txt" v-model="findForm.codeVal" placeholder="短信验证码" @blur="checkCode"/>
             <yd-sendcode class="sendcode" slot="right"
                          v-model="codeStart"
@@ -32,7 +32,7 @@
           </li>
 
           <li>
-            <label><img src="../../../static/imgs/img36.png"/></label>
+            <label><img src="../../assets/imgs/img36.png"/></label>
             <input type="type" v-model="findForm.pwd" style="width: 120px;" class="txt" placeholder="请输入密码" v-if="seePwdModel" @blur="checkPwd"/>
             <input type="password" v-model="findForm.pwd" style="width: 120px;" class="txt" placeholder="请输入密码" v-else @blur="checkPwd"/>
             <button type="button" class="eye" :class="{'eye-on':!seePwdModel}" @click="displayorHidePwd"></button>
@@ -82,9 +82,10 @@
           'password': this.findForm.pwd,
           'code':this.findForm.codeVal
         }
-        self.$http.post('/api/retrieve', params,{ emulateJSON: true })
+        this.$dialog.loading.open('提交中...')
+        self.$http.post('/healthymvc/retrieve', params,{ emulateJSON: true })
           .then(function (response) {
-            console.log(JSON.stringify(response))
+            this.$dialog.loading.close()
             if (response.data.status === true) {
               // sessionStorage.setItem('token', response.data.result.mobileToken)
               // sessionStorage.setItem('setLogonData', JSON.stringify(response.data.result))
@@ -97,6 +98,7 @@
             }
           })
         .catch(function (error) {
+          this.$dialog.loading.close()
           console.log(error)
         })
       },
@@ -173,7 +175,7 @@
       getcode(){
         this.$http
           .post(
-            "/api/setsms",
+            "/healthymvc/setsms",
             { phone: this.logonForm.name },
             { emulateJSON: true }
           )

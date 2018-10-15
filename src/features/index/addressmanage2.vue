@@ -49,7 +49,9 @@
         show1: false,
         address: '',
         addressdetail: '',
-        district: District
+        status: 0,
+        district: District,
+        infoData: {},
       }
     },
     methods: {
@@ -60,11 +62,11 @@
         this.$router.go(-1)
       },
       getinfo(){
-        this.nickname = addressinfo.name
-        this.phone = addressinfo.phone
-        this.state = addressinfo.state
-        this.address = addressinfo.address
-        this.addressdetail = addressinfo.detailed_address
+        this.nickname = this.infoData.name
+        this.phone = this.infoData.phone
+        this.status = this.infoData.status
+        this.address = this.infoData.address
+        this.addressdetail = this.infoData.detailedAddress
       },
       submit(){
         let self = this
@@ -82,25 +84,38 @@
           })
           return
         }
+        let adds = this.address
+        adds = adds.replace(/\s+/g,"")
         let paramts = {
+          myaddressid: this.infoData.id,
           name: this.nickname,
           phone: this.phone,
-          state: 0,
-          address: this.address,
+          status: this.infoData.status,
+          address: adds,
           detailed_address: this.addressdetail,
         }
-        self.$http.post('api/upmyaddress',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+        this.$dialog.loading.open('提交中...')
+        self.$http.post('/healthymvc/upmyaddress',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
-            console.log(JSON.stringify(response))
-            if (response.data.data) {
+            this.$dialog.loading.close()
+            if (response.data.status == true) {
+              this.$router.replace({path: '/addressmanage'})
             }
+            this.$dialog.toast({
+              mes: response.data.msg,
+              timeout: 1500
+            })
           })
           .catch(function (error) {
+            this.$dialog.loading.close()
             console.log(error)
           })
       },
     },
-    mounted: function () {},
+    mounted: function () {
+      this.infoData = this.$route.query.item
+      this.getinfo()
+    },
     // components: {
     //   TopBar
     // }

@@ -3,9 +3,9 @@
     <div class="my-head">
       <div @click="clearLogin" class="set"></div>
       <div class="head">
-        <div class="head-l">
+        <div class="head-l" style="z-index: 9999999">
           <img style="height: 60px;width: 60px;border-radius: 30px;" v-if="face" :src="face"/>
-          <img v-else src="../../../static/imgs/img39.png"/>
+          <img v-else src="../../assets/imgs/img39.png"/>
         </div>
         <div class="head-r">
           <h4>{{name}}</h4>
@@ -14,11 +14,11 @@
       </div>
       <div class="body">
         <div class="body-l" @click="productIntro(0)">
-          <i><img src="../../../static/imgs/img16.png"/></i>
+          <i><img src="../../assets/imgs/img16.png"/></i>
           <font>医疗急救卡</font>
         </div>
         <div class="body-r">
-          <img src="../../../static/imgs/img15.png"/>
+          <img src="../../assets/imgs/img15.png"/>
         </div>
       </div>
     </div>
@@ -28,36 +28,34 @@
           我的资料
         </div>
         <div class="head-r">
-          <a href="#">更多</a>
+          <a >更多</a>
         </div>
       </div>
       <div class="body">
         <ul>
           <li @click="productIntro(1)">
               <div class="img">
-                <img src="../../../static/imgs/img42.png"/>
+                <img src="../../assets/imgs/img42.png"/>
               </div>
               <p>我的资料</p>
           </li>
           <li @click="productIntro(2)">
               <div class="img">
-                <img src="../../../static/imgs/img43.png"/>
+                <img src="../../assets/imgs/img43.png"/>
               </div>
               <p>我的保单</p>
           </li>
           <li @click="productIntro(3)">
               <div class="img">
-                <img src="../../../static/imgs/img44.png"/>
+                <img src="../../assets/imgs/img44.png"/>
               </div>
               <p>地址管理</p>
           </li>
-          <li>
-            <a href="#">
-              <div class="img">
-                <img src="../../../static/imgs/img45.png"/>
-              </div>
-              <p>积分明细</p>
-            </a>
+          <li @click="productIntro(6)">
+            <div class="img">
+              <img src="../../assets/imgs/img45.png"/>
+            </div>
+            <p>积分明细</p>
           </li>
         </ul>
 
@@ -69,40 +67,40 @@
           商城订单
         </div>
         <div class="head-r">
-          <a href="#">进入商城</a>
+          <a >进入商城</a>
         </div>
       </div>
       <div class="body">
         <ul>
           <li>
-            <a href="#">
+            <a >
               <div class="img">
-                <img src="../../../static/imgs/img46.png"/>
+                <img src="../../assets/imgs/img46.png"/>
               </div>
               <p>待付款</p>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a >
               <div class="img">
-                <img src="../../../static/imgs/img47.png"/>
+                <img src="../../assets/imgs/img47.png"/>
               </div>
               <p>待发货</p>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a >
               <div class="img">
-                <img src="../../../static/imgs/img48.png"/>
+                <img src="../../assets/imgs/img48.png"/>
                 <sup>1</sup>
               </div>
               <p>待收货</p>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a >
               <div class="img">
-                <img src="../../../static/imgs/img49.png"/>
+                <img src="../../assets/imgs/img49.png"/>
               </div>
               <p>售后/退款</p>
             </a>
@@ -115,32 +113,32 @@
         <div class="head-l">
           上门订单
         </div>
-        <div class="head-r">
-          <a href="#">全部</a>
+        <div class="head-r" @click="productIntro(4,0)">
+          <a>全部</a>
         </div>
       </div>
       <div class="body">
         <ul>
-          <li>
-            <a href="#">
+          <li @click="productIntro(4,0)">
+            <a >
               <div class="img">
-                <img src="../../../static/imgs/img50.png"/>
+                <img src="../../assets/imgs/img50.png"/>
               </div>
               <p>进行中</p>
             </a>
           </li>
-          <li>
-            <a href="#">
+          <li @click="productIntro(4,4)">
+            <a >
               <div class="img">
-                <img src="../../../static/imgs/img51.png"/>
+                <img src="../../assets/imgs/img51.png"/>
               </div>
               <p>已完成</p>
             </a>
           </li>
-          <li>
-            <a href="#">
+          <li @click="productIntro(4,4)">
+            <a >
               <div class="img">
-                <img src="../../../static/imgs/img52.png"/>
+                <img src="../../assets/imgs/img52.png"/>
               </div>
               <p>已取消</p>
             </a>
@@ -155,40 +153,40 @@
         <div class="head-l">
           活动预约
         </div>
-        <div class="head-r">
-          <a href="#">更多</a>
+        <div class="head-r" @click="productIntro(5,99)">
+          <a>更多</a>
         </div>
       </div>
       <div class="body">
         <ul>
-          <li>
-            <a href="#">
+          <li @click="productIntro(5,0)">
+            <a >
               <div class="img">
-                <img src="../../../static/imgs/img53.png"/>
+                <img src="../../assets/imgs/img53.png"/>
               </div>
               <p>待参加</p>
             </a>
           </li>
-          <li>
-            <a href="#">
+          <li @click="productIntro(5,4)">
+            <a >
               <div class="img">
-                <img src="../../../static/imgs/img54.png"/>
+                <img src="../../assets/imgs/img54.png"/>
               </div>
               <p>待审核</p>
             </a>
           </li>
-          <li>
-            <a href="#">
+          <li @click="productIntro(5,7)">
+            <a >
               <div class="img">
-                <img src="../../../static/imgs/img55.png"/>
+                <img src="../../assets/imgs/img55.png"/>
               </div>
               <p>已验票</p>
             </a>
           </li>
-          <li>
-            <a href="#">
+          <li @click="productIntro(5,9)">
+            <a >
               <div class="img">
-                <img src="../../../static/imgs/img56.png"/>
+                <img src="../../assets/imgs/img56.png"/>
               </div>
               <p>退票</p>
             </a>
@@ -207,25 +205,25 @@
       <div class="body">
         <ul>
           <li>
-            <a href="#">
+            <a >
               <div class="img">
-                <img src="../../../static/imgs/img57.png"/>
+                <img src="../../assets/imgs/img57.png"/>
               </div>
               <p>商城优惠券</p>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a >
               <div class="img">
-                <img src="../../../static/imgs/img58.png"/>
+                <img src="../../assets/imgs/img58.png"/>
               </div>
               <p>服务优惠券</p>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a >
               <div class="img">
-                <img src="../../../static/imgs/img59.png"/>
+                <img src="../../assets/imgs/img59.png"/>
               </div>
               <p>分享赚积分</p>
             </a>
@@ -251,7 +249,7 @@
       }
     },
     methods: {
-      productIntro(v) {
+      productIntro(v,flag) {
         if( v === 0 ){
           this.$router.push({path: '/aidcard'})
         }
@@ -265,10 +263,13 @@
           this.$router.push({path: '/addressmanage'})
         }
         if( v === 4 ){
-          this.$router.push({path: '/serviceorder'})
+          this.$router.push({path: '/serviceorder',query:{flag:flag}})
         }
         if( v === 5 ){
-          this.$router.push({path: '/activeorder'})
+          this.$router.push({path: '/activeorder',query:{flag:flag}})
+        }
+        if( v === 6 ){
+          this.$router.push({path: '/integral'})
         }
       },
       clearLogin(){

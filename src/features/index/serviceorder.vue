@@ -14,28 +14,28 @@
     <div class="servlist">
       <div class="head g-tab-hd">
         <ul>
-          <li class="on"><a href="#">进行中</a></li>
-          <li><a href="#">已完成</a></li>
-          <li><a href="#">已取消</a></li>
+          <li :class="{'on':navflag == 0}" @click="searchList(0)"><a>进行中</a></li>
+          <li :class="{'on':navflag == 4}" @click="searchList(4)"><a >已完成</a></li>
+          <li :class="{'on':navflag == 6}" @click="searchList(6)"><a >已取消</a></li>
         </ul>
       </div>
       <div class="body g-tab-bd">
         <ul>
-          <li>
+          <li v-for="item in listData" :key="item.orderno">
             <div class="bd" @click="goDetail">
               <div class="bd-l">
-                <img src="../../../static/imgs/img77.png"/>
+                <img :src="item.technicianAurl"/>
               </div>
               <div class="bd-r">
-                <h3>技师：李艾美</h3>
-                <h4>服务：团享办公室肩颈</h4>
-                <p>服务时间：09-16  15:30</p>
-                <label>¥158</label>
+                <h3>技师：{{item.technicianName}}</h3>
+                <h4>服务：{{item.serviceName}}</h4>
+                <p>服务时间：{{item.serviceTime}}</p>
+                <label>{{item.totalPrice}}</label>
               </div>
             </div>
             <div class="ft">
               <div class="ft-l">
-                2018-09-16
+                {{item.serviceAddress}}
               </div>
               <div class="ft-r">
                 <!--<input type="button" name="" id="" value="取消" />-->
@@ -43,122 +43,10 @@
               </div>
             </div>
           </li>
-          <li>
-            <div class="bd">
-              <div class="bd-l">
-                <img src="../../../static/imgs/img76.png"/>
-              </div>
-              <div class="bd-r">
-                <h3>技师：欧阳夏丹</h3>
-                <h4>服务：团享办公室肩颈</h4>
-                <p>服务时间：09-18  11:30</p>
-                <label>¥158</label>
-              </div>
-            </div>
-            <div class="ft">
-              <div class="ft-l">
-                2018-09-16
-              </div>
-              <div class="ft-r">
-                <input type="button" name="" id="" value="取消" />
-              </div>
-            </div>
-          </li>
 
         </ul>
       </div>
-      <div class="body g-tab-bd" style="display: none;">
-        <ul>
-          <li>
-            <div class="bd">
-              <div class="bd-l">
-                <img src="../../../static/imgs/img77.png"/>
-              </div>
-              <div class="bd-r">
-                <h3>技师：李艾美</h3>
-                <h4>服务：团享办公室肩颈</h4>
-                <p>服务时间：09-16  15:30</p>
-                <label>¥158</label>
-              </div>
-            </div>
-            <div class="ft">
-              <div class="ft-l">
-                2018-09-16
-              </div>
-              <div class="ft-r">
-                <input type="button" name="" id="" value="取消" />
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="bd">
-              <div class="bd-l">
-                <img src="../../../static/imgs/img76.png"/>
-              </div>
-              <div class="bd-r">
-                <h3>技师：欧阳夏丹</h3>
-                <h4>服务：团享办公室肩颈</h4>
-                <p>服务时间：09-18  11:30</p>
-                <label>¥158</label>
-              </div>
-            </div>
-            <div class="ft">
-              <div class="ft-l">
-                2018-09-16
-              </div>
-              <div class="ft-r">
-                <input type="button" name="" id="" value="取消" />
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="bd">
-              <div class="bd-l">
-                <img src="../../../static/imgs/img76.png"/>
-              </div>
-              <div class="bd-r">
-                <h3>技师：欧阳夏丹</h3>
-                <h4>服务：团享办公室肩颈</h4>
-                <p>服务时间：09-18  11:30</p>
-                <label>¥158</label>
-              </div>
-            </div>
-            <div class="ft">
-              <div class="ft-l">
-                2018-09-16
-              </div>
-              <div class="ft-r">
-                <input type="button" name="" id="" value="取消" />
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="body g-tab-bd" style="display: none;">
-        <ul>
-          <li>
-            <div class="bd">
-              <div class="bd-l">
-                <img src="../../../static/imgs/img77.png"/>
-              </div>
-              <div class="bd-r">
-                <h3>技师：李艾美</h3>
-                <h4>服务：团享办公室肩颈</h4>
-                <p>服务时间：09-16  15:30</p>
-                <label>¥158</label>
-              </div>
-            </div>
-            <div class="ft">
-              <div class="ft-l">
-                2018-09-16
-              </div>
-              <div class="ft-r" >
-                <p @click="goRefund">取消</p>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
+
     </div>
   </div>
 </template>
@@ -169,27 +57,83 @@
     name: 'Serviceorder',
     data () {
       return {
-        logonData: {},
-        show2: false,
-        radio2: 2,
-        navflag: 1
-    }
+        listData: [],
+        cancelData: {},
+        navflag: 0,
+        orderno: '123456'
+      }
     },
     methods: {
       goDetail() {
         this.$router.push({path: '/serviceorderdetail'})
       },
       goRefund() {
-        this.$router.push({path: '/refund'})
+        let self = this
+        let paramts = {
+          orderno: this.orderno,
+        }
+        this.$dialog.loading.open('获取中...')
+        self.$http.post('/healthymvc/cancelserviceorder',paramts,{ emulateJSON: true, headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+          .then(function (response) {
+            this.$dialog.loading.close()
+            if (response.data.status == true) {
+              this.$router.push({path: '/refund'})
+              this.cancelData = response.data.data
+            }
+            // else {
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
+            // }
+          })
+          .catch(function (error) {
+            this.$dialog.loading.close()
+            console.log(error)
+          })
       },
       searchList(v){
-        this.navflag = v + 1
+        this.navflag = v
+        this.getList()
       },
       prev(){
         this.$router.go(-1)
-      }
+      },
+      getList(){
+        this.listData = []
+        let self = this
+        let paramts = {
+          status: this.navflag,
+        }
+        this.$dialog.loading.open('获取中...')
+        self.$http.post('/healthymvc/getmyserviceorderlist',paramts,{ emulateJSON: true, headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+          .then(function (response) {
+            this.$dialog.loading.close()
+            if (response.data.status == true) {
+              this.listData = response.data.data
+            }
+            else {
+              if(response.data.msg == 'token错误'){
+                this.$router.push({path: '/login'})
+              }
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
+            }
+          })
+          .catch(function (error) {
+            this.$dialog.loading.close()
+            console.log(error)
+          })
+      },
     },
-    mounted: function () {},
+    mounted: function () {
+      if(this.$route.query.flag){
+        this.navflag = this.$route.query.flag
+      }
+      this.getList()
+    },
     components: {
       FooterBar,
       TopBar
