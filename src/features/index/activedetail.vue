@@ -89,6 +89,9 @@
 </template>
 <script>
   import {quillEditor} from 'vue-quill-editor'
+  // import 'quill/dist/quill.core.css'
+  import 'quill/dist/quill.snow.css'
+  // import 'quill/dist/quill.bubble.css'
   export default {
     name: 'Activedetail',
     data () {
@@ -302,7 +305,7 @@
   /*button{*/
     /*display: none !important;*/
   /*}*/
-  .ql-toolbar ql-snow{
+  .quill-editor .ql-toolbar ql-snow{
     display: none !important;
   }
   .ql-formats{

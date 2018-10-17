@@ -23,21 +23,22 @@
         <ul>
           <yd-infinitescroll  :callback="getActiveOrder" ref="infinitescrollDemo">
             <yd-list theme="1" slot="list">
-          <li v-for="(item,index) in list" :key="index" @click="goDetail(item)">
+          <li v-for="(item,index) in list" :key="index" >
             <div class="left">
-              <h4>{{item.activitename}}</h4>
+              <div style="display: flex;flex-direction: row;justify-content: space-between">
+                <h4>{{item.activitename}}</h4>
+                <h4 style="color:#00CE9F;line-height: 23px;font-size: 16px;margin-right: 7px;" @click="goPay">去支付</h4>
+              </div>
               <dl>
                 <dt>{{item.activitetime | momentFilter}} </dt>
                 <dd>{{item.activiteaddress}}</dd>
               </dl>
             </div>
-            <div class="right">
+            <div class="right" @click="goDetail(item)">
               <h4>{{item.ticketname}}</h4>
               <p class="c_green">¥{{item.unitprice}}</p>
             </div>
-            <div class="ft-r">
-              <p style="text-align: center;color:#00CE9F;line-height: 23px;font-size: 12px;" @click="goPay">支付</p>
-            </div>
+
             <div class="img img-wait" v-if="statusflag == 0"></div>
             <div class="img img-doing" v-if="statusflag == 4"></div>
             <div class="img img-done" v-if="statusflag == 7"></div>

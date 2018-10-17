@@ -203,7 +203,7 @@
           })
       },
       prev(){
-        this.$router.go(-1)
+        this.$router.replace({path: '/my'})
       }
     },
     mounted: function () {
@@ -212,82 +212,6 @@
   }
 </script>
 <style lang="scss" scoped>
-  .home-box {
-    /*margin-top:45px;*/
-    height: auto;
-    /*min-height: 100%;*/
-    width: 100%;
-    background: #ffffff;
-  }
-  .product-box{
-    height: auto;
-    width: 90%;
-    margin: 0 auto;
-    background: #ffffff;
-    padding: 20px;
-    margin-top: 10px;
-    display: flex;border: 1px solid #e0e0e0;
-    border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-  }
-  .aid-box1{
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid #e0e0e0;
-    width: 100%;
-    padding-bottom: 15px;
-  }
-  .aid-text1{
-    font-size: 24px;
-    color: #333;
-    font-weight: bold;
-    line-height: 35px;
-  }
-  .aid-text2{
-    font-size: 16px;
-    color: #999;
-    line-height: 35px;
-  }
-  .aid-text3{
-    font-size: 18px;
-    color: #999;
-    line-height: 35px;
-    font-weight: bold;
-    margin-top: 7px;
-  }
-  .aid-text4{
-    font-size: 16px;
-    color: #333;
-    line-height: 35px;
-    font-weight: bold;
-  }
-  .box-content1 div{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-  }
-  .se-title1 span{
-    font-weight: bold;
-  }
-  home-title6{
-    font-family:'微软雅黑';
-    font-weight:400;
-    font-style:normal;
-    color:#CCC;
-  }
-  .pro-bottom{
-    height: auto;
-    line-height: 35px;
-    width: 65%;
-    margin: auto;
-    border-radius: 35px;
-    padding: 10px;
-    background: rgb(153,153,153);
-    margin-top:15px;
-    margin-bottom: 15px;
-  }
   .pro-bottom p{
     text-align: center;
     color: #ffffff;

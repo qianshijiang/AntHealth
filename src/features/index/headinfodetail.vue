@@ -12,11 +12,11 @@
     <div class="newsd">
       <div class="head">
         <h4>{{detailData.newTitle}}</h4>
-        <p>2018 09/17  08:02</p>
+        <!--<p>2018 09/17  08:02</p>-->
       </div>
       <div class="body">
         <!--<p><img src="../../assets/imgs/img67.jpg"/></p>-->
-        <p><img style="width: 100%;height: 210px;border-radius: 6px;" :src="detailData.newImg"/></p>
+        <!--<p><img style="width: 100%;height: 210px;border-radius: 6px;" :src="detailData.newImg"/></p>-->
         <!--<p style="overflow: hidden">{{detailData.newcontent}}</p>-->
         <div style="widht:100%;height:100%;word-wrap: break-word">
           <quill-editor ref="myTextEditor" v-model="content" :options = "editorOption" @focus="onEditorFocus"  @change="onEditorChange($event)"></quill-editor>

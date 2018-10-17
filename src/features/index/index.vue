@@ -107,7 +107,7 @@
                 <div class="txt">
                   <h4>{{item.insuranceName}}</h4>
                   <p style="line-height: 16px;">{{item.insuranceIntroduction}}</p>
-                  <label class="c_green">{{item.insruanceprice}}</label>
+                  <label class="c_green" style="line-height: 32px;">{{item.insruanceprice}}</label>
                 </div>
             </li>
           </ul>
@@ -274,6 +274,20 @@
           }
         },{enableHighAccuracy: true})
       },
+      getArea(){//获取区域
+        let self = this
+        self.$http.get('/healthymvc/getarea', {emulateJSON: true})
+          .then(function (response) {
+              this.$dialog.loading.close()
+              if(response.body.status == true){
+                localStorage.setItem('areas', JSON.stringify(response.data.data))
+              }
+            }
+          ).catch(function (error) {
+          this.$dialog.loading.close()
+          console.log(error)
+        })
+      }
     },
     mounted: function () {
       // let mySwiper = new Swiper('.swiper-container', {
@@ -293,6 +307,7 @@
       this.getProduct()
       this.getActive()
       this.getNews()
+      this.getArea()
     },
     components: {
       FooterBar

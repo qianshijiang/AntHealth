@@ -13,7 +13,8 @@
       <div class="head">
         <div class="head-hd">
           <div class="img">
-            <img src="../../assets/imgs/img38.png"/>
+            <img style="height: 70px;width: 70px;border-radius: 35px;margin-top: 10px;" v-if="face" :src="face"/>
+            <img v-else src="../../assets/imgs/img38.png"/>
             <sub>{{aidData.sex}}</sub>
           </div>
           <div class="txt">
@@ -80,9 +81,9 @@
           <p class="hh7" >
             您正在呼叫急救，马上就有工作人员呼叫您，并赶到您的身边。
           </p>
-          <!--<yd-button @click.native="chstatus" class="hh4">-->
-            <!--<p style="font-size: 14px;line-height: 24px;">查看状态</p>-->
-          <!--</yd-button>-->
+          <yd-button @click.native="chstatus" class="hh4">
+            <p style="font-size: 14px;line-height: 24px;">确定</p>
+          </yd-button>
         </div>
       </yd-popup>
       <yd-popup v-model="show2" position="center" class="hh1" width="92%">
@@ -226,7 +227,8 @@
         nowData: {},
         chData:{},
         bannerData:[],
-        titles:'立即急救'
+        titles:'立即急救',
+        face:''
       }
     },
     methods: {
@@ -342,7 +344,7 @@
           firstaidorderid : this.nowData.firstaidorderid,
         }
         this.$dialog.loading.open('查询中...')
-        self.$http.post('/healthymvc/getFirstAidOrder',params, {emulateJSON: true,headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token") }})
+        self.$http.get('/healthymvc/getFirstAidOrder', {emulateJSON: true,headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token") }})
           .then(function (response) {
             this.$dialog.loading.close()
               if(response.body.status == true){
@@ -400,6 +402,9 @@
             url: 'aidcardt'
           }})
       }else {
+        if(localStorage.getItem('avatar_url')){
+          this.face = localStorage.getItem('avatar_url')
+        }
         this.getInfo()
       }
     },

@@ -2,8 +2,8 @@
   <div class="layout pb120 " >
     <div class="my-head">
       <div @click="clearLogin" class="set"></div>
-      <div class="head">
-        <div class="head-l" style="z-index: 9999999">
+      <div class="head" @click="productIntro(1)">
+        <div class="head-l" style="z-index: 9999999" >
           <img style="height: 60px;width: 60px;border-radius: 30px;" v-if="face" :src="face"/>
           <img v-else src="../../assets/imgs/img39.png"/>
         </div>
@@ -334,7 +334,7 @@
         if(comm !== '' || park !== ''){
           this.address = comm +' '+ park
         }else{
-          this.address = '点击我的资料设置'
+          this.address = '点击设置'
         }
         // this.address = localStorage.getItem("address")
       }

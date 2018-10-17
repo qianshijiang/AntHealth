@@ -2,7 +2,7 @@
   <div class="layout pb120">
     <div class="header header-bg">
       <div class="left">
-        <p class="address">上门地址：<span>{{myaddress}}</span></p>
+        <p class="address" style="line-height: 62px;">上门地址：<span>{{myaddress}}</span></p>
       </div>
       <div class="center">
 

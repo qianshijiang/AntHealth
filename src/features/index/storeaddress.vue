@@ -93,7 +93,7 @@
         let lng = this.detailData.storeLongitude //经度 长的
         let lat = this.detailData.storeLatitude
         let map = new BMap.Map("allmap")
-        let point = new BMap.Point(lng, lat)
+        let point = new BMap.Point(lng,lat)
         map.centerAndZoom(point, 15)
 
         //创建小狐狸
@@ -110,6 +110,7 @@
       }
     },
     mounted: function () {
+      // this.getMap()
       this.getInfo()
 
     },
