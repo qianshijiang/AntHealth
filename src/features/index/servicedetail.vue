@@ -31,7 +31,7 @@
             <span>|</span>
             <span>{{technicians.occupationTitle}}</span>
           </h4>
-          <p>{{technicians.introduction}}</p>
+          <p style="line-height: 16px;overflow: hidden">{{technicians.introduction}}</p>
         </div>
       </div>
       <div class="head-f">
@@ -40,12 +40,12 @@
             <div class="left">
               <p>{{services.serviceName}}</p>
             </div>
-            <div class="right">
-              <font class="c_green">{{technicians.price}}</font>/60分钟
+            <div class="right" style="margin-top: 5px;">
+              <font class="c_green">￥{{technicians.price}}</font>/60分钟
             </div>
           </div>
           <div class="conter">
-            <p>{{services.serviceIntroduction}}</p>
+            <p style="line-height: 16px;overflow: hidden">{{services.serviceIntroduction}}</p>
           </div>
         </div>
 
@@ -56,7 +56,7 @@
         </div>
         <div class="bd" v-for="(item ,index) in detailData.introductions" :key="index">
           <h4 class="c_green">{{item.name}}</h4>
-          <p>{{item.contents}}</p>
+          <p style="line-height: 18px;overflow:hidden;">{{item.contents}}</p>
         </div>
       </div>
       <div class="foot">

@@ -153,21 +153,21 @@
         <div class="head-l">
           活动预约
         </div>
-        <div class="head-r" @click="productIntro(5,99)">
+        <div class="head-r" @click="productIntro(5,0)">
           <a>更多</a>
         </div>
       </div>
       <div class="body">
         <ul>
+          <!--<li @click="productIntro(5,0)">-->
+            <!--<a >-->
+              <!--<div class="img">-->
+                <!--<img src="../../assets/imgs/img53.png"/>-->
+              <!--</div>-->
+              <!--<p>待参加</p>-->
+            <!--</a>-->
+          <!--</li>-->
           <li @click="productIntro(5,0)">
-            <a >
-              <div class="img">
-                <img src="../../assets/imgs/img53.png"/>
-              </div>
-              <p>待参加</p>
-            </a>
-          </li>
-          <li @click="productIntro(5,4)">
             <a >
               <div class="img">
                 <img src="../../assets/imgs/img54.png"/>
@@ -175,7 +175,7 @@
               <p>待审核</p>
             </a>
           </li>
-          <li @click="productIntro(5,7)">
+          <li @click="productIntro(5,1)">
             <a >
               <div class="img">
                 <img src="../../assets/imgs/img55.png"/>
@@ -183,7 +183,7 @@
               <p>已验票</p>
             </a>
           </li>
-          <li @click="productIntro(5,9)">
+          <li @click="productIntro(5,3)">
             <a >
               <div class="img">
                 <img src="../../assets/imgs/img56.png"/>
@@ -220,7 +220,7 @@
               <p>服务优惠券</p>
             </a>
           </li>
-          <li>
+          <li @click="mmp">
             <a >
               <div class="img">
                 <img src="../../assets/imgs/img59.png"/>
@@ -260,7 +260,7 @@
           this.$router.push({path: '/mypolicy'})
         }
         if( v === 3 ){
-          this.$router.push({path: '/addressmanage'})
+          this.$router.push({path: '/addressmanage',query:{url:'my'}})//addressmanage
         }
         if( v === 4 ){
           this.$router.push({path: '/serviceorder',query:{flag:flag}})
@@ -287,7 +287,33 @@
         else{
 
         }
-      }
+      },
+      mmp(){
+        this.$dialog.loading.open('提交中...')
+        let self = this
+        let paramts = {
+          type : 'plus',
+          score  : '100',
+          status  : '0',
+          remarks  : 'aiyawei',
+        }
+        self.$http.post('/healthymvc/getscore',paramts,{ emulateJSON: true ,headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
+          .then(function (response) {
+            this.$dialog.loading.close()
+            if (response.data.status == true) {
+              // this.detailData = response.data.data
+            }else {
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
+            }
+          })
+          .catch(function (error) {
+            this.$dialog.loading.close()
+            console.log(error)
+          })
+      },
     },
     mounted: function () {
       if(!localStorage.getItem("token")){
@@ -297,7 +323,20 @@
         this.logonData = JSON.parse(localStorage.getItem("data"))
         this.face = localStorage.getItem("avatar_url")
         this.name = localStorage.getItem("display_name")
-        this.address = localStorage.getItem("address")
+        let comm = ''
+        let park = ''
+        if(localStorage.getItem("commaddress")){
+          comm = localStorage.getItem("commaddress")
+        }
+        if(localStorage.getItem("parkaddress")){
+          park = localStorage.getItem("parkaddress")
+        }
+        if(comm !== '' || park !== ''){
+          this.address = comm +' '+ park
+        }else{
+          this.address = '点击我的资料设置'
+        }
+        // this.address = localStorage.getItem("address")
       }
     },
     components: {

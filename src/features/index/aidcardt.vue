@@ -70,7 +70,7 @@
         <span>{{aidData.sosAddress}}</span>
       </div>
       <yd-button @click.native="nowAid(aidData.sosc,aidData.storeId)"  class="foot" style="background-color: rgba(1,1,1,0);width: 100%">
-        <a style="text-align: center">立即急救</a>
+        <a style="text-align: center">{{titles}}</a>
       </yd-button>
       <yd-popup v-model="show1" position="center" class="hh1" width="92%">
         <div class="hh2">
@@ -225,7 +225,8 @@
         pageflag: 0,
         nowData: {},
         chData:{},
-        bannerData:[]
+        bannerData:[],
+        titles:'立即急救'
       }
     },
     methods: {
@@ -248,6 +249,10 @@
                 this.getBanner()
               }else {
                 this.pageflag = 2
+                if(response.data.data.sosc == 1){
+                  this.titles = '最近急救信息'
+                }
+
               }
             }
             else{
@@ -255,12 +260,13 @@
                 mes:  response.data.msg,
                 timeout: 1500
               })
+              if(response.data.msg == 'token错误'){
+                this.$router.push({path: '/login',  query: {
+                    url: 'aidcardt'
+                  }})
+              }
             }
-            if(response.data.msg == 'token错误'){
-              this.$router.push({path: '/login',  query: {
-                  url: 'aidcardt'
-                }})
-            }
+
           })
           .catch(function (error) {
             this.$dialog.loading.close()
@@ -269,11 +275,27 @@
       },
       nowAid(id,sid){
         let self = this
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'aidcardt'
+            }})
+          return
+        }
         if(id == 1){
           this.$router.push({path: '/aidorder'})
           return
         }
+        let parksid = 0
+        let communityid = 0
+        if(localStorage.getItem('parksid')){
+          parksid = localStorage.getItem('parksid')
+        }
+        if(localStorage.getItem('communityid')){
+          communityid = localStorage.getItem('communityid')
+        }
         let params = {
+          parksid: parksid,
+          communityid: communityid,
           firstaidId : this.aidData.id,
           name : this.aidData.name,
           address: this.aidData.sosAddress,
@@ -285,6 +307,7 @@
             this.$dialog.loading.close()
               if(response.body.status == true){
                 this.show1 = true
+                this.getInfo()
                 this.nowData = response.data.data
               }
               else{
@@ -292,6 +315,14 @@
                   mes:  response.data.msg,
                   timeout: 1500
                 })
+                if(response.data.msg == 'token错误'){
+                  this.$router.push({path: '/login',  query: {
+                      url: 'aidcardt'
+                    }})
+                }
+                if(response.data.msg == '您有未完成的急救单'){
+                  this.$router.push({path: '/aidorder'})
+                }
               }
             }
           ).catch(function (error) {
@@ -301,6 +332,12 @@
       },
       chstatus(){
         let self = this
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'aidcardt'
+            }})
+          return
+        }
         let params = {
           firstaidorderid : this.nowData.firstaidorderid,
         }
@@ -318,6 +355,11 @@
                   mes:  response.data.msg,
                   timeout: 1500
                 })
+                if(response.data.msg == 'token错误'){
+                  this.$router.push({path: '/login',  query: {
+                      url: 'aidcardt'
+                    }})
+                }
               }
             }
           ).catch(function (error) {

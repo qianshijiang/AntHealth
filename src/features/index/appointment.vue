@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="servf">
-        <form action="" method="post">
+        <!--<form action="" method="post">-->
           <div class="body">
             <ul>
               <li>
@@ -21,7 +21,7 @@
                   {{services.serviceName}}
                 </div>
                 <div class="input">
-                  {{technicians.price}}/60分钟
+                  {{technicians.price}}元/60分钟
                   <!--<input class="spinnerExample" type="" name=""  value="1" />-->
                   <!--插件-->
                 </div>
@@ -58,13 +58,13 @@
                   <input type="text"  v-model="phone" />
                 </div>
               </li>
-                <yd-cell-group style="margin-bottom: 0;">
+                <yd-cell-group @click.native="selAddress" style="margin-bottom: 0;">
                   <yd-cell-item arrow>
                     <span slot="left">服务地址：</span>
-                    <input slot="right" type="text" @click.stop="show1 = true" v-model.trim="address" readonly placeholder="请选择收货地址">
+                    <input slot="right" type="text"  v-model.trim="address" readonly placeholder="请选择服务地址">
                   </yd-cell-item>
                 </yd-cell-group>
-              <yd-cityselect style="overflow: scroll;height: auto" v-model="show1" :callback="result1" :items="district"></yd-cityselect>
+              <!--<yd-cityselect style="overflow: scroll;height: auto" v-model="show1" :callback="result1" :items="district"></yd-cityselect>-->
               <!--</li>-->
               <li>
                 <div class="label">
@@ -98,54 +98,44 @@
                   预计实付
                 </div>
                 <div class="input">
-                  <input type="text" class="c_green number"  name="" id="" value="158元" />
+                  <p class="c_green number">{{technicians.price}}元</p>
+                  <!--<input type="text"  readonly v-model="" />-->
                 </div>
               </li>
             </ul>
           </div>
-          <div class="foot foot-fixd">
+          <div class="foot foot-fixd" style="width: 100%;margin-left: 0;left: 0;">
             <div class="foot-l left">
-              合计金额：<strong>¥158</strong>
+              合计金额：<strong>￥{{technicians.price}}</strong>
             </div>
             <div class="foot-r right" @click="goPay">
               <p  class="foot-btn" >立即预约</p>
             </div>
           </div>
-        </form>
+        <!--</form>-->
       </div>
     </div>
-    <div class="shade"></div>
-    <!--<div class="">-->
-    <div class="actd-ft body" v-if="coupons === true" style="display: block;bottom: 60px;background: rgb(250,250,250)">
+    <!--<div class="shade"></div>-->
+    <div class="actd-ft body" v-if="coupons === true" style="border-top:2px solid #e0e0e0;display: block;bottom: 50px;background: rgb(250,250,250)">
       <dl>
         <dt>选择优惠卷券</dt>
         <span @click="coupons = false"  style="font-size: 0.5rem;float: right;margin-top: -44px;margin-right: 20px;color: #666;">&times;</span>
-        <dd  style="position: relative;top: 0;">
-          <img  style="position: absolute;top: 30px;left: 8px;height: 25px;width: 25px;" src="../../assets/imgs/img29.png"/>
+        <dd v-for="(item,index) in couponData" :key="item.id" v-if="index < 4 && couponData.length>0" style="position: relative;top: 0;">
+          <img @click="nsel(item)" v-if="item.checked == true" style="position: absolute;top: 30px;left: 8px;height: 25px;width: 25px;" src="../../assets/imgs/img29.png"/>
+          <img @click="sel(item)" v-if="item.checked == false" style="position: absolute;top: 30px;left: 8px;height: 25px;width: 25px;" src="../../assets/imgs/img30.png"/>
           <div class="left" style="width: 3.2rem;margin-left: 15px">
-            <h4>优惠卷类型：gg</h4>
-            <p>优惠卷名称: <span> gg</span></p>
+            <h4>优惠卷类型： <span>{{item.couponType}}</span></h4>
+            <p>优惠卷名称：<span>{{item.couponName}}</span></p>
           </div>
           <div class="right">
-            <p class="decrease">卷值<span style="color: rgb(148,97,93);margin: auto 2px;font-size: 18px;">90</span>元</p>
+            <p class="decrease">卷值<span style="color: rgb(148,97,93);margin: auto 2px;font-size: 18px;">{{item.couponValue}}</span>元</p>
           </div>
         </dd>
-        <!--<dd v-for="(item,index) in couponData" :key="item.id" v-if="index < 4" style="position: relative;top: 0;">-->
-          <!--<img @click="nsel(item)" v-if="item.checked == true" style="position: absolute;top: 30px;left: 8px;height: 25px;width: 25px;" src="../../assets/imgs/img29.png"/>-->
-          <!--<img @click="sel(item)" v-if="item.checked == false" style="position: absolute;top: 30px;left: 8px;height: 25px;width: 25px;" src="../../assets/imgs/img30.png"/>-->
-          <!--<div class="left" style="width: 3.2rem;margin-left: 15px">-->
-            <!--<h4>{{item.couponName}} <span v-if="item.ticketprice > 0">{{item.ticketprice}}</span></h4>-->
-            <!--<p>类型：{{item.couponType}}</p>-->
-          <!--</div>-->
-          <!--<div class="right">-->
-            <!--<div class="spinner">-->
-              <!--<p class="decrease">金额</p>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</dd>-->
+        <div v-if="couponData == 0" style="height: auto;width: 100%;padding: 65px;text-align: center">
+          暂无优惠卷可使用！
+        </div>
       </dl>
     </div>
-    <!--</div>-->
     <div class="section_time" v-if="timeflag == true" style="display: block">
       <div class="hd">
         <div class="hd-left">
@@ -225,9 +215,9 @@
       },
     },
     methods: {
-      result1(ret) {
-        this.address = ret.itemName1 + ' ' + ret.itemName2 + ' ' + ret.itemName3;
-      },
+      // result1(ret) {
+      //   this.address = ret.itemName1 + ' ' + ret.itemName2 + ' ' + ret.itemName3;
+      // },
       goPay() {
         this.submit()
 
@@ -237,6 +227,9 @@
       },
       goCoupon(){
         this.$router.push({path: '/coupon'})
+      },
+      selAddress(){
+        this.$router.push({path: '/areas'})
       },
       prev(){
         this.$router.go(-1)
@@ -288,7 +281,7 @@
           })
           return
         }
-        if(!this.address){
+        if(this.address == '' || this.address == null || this.address == undefined || this.address == '请选择服务地址'){
           this.$dialog.toast({
             mes:  '请选择服务地址',
             timeout: 1500
@@ -320,14 +313,19 @@
           .then(function (response) {
             this.$dialog.loading.close()
             if (response.data.status == true) {
-              this.$router.push({path: '/pay',query: {
+              this.$router.push({path: '/serviceorder',query: {
                   orderid:response.data.data, type: 1
                 }})
+            }else{
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
+              if(response.data.msg == 'token错误'){
+                this.$router.push({path: '/login',query:{url: 'appointment'}})
+              }
             }
-            this.$dialog.toast({
-              mes:  response.data.msg,
-              timeout: 1500
-            })
+
           })
           .catch(function (error) {
             this.$dialog.loading.close()
@@ -470,8 +468,22 @@
     mounted: function () {
       this.getInfo()
       this.getCoupon()
-      if(localStorage.getItem('address')){
-        this.address = localStorage.getItem('address')
+      // if(localStorage.getItem('address')){
+      //   this.address = localStorage.getItem('address')
+      // }
+      let comm = ''
+      let park = ''
+      if(localStorage.getItem("commaddress")){
+        comm = localStorage.getItem("commaddress")
+      }
+      if(localStorage.getItem("parkaddress")){
+        park = localStorage.getItem("parkaddress")
+      }
+      if(comm !== '' || park !== ''){
+
+        this.address = comm +' '+ park
+      }else{
+        this.address = '请选择服务地址'
       }
       if(localStorage.getItem('phone')){
         this.phone = localStorage.getItem('phone')

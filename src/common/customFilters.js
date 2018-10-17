@@ -26,4 +26,14 @@ let uuidFilter = function (value) {
   }
   return temp + (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4())
 }
-export { momentFilter, nullFilter, distanceFilter, uuidFilter }
+let times = function (val) {
+  let date = new Date(val);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+  let Y = date.getFullYear() + '-'
+  let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+  let D = date.getDate() + ' '
+  let h = date.getHours() + ':'
+  let m = date.getMinutes() + ':'
+  let s = date.getSeconds()
+  return Y + M + D + h + m + s
+}
+export { momentFilter, nullFilter, distanceFilter, uuidFilter ,times}

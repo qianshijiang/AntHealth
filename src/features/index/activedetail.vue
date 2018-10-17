@@ -22,15 +22,15 @@
       </div>
       <div class="actd-nv">
         <ul>
-          <li>
-            <div @click="goAddress(detailData.store_id)">
+          <li @click="goAddress(detailData.store_id)">
+            <div>
               <i><img src="../../assets/imgs/img81.png"/></i>主办门店
             </div>
-            <a href="#" class="more"></a>
+            <a class="more"></a>
           </li>
           <li>
             <i><img src="../../assets/imgs/img103.png"/></i>
-            {{detailData.activity_time}}
+            {{detailData.activity_time | momentFilter}}
           </li>
           <li>
             <i><img src="../../assets/imgs/img82.png"/></i>
@@ -44,8 +44,10 @@
         </div>
         <div class="body" >
           <!--<p><img src="../../../static/imgs/img73.jpg"/></p>-->
-          <p style="overflow: hidden">{{detailData.activity_details}}</p>
-
+          <!--<p style="overflow: hidden">{{detailData.activity_details}}</p>-->
+          <!--<div>-->
+            <quill-editor ref="myTextEditor"  v-model="content"  :options = "editorOption" @focus="onEditorFocus($event)"  @change="onEditorChange($event)"></quill-editor>
+          <!--</div>-->
         </div>
       </div>
       <div class="actd-ft">
@@ -54,7 +56,7 @@
             <dt>选择票券</dt>
             <span @click="close"  style="font-size: 0.5rem;float: right;margin-top: -44px;margin-right: 20px;color: #666;">&times;</span>
             <dd v-for="(item,index) in ticketData" :key="item.ticketid" v-if="index < 4" style="position: relative;top: 0;">
-              <img @click="nsel(item)" v-if="item.checked == true" style="position: absolute;top: 30px;left: 8px;height: 25px;width: 25px;" src="../../assets/imgs/img29.png"/>
+              <img v-if="item.checked == true" style="position: absolute;top: 30px;left: 8px;height: 25px;width: 25px;" src="../../assets/imgs/img29.png"/>
               <img @click="sel(item)" v-if="item.checked == false" style="position: absolute;top: 30px;left: 8px;height: 25px;width: 25px;" src="../../assets/imgs/img30.png"/>
               <div class="left" style="width: 3.2rem;margin-left: 15px">
                 <h4>{{item.ticketName}} <span v-if="item.ticketprice > 0">{{item.ticketprice}}</span></h4>
@@ -68,6 +70,9 @@
                 </div>
               </div>
             </dd>
+            <div v-if="ticketData.length == 0" style="width: 100%; height: auto;padding: 50px; text-align: center">
+              <p>暂无票卷！</p>
+            </div>
           </dl>
         </div>
         <div class="foot" v-if="ticket==false">
@@ -83,14 +88,26 @@
   </div>
 </template>
 <script>
+  import {quillEditor} from 'vue-quill-editor'
   export default {
     name: 'Activedetail',
     data () {
       return {
         detailData: {},
+        content:'',
         ticket : false,
         ticketnum: 1,
-        ticketData:[]
+        ticketid:'',
+        ticketData:[],
+        editorOption: {
+          modules:{
+            toolbar:[
+              ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+              ['blockquote', 'code-block']
+            ]
+          }
+          // something config
+        }
       }
     },
     methods: {
@@ -99,16 +116,24 @@
         this.getTicket()
         // this.$router.push({path: '/payshure'})
       },
+      onEditorFocus(editor,val,text){ // 富文本获得焦点时的事件
+        editor.enable(false) // 在获取焦点的时候禁用
+      },
+      onEditorChange({ editor, html, text }) {
+        //富文本编辑器  文本改变时 设置字段值
+        this.content = html
+      },
       close(){
         this.ticket = false
       },
       goAddress(storeid ) {
         this.$router.push({path: '/storeaddress',query: {
-            storeid: storeid
+            storeid: storeid,id: this.$route.query.id
           }})
       },
       prev(){
-        this.$router.go(-1)
+        this.$router.replace({path: '/active'})
+        // this.$router.go(-1)
       },
       getDetail(){
         this.$dialog.loading.open('获取中...')
@@ -121,6 +146,7 @@
             this.$dialog.loading.close()
             if (response.data.status == true) {
               this.detailData = response.data.data.activitys
+              this.content = this.detailData.activity_details
               this.detailData = this.detailData
             }else {
               this.$dialog.toast({
@@ -135,6 +161,7 @@
           })
       },
       getTicket(){
+        this.ticketData = []
         let self = this
         this.$dialog.loading.open('获取中...')
         let params = {
@@ -188,7 +215,15 @@
       },
       sel(item){
         if(item.ticketnum > 0){
-          item.checked = true
+          this.ticketData.forEach(items => {
+            if(items.ticketid == item.ticketid){
+              this.ticketid = item.ticketid
+              this.ticketnum = item.ticketnum
+              items.checked = true
+            }else{
+              items.checked = false
+            }
+          })
         }
         else {
           this.$dialog.toast({
@@ -223,14 +258,16 @@
         let self = this
         this.$dialog.loading.open('提交中...')
         let paramts = {
+          ticketid:this.ticketid,
+          num: this.ticketnum,
           activityid : self.$route.query.id,
-          ticketjson :  JSON.stringify(ticketres)
+          // ticketjson :  JSON.stringify(ticketres)
         }
         self.$http.post('/healthymvc/creatActivityOrder',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
             this.$dialog.loading.close()
             if (response.data.status == true) {
-              this.$router.push({path: '/pay',query: {
+              this.$router.push({path: '/activeorder',query: {
                   orderid:response.data.data.order.orderno, type: 2
                 }})
               // this.$router.push({path: '/activeorder'})
@@ -254,9 +291,22 @@
     },
     mounted: function () {
       this.getDetail()
+      this.$refs.myTextEditor.quill.enable(false)
+    },
+    components: {
+      quillEditor                 // 声明组件quillEditor
     }
   }
 </script>
 <style lang="scss" scoped>
+  /*button{*/
+    /*display: none !important;*/
+  /*}*/
+  .ql-toolbar ql-snow{
+    display: none !important;
+  }
+  .ql-formats{
+    display: none !important;
+  }
 </style>
 

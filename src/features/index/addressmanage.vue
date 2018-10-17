@@ -21,8 +21,8 @@
           <div class="foot">
             <div class="foot-l">
               <label class="radio_box">
-                <img v-if="item.status == 3" @click="setAddress(0,item.id)" class="himg" src="../../assets/imgs/img29.png">
-                <img v-if="item.status == 0" @click="setAddress(3,item.id)" class="himg" src="../../assets/imgs/img30.png">
+                <img v-if="item.status == 3" class="himg" src="../../assets/imgs/img29.png">
+                <img v-if="item.status == 0" @click="setAddress(3,item.id,item.address)" class="himg" src="../../assets/imgs/img30.png">
                 <em>设置默认</em>
               </label>
             </div>
@@ -42,28 +42,42 @@
     name: 'Addressmanage',
     data () {
       return {
-        listData:{},
-        imgs: '../../assets/imgs/img29.png',
+        listData:{}
       }
     },
     methods: {
       result1(ret) {
-        this.model1 = ret.itemName1 + ' ' + ret.itemName2 + ' ' + ret.itemName3;
+        this.model1 = ret.itemName1 + ' ' + ret.itemName2 + ' ' + ret.itemName3
       },
       prev(){
-        this.$router.go(-1)
+        if(this.$route.query.url == 'my')
+        {
+          this.$router.replace({path: '/my'})
+        }
+        else if(this.$route.query.url == 'service')
+        {
+          this.$router.replace({path: '/service'})
+        }
+        else{
+          this.$router.replace({path: '/my'})
+        }
       },
       newAdderess(){
-        this.$router.push({path: '/addressmanage1'})
+        this.$router.push({path: '/addressmanage1',query:{url:this.$route.query.url}})
       },
       updateAddress(item){
         this.$router.push({path: '/addressmanage2',query: {
-            item:item
+            item:item,url:this.$route.query.url
           }})
       },
       getList(){
         let self = this
-        // this.listData.push({id : '1', checkflag : false})
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'addressmanage'
+            }})
+          return
+        }
         this.$dialog.loading.open('获取中...')
         self.$http.get('/healthymvc/getmyaddresslist',{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
@@ -76,21 +90,29 @@
                 }
               })
             }
-            if(response.data.msg == 'token错误'){
-              this.$router.push({path: '/login'})
+            else{
+              this.$dialog.toast({
+                mes: response.data.msg,
+                timeout: 1500
+              })
+              if(response.data.msg == 'token错误'){
+                this.$router.push({path: '/login',query:{url:'addressmanage'}})
+              }
             }
-            this.$dialog.toast({
-              mes: response.data.msg,
-              timeout: 1500
-            })
           })
           .catch(function (error) {
             this.$dialog.loading.close()
             console.log(error)
           })
       },
-      setAddress(status,id){
+      setAddress(status,id,addr){
         let self = this
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'addressmanage'
+            }})
+          return
+        }
         let paramts = {
           myaddressid: id,
           status: status
@@ -100,14 +122,17 @@
           .then(function (response) {
             this.$dialog.loading.close()
             if (response.data.status == true) {
+              localStorage.setItem("address", addr)
               this.getList()
             }
-            this.$dialog.toast({
-              mes: response.data.msg,
-              timeout: 1500
-            })
-            if(response.data.msg == 'token错误'){
-              this.$router.push({path: '/login'})
+            else{
+              this.$dialog.toast({
+                mes: response.data.msg,
+                timeout: 1500
+              })
+              if(response.data.msg == 'token错误'){
+                this.$router.push({path: '/login',query:{url:'addressmanage'}})
+              }
             }
           })
           .catch(function (error) {
@@ -117,6 +142,12 @@
       },
       delAddress(id){
         let self = this
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'addressmanage'
+            }})
+          return
+        }
         let paramts = {
           myaddressid: id
         }
@@ -127,12 +158,14 @@
             if (response.data.status == true) {
               this.getList()
             }
-            this.$dialog.toast({
-              mes: response.data.msg,
-              timeout: 1500
-            })
-            if(response.data.msg == 'token错误'){
-              this.$router.push({path: '/login'})
+            else{
+              this.$dialog.toast({
+                mes: response.data.msg,
+                timeout: 1500
+              })
+              if(response.data.msg == 'token错误'){
+                this.$router.push({path: '/login',query:{url:'addressmanage'}})
+              }
             }
           })
           .catch(function (error) {

@@ -9,13 +9,18 @@
       </div>
     </div>
     <div class="orderd">
-      <div class="orderd-vw">
-        <div class="orderd-bd">
-          <p style="margin-top: 5px;font-size: 16px;color: #00CE9F">剩余可用积分：{{detailData.all_integral}}</p>
-          <p style="margin-top: 15px;font-size: 16px;color: #aa0000">冻结积分：{{detailData.freezing_integral}}</p>
-          <p style="margin-top: 15px;font-size: 16px;">已使用积分：{{detailData.used_integral}}</p>
+      <div class="orderd-vw" >
+        <div v-if="detailData !== null">
+          <div class="orderd-bd">
+            <p style="margin-top: 5px;font-size: 16px;color: #00CE9F">剩余可用积分：{{detailData.all_integral}}</p>
+            <p style="margin-top: 15px;font-size: 16px;color: #aa0000">冻结积分：{{detailData.freezing_integral}}</p>
+            <p style="margin-top: 15px;font-size: 16px;">已使用积分：{{detailData.used_integral}}</p>
+          </div>
+          <div @click="goList" class="hh"><p>明细列表</p></div>
         </div>
-        <div @click="goList" class="hh"><p>明细列表</p></div>
+        <div style="height: auto;width: 100%;padding: 50px;" v="else">
+          <p style="text-align: center;font-size: 16px;">暂无积分！</p>
+        </div>
       </div>
     </div>
   </div>
@@ -40,6 +45,12 @@
         this.$router.go(-1)
       },
       getDetail(){
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'integral'
+            }})
+          return
+        }
         this.$dialog.loading.open('获取中...')
         let self = this
         self.$http.get('/healthymvc/getmyintegral',{ emulateJSON: true ,headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
@@ -52,6 +63,9 @@
                 mes:  response.data.msg,
                 timeout: 1500
               })
+              if(response.data.msg == 'token错误'){
+                this.$router.push({path: '/login',query:{url: 'integral'}})
+              }
             }
           })
           .catch(function (error) {

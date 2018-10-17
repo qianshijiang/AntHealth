@@ -52,11 +52,17 @@
         status: 0,
         district: District,
         infoData: {},
+        province:'',
+        city:'',
+        area:'',
       }
     },
     methods: {
       result1(ret) {
         this.address = ret.itemName1 + ' ' + ret.itemName2 + ' ' + ret.itemName3
+        this.province = ret.itemName1
+        this.city = ret.itemName2
+        this.area = ret.itemName3
       },
       prev(){
         this.$router.go(-1)
@@ -70,6 +76,12 @@
       },
       submit(){
         let self = this
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'addressmanage2'
+            }})
+          return
+        }
         if(!this.address){
           this.$dialog.toast({
             mes: '请选择地址',
@@ -91,6 +103,9 @@
           name: this.nickname,
           phone: this.phone,
           status: this.infoData.status,
+          province:this.province,
+          city:this.city,
+          area:this.area,
           address: adds,
           detailed_address: this.addressdetail,
         }
@@ -99,12 +114,17 @@
           .then(function (response) {
             this.$dialog.loading.close()
             if (response.data.status == true) {
-              this.$router.replace({path: '/addressmanage'})
+              this.$router.replace({path: '/addressmanage',query:{url:this.$route.query.url}})
             }
-            this.$dialog.toast({
-              mes: response.data.msg,
-              timeout: 1500
-            })
+            else{
+              this.$dialog.toast({
+                mes: response.data.msg,
+                timeout: 1500
+              })
+              if(response.data.msg == 'token错误'){
+                this.$router.push({path: '/login',query:{url:'addressmanage2'}})
+              }
+            }
           })
           .catch(function (error) {
             this.$dialog.loading.close()
@@ -115,10 +135,7 @@
     mounted: function () {
       this.infoData = this.$route.query.item
       this.getinfo()
-    },
-    // components: {
-    //   TopBar
-    // }
+    }
   }
 </script>
 <style>
@@ -146,5 +163,6 @@
    font-size: .3rem;
    color: #fff;
  }
+  span{padding-bottom: 0.12rem!important;}
 </style>
 

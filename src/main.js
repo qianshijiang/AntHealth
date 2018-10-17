@@ -5,8 +5,6 @@ import Element from 'element-ui'
 import VueResource from 'vue-resource'
 
 Vue.use(VueResource)
-// import http from 'axios'
-// import qs from 'qs'
 import Mock from './mock/mock'
 import store from './vuex/store'
 import vuescroll from 'vuescroll'

@@ -5,7 +5,7 @@
 
         <div class="header header-bg1">
           <div class="center">
-            <p><span class="header-tit">上海 新华园</span></p>
+            <p><span class="header-tit">{{nowposition}}</span></p>
           </div>
         </div>
         <yd-slider autoplay="3000" style="height: 140px;width: 92%;margin: auto;border-radius: 5px;margin-top: -45px;">
@@ -22,41 +22,37 @@
           <li @click="productIntro(2)">
             <div class="txt">
               <h4>我的保单</h4>
-              <p>一键轻松管理保单</p>
+              <p style="line-height: 18px;">一键轻松管理保单</p>
             </div>
             <div class="img">
               <img src="../../assets/imgs/img21.png"/>
             </div>
           </li>
           <li>
-            <a href="#">
-              <div class="txt">
-                <h4>福利商城</h4>
-                <p>一键轻松管理保单</p>
-              </div>
-              <div class="img">
-                <img src="../../assets/imgs/img23.png"/>
-              </div>
-            </a>
+            <div class="txt">
+              <h4>福利商城</h4>
+              <p style="line-height: 18px;">一键轻松管理保单</p>
+            </div>
+            <div class="img">
+              <img src="../../assets/imgs/img23.png"/>
+            </div>
           </li>
         </ul>
         <ul>
           <li>
-            <a href="#">
-              <div class="txt">
-                <h4>平价药店</h4>
-                <p>让买药变轻松的事</p>
-              </div>
-              <div class="img">
-                <img src="../../assets/imgs/img24.png"/>
-              </div>
-            </a>
+            <div class="txt">
+              <h4>平价药店</h4>
+              <p style="line-height: 18px;">让买药变轻松的事</p>
+            </div>
+            <div class="img">
+              <img src="../../assets/imgs/img24.png"/>
+            </div>
           </li>
           <li>
             <div @click="productIntro(3)">
               <div class="txt">
                 <h4>一键急救</h4>
-                <p>遇到危险点这里</p>
+                <p style="line-height: 18px;">遇到危险点这里</p>
               </div>
               <div class="img">
                 <img src="../../assets/imgs/img22.png"/>
@@ -83,7 +79,7 @@
         <div class="body h-act-list" >
           <div class="swiper-container">
             <div class="swiper-wrapper" style="">
-              <div class="swiper-slide" @click="productIntro(5,item.activateid)" v-for="item in activeData" :key="item.activateid">
+              <div class="swiper-slide swiper-slide-next" @click="productIntro(5,item.activateid)" v-for="item in activeData" :key="item.activateid">
                 <div >
                   <div class="img">
                     <img style="width: 230px;height: 130px" :src="item.activity_img"/>
@@ -106,17 +102,18 @@
             <li v-for="item in productData" :key="item.id" @click="productIntro(1,item.id)">
                 <div class="img">
                   <!--<img src="../../assets/imgs/img11.jpg"/>-->
-                  <img :src="item.insuranceImg"/>
+                  <img :src="item.insruanceimg"/>
                 </div>
                 <div class="txt">
                   <h4>{{item.insuranceName}}</h4>
-                  <p>{{item.insuranceIntroduction}}</p>
+                  <p style="line-height: 16px;">{{item.insuranceIntroduction}}</p>
                   <label class="c_green">{{item.insruanceprice}}</label>
                 </div>
             </li>
           </ul>
         </div>
       </div>
+      <div style="display: none" id="allmap"></div>
     <FooterBar pageTag="0"/>
   </div>
 </template>
@@ -132,6 +129,7 @@
         bannerData: {},
         activeData: {},
         productData: [],
+        nowposition: '定位中...',
       }
     },
     methods: {
@@ -196,6 +194,12 @@
             if (response.data.status == true) {
               this.productData = response.data.data
             }
+            else{
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
+            }
           })
           .catch(function (error) {
             this.$dialog.loading.close()
@@ -214,6 +218,12 @@
             this.$dialog.loading.close()
             if (response.data.status == true) {
               this.activeData = response.data.data
+            }
+            else{
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
             }
           })
           .catch(function (error) {
@@ -234,18 +244,51 @@
             if (response.data.status == true) {
               self.newsData = response.data.data
             }
+            else{
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
+            }
           })
           .catch(function (error) {
             this.$dialog.loading.close()
             console.log(error)
           })
       },
+      getPosition(){
+        let self = this
+        let map = new BMap.Map("allmap")
+
+        let geolocation = new BMap.Geolocation()
+        geolocation.getCurrentPosition(function(r){
+          if(this.getStatus() == BMAP_STATUS_SUCCESS){
+            self.nowposition = r.address.province+' '+r.address.city
+          }
+          else {
+            this.nowposition = '定位失败'
+            this.$dialog.toast({
+              mes:  '定位失败',
+              timeout: 1500
+            })
+          }
+        },{enableHighAccuracy: true})
+      },
     },
     mounted: function () {
-      let mySwiper = new Swiper('.swiper-container', {
-        autoplay:true,
-        loop:true
+      // let mySwiper = new Swiper('.swiper-container', {
+      //   autoplay:true,
+      //   loop:true
+      // })
+      let swiper = new Swiper('.h-act-list .swiper-container', {
+        slidesPerView: 'auto',
+        spaceBetween: 30,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
       })
+      this.getPosition()
       this.getBanner()
       this.getProduct()
       this.getActive()

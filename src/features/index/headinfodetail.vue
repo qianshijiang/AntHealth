@@ -17,24 +17,43 @@
       <div class="body">
         <!--<p><img src="../../assets/imgs/img67.jpg"/></p>-->
         <p><img style="width: 100%;height: 210px;border-radius: 6px;" :src="detailData.newImg"/></p>
-        <p style="overflow: hidden">{{detailData.newcontent}}</p>
-
+        <!--<p style="overflow: hidden">{{detailData.newcontent}}</p>-->
+        <div style="widht:100%;height:100%;word-wrap: break-word">
+          <quill-editor ref="myTextEditor" v-model="content" :options = "editorOption" @focus="onEditorFocus"  @change="onEditorChange($event)"></quill-editor>
+        </div>
 
       </div>
     </div>
   </div>
 </template>
 <script>
+  import {quillEditor} from 'vue-quill-editor'
   export default {
     name: 'Headinfodetail',
     data () {
       return {
-        detailData: {}
+        detailData: {},
+        content: '',                // 编辑器的内容
+        editorOption: {
+          toolbar:[
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            ['blockquote', 'code-block']
+          ]
+          // something config
+        }
       }
     },
     methods: {
       prev(){
         this.$router.go(-1)
+      },
+      onEditorFocus(editor,val,text){ // 富文本获得焦点时的事件
+        editor.enable(false) // 在获取焦点的时候禁用
+      },
+      onEditorChange({ editor, html, text }) {
+        //富文本编辑器  文本改变时 设置字段值
+        this.content = html
+        editor.enable(false)
       },
       getDetail(){
         let self = this
@@ -47,6 +66,7 @@
             this.$dialog.loading.close()
             if (response.data.status == true) {
               this.detailData = response.data.data
+              this.content = this.detailData.newcontent
             }else {
               this.$dialog.toast({
                 mes:  response.data.msg,
@@ -62,9 +82,16 @@
     },
     mounted: function () {
       this.getDetail()
+      this.$refs.myTextEditor.quill.enable(false)
+    },
+    components: {
+      quillEditor                 // 声明组件quillEditor
     }
   }
 </script>
 <style lang="scss" scoped>
+  button{
+    display: none !important;
+  }
 </style>
 

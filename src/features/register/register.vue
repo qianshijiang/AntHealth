@@ -17,7 +17,7 @@
             <p class="messagesty">{{messagename}}</p>
             <li>
               <label><img src="../../assets/imgs/img35.png"/></label>
-              <input type="text" style="width: 160px;" class="txt" v-model="logonForm.codeVal" placeholder="短信验证码" @change="checkCode"/>
+              <input type="text" style="width: 140px;" class="txt" v-model="logonForm.codeVal" placeholder="短信验证码" @change="checkCode"/>
               <yd-sendcode class="sendcode" slot="right"
                            v-model="codeStart"
                            init-str="点击获取"
@@ -102,6 +102,8 @@
               localStorage.setItem('address', response.data.data.address)
               localStorage.setItem('phone', response.data.data.phone)
               localStorage.setItem('data', JSON.stringify(response.data.data))
+              localStorage.setItem('parksid', response.data.data.parksid)
+              localStorage.setItem('communityid', response.data.data.communityid)
               self.$router.replace({path: '/my'})
             }else{
               this.$dialog.toast({

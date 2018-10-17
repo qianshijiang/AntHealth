@@ -8,7 +8,7 @@
 
       </div>
       <div class="right" @click="goAddre">
-        <a class="changeaddr border_2"><span>更换地址</span></a>
+        <a class="changeaddr border_2"><span style="top: 38%;">更换地址</span></a>
       </div>
     </div>
     <div class="selectaddr">
@@ -21,7 +21,9 @@
       </div>
       <div class="body" style="margin-bottom: 60px;">
         <ul>
-          <li v-for="item in listData" :key="item.id" @click="goDetail(item.serviceId,item.technicianid)">
+          <yd-infinitescroll  :callback="getList" ref="infinitescrollDemo">
+            <yd-list theme="1" slot="list">
+          <li v-for="item in list" :key="item.id" @click="goDetail(item.serviceId,item.technicianid)">
               <div class="img">
                 <!--<img src="../../assets/imgs/img77.png"/>-->
                 <img :src="item.technicianAvatar_url"/>
@@ -35,11 +37,17 @@
                   <span>|</span>
                   <span>{{item.occupationTitle}}</span>
                 </h4>
-                <p>{{item.introduction}}</p>
+                <p style="line-height: 16px;">{{item.introduction}}</p>
                 <address>{{item.distance}}</address>
               </div>
           </li>
+            </yd-list>
+            <!-- 数据全部加载完毕显示 -->
+            <span slot="doneTip">~~没有数据啦~~</span>
 
+            <!-- 加载中提示，不指定，将显示默认加载中图标 -->
+            <img slot="loadingTip" src="http://static.ydcss.com/uploads/ydui/loading/loading10.svg"/>
+          </yd-infinitescroll>
         </ul>
       </div>
     </div>
@@ -54,7 +62,9 @@
     data () {
       return {
         typeData: [],
-        listData:[],
+        list:[],
+        page:1,
+        pagesize:10,
         typeid: '',
         navflag: 1,
         address:'',
@@ -97,6 +107,9 @@
                 timeout: 1500
               })
             }
+            this.page = 1
+            this. pagesize = 10
+            this.list = []
             this.getList()
           })
           .catch(function (error) {
@@ -105,27 +118,56 @@
           })
       },
       getList(){
-        this.listData = []
         let self = this
-        let adds = this.address
+        let adds = this.myaddress
+        // str = str.replace(/,/g, "");//取消字符串中出现的所有逗号
+        // return str;
         if(adds){
           adds = adds.replace(/\s+/g,"")
+          adds = adds.replace(/,/g, "")
+          adds = adds.replace(/，/g, "")
         }
         else {
           adds = ''
         }
+        let parksid = 0
+        let communityid = 0
+        if(localStorage.getItem('parksid')){
+          parksid = localStorage.getItem('parksid')
+        }
+        if(localStorage.getItem('communityid')){
+          communityid = localStorage.getItem('communityid')
+        }
+        let page = this.page > 1 ? this.page - 1 : this.page
+        // alert(parksid + communityid)
         let paramts = {
           typeid: this.typeid,
-          page: 1,
-          pagemax: 10,
-          address: adds
+          page: page,
+          pagemax: this.pagesize,
+          address: adds,
+          parksid:parksid,
+          communityid:communityid,
         }
         this.$dialog.loading.open('获取中...')
         self.$http.post('/healthymvc/gettechnicianbytype',paramts,{ emulateJSON: true, headers: { "Content-Type": "multipart/form-data"}})
           .then(function (response) {
             this.$dialog.loading.close()
             if (response.data.status == true) {
-              this.listData = response.data.data
+              this.list = response.data.data
+              const _list = response.data.data
+
+                this.list = [...this.list, ..._list];
+
+              if (_list.length < this.pageSize || this.page == 10) {
+                /* 所有数据加载完毕 */
+                this.$refs.infinitescrollDemo.$emit('ydui.infinitescroll.loadedDone');
+                return;
+              }
+
+              /* 单次请求数据完毕 */
+              this.$refs.infinitescrollDemo.$emit('ydui.infinitescroll.finishLoad');
+
+              this.page++;
             }
             else {
               this.$dialog.toast({
@@ -150,7 +192,7 @@
               url: 'service'
             }})
         }else {
-          this.$router.push({path: '/addressmanage'})
+          this.$router.push({path: '/areas',query:{url:'service'}})
         }
       },
     },
@@ -158,7 +200,21 @@
       this.getListType()
       if(localStorage.getItem('address')){
         this.address = localStorage.getItem('address')
-        this.myaddress = localStorage.getItem('address')
+
+        // this.myaddress = localStorage.getItem('address')
+      }
+      let comm = ''
+      let park = ''
+      if(localStorage.getItem("commaddress")){
+        comm = localStorage.getItem("commaddress")
+      }
+      if(localStorage.getItem("parkaddress")){
+        park = localStorage.getItem("parkaddress")
+      }
+      if(comm !== '' || park !== ''){
+        this.myaddress = comm +' '+ park
+      }else{
+        this.myaddress = '点击我的资料设置'
       }
     },
     components: {

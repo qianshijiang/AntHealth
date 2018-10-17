@@ -38,6 +38,7 @@ import Insurance from '@/features/index/insurance'
 import Integral from '@/features/index/integral'
 import Integraldetail from '@/features/index/integraldetail'
 import Aidorder from '@/features/index/aidorder'
+import Areas from '@/features/index/areas'
 
 Vue.use(Router)
 
@@ -237,6 +238,11 @@ const router = new Router({
       path: '/aidorder',
       name: 'aidorder',
       component: Aidorder
+    },
+    {
+      path: '/areas',
+      name: 'areas',
+      component: Areas
     }
   ]
 });

@@ -83,6 +83,12 @@
       },
       submit(){
         let self = this
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'pay'
+            }})
+          return
+        }
         let paramts = {
           objOrderno : this.$route.query.orderid,
           paytype : this.ptype,
@@ -101,6 +107,9 @@
                 mes:  response.data.msg,
                 timeout: 1500
               })
+              if(response.data.msg == 'token错误'){
+                this.$router.push({path: '/login',query:{url: 'pay'}})
+              }
             }
           })
           .catch(function (error) {
@@ -154,6 +163,12 @@
       },
       submits(){
         let self = this
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'pay'
+            }})
+          return
+        }
         let paramts = {
           objOrderno : this.$route.query.orderid,
           paytype : this.ptype,
@@ -171,6 +186,9 @@
                 mes:  response.data.msg,
                 timeout: 1500
               })
+              if(response.data.msg == 'token错误'){
+                this.$router.push({path: '/login',query:{url: 'pay'}})
+              }
             }
           })
           .catch(function (error) {

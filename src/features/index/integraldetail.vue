@@ -14,17 +14,17 @@
         <ul>
           <li v-for="(item,index) in listData" :key="index">
             <div class="left">
-              <h4>{{item.integral}} 分</h4>
+              <h4>积分值：{{item.integral}} 分</h4>
               <p style="display: flex;flex-direction: column;color: #666;">
-                <span>{{item.create_date}}</span>
-                <span style="margin-top: 10px;">{{item.remarks}}</span>
+                <span>发生时间：{{item.create_date | momentFilter}}</span>
+                <span style="margin-top: 10px;">备注：{{item.remarks}}</span>
               </p>
             </div>
             <div class="right">
-              <h4 v-if="item.objtype == 1">加</h4>
-              <h4 v-if="item.objtype == 2">减</h4>
-              <p class="c_green" style="margin-top: 15px;" v-if="item.status == 0">正常</p>
-              <p class="c_green" style="margin-top: 15px;" v-if="item.status == 1">冻结</p>
+              <h4 v-if="item.objtype == 1">类型：加</h4>
+              <h4 v-if="item.objtype == 2">类型：减</h4>
+              <p class="c_green" style="margin-top: 15px;" v-if="item.status == 0">状态：正常</p>
+              <p class="c_green" style="margin-top: 15px;" v-if="item.status == 1">状态：冻结</p>
             </div>
           </li>
         </ul>
@@ -48,6 +48,12 @@
         this.$router.go(-1)
       },
       getDetail(){
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'integraldetail'
+            }})
+          return
+        }
         this.$dialog.loading.open('获取中...')
         this.listData = []
         let self = this
@@ -66,6 +72,9 @@
                   mes:  response.data.msg,
                   timeout: 1500
                 })
+                if(response.data.msg == 'token错误'){
+                  this.$router.push({path: '/login',query:{url: 'integraldetail'}})
+                }
               }
             }
           ).catch(function (error) {

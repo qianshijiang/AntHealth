@@ -27,7 +27,7 @@
       <div class="orderd-hd">
         <h4>{{detailData.activitename}}</h4>
         <dl>
-          <dt>{{detailData.activitetime}}</dt>
+          <dt>{{detailData.activitetime | momentFilter}}</dt>
           <dd>{{detailData.activiteaddress}}</dd>
         </dl>
       </div>
@@ -38,7 +38,7 @@
 
     </div>
     <div class="orderd-f">
-      购票时间：{{detailData.creattime}}
+      购票时间：{{detailData.creattime | momentFilter}}
       <p style="float: right;margin-right: 25px;font-size: 14px;color: #333;font-weight: bold" @click="goRefund">取消</p>
     </div>
   </div>

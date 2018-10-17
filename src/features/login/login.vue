@@ -84,6 +84,8 @@
                 localStorage.setItem('address', response.data.data.address)
                 localStorage.setItem('phone', response.data.data.phone)
                 localStorage.setItem('data', JSON.stringify(response.data.data))
+                localStorage.setItem('parksid', response.data.data.parksid)
+                localStorage.setItem('communityid', response.data.data.communityid)
                 if(this.$route.query.url == 'aidcardt'){
                   setTimeout(self.$router.replace({path: '/aidcardt'}),3000)
                 }
@@ -95,6 +97,42 @@
                 }
                 else if(this.$route.query.url == 'appointment'){
                   setTimeout(self.$router.replace({path: '/service'}),3000)
+                }
+                else if(this.$route.query.url == 'addressmanage'){
+                  setTimeout(self.$router.replace({path: '/addressmanage'}),3000)
+                }
+                else if(this.$route.query.url == 'addressmanage1'){
+                  setTimeout(self.$router.replace({path: '/addressmanage1'}),3000)
+                }
+                else if(this.$route.query.url == 'addressmanage2'){
+                  setTimeout(self.$router.replace({path: '/addressmanage2'}),3000)
+                }
+                else if(this.$route.query.url == 'aidcard'){
+                  setTimeout(self.$router.replace({path: '/aidcard'}),3000)
+                }
+                else if(this.$route.query.url == 'myinfo'){
+                  setTimeout(self.$router.replace({path: '/myinfo'}),3000)
+                }
+                else if(this.$route.query.url == 'updatephone'){
+                  setTimeout(self.$router.replace({path: '/updatephone'}),3000)
+                }
+                else if(this.$route.query.url == 'aidorder'){
+                  setTimeout(self.$router.replace({path: '/aidorder'}),3000)
+                }
+                else if(this.$route.query.url == 'integral'){
+                  setTimeout(self.$router.replace({path: '/integral'}),3000)
+                }
+                else if(this.$route.query.url == 'integraldetail'){
+                  setTimeout(self.$router.replace({path: '/integraldetail'}),3000)
+                }
+                else if(this.$route.query.url == 'pay'){
+                  setTimeout(self.$router.replace({path: '/pay'}),3000)
+                }
+                else if(this.$route.query.url == 'serviceorder'){
+                  setTimeout(self.$router.replace({path: '/serviceorder'}),3000)
+                }
+                else if(this.$route.query.url == 'areas'){
+                  setTimeout(self.$router.replace({path: '/areas'}),3000)
                 }
                 else {
                   self.$router.replace({path: '/my'})

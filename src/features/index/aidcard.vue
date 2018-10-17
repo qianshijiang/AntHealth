@@ -106,6 +106,12 @@
     methods: {
       getInfo(){
         let self = this
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'aidcard'
+            }})
+          return
+        }
         this.$dialog.loading.open('获取中...')
         self.$http.get('/healthymvc/getmyFirstAid',{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token") }})
           .then(function (response) {
@@ -115,7 +121,7 @@
               if(response.data.data == null){
                 this.title = '保 存'
               }else {
-                this.name = this.aidData
+                this.name = this.aidData.name
                 this.gender = this.aidData.sex
                 this.blood = this.aidData.blood
                 this.height = this.aidData.height
@@ -130,9 +136,12 @@
             }
             else{
               this.$dialog.toast({
-                mes:  response.data.msg,
+                mes: response.data.msg,
                 timeout: 1500
               })
+              if(response.data.msg == 'token错误'){
+                this.$router.push({path: '/login',query:{url:'aidcard'}})
+              }
             }
           })
           .catch(function (error) {
@@ -142,6 +151,12 @@
       },
       submit(){
         let self = this
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'aidcard'
+            }})
+          return
+        }
         if(!this.name || !this.gender || !this.blood || !this.height || !this.weight || !this.phone || !this.medical || !this.allergy
         || !this.usedrag || !this.address){
           this.$dialog.toast({
@@ -178,9 +193,9 @@
                 mes: response.data.msg,
                 timeout: 1500
               })
-            // }else{
-            //
-            // }
+            if(response.data.msg == 'token错误'){
+              this.$router.push({path: '/login',query:{url:'aidcard'}})
+            }
           })
           .catch(function (error) {
             this.$dialog.loading.close()
@@ -277,6 +292,9 @@
     text-align: center;
     color: #ffffff;
     font-size: 16px;
+  }
+  span{
+    padding-top: 0 !important;
   }
 </style>
 

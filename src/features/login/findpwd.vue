@@ -21,22 +21,24 @@
           <li>
             <label><img src="../../assets/imgs/img35.png"/></label>
             <input type="text" style="width: 100px;" class="txt" v-model="findForm.codeVal" placeholder="短信验证码" @blur="checkCode"/>
-            <yd-sendcode class="sendcode" slot="right"
+            <p class="messagesty">{{messagecode}}</p>
+            <yd-sendcode style="width: auto;float: right;margin-right: 10px;" class="sendcode" slot="right"
                          v-model="codeStart"
                          init-str="点击获取"
                          @click.native="getVerificationCode"
                          run-str="{%s}秒"
                          reset-str="重新获取"
             ></yd-sendcode>
-            <p class="messagesty">{{messagecode}}</p>
+
           </li>
 
           <li>
             <label><img src="../../assets/imgs/img36.png"/></label>
             <input type="type" v-model="findForm.pwd" style="width: 120px;" class="txt" placeholder="请输入密码" v-if="seePwdModel" @blur="checkPwd"/>
             <input type="password" v-model="findForm.pwd" style="width: 120px;" class="txt" placeholder="请输入密码" v-else @blur="checkPwd"/>
-            <button type="button" class="eye" :class="{'eye-on':!seePwdModel}" @click="displayorHidePwd"></button>
             <p class="messagesty">{{messagepwd}}</p>
+            <button type="button" style="float: right;margin-right: 10px;" class="eye" :class="{'eye-on':!seePwdModel}" @click="displayorHidePwd"></button>
+
           </li>
 
         </ul>
@@ -212,7 +214,7 @@
       font-size: 12px;
       color: red;
       /*padding-top: 7px;padding-bottom: 15px;*/
-      margin-left: 20px;
+      margin-left: 0;
       line-height: 48px;
       width:100px;
       float: right;

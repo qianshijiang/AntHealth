@@ -29,7 +29,7 @@
             </div>
             <div class="txt" style="width: 75%;">
               <h4>{{item.activity_name}}</h4>
-              <p>{{item.activity_time}} </p>
+              <p>{{item.activity_time | momentFilter}} </p>
               <label class="c_green">{{item.activity_address}}</label>
             </div>
             </a>
@@ -56,7 +56,9 @@
         this.showChangePwdPanel = true
       },
       prev(){
-        this.$router.go(-1)
+        this.$router.replace({path: '/activedetail',query: {
+           id:this.$route.query.id
+          }})
       },
       getInfo(){
         let self = this

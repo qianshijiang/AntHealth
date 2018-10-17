@@ -22,20 +22,23 @@
       <div class="body g-tab-bd">
         <ul>
           <li v-for="item in listData" :key="item.orderno">
-            <div class="bd" @click="goDetail">
+            <div class="bd">
               <div class="bd-l">
                 <img :src="item.technicianAurl"/>
               </div>
               <div class="bd-r">
                 <h3>技师：{{item.technicianName}}</h3>
                 <h4>服务：{{item.serviceName}}</h4>
-                <p>服务时间：{{item.serviceTime}}</p>
-                <label>{{item.totalPrice}}</label>
+                <p>服务时间：{{item.serviceTime | momentFilter}}</p>
+                <label>￥{{item.totalPrice}}</label>
               </div>
             </div>
             <div class="ft">
               <div class="ft-l">
                 {{item.serviceAddress}}
+              </div>
+              <div class="ft-r">
+                <p style="text-align: center;color:#00CE9F;line-height: 23px;font-size: 12px;" @click="goPay">支付</p>
               </div>
               <div class="ft-r">
                 <!--<input type="button" name="" id="" value="取消" />-->
@@ -67,12 +70,23 @@
       goDetail() {
         this.$router.push({path: '/serviceorderdetail'})
       },
+      goPay(){
+        this.$router.push({path: '/pay',query: {
+            orderid:this.$route.query.orderid, type: this.$route.query.type
+          }})
+      },
       goRefund() {
         let self = this
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'serviceorder'
+            }})
+          return
+        }
         let paramts = {
           orderno: this.orderno,
         }
-        this.$dialog.loading.open('获取中...')
+        this.$dialog.loading.open('提交中...')
         self.$http.post('/healthymvc/cancelserviceorder',paramts,{ emulateJSON: true, headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
             this.$dialog.loading.close()
@@ -80,12 +94,15 @@
               this.$router.push({path: '/refund'})
               this.cancelData = response.data.data
             }
-            // else {
+            else {
               this.$dialog.toast({
                 mes:  response.data.msg,
                 timeout: 1500
               })
-            // }
+              if(response.data.msg == 'token错误'){
+                this.$router.push({path: '/login',query:{url:'serviceorder'}})
+              }
+            }
           })
           .catch(function (error) {
             this.$dialog.loading.close()
@@ -100,6 +117,12 @@
         this.$router.go(-1)
       },
       getList(){
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'serviceorder'
+            }})
+          return
+        }
         this.listData = []
         let self = this
         let paramts = {
@@ -114,7 +137,7 @@
             }
             else {
               if(response.data.msg == 'token错误'){
-                this.$router.push({path: '/login'})
+                this.$router.push({path: '/login',query:{url:'serviceorder'}})
               }
               this.$dialog.toast({
                 mes:  response.data.msg,

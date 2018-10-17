@@ -19,29 +19,43 @@
         </div>
         <div class="body g-tab-bd">
           <ul>
-            <li @click="goDetail(item.id)" v-for="item in listData" :key="item.id">
+            <yd-infinitescroll  :callback="getList" ref="infinitescrollDemo">
+              <yd-list theme="1" slot="list">
+            <li @click="goDetail(item.id)" v-for="item in list" :key="item.id">
                 <div class="img">
                   <img :src="item.newImg"/>
                 </div>
                 <div class="txt">
                   <h4>{{item.newTitle}}</h4>
-                  <p>{{item.newIntroduction}}</p>
-                  <div class="labels">
+                  <p class="hnm ndy">{{item.newIntroduction}}</p>
+                  <div class="labels" style="margin-top: 5px;">
                     <div class="left">
                       <label>{{item.newLable}}</label>
                     </div>
                     <div class="right">
-                      2018-09-16
+                     {{item.newDate | momentFilter}}
                     </div>
                   </div>
                 </div>
             </li>
+              </yd-list>
+              <!-- 数据全部加载完毕显示 -->
+              <span slot="doneTip">~~没有数据啦~~</span>
+
+              <!-- 加载中提示，不指定，将显示默认加载中图标 -->
+              <img slot="loadingTip" src="http://static.ydcss.com/uploads/ydui/loading/loading10.svg"/>
+            </yd-infinitescroll>
           </ul>
         </div>
       </div>
     </div>
 </template>
 <script>
+  import Vue from 'vue';
+  import {InfiniteScroll} from 'vue-ydui/dist/lib.rem/infinitescroll';
+  /* 使用px：import {InfiniteScroll} from 'vue-ydui/dist/lib.px/infinitescroll'; */
+
+  Vue.component(InfiniteScroll.name, InfiniteScroll);
   import FooterBar from '../components/FooterBar.vue'
   import TopBar from '../components/TopBar.vue'
   export default {
@@ -49,7 +63,9 @@
     data () {
       return {
         typeData: [],
-        listData:[],
+        list:[],
+        page:1,
+        pagesize:10,
         typeid: ''
       }
     },
@@ -67,8 +83,11 @@
             item.check = false
           }
         })
-        this.typeid = id
-        this.getList()
+       this.typeid = id
+       this.page = 1
+       this. pagesize = 10
+        this.list = []
+       this.getList()
       },
       prev(){
         this.$router.go(-1)
@@ -84,13 +103,14 @@
               datas.forEach((item,index) => {
                 if(index === 0){
                   this.typeid = item.id
+                  this.getList()
                   this.typeData.push({check: true,id: item.id,newtypename: item.newtypename})
                 }
                 else {
                   this.typeData.push({check: false,id: item.id,newtypename: item.newtypename})
                 }
               })
-              this.getList()
+
             }
             else {
               this.$dialog.toast({
@@ -106,18 +126,32 @@
       },
       getList(){
         let self = this
-        self.listData = []
+        let page = this.page > 1 ? this.page - 1 : this.page
         let paramts = {
           typeid: this.typeid,
-          page: 1,
-          pagemax: 10
+          page: page,
+          pagemax: this.pagesize
         }
         this.$dialog.loading.open('获取中...')
         self.$http.post('/healthymvc/getnewslist',paramts,{ emulateJSON: true , headers: { "Content-Type": "multipart/form-data","token":localStorage.getItem("token")}})
           .then(function (response) {
             this.$dialog.loading.close()
             if (response.data.status == true) {
-              this.listData = response.data.data
+              this.list = response.data.data
+              const _list = response.data.data
+
+              this.list = [...this.list, ..._list];
+
+              if (_list.length < this.pageSize || this.page == 3) {
+                /* 所有数据加载完毕 */
+                this.$refs.infinitescrollDemo.$emit('ydui.infinitescroll.loadedDone');
+                return;
+              }
+
+              /* 单次请求数据完毕 */
+              this.$refs.infinitescrollDemo.$emit('ydui.infinitescroll.finishLoad');
+
+              this.page++;
             }else {
               this.$dialog.toast({
               mes:  response.data.msg,
@@ -148,86 +182,22 @@
     color: #333;
     border-bottom: 1px solid #00CE9F
   }
-  .home-box {
-    /*margin-top:45px;*/
-    background-image:none;
-    height: auto;
-    min-height: 100%;
-    width: 100%;
-    background: #fff;
-  }
-  .box-text{
-    font-size: 14px;
-    color: #999;
-    margin-top: 5px;
-    line-height:18px;
-    height: 36px;
-    overflow: hidden;
-    display:-webkit-box;
-    text-overflow:ellipsis;
-    -webkit-line-clamp:2;
-    -webkit-box-orient:vertical;
-    white-space:normal;
-  }
-  .box-content{
-    height: auto;
-    max-height: 120px;
-    width: 100%;
-    border-bottom:1px solid #e0e0e0;
-    border-top:1px solid #e0e0e0;
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-    margin-top: 10px;
-  }
-  .box-content1{
-    display: flex;
-    flex-direction: column;
+  .hnm{
+    height: auto!important;
+    line-height: 16px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     overflow: hidden;
   }
-  .box-content1 div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 8px;
-  }
-  .box-top{
-    height: auto;
-    width: 100%;
-    border-bottom:1px solid #e0e0e0;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    padding: 20px 10px;
-  }
-  .box-top1{
-    padding: 0 10px;
-    justify-content: space-around;
-    margin-bottom: 5px;
-  }
-  .box-top2{
-    padding: 15px 0;
-    flex: 1;
-    text-align: center;
-  }
-  .box-top2j{
-    border-bottom: 1px solid #333;
-  }
-  .box-imgb{
-    width:120px;
-    height:90px;
-    border: 1px solid #999;
-    margin-right: 15px;
-    border-radius: 10px;
-  }
-  .box-img1{
-    width:100%;
-    height: 100%;
-    border-radius: 15px;
-  }
-  .se-title3{
-    font-size: 14px;
-    color: #999;
+  .ndy{
+     overflow: hidden;
+/*   white-space: nowrap; */
+  text-overflow: ellipsis;
+  -webkit-line-clamp:2;
+  word-break:break-all;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
   }
 </style>
 

@@ -2,7 +2,7 @@
   <div class="layout">
     <div class="header">
       <div class="left">
-        <a href="#/login" class="back"></a>
+        <a @click="prev" class="back"></a>
       </div>
       <div class="center">
         <p>修改手机号</p>
@@ -26,14 +26,14 @@
           <li>
             <label><img src="../../assets/imgs/img35.png"/></label>
             <input type="text" style="width: 100px;" class="txt" v-model="findForm.codeVal" placeholder="短信验证码" @blur="checkCode"/>
-            <yd-sendcode class="sendcode" slot="right"
+            <p class="messagesty">{{messagecode}}</p>
+            <yd-sendcode class="sendcode" style="width: auto;float: right" slot="right"
                          v-model="codeStart"
                          init-str="点击获取"
                          @click.native="getVerificationCode"
                          run-str="{%s}秒"
                          reset-str="重新获取"
             ></yd-sendcode>
-            <p class="messagesty">{{messagecode}}</p>
           </li>
         </ul>
         <div class="foot" @click="submit">
@@ -68,8 +68,17 @@
       }
     },
     methods: {
+      prev(){
+        this.$router.go(-1)
+      },
       submit () {
         let self = this
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'updatephone'
+            }})
+          return
+        }
         if(!this.checkOldphone() || !this.checkPhone|| !this.checkCode){
           return
         }
@@ -84,13 +93,16 @@
             this.$dialog.loading.close()
             if (response.data.status === true) {
               localStorage.setItem('phone', response.data.data.phone)
-              // sessionStorage.setItem('setLogonData', JSON.stringify(response.data.result))
-              // self.$router.replace({path: '/login'})
-            }else{
+              this.$router.replace({path: '/myinfo'})
+            }
+            else{
               this.$dialog.toast({
-                mes: response.body.msg,
+                mes: response.data.msg,
                 timeout: 1500
               })
+              if(response.data.msg == 'token错误'){
+                this.$router.push({path: '/login',query:{url:'updatephone'}})
+              }
             }
           })
           .catch(function (error) {
