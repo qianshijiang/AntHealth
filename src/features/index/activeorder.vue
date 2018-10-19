@@ -13,17 +13,17 @@
       <div class="head g-tab-hd">
         <ul style="display: flex;justify-content: space-around">
           <!--<li :class="{'xh' : statusflag === 99}" @click="searchList(99)"><p>全部</p></li>-->
-          <li :class="{'xh' : statusflag === 0}" @click="searchList(0)"><p>待审核</p></li>
+          <li :class="{'xh' : statusflag == 0}" @click="searchList(0)"><p>待审核</p></li>
           <!--<li :class="{'xh' : statusflag === 4}" @click="searchList(4)"><p>审核中</p></li>-->
-          <li :class="{'xh' : statusflag === 1}" @click="searchList(1)"><p>已验票</p></li>
-          <li :class="{'xh' : statusflag === 3}"  @click="searchList(3)"><p>退票</p></li>
+          <li :class="{'xh' : statusflag == 1}" @click="searchList(1)"><p>已验票</p></li>
+          <li :class="{'xh' : statusflag == 3}"  @click="searchList(3)"><p>退票</p></li>
         </ul>
       </div>
       <div class="body g-tab-bd">
         <ul>
           <yd-infinitescroll  :callback="getActiveOrder" ref="infinitescrollDemo">
             <yd-list theme="1" slot="list">
-          <li v-for="(item,index) in list" :key="index" >
+          <li v-for="(item,index) in list" :key="index+page" >
             <div class="left">
               <div style="display: flex;flex-direction: row;justify-content: space-between">
                 <h4>{{item.activitename}}</h4>
@@ -46,7 +46,7 @@
           </li>
             </yd-list>
             <!-- 数据全部加载完毕显示 -->
-            <span slot="doneTip">~~没有数据啦~~</span>
+            <span slot="doneTip" v-show="page > 1">~~没有数据啦~~</span>
 
             <!-- 加载中提示，不指定，将显示默认加载中图标 -->
             <img slot="loadingTip" src="http://static.ydcss.com/uploads/ydui/loading/loading10.svg"/>
@@ -74,7 +74,7 @@
     methods: {
       goDetail(item) {
         this.$router.push({path: '/activeorderdetail',query: {
-            item: item
+            item: item,status:this.statusflag
           }})
       },
       prev(){
@@ -86,6 +86,12 @@
           }})
       },
       getActiveOrder(){
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'activeorder'
+            }})
+          return
+        }
         this.$dialog.loading.open('获取中...')
         let self = this
         let page = this.page > 1 ? this.page - 1 : this.page
@@ -98,12 +104,12 @@
           .then(function (response) {
             this.$dialog.loading.close()
               if(response.body.status == true){
-                this.list = response.data.data.tickets
+                // this.list = []
                 const _list = response.data.data.tickets
 
                   this.list = [...this.list, ..._list];
 
-                if (_list.length < this.pageSize || this.page == 3) {
+                if (_list.length < this.pagesize) {
                   /* 所有数据加载完毕 */
                   this.$refs.infinitescrollDemo.$emit('ydui.infinitescroll.loadedDone');
                   return;
@@ -116,7 +122,7 @@
               }
               else{
                 if(response.data.msg == 'token错误'){
-                  this.$router.push({path: '/login'})
+                  this.$router.push({path: '/login',query:{url:'activeorder'},})
                 }
                 this.$dialog.toast({
                   mes:  response.data.msg,

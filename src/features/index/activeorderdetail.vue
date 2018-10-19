@@ -39,7 +39,7 @@
     </div>
     <div class="orderd-f">
       购票时间：{{detailData.creattime | momentFilter}}
-      <p style="float: right;margin-right: 25px;font-size: 14px;color: #333;font-weight: bold" @click="goRefund">取消</p>
+      <p style="float: right;margin-right: 25px;font-size: 14px;color: #333;font-weight: bold" @click="delOrder">取消</p>
     </div>
   </div>
 </template>
@@ -58,6 +58,41 @@
     methods: {
       goRefund() {
         this.$router.push({path: '/refund'})
+      },
+      delOrder(){
+        let self = this
+        if(!localStorage.getItem("token")){
+          this.$router.push({path: '/login',  query: {
+              url: 'activeorderdetail'
+            }})
+          return
+        }
+        this.$dialog.loading.open('提交中...')
+        let paramts ={
+          myticketid: this.detailData.ticketorder,
+          status: this.$route.query.status
+        }
+        self.$http.post('/healthymvc/activityordercancel',paramts,{ emulateJSON: true })
+          .then(function (response) {
+            this.$dialog.loading.close()
+            if (response.data.status == true) {
+              this.$router.push({path: '/refund'})
+            }
+            else {
+              if(response.data.msg == 'token错误'){
+                this.$router.push({path: '/login',query:{url:'activeorderdetail',item:this.$route.query.item}})
+              }
+              this.$dialog.toast({
+                mes:  response.data.msg,
+                timeout: 1500
+              })
+            }
+            this.getList()
+          })
+          .catch(function (error) {
+            this.$dialog.loading.close()
+            console.log(error)
+          })
       },
       goAppoin() {
         this.$router.push({path: '/appointment'})

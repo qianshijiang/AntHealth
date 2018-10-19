@@ -38,16 +38,23 @@
                   {{technicians.technicianName}}
                 </div>
               </li>
-              <li>
-                <div class="label c_gray">
-                  当前技师无法服务时，允许更换技师
-                </div>
+              <!--<li style="padding: 0;border: 0">-->
+                <yd-cell-group style="border:0">
+                  <yd-cell-item type="label">
+                    <div slot="left">当前技师无法服务时，允许更换技师</div>
+                    <yd-switch style="background: #00ce9f" slot="right" v-model="flags"></yd-switch>
+                  </yd-cell-item>
+                </yd-cell-group>
+                <!--<div class="label c_gray">-->
+                  <!--当前技师无法服务时，允许更换技师-->
+                <!--</div>-->
 
-                <div class="input">
-                  <input type="checkbox"  class="choose-btn"  />
-                  <label  class="choose-label" :class="{'nmm' : flags === true}" @click="flags = !flags"></label>
-                </div>
-              </li>
+                <!--<div class="input">-->
+                  <!--<input type="checkbox"  class="choose-btn"  />-->
+                  <!--<label  class="choose-label" :class="{'nmm' : flags === true}" @click="flags = !flags"></label>-->
+                <!--</div>-->
+              <!--</li>-->
+
             </ul>
             <ul>
               <li>
@@ -120,7 +127,7 @@
       <dl>
         <dt>选择优惠卷券</dt>
         <span @click="coupons = false"  style="font-size: 0.5rem;float: right;margin-top: -44px;margin-right: 20px;color: #666;">&times;</span>
-        <dd v-for="(item,index) in couponData" :key="item.id" v-if="index < 4 && couponData.length>0" style="position: relative;top: 0;">
+        <dd v-for="(item,index) in couponData" :key="item.id" v-if="couponData.length>0" style="position: relative;top: 0;">
           <img @click="nsel(item)" v-if="item.checked == true" style="position: absolute;top: 30px;left: 8px;height: 25px;width: 25px;" src="../../assets/imgs/img29.png"/>
           <img @click="sel(item)" v-if="item.checked == false" style="position: absolute;top: 30px;left: 8px;height: 25px;width: 25px;" src="../../assets/imgs/img30.png"/>
           <div class="left" style="width: 3.2rem;margin-left: 15px">

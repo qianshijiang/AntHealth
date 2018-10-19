@@ -37,12 +37,12 @@
               <div class="ft-l">
                 {{item.serviceAddress}}
               </div>
-              <div class="ft-r">
-                <p style="text-align: center;color:#00CE9F;line-height: 23px;font-size: 12px;" @click="goPay">支付</p>
-              </div>
-              <div class="ft-r">
+              <div class="ft-r" style="margin-left: 10px;">
                 <!--<input type="button" name="" id="" value="取消" />-->
                 <p style="text-align: center;color:#00CE9F;line-height: 23px;font-size: 12px;" @click="goRefund">取消</p>
+              </div>
+              <div class="ft-r">
+                <p style="text-align: center;color:#00CE9F;line-height: 23px;font-size: 12px;" @click="goPay">支付</p>
               </div>
             </div>
           </li>

@@ -9,21 +9,21 @@
       </div>
     </div>
     <div class="h-related">
-      <div class="head g-tab-hd" style="padding-top: 0;">
-        <ul style="display: flex;flex-direction: row;line-height: 35px;">
-          <li style="flex: 1" v-for="(item,index) in typeData" :key="item.id" v-if="index<5">
+      <div  style="padding: 4px 8px;">
+        <ul style="display: flex;flex-direction: row;line-height: 35px;flex-wrap: wrap;justify-content: flex-start">
+          <li style="flex: 1" v-for="(item,index) in typeData" :key="item.id">
             <p class="xq" :class="{'xh' : item.check === true}" @click="searchList(item.id)">{{item.typename}}</p>
           </li>
         </ul>
       </div>
-      <div class="body">
+      <div class="body" v-show="list.length !== 0">
         <ul>
           <yd-infinitescroll  :callback="getList" ref="infinitescrollDemo">
             <yd-list theme="1" slot="list">
-          <li v-for="item in list" :key="item.id" @click="goDetail(item.id)">
-            <div class="img">
+          <li v-for="item,index in list" :key="index+page" @click="goDetail(item.id)">
+            <div class="img" >
               <!--<img src="../../assets/imgs/img11.jpg"/>-->
-              <img style="height: 110px;width: 110px;" :src="item.insruanceimg"/>
+              <img style="height: 100px;width: 100px;margin-right: 5px;" :src="item.insruanceimg"/>
             </div>
             <div class="txt">
               <h4>{{item.insuranceName}}</h4>
@@ -33,7 +33,7 @@
           </li>
             </yd-list>
             <!-- 数据全部加载完毕显示 -->
-            <span slot="doneTip">~~没有数据啦~~</span>
+            <span slot="doneTip" v-show="page > 1">~~没有数据啦~~</span>
 
             <!-- 加载中提示，不指定，将显示默认加载中图标 -->
             <img slot="loadingTip" src="http://static.ydcss.com/uploads/ydui/loading/loading10.svg"/>
@@ -117,12 +117,12 @@
           .then(function (response) {
             this.$dialog.loading.close()
             if (response.data.status == true) {
-              this.list = response.data.data
+              // this.list = response.data.data
               const _list = response.data.data
 
                 this.list = [...this.list, ..._list];
 
-              if (_list.length < this.pageSize || this.page == 3) {
+              if (_list.length < this.pagesize) {
                 /* 所有数据加载完毕 */
                 this.$refs.infinitescrollDemo.$emit('ydui.infinitescroll.loadedDone');
                 return;
@@ -158,12 +158,15 @@
 </script>
 <style lang="scss" scoped>
   .himg{
-    height: .4rem;width: .4rem;vertical-align:middle;
+    height: .4rem;
+    width: .4rem;
+    vertical-align:middle;
   }
      .xq{
        color:#999;
        padding: 0 10px;
        text-align: center;
+       /*width: 50px;*/
      }
   .xh{
     color: #333;

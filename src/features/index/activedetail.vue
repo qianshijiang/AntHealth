@@ -55,7 +55,7 @@
           <dl>
             <dt>选择票券</dt>
             <span @click="close"  style="font-size: 0.5rem;float: right;margin-top: -44px;margin-right: 20px;color: #666;">&times;</span>
-            <dd v-for="(item,index) in ticketData" :key="item.ticketid" v-if="index < 4" style="position: relative;top: 0;">
+            <dd v-for="(item,index) in ticketData" :key="item.ticketid" style="position: relative;top: 0;">
               <img v-if="item.checked == true" style="position: absolute;top: 30px;left: 8px;height: 25px;width: 25px;" src="../../assets/imgs/img29.png"/>
               <img @click="sel(item)" v-if="item.checked == false" style="position: absolute;top: 30px;left: 8px;height: 25px;width: 25px;" src="../../assets/imgs/img30.png"/>
               <div class="left" style="width: 3.2rem;margin-left: 15px">
@@ -239,7 +239,7 @@
       submit(){
         if(!localStorage.getItem("token")){
           this.$router.push({path: '/login',  query: {
-              url: 'activedetail'
+              url: 'activedetail',id:this.$route.query.id
             }})
           return
         }
@@ -253,7 +253,7 @@
         ticketres.ticketres = ticketjson
         if(ticketjson.length == 0){
           this.$dialog.toast({
-            mes:  '至少选择一张票',
+            mes:  '请选择您要购买的票卷',
             timeout: 1500
           })
           return
@@ -281,7 +281,7 @@
               })
               if(response.data.msg == 'token错误'){
                 this.$router.push({path: '/login',  query: {
-                    url: 'activedetail'
+                    url: 'activedetail',id:this.$route.query.id
                   }})
               }
             }

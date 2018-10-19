@@ -5,10 +5,10 @@
         <div @click="prev" class="back"></div>
       </div>
       <div class="center">
-        <p>平价药店</p>
+        <p>福利商城</p>
       </div>
     </div>
-    <iframe style="height: 100%;width: 100%;" src="https://m.laobai.com/react/home/" scrolling="auto" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    <iframe style="height: 100%;width: 100%;" src="http://weixin.maoyinli.com/app/index.php?i=3&c=entry&m=ewei_shopv2&do=mobile&r=diypage&id=124" scrolling="auto" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
   </div>
 </template>
@@ -28,7 +28,7 @@
         this.$router.push({path: '/activeorder'})
       },
       prev(){
-        this.$router.replace({path: '/index'})
+        this.$router.go(-1)
       },
     },
     mounted: function () {},

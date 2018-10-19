@@ -86,6 +86,8 @@
                 localStorage.setItem('data', JSON.stringify(response.data.data))
                 localStorage.setItem('parksid', response.data.data.parksid)
                 localStorage.setItem('communityid', response.data.data.communityid)
+                localStorage.setItem('commaddress', response.data.data.communityaddress)
+                localStorage.setItem('parkaddress', response.data.data.parksaddress)
                 if(this.$route.query.url == 'aidcardt'){
                   setTimeout(self.$router.replace({path: '/aidcardt'}),3000)
                 }
@@ -133,6 +135,15 @@
                 }
                 else if(this.$route.query.url == 'areas'){
                   setTimeout(self.$router.replace({path: '/areas'}),3000)
+                }
+                else if(this.$route.query.url == 'activeorder'){
+                  setTimeout(self.$router.replace({path: '/activeorder'}),3000)
+                }
+                else if(this.$route.query.url == 'activeorderdetail'){
+                  setTimeout(self.$router.replace({path: '/activeorderdetail',query:{item:this.$route.query.item}}),3000)
+                }
+                else if(this.$route.query.url == 'activedetail'){
+                  setTimeout(self.$router.replace({path: '/activedetail',query:{id:this.$route.query.id}}),3000)
                 }
                 else {
                   self.$router.replace({path: '/my'})

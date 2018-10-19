@@ -18,7 +18,7 @@
           </div>
           <div @click="goList" class="hh"><p>明细列表</p></div>
         </div>
-        <div style="height: auto;width: 100%;padding: 50px;" v="else">
+        <div style="height: auto;width: 100%;padding: 50px;" v-else>
           <p style="text-align: center;font-size: 16px;">暂无积分！</p>
         </div>
       </div>
@@ -88,7 +88,8 @@
     width: 200px;
     height: 35px;
     background-color: #00CE9f;
-    border-radius: 100px;line-height: 35px;
+    border-radius: 100px;
+    line-height: 35px;
     justify-content: center;
     margin-left: 15%;
   }

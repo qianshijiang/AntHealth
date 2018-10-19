@@ -25,7 +25,7 @@
             <a>
             <div class="img">
               <!--<img src="../../assets/imgs/img66.png"/>-->
-              <img style="height: 90px;width: 90px;" :src="item.activity_img"/>
+              <img style="height: 80px;width: 90px;" :src="item.activity_img"/>
             </div>
             <div class="txt" style="width: 75%;">
               <h4>{{item.activity_name}}</h4>

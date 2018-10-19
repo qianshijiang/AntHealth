@@ -39,6 +39,7 @@ import Integral from '@/features/index/integral'
 import Integraldetail from '@/features/index/integraldetail'
 import Aidorder from '@/features/index/aidorder'
 import Areas from '@/features/index/areas'
+import Market from '@/features/index/market'
 
 Vue.use(Router)
 
@@ -243,6 +244,11 @@ const router = new Router({
       path: '/areas',
       name: 'areas',
       component: Areas
+    },
+    {
+      path: '/market',
+      name: 'market',
+      component: Market
     }
   ]
 });

@@ -66,8 +66,8 @@
         <div class="head-l">
           商城订单
         </div>
-        <div class="head-r">
-          <a >进入商城</a>
+        <div class="head-r" @click="productIntro(10)">
+          <a>进入商城</a>
         </div>
       </div>
       <div class="body">
@@ -135,7 +135,7 @@
               <p>已完成</p>
             </a>
           </li>
-          <li @click="productIntro(4,4)">
+          <li @click="productIntro(4,6)">
             <a >
               <div class="img">
                 <img src="../../assets/imgs/img52.png"/>
@@ -154,7 +154,7 @@
           活动预约
         </div>
         <div class="head-r" @click="productIntro(5,0)">
-          <a>更多</a>
+          <a>全部</a>
         </div>
       </div>
       <div class="body">
@@ -270,6 +270,9 @@
         }
         if( v === 6 ){
           this.$router.push({path: '/integral'})
+        }
+        if( v === 10 ){
+          this.$router.push({path: '/market'})
         }
       },
       clearLogin(){

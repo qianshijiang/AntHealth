@@ -28,7 +28,7 @@
               <img src="../../assets/imgs/img21.png"/>
             </div>
           </li>
-          <li>
+          <li @click="productIntro(10)">
             <div class="txt">
               <h4>福利商城</h4>
               <p style="line-height: 18px;">一键轻松管理保单</p>
@@ -39,7 +39,7 @@
           </li>
         </ul>
         <ul>
-          <li>
+          <li @click="productIntro(9)">
             <div class="txt">
               <h4>平价药店</h4>
               <p style="line-height: 18px;">让买药变轻松的事</p>
@@ -84,7 +84,7 @@
                   <div class="img">
                     <img style="width: 230px;height: 130px" :src="item.activity_img"/>
                   </div>
-                  <p>{{item.activity_name}}</p>
+                  <p class="ndyy">{{item.activity_name}}</p>
                 </div>
               </div>
             </div>
@@ -160,6 +160,12 @@
         }
         if( v === 8 ){
           this.$router.push({path: '/insurance'})
+        }
+        if( v === 9 ){
+          this.$router.push({path: '/oldbai'})
+        }
+        if( v === 10 ){
+          this.$router.push({path: '/market'})
         }
       },
       getBanner(){
@@ -264,8 +270,16 @@
         geolocation.getCurrentPosition(function(r){
           if(this.getStatus() == BMAP_STATUS_SUCCESS){
             self.nowposition = r.address.province+' '+r.address.city
+            let point = new BMap.Point(r.point.lng,r.point.lat)
+            let gc = new BMap.Geocoder()
+            gc.getLocation(point, function(rs){
+              let addComp = rs.addressComponents;
+              console.log(rs.address)//地址信息
+              localStorage.setItem('jsaddress',rs.address)//弹出所在地址
+            });
           }
           else {
+            localStorage.setItem('jsaddress','')
             this.nowposition = '定位失败'
             this.$dialog.toast({
               mes:  '定位失败',
@@ -352,5 +366,13 @@
    padding-right: .3rem;
    margin-top: .1rem;
  }
+  .ndyy{
+    overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp:1;
+      word-break:break-all;
+      display:-webkit-box;
+      -webkit-box-orient:vertical;
+  }
 </style>
 

@@ -17,14 +17,19 @@
         <yd-cell-item arrow type="label">
           <span slot="left">性别：</span>
           <select slot="right" v-model="gender" required >
-            <option value="">请选择性别</option>
-            <option value="男">男</option>
-            <option value="女">女</option>
+            <option value="1">男</option>
+            <option value="0">女</option>
           </select>
         </yd-cell-item>
-        <yd-cell-item style="background-color: #fff;border-bottom: 1px solid #e0e0e0;">
+        <yd-cell-item arrow type="label">
           <span slot="left">血型：</span>
-          <yd-input slot="right" v-model="blood" required placeholder="请输入血型"></yd-input>
+          <select slot="right" v-model="blood" required >
+            <option value="">请选择血型</option>
+            <option value="A">A型</option>
+            <option value="AB">AB型</option>
+            <option value="B">B型</option>
+            <option value="O">O型</option>
+          </select>
         </yd-cell-item>
         <yd-cell-item style="background-color: #fff;border-bottom: 1px solid #e0e0e0;">
           <span slot="left">身高：</span>
@@ -89,7 +94,7 @@
     data () {
       return {
         name: '',
-        gender: '',
+        gender: '1',
         blood: '',
         height: '',
         weight: '',
@@ -121,9 +126,31 @@
               if(response.data.data == null){
                 this.title = '保 存'
               }else {
+                if(this.aidData.sex == '男'){
+                  this.gender == '1'
+                }
+                else if(this.aidData.sex == '女'){
+                  this.gender == '0'
+                }
+                else{
+                  this.gender = this.aidData.sex
+                }
+                if(this.aidData.blood == 'A型'){
+                  this.blood == 'A'
+                }
+                else if(this.aidData.blood == 'B型'){
+                  this.blood == 'B'
+                }
+               else  if(this.aidData.blood == 'AB型'){
+                  this.blood == 'AB'
+                }
+                else if(this.aidData.blood == 'O型'){
+                  this.blood == 'O'
+                }
+                else{
+                  this.blood = this.aidData.blood
+                }
                 this.name = this.aidData.name
-                this.gender = this.aidData.sex
-                this.blood = this.aidData.blood
                 this.height = this.aidData.height
                 this.weight = this.aidData.weight
                 this.phone = this.aidData.sosPhone
@@ -164,6 +191,24 @@
             timeout: 1500
           })
           return
+        }
+        if(this.gender == '男'){
+          this.gender == '1'
+        }
+        if(this.gender == '女'){
+          this.gender == '0'
+        }
+        if(this.blood == 'A型'){
+          this.blood == 'A'
+        }
+        if(this.blood == 'B型'){
+          this.blood == 'B'
+        }
+        if(this.blood == 'AB型'){
+          this.blood == 'AB'
+        }
+        if(this.blood == 'O型'){
+          this.blood == 'O'
         }
         this.$dialog.loading.open('提交中...')
         let paramts = {

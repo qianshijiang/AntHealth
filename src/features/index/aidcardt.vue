@@ -422,25 +422,49 @@
 <style lang="scss" scoped>
 
   .hh1{
-    margin:auto;border:1px solid #303133;border-radius: 8px;
+    margin:auto;
+    border:1px solid #303133;
+    border-radius: 8px;
   }
   .hh2{
-    background-color:#fff;border:1px solid #303133;border-radius: 8px;padding: 25px;
+    background-color:#fff;
+    border:1px solid #303133;
+    border-radius: 8px;
+    padding: 25px;
   }
   .hh3{
-    font-weight: bold;font-size: 36px;color: #666;line-height: 35px;text-align: center;
+    font-weight: bold;
+    font-size: 36px;
+    color: #666;
+    line-height: 35px;
+    text-align: center;
   }
   .hh4{
-    background-color: #00CE9F;border-radius: 50px;height:30px;margin-top:25px;width: 100px;padding: 0;
+    background-color: #00CE9F;
+    border-radius: 50px;
+    height:30px;
+    margin-top:25px;
+    width: 100px;
+    padding: 0;
   }
   .hh5{
-    display: flex;padding: 15px 40px;background: rgb(242,242,242);border:1px solid #e0e0e0;border-radius: 25px;margin: 25px auto;
+    display: flex;
+    padding: 15px 40px;
+    background: rgb(242,242,242);
+    border:1px solid #e0e0e0;
+    border-radius: 25px;
+    margin: 25px auto;
   }
   .hh6{
-    text-align: center;font-size: 14px;color: #333;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
   }
   .hh7{
-    text-align: center;color: #999;margin-top: 15px;font-size: 14px;
+    text-align: center;
+    color: #999;
+    margin-top: 15px;
+    font-size: 14px;
   }
 </style>
 

@@ -12,7 +12,7 @@
       <div class="topnews">
         <div class="head g-tab-hd">
           <ul>
-            <li  v-for="(item,index) in typeData" :key="item.id" v-if="index<5">
+            <li  v-for="(item,index) in typeData" :key="item.id">
               <p class="xq" :class="{'xh' : item.check === true}" @click="searchList(item.id)">{{item.newtypename}}</p>
             </li>
           </ul>
@@ -21,7 +21,7 @@
           <ul>
             <yd-infinitescroll  :callback="getList" ref="infinitescrollDemo">
               <yd-list theme="1" slot="list">
-            <li @click="goDetail(item.id)" v-for="item in list" :key="item.id">
+            <li @click="goDetail(item.id)" v-for="item,index in list" :key="index+page">
                 <div class="img">
                   <img :src="item.newImg"/>
                 </div>
@@ -40,7 +40,7 @@
             </li>
               </yd-list>
               <!-- 数据全部加载完毕显示 -->
-              <span slot="doneTip">~~没有数据啦~~</span>
+              <span slot="doneTip" v-show="page > 1">~~没有数据啦~~</span>
 
               <!-- 加载中提示，不指定，将显示默认加载中图标 -->
               <img slot="loadingTip" src="http://static.ydcss.com/uploads/ydui/loading/loading10.svg"/>
@@ -137,12 +137,12 @@
           .then(function (response) {
             this.$dialog.loading.close()
             if (response.data.status == true) {
-              this.list = response.data.data
+              // this.list = response.data.data
               const _list = response.data.data
 
               this.list = [...this.list, ..._list];
 
-              if (_list.length < this.pageSize || this.page == 3) {
+              if (_list.length < this.pagesize) {
                 /* 所有数据加载完毕 */
                 this.$refs.infinitescrollDemo.$emit('ydui.infinitescroll.loadedDone');
                 return;
@@ -191,8 +191,7 @@
     overflow: hidden;
   }
   .ndy{
-     overflow: hidden;
-/*   white-space: nowrap; */
+    overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp:2;
   word-break:break-all;

@@ -104,6 +104,8 @@
               localStorage.setItem('data', JSON.stringify(response.data.data))
               localStorage.setItem('parksid', response.data.data.parksid)
               localStorage.setItem('communityid', response.data.data.communityid)
+              localStorage.setItem('commaddress', response.data.data.communityaddress)
+              localStorage.setItem('parkaddress', response.data.data.parksaddress)
               self.$router.replace({path: '/my'})
             }else{
               this.$dialog.toast({
